@@ -1,0 +1,10 @@
+body {
+  color: blue;
+  width: 780px;
+}
+@media print {
+  body {
+    color: red;
+  }
+  
+}
