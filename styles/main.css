@@ -7,10 +7,26 @@ body {
   //height: 842pt;
   height: 297mm;
   border: 1px solid blue;
+  margin: 10px
+}
+zzz {
+  margin-left: 10px;
+  color: aqua;
+  //border: 1px solid green;
+}
+to-do {
+  margin-left: 30px;
+  color: lime;
+}
+p {
+  margin-left: 10px;
+}
+.latex {
+  font-family: 'Computer Modern Serif';
+  color: black;
 }
 @media print {
   body {
     color: red;
   }
-  
 }
