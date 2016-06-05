@@ -1,0 +1,15 @@
+body {
+  color: blue;
+  width: 210mm;
+  height: 297mm;
+  background: white;
+  border: 1px solid black;
+}
+p {
+  margin: 1cm;
+  font-size: 10pt;
+  font-family: 'Computer Modern Serif';
+  color: black;
+  text-align: justify;
+  text-indent: 16pt;
+}
