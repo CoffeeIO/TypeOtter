@@ -1,6 +1,7 @@
-# mlTex
+# mlTex 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21)](https://www.codacy.com/app/mgapcdev/mlTex?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MGApcDev/mlTex&amp;utm_campaign=Badge_Grade)
 
-Javascript library to create document with high quality typesetting in html and pdf.
+mlTex is a Javascript library to render high quality typesetting in html and pdf.
 
 This library is intended as an improvement on LaTex, allowing users to write professional documents in markup.
 
