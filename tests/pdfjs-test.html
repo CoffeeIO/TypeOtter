@@ -1,0 +1,59 @@
+<html>
+<body>
+  <canvas id="the-canvas" style="border:1px solid black"></canvas>
+
+  <!-- Use latest PDF.js build from Github -->
+  <script type="text/javascript" src="https://raw.github.com/mozilla/pdf.js/gh-pages/build/pdf.js"></script>
+  
+  <script type="text/javascript">
+    //
+    // NOTE:
+    // Modifying the URL below to another server will likely *NOT* work. Because of browser
+    // security restrictions, we have to use a file server with special headers
+    // (CORS) - most servers don't support cross-origin browser requests.
+    //
+    //var url = 'TestDocument1.pdf';
+    var url = 'pdf-include-full.pdf';
+
+    //
+    // Disable workers to avoid yet another cross-origin issue (workers need the URL of
+    // the script to be loaded, and dynamically loading a cross-origin script does
+    // not work)
+    //
+    PDFJS.disableWorker = true;
+
+    //
+    // Asynchronous download PDF as an ArrayBuffer
+    //
+    PDFJS.getDocument(url).then(function getPdfHelloWorld(pdf) {
+      //
+      // Fetch the first page
+      //
+      pdf.getPage(1).then(function getPageHelloWorld(page) {
+        var scale = 1.6;
+        var viewport = page.getViewport(scale);
+
+        //
+        // Prepare canvas using PDF page dimensions
+        //
+        var canvas = document.getElementById('the-canvas');
+        var context = canvas.getContext('2d');
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        //
+        // Render PDF page into canvas context
+        //
+        page.render({canvasContext: context, viewport: viewport});
+      });
+    });
+  </script>
+  <p class="latex">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse in nisi et nulla   asoijdasoijdoasjaosijdoijasdoijasoioaisdj in vel risus. Aliquam nibh libero, consequat at lobortis sit amet, molestie dignissim erat. Fusce tortor ipsum, eleifend ac tellus ac, molestie commodo dui. Suspendisse eleifend, ex id euismod vestibulum, mauris velit commodo ligula, vel elementum lacus mauris ac eros. Fusce sit amet tortor urna. Nam ultrices ac arcu quis facilisis. Donec tincidunt vestibulum purus, et malesuada massa dignissim at. In at accumsan lectus.
+
+    Aliquam posuere dolor sed diam consequat tincidunt. Quisque aliquet varius sagittis. Nulla faucibus, eros non vulputate luctus, tortor augue auctor ex, sit amet mattis enim sem eu enim. Quisque sed velit accumsan, consectetur odio sed, congue ante. Vivamus nisi nisi, gravida et sem eu, mattis viverra dui. Integer lacus nunc, faucibus vitae odio eget, malesuada pellentesque lacus. Vestibulum scelerisque ac purus nec viverra. Nullam finibus quam in varius bibendum.
+
+    Nunc ligula mi, congue sit amet ante in, auctor volutpat elit. Maecenas sit amet odio ultrices, mollis augue sit amet, auctor augue. Nunc luctus, felis ac cursus commodo, dolor turpis varius orci, dignissim viverra leo velit id tellus. Vestibulum neque velit, volutpat ac enim et, porta porta lectus. Mauris accumsan semper orci, hendrerit pretium sem accumsan id. Donec hendrerit orci at augue tempus, quis rutrum ligula pulvinar. Praesent consectetur augue metus, ut facilisis leo fringilla non. Etiam scelerisque est vitae nunc efficitur consectetur. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+    </p>
+</body>
+</html>
