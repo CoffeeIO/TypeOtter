@@ -1,20 +1,17 @@
 var regMarkup = /^[\s\b]*<[\w]+/;
 function wrapper(elem) {
-  //elem.children(':nth-child(1)').remove();
+
   if (elem.html() === undefined) return elem;
-  //console.log('--> ' + elem.html());
+
   var html = ''; // returning markup
   var clone = elem.clone();
 
   // Elements to skip
-  var skipElem = ["P", "SCRIPT", "TH", "TD"]
-  // Skip <p> and <script>
+  var skipElem = ["P", "SCRIPT", "TH", "TD", "LI"];
+
   if (skipElem.indexOf(clone.prop('tagName')) != '-1') {
     return elem;
   }
-  // if (clone.prop('tagName') == 'SCRIPT') {
-  //   return elem;
-  // }
 
   //Check empty elements
   if (clone.html().trim() == '') return elem;
