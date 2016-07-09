@@ -1,13 +1,13 @@
 var regMarkup = /^[\s\b]*<[\w]+/;
 function wrapper(elem) {
 
-  if (elem.html() === undefined) return elem;
+  if (elem.html() === undefined) return elem; // ignore special elements without markup, style, script..
 
   var html = ''; // returning markup
   var clone = elem.clone();
 
   // Elements to skip
-  var skipElem = ["P", "SCRIPT", "TH", "TD", "LI"];
+  var skipElem = ["P", "SCRIPT", "TH", "TD", "LI", "STYLE"];
 
   if (skipElem.indexOf(clone.prop('tagName')) != '-1') {
     return elem;
