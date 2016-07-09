@@ -5,13 +5,16 @@ function wrapper(elem) {
   //console.log('--> ' + elem.html());
   var html = ''; // returning markup
   var clone = elem.clone();
+
+  // Elements to skip
+  var skipElem = ["P", "SCRIPT", "TH", "TD"]
   // Skip <p> and <script>
-  if (clone.prop('tagName') == 'P') {
+  if (skipElem.indexOf(clone.prop('tagName')) != '-1') {
     return elem;
   }
-  if (clone.prop('tagName') == 'SCRIPT') {
-    return elem;
-  }
+  // if (clone.prop('tagName') == 'SCRIPT') {
+  //   return elem;
+  // }
 
   //Check empty elements
   if (clone.html().trim() == '') return elem;
@@ -27,8 +30,8 @@ function wrapper(elem) {
     if (temp.html() !== undefined) html += temp.wrap('<div>').parent().html();
     clone.children(':nth-child(1)').remove();
   }
-
-  if (regMarkup.test(clone.html()) == false) {
+  // Check text after last child
+  if (clone.html().trim() != '' && regMarkup.test(clone.html()) == false) {
     clone.html('<p>' + clone.html());
     html += clone.children(':nth-child(1)').clone().wrap('<div>').parent().html();
     clone.children(':nth-child(1)').remove();
@@ -36,11 +39,3 @@ function wrapper(elem) {
   elem.html(html);
   return elem;
 }
-$(document).ready(function () {
-  console.log('------------------------------------');
-  //console.log($('body').html());
-  //var finalhtml = wrap($('body'));
-  //console.log(wrap($('body')).wrap('<div>').parent().html());
-  //console.log($('body').children(':nth-child(1)').html());
-  console.log(wrapper($('body')).wrap('<div>').parent().html());
-});
