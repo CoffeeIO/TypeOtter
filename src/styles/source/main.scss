@@ -1,0 +1,32 @@
+body {
+  width: 210mm;
+  margin: 0 auto;
+  
+  font-family: 'Computer Modern Serif';
+  color: black;
+  font-size: 10pt;
+  letter-spacing: -0.2pt;
+}
+.page {
+  height: 297mm;
+  width: 210mm;
+  
+  margin: 0 1cm;
+}
+.header {
+  height: 1cm;
+  margin-bottom: 0;
+}
+.footer {
+  height: 1cm;
+  margin-top: 0;
+}
+// Overwrite default browser print properties
+@page {
+  margin: 0;
+}
+
+p {  
+  text-align: justify;
+  text-indent: 16pt;
+}
