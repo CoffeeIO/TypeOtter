@@ -1,6 +1,5 @@
 var regMarkup = /^[\s\b]*<[\w]+/;
 function wrapper(elem) {
-
   if (elem.html() === undefined) return elem; // ignore special elements without markup, style, script..
 
   var html = ''; // returning markup
