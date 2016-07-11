@@ -8,15 +8,16 @@ body {
 
 .page {
   height: 296mm;
-  width: 180mm;
-  margin: 0 15mm; }
+  width: 190mm;
+  margin: 0 10mm; }
 
 .header, .footer {
-  height: 15mm;
+  overflow: hidden;
+  height: 10mm;
   text-align: center; }
   .header > *, .footer > * {
     height: inherit;
-    line-height: 15mm; }
+    line-height: 10mm; }
 
 .left {
   text-align: left;
@@ -31,7 +32,7 @@ body {
   float: right; }
 
 .content {
-  height: 266mm;
+  height: 276mm;
   overflow: hidden; }
 
 @page {

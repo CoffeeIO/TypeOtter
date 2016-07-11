@@ -1,24 +1,22 @@
 // normal dpi --> height: 1123px, width: 794px
 //                1cm = 37.795275591px
 var pixelPerCm = 37.795275591;
-var margin = 1.5;
-var pageHeight = 1118;
 
 var Page = function () {
     this.height = '297mm',
     this.width = '210mm',
     this.number = 1,
-    this.html = ''
+    this.html = '',
+    this.headerHeight = '',
+    this.footerHeight = ''
 };
-
 
 var curPage = 1;
 var totalPage = 1;
 
-var pageTemp = '<div class="page">'
+var pageTemp   = '<div class="page">'
 var headerTemp = '<div class="header">';
 var footerTemp = '<div class="footer">';
-
 
 function genHeader(left, center, right) {
     var curHtml = headerTemp;
@@ -49,7 +47,9 @@ function genPage(header, content, footer) {
 }
 
 function makePage (pageSettings, html) {
-    var maxHeight = pageHeight - (2 * margin * pixelPerCm),
+    
+    
+    var maxHeight = pageSettings.height,
         remainingHeight = maxHeight,
         curHtml = '';
     while (html.children(':nth-child(1)').outerHeight(true) <= remainingHeight) {
@@ -67,6 +67,10 @@ function makePage (pageSettings, html) {
 }
 function texify (pageSettings, html) {
     html.wrapInner('<div class="content">').prepend('<div class="header">').append('<div class="footer">').wrapInner('<div class="page">');
+    pageSettings.height = $('body').find('.content').height(),
+    pageSettings.headerHeight = $('body').find('.header').height(),
+    pageSettings.footerHeight = $('body').find('.footer').height();
+    
     var clone = html.find('.content');
     //while (clone.text().trim() != '') {
         var obj = makePage(pageSettings, clone);
