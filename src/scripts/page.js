@@ -47,13 +47,9 @@ function genPage(header, content, footer) {
 }
 
 function makePage (pageSettings, html) {
-    
-    
-    var maxHeight = pageSettings.height,
-        remainingHeight = maxHeight,
+    var remainingHeight = pageSettings.height,
         curHtml = '';
     while (html.children(':nth-child(1)').outerHeight(true) <= remainingHeight) {
-        console.log(html.children(':nth-child(1)').outerHeight(true));
         remainingHeight -= html.children(':nth-child(1)').outerHeight(true);
         curHtml += html.children(':nth-child(1)').clone().wrap('<div>').parent().html();
         html.children(':nth-child(1)').remove();
@@ -61,9 +57,17 @@ function makePage (pageSettings, html) {
     var header = genHeader('Testing page layout', '<i>by</i>', 'MGApcDev'),
         footer = genFooter('left', pageSettings.number, 'right'),
         page   = genPage(header, curHtml, footer);
-    $('body').html(page);
+    
+    pageSettings.html = page;
+    
+    var obj = {
+        "page": pageSettings,
+        "remain": html
+    };
+    
     console.log('remain --> ' + remainingHeight);
     console.log('cur html --> ' + page);
+    return obj;
 }
 function texify (pageSettings, html) {
     html.wrapInner('<div class="content">').prepend('<div class="header">').append('<div class="footer">').wrapInner('<div class="page">');
@@ -74,8 +78,10 @@ function texify (pageSettings, html) {
     var clone = html.find('.content');
     //while (clone.text().trim() != '') {
         var obj = makePage(pageSettings, clone);
+    
         pageSettings.number = ++curPage;
         //console.log(JSON.stringify(obj));
     //}
+    $('body').html(obj.page.html);
     return "hello";
 }
