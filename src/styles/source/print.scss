@@ -1,0 +1,21 @@
+body {
+  background-color: rgb(82, 86, 89);
+}
+.page {
+  margin-top: 15px;
+}
+
+// Print styling
+@media print {
+  body {
+    background-color: white;
+  }
+  .page {
+    margin-top: 0;
+  }
+}
+
+// Overwrite default browser print properties
+@page {
+  margin: 0;
+}
