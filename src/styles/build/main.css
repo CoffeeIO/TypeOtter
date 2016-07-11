@@ -7,17 +7,32 @@ body {
   letter-spacing: -0.2pt; }
 
 .page {
-  height: 297mm;
-  width: 210mm;
-  margin: 0 1cm; }
+  height: 296mm;
+  width: 180mm;
+  margin: 0 15mm; }
 
-.header {
-  height: 1cm;
-  margin-bottom: 0; }
+.header, .footer {
+  height: 15mm;
+  text-align: center; }
+  .header > *, .footer > * {
+    height: inherit;
+    line-height: 15mm; }
 
-.footer {
-  height: 1cm;
-  margin-top: 0; }
+.left {
+  text-align: left;
+  float: left; }
+
+.center {
+  display: inline-block;
+  margin: 0 auto; }
+
+.right {
+  text-align: right;
+  float: right; }
+
+.content {
+  height: 266mm;
+  overflow: hidden; }
 
 @page {
   margin: 0; }
