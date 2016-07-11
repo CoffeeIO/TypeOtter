@@ -25,3 +25,5 @@ body {
 p {
   text-align: justify;
   text-indent: 16pt; }
+  p[title] {
+    text-indent: 0; }

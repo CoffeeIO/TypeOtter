@@ -29,4 +29,7 @@ body {
 p {  
   text-align: justify;
   text-indent: 16pt;
+  &[title] {
+    text-indent: 0;
+  }
 }
