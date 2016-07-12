@@ -47,9 +47,10 @@ function genPage(header, content, footer) {
 }
 
 function makePage (pageSettings, html) {
+    console.log('--> new page');
     var remainingHeight = pageSettings.height,
         curHtml = '';
-    while (html.children(':nth-child(1)').outerHeight(true) <= remainingHeight) {
+    while (html.children().length > 0 && html.children(':nth-child(1)').outerHeight(true) <= remainingHeight) {
         remainingHeight -= html.children(':nth-child(1)').outerHeight(true);
         curHtml += html.children(':nth-child(1)').clone().wrap('<div>').parent().html();
         html.children(':nth-child(1)').remove();
@@ -62,12 +63,18 @@ function makePage (pageSettings, html) {
     
     var obj = {
         "page": pageSettings,
-        "remain": html
+        "remain": html.html()
     };
     
     console.log('remain --> ' + remainingHeight);
     console.log('cur html --> ' + page);
-    return obj;
+    console.log('remain html --> ' + obj.remain);
+
+    
+    return {
+        "page": pageSettings,
+        "remain": html.html()
+    };
 }
 function texify (pageSettings, html) {
     html.wrapInner('<div class="content">').prepend('<div class="header">').append('<div class="footer">').wrapInner('<div class="page">');
@@ -75,13 +82,24 @@ function texify (pageSettings, html) {
     pageSettings.headerHeight = $('body').find('.header').height(),
     pageSettings.footerHeight = $('body').find('.footer').height();
     
-    var clone = html.find('.content');
-    //while (clone.text().trim() != '') {
-        var obj = makePage(pageSettings, clone);
+    var pages = [],
+        fullHtml = '';
+    
+    var clone = html.find('.content'),
+        obj = null;
+    while (clone.html().trim() != '') {
+        pages.push(makePage(pageSettings, clone));
+        obj = pages[pages.length - 1];
     
         pageSettings.number = ++curPage;
-        //console.log(JSON.stringify(obj));
-    //}
-    $('body').html(obj.page.html);
+        clone.html(obj.remain);
+    }
+    
+    pages.forEach(function (item, index) {
+        fullHtml += item.page.html;
+        console.log('page' + index + ' --> ' + item.page.html);
+    });
+    
+    $('body').html(fullHtml);
     return "hello";
 }

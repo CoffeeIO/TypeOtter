@@ -362,18 +362,22 @@ body {
   letter-spacing: -0.2pt; }
 
 .page {
-  height: 296mm;
+  height: 286mm;
   width: 190mm;
-  padding: 0 10mm;
+  padding: 5mm 10mm;
   background-color: white; }
+
+.content {
+  height: 266mm;
+  overflow: hidden; }
 
 .header, .footer {
   overflow: hidden;
   height: 10mm;
+  line-height: 10mm;
   text-align: center; }
   .header > *, .footer > * {
-    height: inherit;
-    line-height: 10mm; }
+    height: inherit; }
 
 .left {
   text-align: left;
@@ -386,10 +390,6 @@ body {
 .right {
   text-align: right;
   float: right; }
-
-.content {
-  height: 276mm;
-  overflow: hidden; }
 
 p {
   text-align: justify;
