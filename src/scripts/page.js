@@ -88,7 +88,8 @@ function texify (pageSettings, html) {
     var clone = html.find('.content'),
         obj = null;
     while (clone.html().trim() != '') {
-        pages.push(makePage(pageSettings, clone));
+        // use extend to clone pageSetting obj and remove it's reference
+        pages.push(makePage($.extend(true, [], pageSettings), clone));
         obj = pages[pages.length - 1];
     
         pageSettings.number = ++curPage;

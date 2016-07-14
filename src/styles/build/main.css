@@ -397,6 +397,29 @@ p {
   p[title] {
     text-indent: 0; }
 
+img {
+  display: block;
+  margin: 10px auto;
+  max-width: 100%; }
+
+table {
+  width: 96%;
+  margin: 10px 2%;
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: table; }
+  table th {
+    font-weight: bold;
+    border-bottom: 2px solid #ddd;
+    text-align: left; }
+  table td {
+    border-top: 1px solid #ddd; }
+  table tr {
+    vertical-align: middle; }
+  table th, table td {
+    padding: 8px; }
+
 body {
   background-color: #525659; }
 
