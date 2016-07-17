@@ -1,6 +1,13 @@
 $(window).load(function () {
   console.log('------------------------------------');
-  var page = new Page();
 
-  console.log(texify(page, $('body')));
+  // User specified options, example
+  var options = {
+    headerRight: 'MGApcDev',
+    headerCenter: '<i>by</i>',
+    pager : 'Page [cur] of [total]'
+  }
+
+  texify(options, $('body'));
 });
+

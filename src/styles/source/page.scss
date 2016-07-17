@@ -1,5 +1,4 @@
 body {
-  width: $page-width;
   margin: 0 auto;
   
   font-family: 'Computer Modern Serif';
@@ -9,22 +8,15 @@ body {
 }
 
 .page {
-  height: $page-height - (2 * $page-margin-top);
-  width: $page-width - (2 * $page-margin);
-  padding: $page-margin-top $page-margin;
-  
   background-color: white;
 }
 
 .content {
-  height: $page-height - (2 * $page-header-height) - (2 * $page-margin-top);
   overflow: hidden;
 }
 
 .header, .footer {
   overflow: hidden;
-  height: $page-header-height;
-  line-height: $page-header-height;
   text-align: center;
   > * {
     height: inherit;
