@@ -3,6 +3,7 @@ body {
 }
 .page {
   margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 // Print styling
@@ -11,7 +12,7 @@ body {
     background-color: white;
   }
   .page {
-    margin-top: 0;
+    margin: 0;
   }
 }
 

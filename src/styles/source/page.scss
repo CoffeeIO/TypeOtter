@@ -18,6 +18,7 @@ body {
 .header, .footer {
   overflow: hidden;
   text-align: center;
+  position: relative;
   > * {
     height: inherit;
   }
@@ -30,6 +31,10 @@ body {
 .center {
   display: inline-block;
   margin: 0 auto;
+  position: absolute;
+  left: 0;
+  width: 50%;
+  margin-left: 25%;
 }
 .right {
   text-align: right;
