@@ -148,7 +148,7 @@ function loadStyleSettings(options) {
     $('<style>' + css + '</style>').appendTo('body');
 }
 
-function texify (customOptions, html) {
+function texify (customOptions, dom) {
     var options = jsonConcat(defaultOptions, customOptions);
     var basePage = new Page();
     
@@ -156,7 +156,7 @@ function texify (customOptions, html) {
     loadStyleSettings(options);
     
     // Wrap the body in a page to get accurate height on elements
-    html.wrapInner('<div class="content">').wrapInner('<div class="page">');
+    dom.wrapInner('<div class="content">').wrapInner('<div class="page">');
     
     // Detect rendered size
     basePage.page.height = $('body').find('.content').height();
@@ -169,7 +169,7 @@ function texify (customOptions, html) {
     var pages = [],
         fullHtml = '';
     
-    var clone = html.find('.content'),
+    var clone = dom.find('.content'),
         obj = null,
         curPage = 1;
 
