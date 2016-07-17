@@ -33,7 +33,6 @@ function jsonConcat(o1, o2) {
 var Page = function () {
     this.number = 1,
     this.total = 1,
-    this.html = '',
     this.content = "",
     this.page = {
         wrapper : '<div class="page">',
@@ -200,7 +199,7 @@ function texify (customOptions, html) {
             page   = genPage(header, footer, item.page);
         
         fullHtml += page;
-        console.log('page' + index + ' --> ' + item.page.html);
+        console.log('render --> page ' + index);
     });
     
     $('body').html(fullHtml);
