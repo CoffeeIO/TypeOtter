@@ -4,7 +4,7 @@
 // Default options the program will use.
 var defaultOptions = {
     // Dimensions
-    height : '297mm',
+    height : '296mm', // Issue: printing makes blank page at the end **reduced height from 297mm**
     width : '210mm',
     padding : '10mm',
     headerHeight : '6mm', 
