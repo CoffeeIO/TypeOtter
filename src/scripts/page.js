@@ -1,6 +1,5 @@
 // normal dpi --> height: 1123px, width: 794px
 //                1cm = 37.795275591px
-var pixelPerCm = 37.795275591;
 
 // Default options the program will use.
 var defaultOptions = {
@@ -51,13 +50,6 @@ var Page = function () {
         left : ""
     }
 };
-
-var curPage = 1;
-var totalPage = 1;
-
-var pageTemp   = '<div class="page">';
-var headerTemp = '<div class="header">';
-var footerTemp = '<div class="footer">';
 
 function genPager(options, page) {
     return options.pager.replace('[cur]', page.number).replace('[total]', page.total);
@@ -178,7 +170,9 @@ function texify (customOptions, html) {
         fullHtml = '';
     
     var clone = html.find('.content'),
-        obj = null;
+        obj = null,
+        curPage = 1;
+
     // Check there is still remaining html in the body
     while (clone.html().trim() != '') {
         // use extend to clone pageSetting obj and remove it's reference
