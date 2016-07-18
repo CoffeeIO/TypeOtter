@@ -24,11 +24,19 @@ var defaultOptions = {
     pager : '[cur]',
     pagerStyle : '1'
 };
+
+/**
+ * Merge two json objects
+ * 
+ * @param o1 The default json, base
+ * @param o2 The custom json, overwrite existing elements
+ */
 function jsonConcat(o1, o2) {
     for (var key in o2) { o1[key] = o2[key]; }
     return o1;
 }
 
+// Base empty Page Object
 var Page = function () {
     this.number = 1,
     this.total = 1,
@@ -51,10 +59,16 @@ var Page = function () {
     }
 };
 
+/**
+ * Construct the html of the pager of a specific page.
+ */
 function genPager(options, page) {
     return options.pager.replace('[cur]', page.number).replace('[total]', page.total);
 }
 
+/**
+ * Construct the html of the header of a specific page.
+ */
 function genHeader(options, page) {
     var curHtml = page.header.wrapper,
         pager = '';
@@ -79,6 +93,9 @@ function genHeader(options, page) {
     return curHtml;
 }
 
+/**
+ * Construct the html of the footer of a specific page.
+ */
 function genFooter(options, page) {
     var curHtml = page.footer.wrapper,
         pager = '';
@@ -103,6 +120,9 @@ function genFooter(options, page) {
     return curHtml;
 }
 
+/**
+ * Construct the html of the page.
+ */
 function genPage(header, footer, page) {
     var curHtml = page.page.wrapper;
     curHtml += header;
@@ -113,6 +133,9 @@ function genPage(header, footer, page) {
     return curHtml;
 }
 
+/**
+ * Construct the content of a page.
+ */
 function makePage (basePage, dom, options) {
     console.log('--> new page <--');
     var remainingHeight = basePage.page.height,
@@ -124,9 +147,9 @@ function makePage (basePage, dom, options) {
     }
     basePage.content = curHtml;
     
-    console.log('remainHeight --> ' + remainingHeight);
+    //console.log('remainHeight --> ' + remainingHeight);
     //console.log('cur html --> ' + page);
-    console.log('remain html --> ' + dom.html());
+    //console.log('remain html --> ' + dom.html());
 
     return {
         "page": basePage,
@@ -134,6 +157,9 @@ function makePage (basePage, dom, options) {
     };
 }
 
+/**
+ * Load page style based on default / user specified options.
+ */
 function loadStyleSettings(options) {
     var css = 
         "body {  width: " + options.width + "; }"
@@ -148,6 +174,9 @@ function loadStyleSettings(options) {
     $('<style>' + css + '</style>').appendTo('body');
 }
 
+/**
+ * Convert a dom element to a series of printable pages.
+ */
 function texify (customOptions, dom) {
     var options = jsonConcat(defaultOptions, customOptions);
     var basePage = new Page();
@@ -182,7 +211,7 @@ function texify (customOptions, dom) {
         basePage.number = ++curPage;
         clone.html(obj.remain);
         
-        //if (debugCount++ >= DEBUG_MAX) { console.error('TOO MANY PAGES!!!'); break; }
+        if (debugCount++ >= DEBUG_MAX) { console.error('TOO MANY PAGES!!!'); break; }
     }
     
     // Assemble the pages
