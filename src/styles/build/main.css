@@ -382,8 +382,7 @@ body {
   margin: 0 auto;
   position: absolute;
   left: 0;
-  width: 50%;
-  margin-left: 25%; }
+  width: 100%; }
 
 .right {
   text-align: right;
@@ -391,7 +390,9 @@ body {
 
 p {
   text-align: justify;
-  text-indent: 16pt; }
+  text-indent: 16pt;
+  padding: 0;
+  margin: 10px 0; }
   p[title] {
     text-indent: 0; }
 
