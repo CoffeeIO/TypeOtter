@@ -183,7 +183,7 @@ function recCheckDom(remDom, remainHeight) {
         height: remainHeight,
         content: cur.wrap("<div>").parent().html(),
         remain: remDom,
-        done: true // Check for children
+        done: true
     }
 }
 
