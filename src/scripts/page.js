@@ -133,9 +133,12 @@ function genPage(header, footer, page) {
     return curHtml;
 }
 
+/**
+ * Check if element fits within the height specified, returning the html as 
+ * string and the difference in height.
+ */
 function addToPage(dom, height) {
     if (dom.outerHeight(true) <= height) {
-        console.log('returning --> ' + (height - dom.outerHeight(true)) + ' --- ' + dom.html());
         return {
             height: height - dom.outerHeight(true),
             content: dom.clone().wrap('<div>').parent().html(),
@@ -146,12 +149,11 @@ function addToPage(dom, height) {
     }
 }
 
+/**
+ * Recursive check the specified element's children and add elements until the 
+ * height is achieved or there's no more elements.
+ */
 function recCheckDom(remDom, remainHeight) {
-    //remDom.css('height', 'auto');
-    console.log('rec that dom --> ' + remainHeight);
-    console.log('content --> ' + remDom.attr('class'));
-
-    
     var obj = addToPage(remDom, remainHeight);
     if (obj !== null) {
         remDom.remove();
@@ -162,9 +164,7 @@ function recCheckDom(remDom, remainHeight) {
     }
 
     var curHtml = '';
-    console.log('Checkpoint 1');
     while (remDom.children().length > 0) {
-        console.log('Loop!');
         var elem = remDom.children(':nth-child(1)');
         obj = recCheckDom(elem, remainHeight);
         if (obj == null) break; // exit foreach loop
@@ -173,47 +173,28 @@ function recCheckDom(remDom, remainHeight) {
             curHtml += obj.content;
             if (obj.done == true) break;
             
-            elem.remove(); // If done is true, then not all children were added so we can't remove the parent element
+            // If done is true, then not all children were added so we can't remove the parent element
+            elem.remove();
         }
     }
-    
-    console.log('Checkpoint 2');
-
     var cur = remDom.clone().html(curHtml);
+    
     return {
         height: remainHeight,
         content: cur.wrap("<div>").parent().html(),
         remain: remDom,
         done: true // Check for children
     }
-    
-    
-    return null;
 }
 
 /**
  * Construct the content of a page.
  */
 function makePage (basePage, dom) {
-    console.log('--> new page <--');
     var remainingHeight = basePage.page.height,
-        curHtml = '';
-    
-    var obj = recCheckDom(dom, remainingHeight);
-    
-    /*
-    while (dom.children().length > 0 && dom.children(':nth-child(1)').outerHeight(true) <= remainingHeight) {
-        remainingHeight -= dom.children(':nth-child(1)').outerHeight(true);
-        curHtml += dom.children(':nth-child(1)').clone().wrap('<div>').parent().html();
-        dom.children(':nth-child(1)').remove();
-    }
-    */
-    
+        curHtml = '',
+        obj = recCheckDom(dom, remainingHeight);
     basePage.content = obj.content;
-    
-    //console.log('remainHeight --> ' + remainingHeight);
-    //console.log('cur html --> ' + page);
-    //console.log('remain html --> ' + dom.html());
 
     return {
         "page": basePage,
@@ -271,16 +252,11 @@ function texify (customOptions, dom) {
         // use extend to clone pageSetting obj and remove it's reference
         pages.push(makePage($.extend(true, [], basePage), clone));
         obj = pages[pages.length - 1];
-    
-        
         
         basePage.number = ++curPage;
-        
-        console.log('how much remain ?');
-        
+                
         if (obj.remain != null) {
             clone.html(obj.remain.html());
-            console.log(obj.remain.html());
         }
         else clone.html('');
         
