@@ -133,19 +133,83 @@ function genPage(header, footer, page) {
     return curHtml;
 }
 
+function addToPage(dom, height) {
+    if (dom.outerHeight(true) <= height) {
+        console.log('returning --> ' + (height - dom.outerHeight(true)) + ' --- ' + dom.html());
+        return {
+            height: height - dom.outerHeight(true),
+            content: dom.clone().wrap('<div>').parent().html(),
+            remain: null
+        };
+    } else {
+        return null;
+    }
+}
+
+function recCheckDom(remDom, remainHeight) {
+    //remDom.css('height', 'auto');
+    console.log('rec that dom --> ' + remainHeight);
+    console.log('content --> ' + remDom.attr('class'));
+
+    
+    var obj = addToPage(remDom, remainHeight);
+    if (obj !== null) {
+        remDom.remove();
+        return obj;
+    }
+    if (remDom.children().length == 0) {
+        return null;
+    }
+
+    var curHtml = '';
+    console.log('Checkpoint 1');
+    while (remDom.children().length > 0) {
+        console.log('Loop!');
+        var elem = remDom.children(':nth-child(1)');
+        obj = recCheckDom(elem, remainHeight);
+        if (obj == null) break; // exit foreach loop
+        else {
+            remainHeight = obj.height;
+            curHtml += obj.content;
+            if (obj.done == true) break;
+            
+            elem.remove(); // If done is true, then not all children were added so we can't remove the parent element
+        }
+    }
+    
+    console.log('Checkpoint 2');
+
+    var cur = remDom.clone().html(curHtml);
+    return {
+        height: remainHeight,
+        content: cur.wrap("<div>").parent().html(),
+        remain: remDom,
+        done: true // Check for children
+    }
+    
+    
+    return null;
+}
+
 /**
  * Construct the content of a page.
  */
-function makePage (basePage, dom, options) {
+function makePage (basePage, dom) {
     console.log('--> new page <--');
     var remainingHeight = basePage.page.height,
         curHtml = '';
+    
+    var obj = recCheckDom(dom, remainingHeight);
+    
+    /*
     while (dom.children().length > 0 && dom.children(':nth-child(1)').outerHeight(true) <= remainingHeight) {
         remainingHeight -= dom.children(':nth-child(1)').outerHeight(true);
         curHtml += dom.children(':nth-child(1)').clone().wrap('<div>').parent().html();
         dom.children(':nth-child(1)').remove();
     }
-    basePage.content = curHtml;
+    */
+    
+    basePage.content = obj.content;
     
     //console.log('remainHeight --> ' + remainingHeight);
     //console.log('cur html --> ' + page);
@@ -153,7 +217,7 @@ function makePage (basePage, dom, options) {
 
     return {
         "page": basePage,
-        "remain": dom.html()
+        "remain": obj.remain
     };
 }
 
@@ -179,13 +243,13 @@ function loadStyleSettings(options) {
  */
 function texify (customOptions, dom) {
     var options = jsonConcat(defaultOptions, customOptions);
-    var basePage = new Page();
-    
-    // **Needs to be loaded before wrapping body, because everything is overwritten afterwards.**
-    loadStyleSettings(options);
+    var basePage = new Page();    
     
     // Wrap the body in a page to get accurate height on elements
-    dom.wrapInner('<div class="content">').wrapInner('<div class="page">');
+    dom.wrapInner('<div>').wrapInner('<div class="content">').wrapInner('<div class="page">');
+    
+    // Add styling to get rendering dimensions
+    loadStyleSettings(options);
     
     // Detect rendered size
     basePage.page.height = $('body').find('.content').height();
@@ -198,18 +262,27 @@ function texify (customOptions, dom) {
     var pages = [],
         fullHtml = '';
     
-    var clone = dom.find('.content'),
+    var clone = dom.find('.content > div'),
         obj = null,
         curPage = 1;
-
+    
     // Check there is still remaining html in the body
     while (clone.html().trim() != '') {
         // use extend to clone pageSetting obj and remove it's reference
-        pages.push(makePage($.extend(true, [], basePage), clone, options));
+        pages.push(makePage($.extend(true, [], basePage), clone));
         obj = pages[pages.length - 1];
     
+        
+        
         basePage.number = ++curPage;
-        clone.html(obj.remain);
+        
+        console.log('how much remain ?');
+        
+        if (obj.remain != null) {
+            clone.html(obj.remain.html());
+            console.log(obj.remain.html());
+        }
+        else clone.html('');
         
         if (debugCount++ >= DEBUG_MAX) { console.error('TOO MANY PAGES!!!'); break; }
     }
@@ -226,4 +299,7 @@ function texify (customOptions, dom) {
     });
     
     $('body').html(fullHtml);
+    
+    // Add styling again because they were just overwritten
+    loadStyleSettings(options);
 }
