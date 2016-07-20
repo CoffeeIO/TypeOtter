@@ -60,6 +60,13 @@ var Page = function () {
 };
 
 /**
+ * Strip simple <div></div> wrap of a string.
+ */
+function stripWrapper(html) {
+    return html.substring(0, html.length - 6).substring(5);
+}
+
+/**
  * Construct the html of the pager of a specific page.
  */
 function genPager(options, page) {
@@ -125,8 +132,9 @@ function genFooter(options, page) {
  */
 function genPage(header, footer, page) {
     var curHtml = page.page.wrapper;
+    
     curHtml += header;
-    curHtml += '<div class="content">' + page.content + '</div>';
+    curHtml += '<div class="content">' + stripWrapper(page.content) + '</div>';
     curHtml += footer;
     curHtml += '</div>';
     
@@ -160,6 +168,12 @@ function recCheckDom(remDom, remainHeight) {
         return obj;
     }
     if (remDom.children().length == 0) {
+        return null;
+    }
+    
+    // Elements that should not be recusively checked for children
+    var skipElem = ["P", "SCRIPT", "TABLE", "STYLE"];
+    if (skipElem.indexOf(remDom.prop('tagName')) != '-1') {
         return null;
     }
 
