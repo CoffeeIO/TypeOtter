@@ -1,0 +1,19 @@
+{
+  "name": "mlTex",
+  "version": "0.0.0",
+  "description": "",
+  "author": "Mathias Grundtvig Andreasen (MGApcDev)",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "*",
+    "gulp-ruby-sass": "*",
+    "gulp-util": "*",
+    "gulp-rename": "*",
+    "map-stream": "*",
+    "gulp-livereload": "*",
+    "gulp-concat": "*",
+    "gulp-uglify": "*",
+    "gulp-watch": "*",
+    "gulp-sass": "*"
+  }
+}

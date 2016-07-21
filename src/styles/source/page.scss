@@ -1,0 +1,52 @@
+body {
+  margin: 0 auto;
+  
+  font-family: 'Computer Modern Serif';
+  color: #000000;
+  font-size: $font-size;
+  letter-spacing: -0.2pt;
+}
+
+.page {
+  background-color: #ffffff;
+}
+
+.content {
+  overflow: hidden;
+}
+
+.header, .footer {
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  > * {
+    height: inherit;
+  }
+}
+// left / center / right styles
+.left {
+  text-align: left;
+  float: left;
+}
+.center {
+  display: inline-block;
+  margin: 0 auto;
+  position: absolute;
+  left: 0;
+  width: 100%;
+}
+.right {
+  text-align: right;
+  float: right;
+}
+
+// Default text styling
+p {  
+  text-align: justify;
+  text-indent: 16pt;
+  padding: 0;
+  margin: 10px 0;
+  &[title] {
+    text-indent: 0;
+  }
+}

@@ -1,0 +1,22 @@
+body {
+  background-color: #525659;
+}
+.page {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+// Print styling
+@media print {
+  body {
+    background-color: #ffffff;
+  }
+  .page {
+    margin: 0;
+  }
+}
+
+// Overwrite default browser print properties
+@page {
+  margin: 0;
+}
