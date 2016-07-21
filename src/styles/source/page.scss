@@ -2,13 +2,13 @@ body {
   margin: 0 auto;
   
   font-family: 'Computer Modern Serif';
-  color: black;
+  color: #000000;
   font-size: $font-size;
   letter-spacing: -0.2pt;
 }
 
 .page {
-  background-color: white;
+  background-color: #ffffff;
 }
 
 .content {
@@ -50,4 +50,3 @@ p {
     text-indent: 0;
   }
 }
-

@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(82, 86, 89);
+  background-color: #525659;
 }
 .page {
   margin-top: 15px;
@@ -9,7 +9,7 @@ body {
 // Print styling
 @media print {
   body {
-    background-color: white;
+    background-color: #ffffff;
   }
   .page {
     margin: 0;

@@ -60,7 +60,7 @@ var Page = function () {
 };
 
 /**
- * Strip simple <div></div> wrap of a string.
+ * Strip simple '<div></div>' wrap of a string.
  */
 function stripWrapper(html) {
     return html.substring(0, html.length - 6).substring(5);
@@ -152,9 +152,9 @@ function addToPage(dom, height) {
             content: dom.clone().wrap('<div>').parent().html(),
             remain: null
         };
-    } else {
-        return null;
-    }
+    } 
+    
+    return null;
 }
 
 /**
@@ -185,9 +185,10 @@ function recCheckDom(remDom, remainHeight) {
         else {
             remainHeight = obj.height;
             curHtml += obj.content;
-            if (obj.done == true) break;
             
             // If done is true, then not all children were added so we can't remove the parent element
+            if (obj.done == true) break;
+            
             elem.remove();
         }
     }
@@ -204,7 +205,7 @@ function recCheckDom(remDom, remainHeight) {
 /**
  * Construct the content of a page.
  */
-function makePage (basePage, dom) {
+function makePage(basePage, dom) {
     var remainingHeight = basePage.page.height,
         curHtml = '',
         obj = recCheckDom(dom, remainingHeight);
@@ -226,7 +227,8 @@ function loadStyleSettings(options) {
       + "width: calc(" + options.width + " - (2 * " + options.padding + ")); "
       + "padding: " + options.padding + "; "
       + "}"
-      + ".content { height: calc(" + options.height + " - (2 * " + options.padding + ")" + " - " + options.headerHeight + " - " + options.footerHeight + "); }"
+      + ".content { height: calc(" + options.height + " - (2 * " + options.padding + ") - " + options.headerHeight 
+      + " - " + options.footerHeight + "); }"
       + ".header { height: " + options.headerHeight + "; line-height: " + options.headerHeight + "; }"
       + ".footer { height: " + options.footerHeight + "; line-height: " + options.footerHeight + "; }";
     
@@ -236,9 +238,9 @@ function loadStyleSettings(options) {
 /**
  * Convert a dom element to a series of printable pages.
  */
-function texify (customOptions, dom) {
-    var options = jsonConcat(defaultOptions, customOptions);
-    var basePage = new Page();    
+function texify(customOptions, dom) {
+    var options = jsonConcat(defaultOptions, customOptions),
+        basePage = new Page();
     
     // Wrap the body in a page to get accurate height on elements
     dom.wrapInner('<div>').wrapInner('<div class="content">').wrapInner('<div class="page">');
@@ -249,15 +251,9 @@ function texify (customOptions, dom) {
     // Detect rendered size
     basePage.page.height = $('body').find('.content').height();
     
-    // Debug variables ------------------------------------
-    var DEBUG_MAX = 10,
-        debugCount = 0;
-    // ----------------------------------------------------
-    
     var pages = [],
-        fullHtml = '';
-    
-    var clone = dom.find('.content > div'),
+        fullHtml = '',
+        clone = dom.find('.content > div'),
         obj = null,
         curPage = 1;
     
@@ -273,8 +269,6 @@ function texify (customOptions, dom) {
             clone.html(obj.remain.html());
         }
         else clone.html('');
-        
-        if (debugCount++ >= DEBUG_MAX) { console.error('TOO MANY PAGES!!!'); break; }
     }
     
     // Assemble the pages
@@ -285,9 +279,9 @@ function texify (customOptions, dom) {
             page   = genPage(header, footer, item.page);
         
         fullHtml += page;
-        console.log('render --> page ' + index);
     });
     
+    // Overwite the body
     $('body').html(fullHtml);
     
     // Add styling again because they were just overwritten

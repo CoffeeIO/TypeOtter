@@ -356,12 +356,12 @@ th {
 body {
   margin: 0 auto;
   font-family: 'Computer Modern Serif';
-  color: black;
+  color: #000000;
   font-size: 10pt;
   letter-spacing: -0.2pt; }
 
 .page {
-  background-color: white; }
+  background-color: #ffffff; }
 
 .content {
   overflow: hidden; }
@@ -428,7 +428,7 @@ body {
 
 @media print {
   body {
-    background-color: white; }
+    background-color: #ffffff; }
   .page {
     margin: 0; } }
 
