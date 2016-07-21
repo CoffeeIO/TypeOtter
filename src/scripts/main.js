@@ -5,7 +5,8 @@ $(window).load(function () {
   var options = {
     headerRight: 'MGApcDev',
     headerCenter: '<i>by</i>',
-    pager : 'Page [cur] of [total]'
+    pager : 'Page [cur] of [total]',
+    padding: "7mm 10mm"
   }
 
   texify(options, $('body'));

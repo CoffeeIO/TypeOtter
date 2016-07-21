@@ -60,10 +60,46 @@ var Page = function () {
 };
 
 /**
+ * Analyse the content of a margin / padding string.
+ */
+function getMargin(input) {
+    var reg4value = /^[\s]*([0-9]+[\w%]*)[\s]+([0-9]+[\w%]*)[\s]+([0-9]+[\w%]*)[\s]+([0-9]+[\w%]*)[\s]*$/,
+        reg2value = /^[\s]*([0-9]+[\w%]*)[\s]+([0-9]+[\w%]*)[\s]*$/,
+        reg1value = /^[\s]*([0-9]+[\w%]*)[\s]*$/;
+    var match = reg4value.exec(input);
+    if (match != null) return { top: match[1], right: match[2], bottom: match[3], left: match[4] }
+    match = reg2value.exec(input);
+    if (match != null) return { top: match[1], right: match[2], bottom: match[1], left: match[2] }
+    match = reg1value.exec(input);
+    if (match != null) return { top: match[1], right: match[1], bottom: match[1], left: match[1] }
+    
+    return null;
+}
+
+/**
  * Strip simple '<div></div>' wrap of a string.
  */
 function stripWrapper(html) {
     return html.substring(0, html.length - 6).substring(5);
+}
+
+/**
+ * Load page style based on default / user specified options.
+ */
+function loadStyleSettings(options) {
+    var padding = getMargin(options.padding);
+    var css = 
+        "body {  width: " + options.width + "; }"
+      + ".page { height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + "); "
+      + "width: calc(" + options.width + " - " + padding.left + " - " + padding.right + "); "
+      + "padding: " + options.padding + "; "
+      + "}"
+      + ".content { height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + " - " 
+      + options.headerHeight + " - " + options.footerHeight + "); }"
+      + ".header { height: " + options.headerHeight + "; line-height: " + options.headerHeight + "; }"
+      + ".footer { height: " + options.footerHeight + "; line-height: " + options.footerHeight + "; }";
+    
+    $('<style>' + css + '</style>').appendTo('body');
 }
 
 /**
@@ -215,24 +251,6 @@ function makePage(basePage, dom) {
         "page": basePage,
         "remain": obj.remain
     };
-}
-
-/**
- * Load page style based on default / user specified options.
- */
-function loadStyleSettings(options) {
-    var css = 
-        "body {  width: " + options.width + "; }"
-      + ".page { height: calc(" + options.height + " - (2 * " + options.padding + ")); "
-      + "width: calc(" + options.width + " - (2 * " + options.padding + ")); "
-      + "padding: " + options.padding + "; "
-      + "}"
-      + ".content { height: calc(" + options.height + " - (2 * " + options.padding + ") - " + options.headerHeight 
-      + " - " + options.footerHeight + "); }"
-      + ".header { height: " + options.headerHeight + "; line-height: " + options.headerHeight + "; }"
-      + ".footer { height: " + options.footerHeight + "; line-height: " + options.footerHeight + "; }";
-    
-    $('<style>' + css + '</style>').appendTo('body');
 }
 
 /**
