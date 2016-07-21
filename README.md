@@ -30,8 +30,8 @@ This library is intended as an improvement on LaTex, allowing users to write pro
 ## Sources
 ``todo``
 
-## Credits
-``todo``
+## Dependencies
+- **Font** -->  [Computer Modern on the web by CheckMyWorking.com](http://checkmyworking.com/cm-web-fonts/)
 
 ---
 
