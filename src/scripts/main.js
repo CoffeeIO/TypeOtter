@@ -8,7 +8,9 @@ $(window).load(function () {
     pager : 'Page [cur] of [total]',
     padding: "7mm 10mm"
   }
-
-  texify(options, $('body'));
+  
+  attrify($('body'));
+  
+  //texify(options, $('body'));
 });
 
