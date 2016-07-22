@@ -419,6 +419,9 @@ table {
   table th, table td {
     padding: 8px; }
 
+figure {
+  margin: 0; }
+
 section .section-title {
   font-size: 18pt; }
 
