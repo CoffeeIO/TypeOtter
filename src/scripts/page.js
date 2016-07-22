@@ -58,7 +58,7 @@ var Page = function () {
         right : "",
         center : "",
         left : ""
-    }
+    };
 };
 
 /**
@@ -130,21 +130,21 @@ function genHeader(options, page) {
         pager = genPager(options, page);
     }
     
-    if (options.headerLeft != '') {
+    if (options.headerLeft !== '') {
         if (options.headerLeft === '[pager]') { 
             curHtml += '<div class="left">' + pager + '</div>';
         } else { 
             curHtml += '<div class="left">' + options.headerLeft + '</div>';
         }
     }
-    if (options.headerCenter != '') { 
+    if (options.headerCenter !== '') { 
         if (options.headerCenter === '[pager]') {
             curHtml += '<div class="center">' + pager + '</div>';
         } else { 
             curHtml += '<div class="center">' + options.headerCenter + '</div>';
         }
     }
-    if (options.headerRight != '') {
+    if (options.headerRight !== '') {
         if (options.headerRight === '[pager]') {
             curHtml += '<div class="right">' + pager + '</div>';
         } else {
@@ -170,7 +170,7 @@ function genFooter(options, page) {
         if (options.footerLeft === '[pager]') {
             curHtml += '<div class="left">' + pager + '</div>';
         } else {
-            curHtml += '<div class="left">' + options.footerLeft + '</div>'
+            curHtml += '<div class="left">' + options.footerLeft + '</div>';
         }
     }
     if (options.footerCenter !== '') { 
@@ -248,7 +248,7 @@ function recCheckDom(remDom, remainHeight) {
         obj = recCheckDom(elem, remainHeight);
         if (obj == null) {
             break; // exit foreach loop   
-         } else {
+        } else {
             remainHeight = obj.height;
             curHtml += obj.content;
             

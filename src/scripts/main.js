@@ -1,6 +1,4 @@
 $(window).load(function () {
-    console.log('------------------------------------');
-
     // User specified options, example
     var options = {
         headerRight: 'MGApcDev',
