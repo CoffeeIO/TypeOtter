@@ -16,9 +16,9 @@ function attrify(dom) {
  */
 function handleTitle(dom) {
     dom.find("*[title!=''][title]").each(function (index) {
-        if ($(this).prop('tagName') == 'P') {
+        if ($(this).prop('tagName') === 'P') {
             $(this).prepend('<span class="para-title">' + $(this).attr('title') + '</span>');
-        } else if ($(this).prop('tagName') == 'SECTION') {
+        } else if ($(this).prop('tagName') === 'SECTION') {
             $(this).prepend('<h1 class="section-title">' + $(this).attr('title') + '</h1>');
         }
         
@@ -33,7 +33,7 @@ function handleTitle(dom) {
  */
 function handleName(dom) {
     dom.find("*[name!=''][name]").each(function (index) {
-        if ($(this).prop('tagName') == 'IMG') { //Images can't have nested <a> tag
+        if ($(this).prop('tagName') === 'IMG') { //Images can't have nested <a> tag
             $(this).before('<a name="' + $(this).attr('name') + '"></a>');
         } else {
             $(this).prepend('<a name="' + $(this).attr('name') + '"></a>');    
@@ -46,7 +46,7 @@ function handleName(dom) {
  */
 function handleImages(dom) {
     dom.find("img").each(function (index) {
-        if ($(this).parent().prop('tagName') != "FIGURE") {
+        if ($(this).parent().prop('tagName') !== 'FIGURE') {
             $(this).wrap('<figure>');
         }
     });
