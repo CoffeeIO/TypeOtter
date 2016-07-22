@@ -1,0 +1,5 @@
+@mixin section-size($size) {
+    .section-title {
+        font-size: $size;
+    }
+}

@@ -419,6 +419,19 @@ table {
   table th, table td {
     padding: 8px; }
 
+section .section-title {
+  font-size: 18pt; }
+
+section > section .section-title {
+  font-size: 16pt; }
+
+section > section > section .section-title {
+  font-size: 14pt; }
+
+.para-title {
+  font-weight: bold;
+  margin-right: 10px; }
+
 body {
   background-color: #525659; }
 
