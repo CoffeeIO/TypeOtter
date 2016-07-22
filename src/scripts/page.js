@@ -32,7 +32,9 @@ var defaultOptions = {
  * @param o2 The custom json, overwrite existing elements
  */
 function jsonConcat(o1, o2) {
-    for (var key in o2) { o1[key] = o2[key]; }
+    for (var key in o2) { 
+        o1[key] = o2[key]; 
+    }
     return o1;
 }
 
@@ -66,12 +68,21 @@ function getMargin(input) {
     var reg4value = /^[\s]*([0-9]+[\w%]*)[\s]+([0-9]+[\w%]*)[\s]+([0-9]+[\w%]*)[\s]+([0-9]+[\w%]*)[\s]*$/,
         reg2value = /^[\s]*([0-9]+[\w%]*)[\s]+([0-9]+[\w%]*)[\s]*$/,
         reg1value = /^[\s]*([0-9]+[\w%]*)[\s]*$/;
+    // 4 values
     var match = reg4value.exec(input);
-    if (match != null) return { top: match[1], right: match[2], bottom: match[3], left: match[4] }
+    if (match != null) { 
+        return { top: match[1], right: match[2], bottom: match[3], left: match[4] }
+    }
+    // 2 values
     match = reg2value.exec(input);
-    if (match != null) return { top: match[1], right: match[2], bottom: match[1], left: match[2] }
+    if (match != null) { 
+        return { top: match[1], right: match[2], bottom: match[1], left: match[2] }
+    }
+    // 1 value
     match = reg1value.exec(input);
-    if (match != null) return { top: match[1], right: match[1], bottom: match[1], left: match[1] }
+    if (match != null) {
+        return { top: match[1], right: match[1], bottom: match[1], left: match[1] }
+    }
     
     return null;
 }
