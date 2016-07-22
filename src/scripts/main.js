@@ -7,7 +7,7 @@ $(window).load(function () {
         headerCenter: '<i>by</i>',
         pager : 'Page [cur] of [total]',
         padding: "7mm 10mm"
-    }
+    };
 
     attrify($('body'));
     wrapper($('body'));

@@ -70,18 +70,18 @@ function getMargin(input) {
         reg1value = /^[\s]*([0-9]+[\w%]*)[\s]*$/;
     // 4 values
     var match = reg4value.exec(input);
-    if (match != null) { 
-        return { top: match[1], right: match[2], bottom: match[3], left: match[4] }
+    if (match !== null) { 
+        return {top: match[1], right: match[2], bottom: match[3], left: match[4]};
     }
     // 2 values
     match = reg2value.exec(input);
-    if (match != null) { 
-        return { top: match[1], right: match[2], bottom: match[1], left: match[2] }
+    if (match !== null) { 
+        return {top: match[1], right: match[2], bottom: match[1], left: match[2]};
     }
     // 1 value
     match = reg1value.exec(input);
-    if (match != null) {
-        return { top: match[1], right: match[1], bottom: match[1], left: match[1] }
+    if (match !== null) {
+        return {top: match[1], right: match[1], bottom: match[1], left: match[1]};
     }
     
     return null;
@@ -126,21 +126,30 @@ function genPager(options, page) {
 function genHeader(options, page) {
     var curHtml = page.header.wrapper,
         pager = '';
-    if (options.headerLeft == '[pager]' || options.headerCenter == '[pager]' || options.headerRight == '[pager]') {
+    if (options.headerLeft === '[pager]' || options.headerCenter === '[pager]' || options.headerRight === '[pager]') {
         pager = genPager(options, page);
     }
     
     if (options.headerLeft != '') {
-        if (options.headerLeft == '[pager]') curHtml += '<div class="left">' + pager + '</div>';
-        else curHtml += '<div class="left">' + options.headerLeft + '</div>'
+        if (options.headerLeft === '[pager]') { 
+            curHtml += '<div class="left">' + pager + '</div>';
+        } else { 
+            curHtml += '<div class="left">' + options.headerLeft + '</div>';
+        }
     }
     if (options.headerCenter != '') { 
-        if (options.headerCenter == '[pager]') curHtml += '<div class="center">' + pager + '</div>';
-        else curHtml += '<div class="center">' + options.headerCenter + '</div>';
+        if (options.headerCenter === '[pager]') {
+            curHtml += '<div class="center">' + pager + '</div>';
+        } else { 
+            curHtml += '<div class="center">' + options.headerCenter + '</div>';
+        }
     }
     if (options.headerRight != '') {
-        if (options.headerRight == '[pager]') curHtml += '<div class="right">' + pager + '</div>';
-        else curHtml += '<div class="right">' + options.headerRight + '</div>';
+        if (options.headerRight === '[pager]') {
+            curHtml += '<div class="right">' + pager + '</div>';
+        } else {
+            curHtml += '<div class="right">' + options.headerRight + '</div>';
+        }
     }
     curHtml += '</div>';
     
@@ -153,21 +162,30 @@ function genHeader(options, page) {
 function genFooter(options, page) {
     var curHtml = page.footer.wrapper,
         pager = '';
-    if (options.footerLeft == '[pager]' || options.footerCenter == '[pager]' || options.footerRight == '[pager]') {
+    if (options.footerLeft === '[pager]' || options.footerCenter === '[pager]' || options.footerRight === '[pager]') {
         pager = genPager(options, page);
     }
     
-    if (options.footerLeft != '') {
-        if (options.footerLeft == '[pager]') curHtml += '<div class="left">' + pager + '</div>';
-        else curHtml += '<div class="left">' + options.footerLeft + '</div>'
+    if (options.footerLeft !== '') {
+        if (options.footerLeft === '[pager]') {
+            curHtml += '<div class="left">' + pager + '</div>';
+        } else {
+            curHtml += '<div class="left">' + options.footerLeft + '</div>'
+        }
     }
-    if (options.footerCenter != '') { 
-        if (options.footerCenter == '[pager]') curHtml += '<div class="center">' + pager + '</div>';
-        else curHtml += '<div class="center">' + options.footerCenter + '</div>';
+    if (options.footerCenter !== '') { 
+        if (options.footerCenter === '[pager]') {
+            curHtml += '<div class="center">' + pager + '</div>';
+        } else { 
+            curHtml += '<div class="center">' + options.footerCenter + '</div>';
+        }
     }
-    if (options.footerRight != '') {
-        if (options.footerRight == '[pager]') curHtml += '<div class="right">' + pager + '</div>';
-        else curHtml += '<div class="right">' + options.footerRight + '</div>';
+    if (options.footerRight !== '') {
+        if (options.footerRight === '[pager]') {
+            curHtml += '<div class="right">' + pager + '</div>';
+        } else {
+            curHtml += '<div class="right">' + options.footerRight + '</div>';
+        }
     }
     curHtml += '</div>';
     
@@ -214,13 +232,13 @@ function recCheckDom(remDom, remainHeight) {
         remDom.remove();
         return obj;
     }
-    if (remDom.children().length == 0) {
+    if (remDom.children().length === 0) {
         return null;
     }
     
     // Elements that should not be recusively checked for children
     var skipElem = ["P", "SCRIPT", "TABLE", "STYLE"];
-    if (skipElem.indexOf(remDom.prop('tagName')) != '-1') {
+    if (skipElem.indexOf(remDom.prop('tagName')) !== -1) {
         return null;
     }
 
@@ -228,13 +246,16 @@ function recCheckDom(remDom, remainHeight) {
     while (remDom.children().length > 0) {
         var elem = remDom.children(':nth-child(1)');
         obj = recCheckDom(elem, remainHeight);
-        if (obj == null) break; // exit foreach loop
-        else {
+        if (obj == null) {
+            break; // exit foreach loop   
+         } else {
             remainHeight = obj.height;
             curHtml += obj.content;
             
             // If done is true, then not all children were added so we can't remove the parent element
-            if (obj.done == true) break;
+            if (obj.done === true) {
+                break;
+            }
             
             elem.remove();
         }
@@ -287,7 +308,7 @@ function texify(customOptions, dom) {
         curPage = 1;
     
     // Check there is still remaining html in the body
-    while (clone.html().trim() != '') {
+    while (clone.html().trim() !== '') {
         // use extend to clone pageSetting obj and remove it's reference
         pages.push(makePage($.extend(true, [], basePage), clone));
         obj = pages[pages.length - 1];
@@ -296,8 +317,9 @@ function texify(customOptions, dom) {
                 
         if (obj.remain != null) {
             clone.html(obj.remain.html());
+        } else {
+            clone.html('');
         }
-        else clone.html('');
     }
     
     // Assemble the pages
