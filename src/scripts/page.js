@@ -267,7 +267,7 @@ function recCheckDom(remDom, remainHeight) {
         content: cur.wrap("<div>").parent().html(),
         remain: remDom,
         done: true
-    }
+    };
 }
 
 /**
