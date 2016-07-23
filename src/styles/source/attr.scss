@@ -1,0 +1,15 @@
+section {
+    @include section-size(18pt);
+    > section {
+        @include section-size(16pt);
+        > section {
+            @include section-size(14pt);
+        }
+    }
+}
+
+.para-title {
+    font-weight: bold;
+    margin-right: 10px;
+}
+

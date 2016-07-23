@@ -393,7 +393,7 @@ p {
   text-indent: 16pt;
   padding: 0;
   margin: 10px 0; }
-  p[title] {
+  p[title], p[data-title] {
     text-indent: 0; }
 
 img {
@@ -418,6 +418,26 @@ table {
     vertical-align: middle; }
   table th, table td {
     padding: 8px; }
+
+figure {
+  margin: 0; }
+
+figcaption {
+  text-align: center;
+  font-style: italic; }
+
+section .section-title {
+  font-size: 18pt; }
+
+section > section .section-title {
+  font-size: 16pt; }
+
+section > section > section .section-title {
+  font-size: 14pt; }
+
+.para-title {
+  font-weight: bold;
+  margin-right: 10px; }
 
 body {
   background-color: #525659; }
