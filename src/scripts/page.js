@@ -3,6 +3,8 @@
 
 // Default options the program will use.
 var defaultOptions = {
+    language: 'en-us',
+    
     // Dimensions
     height : '296mm', // Issue: printing makes blank page at the end **reduced height from 297mm**
     width : '210mm',
@@ -285,18 +287,26 @@ function makePage(basePage, dom) {
     };
 }
 
-/**
- * Convert a dom element to a series of printable pages.
- */
-function texify(customOptions, dom) {
-    var options = jsonConcat(defaultOptions, customOptions),
-        basePage = new Page();
-    
+function makeOptions(customOptions) {
+    return jsonConcat(defaultOptions, customOptions);
+}
+
+function preprocess(options, dom) {
     // Wrap the body in a page to get accurate height on elements
     dom.wrapInner('<div>').wrapInner('<div class="content">').wrapInner('<div class="page">');
     
     // Add styling to get rendering dimensions
     loadStyleSettings(options);
+}
+
+/**
+ * Convert a dom element to a series of printable pages.
+ */
+function texify(customOptions, dom) {
+    var options = makeOptions(customOptions),
+        basePage = new Page();
+    
+    preprocess(options, dom);
     
     // Detect rendered size
     basePage.page.height = $('body').find('.content').height();
