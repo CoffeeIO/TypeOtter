@@ -52,13 +52,18 @@ function rec(remain, lineHeight, dom) {
                 var x = window['Hypher']['languages']['en-us'].hyphenate(remain[arrPos - 1]);
                 if (debug) console.log(x);
                 while (dom.height() <= (lineHeight * line) && x[hyphenPos] != undefined) {
-                  temp = span.html();
-                  span.append(x[hyphenPos++]);
+                    temp = span.html();
+                    if (hyphenPos == 0) {
+                        span.append(x[hyphenPos++] + '-');
+                    } else {
+                        span.html(span.html().slice(0, -1));
+                        span.append(x[hyphenPos++] + '-');
+                    }
                 }
                 if (hyphenPos == 1) {
-                  span.html(temp);
+                    span.html(temp);
                 } else {
-                  span.html(temp + '&shy;');
+                    span.html(temp.slice(0, -1) + '&shy;');
                 }
                 carry = (x.slice(hyphenPos - 1)).join('');
             } else {
@@ -115,13 +120,11 @@ function typeset(dom) {
 }
 
 function getMaxWidth(dom, span, height) {
-    var count = 0,
-        maxCount = 200;
+    var count = 0;
     if (debug) console.log('--> ' + dom.height() + ' - ' + height);
     while(dom.height() <= height) {
         count++;
         span.css('margin-left', count + 'px');
-        if (count >= maxCount) return null;
     }
     span.css('margin-left', '0');
     return (count - 1);
