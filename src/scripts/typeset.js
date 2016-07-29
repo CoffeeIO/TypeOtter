@@ -1,8 +1,9 @@
-var splitPercent = 7;
+var debug = false;
+var splitPercent = 5;
 
 function rec(remain, lineHeight, dom) {
     if (arrPos >= remain.length) {
-        console.log('abort mission!')
+        if (debug) console.log('abort mission!')
         return {
             html: carry,
             carry: null,
@@ -20,7 +21,7 @@ function rec(remain, lineHeight, dom) {
         span = dom.find('span'),
         carry = null;
     while(remain[arrPos] != undefined) {
-        console.log('word  - %s, line - %s, span - ', remain[arrPos], line, span.html());
+        if (debug) console.log('word  - %s, line - %s, span - ', remain[arrPos], line, span.html());
         if (carry !== null) {
             span.html(carry + ' ');
             carry = null;
@@ -34,22 +35,22 @@ function rec(remain, lineHeight, dom) {
         else span.append(" " + remain[arrPos++]);
         
         if (dom.height() > (lineHeight * line)) {
-            console.log('break');
+            if (debug) console.log('break');
             span.html(temp + ' ');
             
             var minW = span.width(),
                 whitespace = getMaxWidth(dom, span, lineHeight * line),
                 maxW = minW + whitespace;
             
-            console.log('comp mw: %s, dw: %s', minW, dom.width());
+            if (debug) console.log('comp mw: %s, dw: %s', minW, dom.width());
             
-            console.log("min: %s, max: %s, split: %f", minW, maxW, (minW / maxW) * 100);
+            if (debug) console.log("min: %s, max: %s, split: %f", minW, maxW, (minW / maxW) * 100);
                         
             // Check if we should hyphenate.
             if ((minW / maxW) * 100 < (100 - splitPercent)) {
                 hyphenPos = 0;
                 var x = window['Hypher']['languages']['en-us'].hyphenate(remain[arrPos - 1]);
-                console.log(x);
+                if (debug) console.log(x);
                 while (dom.height() <= (lineHeight * line) && x[hyphenPos] != undefined) {
                   temp = span.html();
                   span.append(x[hyphenPos++]);
@@ -68,17 +69,16 @@ function rec(remain, lineHeight, dom) {
             // Clean up for next line
             span.before(span.html());
             span.html('');
-            console.log('line %i --> %s', line, dom.html());
-            console.log('cur pos --> ' + arrPos);
+            if (debug) console.log('line %i --> %s', line, dom.html());
+            if (debug) console.log('cur pos --> ' + arrPos);
             line++;            
         }
     }
-    console.log('pos %i -> value %s', arrPos, remain[arrPos]);
+    if (debug) console.log('pos %i -> value %s', arrPos, remain[arrPos]);
 
-    console.log('dom --> ' + dom.html());
+    if (debug) console.log('dom --> ' + dom.html());
 
-  
-    var tempMax = dom.height();
+    span.remove();
     dom.html(dom.html());
 
     return;
@@ -97,29 +97,18 @@ function typeset(dom) {
         arrPos: 0,
         carry: null
       };
-  console.log('word count -->'+ domArr.length);
-  console.log(domArr);
+  if (debug) console.log('word count -->'+ domArr.length);
+  if (debug) console.log(domArr);
   
   dom.html('Foo bar');
-  console.log('height --> ' + dom.height());
+  if (debug) console.log('height --> ' + dom.height());
   
   res = rec(domArr, dom.height(), dom);
-  console.log(res);
+  if (debug) console.log(res);
   
   
   return;
-  /*
-  while(looper) {
-    console.log('called --> c:' + res.carry + ' w:' + dom.width() + ' ap:' + res.arrPos);
-    res = rec(domArr, res.carry, dom.width(), check, res.arrPos);
-    fullHtml += res.html;
-    console.log(res);
-    //looper++;
-    if (res.arrPos == null) { 
-      looper = false; 
-    }
-    
-  }*/
+
   console.log('Done');
   //check.remove();
   dom.html(fullHtml);
@@ -128,7 +117,7 @@ function typeset(dom) {
 function getMaxWidth(dom, span, height) {
     var count = 0,
         maxCount = 200;
-    console.log('--> ' + dom.height() + ' - ' + height);
+    if (debug) console.log('--> ' + dom.height() + ' - ' + height);
     while(dom.height() <= height) {
         count++;
         span.css('margin-left', count + 'px');
