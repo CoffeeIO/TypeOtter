@@ -26,9 +26,6 @@ function rec(remain, lineHeight, dom) {
             span.html(carry + ' ');
             carry = null;
         }
-        /*if (arrPos == 75) {
-            return;
-        }*/
         
         temp = span.html();
         if (span.html() == '') span.append(remain[arrPos++]);
@@ -53,12 +50,10 @@ function rec(remain, lineHeight, dom) {
                 if (debug) console.log(x);
                 while (dom.height() <= (lineHeight * line) && x[hyphenPos] != undefined) {
                     temp = span.html();
-                    if (hyphenPos == 0) {
-                        span.append(x[hyphenPos++] + '-');
-                    } else {
+                    if (hyphenPos > 0) {
                         span.html(span.html().slice(0, -1));
-                        span.append(x[hyphenPos++] + '-');
                     }
+                    span.append(x[hyphenPos++] + '-');
                 }
                 if (hyphenPos == 1) {
                     span.html(temp);
