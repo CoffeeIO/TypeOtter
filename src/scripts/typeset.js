@@ -2,17 +2,7 @@ var debug = false;
 var splitPercent = 5;
 
 function rec(remain, lineHeight, dom) {
-    if (arrPos >= remain.length) {
-        if (debug) console.log('abort mission!')
-        return {
-            html: carry,
-            carry: null,
-            arrPos: null
-        };
-    }
-  
     dom.html('<span></span>');
-    
   
     var temp = '', // temporary store for text pieces
         hyphenPos = 0,
@@ -80,8 +70,6 @@ function rec(remain, lineHeight, dom) {
 
     span.remove();
     dom.html(dom.html());
-
-    return;
 }
 
 
