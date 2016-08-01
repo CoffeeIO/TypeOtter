@@ -1,12 +1,13 @@
 function includeFiles(dom) {
     var loading = 0;
     dom.find('include').each(function (index) {
-        var elem = $(this);
-        if (elem.attr('src') != '') {
+        var elem = $(this),
+            src = elem.attr('src');
+        if (src !== undefined && src !== '') {
             loading++;
-            elem.load(elem.attr('src'), function(data) {
-                if (data === undefined) {
-                    console.error('File: "' + elem.attr('src') + '" was not found');
+            elem.load(src, function(data) {
+                if (data === undefined) { // File not found
+                    console.error('File: "' + src + '" was not found');
                 } else {
                     elem.after(elem.html());
                 }
