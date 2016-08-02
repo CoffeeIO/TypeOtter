@@ -1,5 +1,9 @@
+/**
+ * Find include tags in dom and include their sources.
+ */
 function includeFiles(dom) {
-    var loading = 0;
+    var loading = 0; // Count number of active load requests
+    
     dom.find('include').each(function (index) {
         var elem = $(this),
             src = elem.attr('src');
