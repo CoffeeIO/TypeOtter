@@ -28,7 +28,7 @@ function indexToc(dom) {
  */
 function makeTocRow(ref, section, title, className) {
     return '<a href="#' + ref + '"><div class="' + className + '" data-ref="' + ref 
-         + '"><div class="left">' + section + ' ' + title 
+         + '"><div class="left"><span>' + section + '</span>' + title 
          + '</div><div class="right" data-pageref="">' + '</div></div></a>';
 }
 

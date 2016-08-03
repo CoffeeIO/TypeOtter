@@ -1,5 +1,5 @@
 .toc {
-  margin-bottom: 20px;
+  margin-bottom: 16pt;
   
   > a > div {
     position: relative;
@@ -8,20 +8,20 @@
   }
   .sec {
     margin-left: 0;
-    margin-top: 20px;
+    margin-top: 16pt;
     font-weight: bold;
     .left:after {
       content: '';
     }
   }
   .subsec {
-    margin-left: 20px;
+    margin-left: 15pt;
   }
   .subsubsec {
-    margin-left: 40px;
+    margin-left: 36pt;
   }
   .subsubsubsec {
-    margin-left: 60px;
+    margin-left: 57pt;
   }
   .right {
     position: absolute;
@@ -29,12 +29,15 @@
     top: 0;
   }
   .left {
-    padding-right: 15px;
+    padding-right: 9pt;
+    > span {
+      margin-right: 9pt;
+    }
   }
   .left:after {
-    content: ' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ';
+    content: ' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .';
     overflow: hidden;
-    margin-right: 15px;
+    margin-right: 18pt;
   }
   
   // Hyperlink
