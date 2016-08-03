@@ -33,6 +33,9 @@ This library is intended as an improvement on LaTex, allowing users to write pro
 ## Dependencies
 - **Font** -->  [Computer Modern on the web by CheckMyWorking.com](http://checkmyworking.com/cm-web-fonts/)
 
+## Credits
+- Inspiration for Hyphenation --> [Bram Stein's GitHub](https://github.com/bramstein)
+
 ---
 
 Copyright &copy; 2016 Mathias Grundtvig Andreasen (MGApcDev). Licensed under the terms of the [GPLv3 license](LICENSE.md).
