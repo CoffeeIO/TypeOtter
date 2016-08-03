@@ -10,7 +10,7 @@
     margin-left: 0;
     margin-top: 16pt;
     font-weight: bold;
-    .left:after {
+    .right:before {
       content: '';
     }
   }
@@ -23,18 +23,22 @@
   .subsubsubsec {
     margin-left: 57pt;
   }
-  .right {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
   .left {
+    position: relative;
+    background: white;
+    z-index: 1;
     padding-right: 9pt;
     > span {
       margin-right: 9pt;
     }
   }
-  .left:after {
+  .right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 2000pt;
+  }
+  .right:before {
     content: ' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .';
     overflow: hidden;
     margin-right: 18pt;

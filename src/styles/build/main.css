@@ -363,7 +363,7 @@ th {
     margin-left: 0;
     margin-top: 16pt;
     font-weight: bold; }
-    .toc .sec .left:after {
+    .toc .sec .right:before {
       content: ''; }
   .toc .subsec {
     margin-left: 15pt; }
@@ -371,15 +371,19 @@ th {
     margin-left: 36pt; }
   .toc .subsubsubsec {
     margin-left: 57pt; }
-  .toc .right {
-    position: absolute;
-    right: 0;
-    top: 0; }
   .toc .left {
+    position: relative;
+    background: white;
+    z-index: 1;
     padding-right: 9pt; }
     .toc .left > span {
       margin-right: 9pt; }
-  .toc .left:after {
+  .toc .right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 2000pt; }
+  .toc .right:before {
     content: ' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .';
     overflow: hidden;
     margin-right: 18pt; }

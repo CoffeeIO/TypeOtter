@@ -74,10 +74,6 @@ function genToc(inner, title) {
     var curHtml = '<div class="toc"><h1 class="toc-title">' + title + '</h1>';
     curHtml += inner + '</div>';
     return curHtml;
-} 
-
-function fixMaxHeight(dom) {
-    dom.append('<style>.toc > a > div { max-height: ' + dom.find('.toc > a > div').first().css('font-size') + ' }</style>');
 }
 
 /**
@@ -97,7 +93,6 @@ function makeToc(dom) {
         elem.after(toc);
         elem.remove();
     });
-    fixMaxHeight(dom);
 }
 
 /**
