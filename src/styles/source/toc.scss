@@ -1,0 +1,39 @@
+.toc {
+  > a > * {
+    position: relative;
+    overflow: hidden;
+    max-height: 18px;
+  }
+  .sec {
+    margin-left: 0;
+    font-weight: bold;
+  }
+  .subsec {
+    margin-left: 20px;
+  }
+  .subsubsec {
+    margin-left: 40px;
+  }
+  .subsubsubsec {
+    margin-left: 60px;
+  }
+  .right {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .left {
+    padding-right: 15px;
+  }
+  .left:after {
+    content: ' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ';
+    overflow: hidden;
+    margin-right: 15px;
+  }
+  
+  // hyperlink
+  a {
+    color: black;
+  
+  }
+}
