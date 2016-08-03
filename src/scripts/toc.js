@@ -76,6 +76,11 @@ function genToc(inner, title) {
     return curHtml;
 } 
 
+function fixMaxHeight(dom) {
+    console.log('font --> %s', dom.find('.toc > a > div').first().css('font-size'));
+    dom.append('<style>.toc > a > div { max-height: ' + dom.find('.toc > a > div').first().css('font-size') + ' }</style>');
+}
+
 /**
  * Create a table of contents as an element to be inserted into the dom.
  */
@@ -93,6 +98,7 @@ function makeToc(dom) {
         elem.after(toc);
         elem.remove();
     });
+    fixMaxHeight(dom);
 }
 
 /**
@@ -101,9 +107,9 @@ function makeToc(dom) {
 function fillToc(dom) {
     dom.find('.toc').each(function () {
         var elem = $(this);
-        elem.find('> div').each(function () {
-            var sec = dom.find('section[data-ref="' + $(this).attr('data-ref') + '"]').first();
-            var page = sec.closest('.page');
+        elem.find('> a > div').each(function () {
+            var sec = dom.find('section[data-ref="' + $(this).attr('data-ref') + '"]').first(),
+                page = sec.closest('.page');
             $(this).find('.right').html(page.attr('data-page'));
         });
     });

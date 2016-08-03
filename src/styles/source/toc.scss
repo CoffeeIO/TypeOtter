@@ -1,12 +1,18 @@
 .toc {
-  > a > * {
+  margin-bottom: 20px;
+  
+  > a > div {
     position: relative;
     overflow: hidden;
-    max-height: 18px;
+    margin-bottom: 7px;
   }
   .sec {
     margin-left: 0;
+    margin-top: 20px;
     font-weight: bold;
+    .left:after {
+      content: '';
+    }
   }
   .subsec {
     margin-left: 20px;

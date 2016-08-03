@@ -353,39 +353,36 @@ td,
 th {
   padding: 0; }
 
-.toc > a > * {
-  position: relative;
-  overflow: hidden;
-  max-height: 18px; }
-
-.toc .sec {
-  margin-left: 0;
-  font-weight: bold; }
-
-.toc .subsec {
-  margin-left: 20px; }
-
-.toc .subsubsec {
-  margin-left: 40px; }
-
-.toc .subsubsubsec {
-  margin-left: 60px; }
-
-.toc .right {
-  position: absolute;
-  right: 0;
-  top: 0; }
-
-.toc .left {
-  padding-right: 15px; }
-
-.toc .left:after {
-  content: ' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ';
-  overflow: hidden;
-  margin-right: 15px; }
-
-.toc a {
-  color: black; }
+.toc {
+  margin-bottom: 20px; }
+  .toc > a > div {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 7px; }
+  .toc .sec {
+    margin-left: 0;
+    margin-top: 20px;
+    font-weight: bold; }
+    .toc .sec .left:after {
+      content: ''; }
+  .toc .subsec {
+    margin-left: 20px; }
+  .toc .subsubsec {
+    margin-left: 40px; }
+  .toc .subsubsubsec {
+    margin-left: 60px; }
+  .toc .right {
+    position: absolute;
+    right: 0;
+    top: 0; }
+  .toc .left {
+    padding-right: 15px; }
+  .toc .left:after {
+    content: ' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ';
+    overflow: hidden;
+    margin-right: 15px; }
+  .toc a {
+    color: black; }
 
 body {
   margin: 0 auto;
