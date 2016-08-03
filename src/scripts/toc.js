@@ -77,7 +77,6 @@ function genToc(inner, title) {
 } 
 
 function fixMaxHeight(dom) {
-    console.log('font --> %s', dom.find('.toc > a > div').first().css('font-size'));
     dom.append('<style>.toc > a > div { max-height: ' + dom.find('.toc > a > div').first().css('font-size') + ' }</style>');
 }
 
