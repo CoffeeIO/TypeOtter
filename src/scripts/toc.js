@@ -6,20 +6,30 @@ function indexToc(dom) {
     var secs = $('section');
     secs.each(function() {
         var sec = $(this),
-            parents = sec.parentsUntil(dom, 'section');
-        var len = parents.length
+            parents = sec.parentsUntil(dom, 'section'),
+            len = parents.length;
         if (section[len] === undefined) {
             section[len] = 0;
         }
         section[len]++;
-
+        // Reset subsections to zero (relative)
         for (i = len + 1; i < section.length; i++) {
             section[i] = 0;
         }
-        var join = section.join('.')
-        sec.attr('data-ref', join); // Change to .data()
-        sec.prepend('<a name="' + join + '"></a>')
+        var join = section.join('.');
+        sec.attr('data-ref', join);
+        // Make reference link
+        sec.prepend('<a name="' + join + '"></a>');
     });
+}
+
+/**
+ * Create the html of a single row in table of contents.
+ */
+function makeTocRow(ref, section, title, className) {
+    return '<a href="#' + ref + '"><div class="' + className + '" data-ref="' + ref 
+         + '"><div class="left">' + section + ' ' + title 
+         + '</div><div class="right" data-pageref="">' + '</div></div></a>';
 }
 
 /**
@@ -33,23 +43,23 @@ function innerToc(dom) {
             secArr = secStr.split('.');
         
         // Section
-        if (secArr[1] == undefined || secArr[1] == 0) {
-            curHtml += '<a href="#' + secStr + '"><div class="sec" data-ref="' + secStr + '"><div class="left">' + secArr[0] + ' ' + elem.attr('data-title') + '</div><div class="right" data-pageref="">' + '</div></div></a>';
+        if (secArr[1] === undefined || secArr[1] === '0') {
+            curHtml += makeTocRow(secStr, secArr[0], elem.attr('data-title'), 'sec');
             return true;
         }
         // Sub-section
-        if (secArr[2] == undefined || secArr[2] == 0) {
-            curHtml += '<a href="#' + secStr + '"><div class="subsec" data-ref="' + secStr + '"><div class="left">' + secArr[0] + '.' + secArr[1] + ' ' + elem.attr('data-title') + '</div><div class="right" data-pageref="">' + '</div></div></a>';
+        if (secArr[2] === undefined || secArr[2] === '0') {
+            curHtml += makeTocRow(secStr, secArr[0] + '.' + secArr[1], elem.attr('data-title'), 'subsec');
             return true;
         }
         // Sub-sub-section
-        if (secArr[3] == undefined || secArr[3] == 0) {
-            curHtml += '<a href="#' + secStr + '"><div class="subsubsec" data-ref="' + secStr + '"><div class="left">' + secArr[0] + '.' + secArr[1] + '.' + secArr[2] + ' ' + elem.attr('data-title') + '</div><div class="right" data-pageref="">' + '</div></div></a>';
+        if (secArr[3] === undefined || secArr[3] === '0') {
+            curHtml += makeTocRow(secStr, secArr[0] + '.' + secArr[1] + '.' + secArr[2], elem.attr('data-title'), 'subsubsec');
             return true;
         }
         // Sub-sub-sub-section
-        if (secArr[4] == undefined || secArr[4] == 0) {
-            curHtml += '<a href="#' + secStr + '"><div class="subsubsubsec" data-ref="' + secStr + '"><div class="left">' + secArr[0] + '.' + secArr[1] + '.' + secArr[2] + '.' + secArr[3] + ' ' + elem.attr('data-title') + '</div><div class="right" data-pageref="">' + '</div></div></a>';
+        if (secArr[4] === undefined || secArr[4] === '0') {
+            curHtml += makeTocRow(secStr, secArr[0] + '.' + secArr[1] + '.' + secArr[2] + '.' + secArr[3], elem.attr('data-title'), 'subsubsubsec');
             return true;
         }
         console.error('Only 3 subsection levels supported');
