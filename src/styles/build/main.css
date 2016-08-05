@@ -353,6 +353,43 @@ td,
 th {
   padding: 0; }
 
+.toc {
+  margin-bottom: 16pt; }
+  .toc > a > div {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 7px; }
+  .toc .sec {
+    margin-left: 0;
+    margin-top: 16pt;
+    font-weight: bold; }
+    .toc .sec .right:before {
+      content: ''; }
+  .toc .subsec {
+    margin-left: 15pt; }
+  .toc .subsubsec {
+    margin-left: 36pt; }
+  .toc .subsubsubsec {
+    margin-left: 57pt; }
+  .toc .left {
+    position: relative;
+    background: white;
+    z-index: 1;
+    padding-right: 9pt; }
+    .toc .left > span {
+      margin-right: 9pt; }
+  .toc .right {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 2000pt; }
+  .toc .right:before {
+    content: ' . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .';
+    overflow: hidden;
+    margin-right: 18pt; }
+  .toc a {
+    color: black; }
+
 body {
   margin: 0 auto;
   font-family: 'Computer Modern Serif';
