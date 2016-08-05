@@ -237,7 +237,7 @@ function recCheckDom(remDom, remainHeight) {
     }
     
     // Elements that should not be recusively checked for children
-    var skipElem = ["P", "SCRIPT", "TABLE", "STYLE"];
+    var skipElem = ["P", "SCRIPT", "TABLE", "STYLE", "FIGURE"];
     if (skipElem.indexOf(remDom.prop('tagName')) !== -1) {
         return null;
     }

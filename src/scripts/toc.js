@@ -16,10 +16,15 @@ function indexToc(dom) {
         for (i = len + 1; i < section.length; i++) {
             section[i] = 0;
         }
-        var join = section.join('.');
+        var join = section.join('.'),
+            index = join.indexOf('.0');
+        if (index !== -1) {
+            join = join.substr(0, index);
+        }
+        
         sec.attr('data-ref', join);
         // Make reference link
-        sec.prepend('<a name="' + join + '"></a>');
+        sec.prepend('<a name="mltex-' + join + '"></a>');
     });
 }
 
@@ -27,7 +32,7 @@ function indexToc(dom) {
  * Create the html of a single row in table of contents.
  */
 function makeTocRow(ref, section, title, className) {
-    return '<a href="#' + ref + '"><div class="' + className + '" data-ref="' + ref 
+    return '<a href="#mltex-' + ref + '"><div class="' + className + '" data-ref="' + ref 
          + '"><div class="left"><span>' + section + '</span>' + title 
          + '</div><div class="right" data-pageref="">' + '</div></div></a>';
 }
