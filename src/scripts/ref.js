@@ -6,7 +6,7 @@ function makeRef(dom) {
             console.error('Reference needs "href" attribute: %s', elem.clone().wrap('<span>').parent().html());
             return true;
         }
-            ref = dom.find('a[name="' + href.substr(1) + '"]').first();
+        var ref = dom.find('a[name="' + href.substr(1) + '"]').first();
         if (ref.closest('figure').length !== 0) {
             elem.html(ref.closest('figure').attr('data-fig'));
         } else if (ref.closest('section').length !== 0) {
