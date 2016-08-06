@@ -34,7 +34,7 @@ $(window).load(function () {
     indexToc($('body'));
     makeToc($('body'));
     handleCite($('body'), cite);
-
+    makeRefPage($('body'), cite);
     texify(options, $('body'));
     fillToc($('body'));
 });
@@ -49,7 +49,7 @@ $(window).load(function () {
 
 Praesent sit amet urna a ipsum cursus semper quis nec tortor. Ut quis nunc nec elit molestie dignissim. Aenean sodales nibh ut lobortis imperdiet. Cras laoreet est sed nulla porta mattis non quis ligula. Quisque vitae faucibus purus. Duis efficitur vehicula finibus. Nullam tincidunt enim quis nisi ullamcorper, et tempus dolor auctor. Fusce sodales porta interdum.
 
-Suspendisse finibus lorem ut neque faucibus laoreet sed et eros. Vivamus sollicitudin turpis ornare, vehicula magna tincidunt, euismod mi. Nullam interdum lacinia dui, ac interdum leo lacinia vitae. Curabitur fermentum dolor quis aliquam aliquet. Sed bibendum augue mauris, nec scelerisque nibh sodales ac. Proin risus quam, porttitor eu accumsan et, tempus et metus. Aenean blandit tellus a ligula sodales volutpat.<b>Cite --> <a href="book1" cite></a></b>
+      Suspendisse finibus lorem ut neque faucibus laoreet sed et eros. Vivamus sollicitudin turpis ornare, vehicula magna tincidunt, euismod mi. Nullam interdum lacinia dui, ac interdum leo lacinia vitae. Curabitur fermentum dolor quis aliquam aliquet. Sed bibendum augue mauris, nec scelerisque nibh sodales ac. Proin risus quam, porttitor eu accumsan et, tempus et metus. Aenean blandit tellus a ligula sodales volutpat.<b>Cite --> <a href="#book1" cite></a> or look at: <a href="#book2" cite></a></b>
 
 Donec dictum dapibus urna, eget eleifend metus consectetur venenatis. Nam scelerisque turpis erat, at malesuada magna iaculis in. Morbi iaculis ut mauris vel faucibus. Aliquam erat volutpat. Maecenas vel viverra neque, vitae mattis massa. Nullam finibus nunc in eros efficitur, in finibus nulla facilisis. Donec consectetur egestas luctus. Morbi sollicitudin lorem vitae sem lacinia placerat non nec est. Cras eget ipsum libero. Aliquam sollicitudin tellus justo, sit amet cursus eros dapibus sit amet. Aenean id ex mi.
 
