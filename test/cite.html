@@ -33,8 +33,8 @@ $(window).load(function () {
     wrapper($('body'));
     indexToc($('body'));
     makeToc($('body'));
-    handleCite($('body'), cite);
-    makeRefPage($('body'), cite);
+    var ref = handleCite($('body'), cite);
+    makeRefPage($('body'), cite, ref);
     texify(options, $('body'));
     fillToc($('body'));
 });
