@@ -9,7 +9,66 @@
 }
 .tex-ref-name {
     margin-right: 10pt;
+    &:before { content: "["; }
+    &:after { content: "]"; }
 }
-.tex-ref-cite {
-    
+
+// Book ref
+.tex-ref-book {
+    span:nth-last-child(2) {
+        &:after { content: " "; }
+    }
+}
+.tex-book-author {
+    &:after { content: ". "; }
+}
+.tex-book-title {
+    font-style: italic;
+    &:after { content: ". "; }
+}
+.tex-book-editor {
+    &:before { content: "Ed. by "; }
+    &:after { content: ". "; }
+}
+.tex-book-edition {
+    &:after { content: ". "; }
+}
+.tex-book-volume {
+    &:before { content: "Vol. "; }
+    &:after { content: ". "; }
+}
+.tex-book-series {
+    & + span {
+        &:before { content: ". "; }
+    }
+    & + .tex-book-number {
+        &:before { content: " "; }
+    }
+}
+.tex-book-number {
+    &:after { content: ". "; }
+}
+.tex-book-note {
+    &:after { content: ". "; }
+}
+.tex-book-address {
+    & + span {
+        &:before { content: ", "; }
+    }
+    & + .tex-book-publisher {
+        &:before { content: ": "; }
+    }
+}
+.tex-book-publisher {
+    &:after { content: ", "; }
+}
+.tex-book-month {
+    &:after { content: ". " !important; }
+}
+.tex-book-year {
+    &:after { content: " "; }
+}
+.tex-book-cite {
+    &:before { content: " (cit. on p. "; }
+    &:after { content: ")."; }
 }

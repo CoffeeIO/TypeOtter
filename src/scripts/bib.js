@@ -1,9 +1,27 @@
+var refOrderArticle = ["author", "title", "journal", "volume", "number", "month", "year", "editor", "note"];
+var refBook = {
+        author: "[val].",
+        title: "<i>[val]</i>.",
+        editor: "Ed. by [val].",
+        edition: "[val].",
+        volume: "Vol. [val].",
+        series: "[val]",
+        number: "[val]", // '.' after series or number
+        note: "[val].",
+        address: "[val]",
+        publisher: ": [val]",
+        month: "[val]",
+        year: "[val]"
+    };
+
+
 /**
  * Find and replace cite tags in dom with values from biblography.
  */
 function handleCite(dom, bib) {
     var map = [], // Map for how many times the same generated cite name is used
-        refMap = []; // Map for used cite and their generated name
+        refMap = [], // Map for used cite and their generated name
+        counter = 1;
     dom.find('a[cite=""]').each(function () {
         var elem = $(this),
             href = elem.attr('href');
@@ -32,6 +50,7 @@ function handleCite(dom, bib) {
         var fullCite = citeStr + citeSpace + map[citeStr];
         
         elem.html(fullCite);
+        elem.attr('name', fullCite + '-' + counter++); // Link back to cite
         refMap[fullCite] = href;
     });
     return refMap;
@@ -50,6 +69,20 @@ function getMapKeys(dictionary) {
     return keys;
 }
 
+function genBookRef(ref) {
+    var curHtml = '<span class="tex-ref-book">';
+    var refOrderBook = ["author", "title", "editor", "edition", "volume", "series", "number", "note", "address", "publisher", "month", "year"];
+
+    refOrderBook.forEach(function (item) {
+        if (ref[item] !== undefined) {
+            curHtml += '<span class="tex-book-' + item + '">' + ref[item] + '</span>';
+        }
+    });
+    curHtml += '<span class="tex-book-cite"></span>';
+        
+    return curHtml + '</span>';
+}
+
 /**
  * Create references page and append to dom.
  */
@@ -61,8 +94,8 @@ function makeRefPage(dom, bib, ref) {
     keys.forEach(function (item) {
         curHtml += '<div class="tex-ref-row">';
         curHtml += '<a name="' + ref[item] + '"></a>'; // Link for citations
-        curHtml += '<span class="tex-ref-name">[' + item + ']</span>';
-        curHtml += '<span class="tex-ref-cite">' + bib[ref[item]].title + '</span>';
+        curHtml += '<span class="tex-ref-name">' + item + '</span>';
+        curHtml += genBookRef(bib[ref[item]]);
         curHtml += '</div>';
     });
     
