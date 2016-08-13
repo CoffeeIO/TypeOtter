@@ -76,7 +76,7 @@ function handleImgSize(dom) {
 }
 
 /**
- * Handle url attribute on a tags, copy href to html and set target to blank.
+ * Handle url attribute on 'a' tags, copy href to html and set target to blank.
  */
 function handleUrl(dom) {
     dom.find('a[url=""]').each(function (index) {
