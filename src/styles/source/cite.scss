@@ -5,6 +5,14 @@ a[cite=""] {
 
 .tex-ref {
     margin-bottom: 15pt;
+    tr {
+        border-bottom: 7pt solid transparent;
+    }
+    td {
+        vertical-align: top;
+        border: none;
+        padding: 0;
+    }
 }
 .tex-ref-title {
     text-align: center;

@@ -398,6 +398,12 @@ a[cite=""]:after {
 
 .tex-ref {
   margin-bottom: 15pt; }
+  .tex-ref tr {
+    border-bottom: 7pt solid transparent; }
+  .tex-ref td {
+    vertical-align: top;
+    border: none;
+    padding: 0; }
 
 .tex-ref-title {
   text-align: center; }

@@ -84,18 +84,18 @@ function genBookRef(ref) {
  */
 function makeRefPage(dom, bib) {
     var keys = getMapKeys(bib),
-        curHtml = '<div class="tex-ref"><h1 class="tex-ref-title">References</h1>';
+        curHtml = '<div class="tex-ref"><h1 class="tex-ref-title">References</h1><table>';
     
     // Iterate citations used.
     keys.forEach(function (item) {
-        curHtml += '<div class="tex-ref-row" tex-ref-name="' + item + '">';
+        curHtml += '<tr class="tex-ref-row" tex-ref-name="' + item + '">';
         curHtml += '<a name="' + item + '"></a>'; // Link for citations
-        curHtml += '<span class="tex-ref-name">' + bib[item]['tex-ref-name'] + '</span>';
-        curHtml += genBookRef(bib[item]);
-        curHtml += '</div>';
+        curHtml += '<td><span class="tex-ref-name">' + bib[item]['tex-ref-name'] + '</span></td>';
+        curHtml += '<td>' + genBookRef(bib[item]) + '</td>';
+        curHtml += '</tr>';
     });
     
-    curHtml += '</div>';
+    curHtml += '</table></div>';
     dom.append(curHtml);
 }
 
