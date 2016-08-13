@@ -1,27 +1,11 @@
 var refOrderArticle = ["author", "title", "journal", "volume", "number", "month", "year", "editor", "note"];
-var refBook = {
-        author: "[val].",
-        title: "<i>[val]</i>.",
-        editor: "Ed. by [val].",
-        edition: "[val].",
-        volume: "Vol. [val].",
-        series: "[val]",
-        number: "[val]", // '.' after series or number
-        note: "[val].",
-        address: "[val]",
-        publisher: ": [val]",
-        month: "[val]",
-        year: "[val]"
-    };
-
 
 /**
  * Find and replace cite tags in dom with values from biblography.
  */
 function handleCite(dom, bib) {
-    var map = [], // Map for how many times the same generated cite name is used
-        refMap = [], // Map for used cite and their generated name
-        counter = 1;
+    var map = []; // Map for how many times the same generated cite name is used
+    
     dom.find('a[cite=""]').each(function () {
         var elem = $(this),
             href = elem.attr('href');
@@ -31,29 +15,39 @@ function handleCite(dom, bib) {
         } else {
             href = href.substr(1); // Ignore '#'
         }
+        
         var ref = bib[href];
         if (ref === undefined) {
             console.error('Could not find reference: %s', href);
             return true;
         }
-        var citeStr = ref.title.substr(0, 3),
-            citeSpace = '';
         
-        if (map[citeStr] === undefined) {
-            map[citeStr] = 1;
-        } else {
-            map[citeStr]++;
+        if (ref['tex-ref-name'] === undefined) {
+            var citeStr = ref.title.substr(0, 3),
+                citeSpace = '';
+
+            if (map[citeStr] === undefined) {
+                map[citeStr] = 1;
+            } else {
+                map[citeStr]++;
+            }
+
+            if (map[citeStr] < 10) {
+                citeSpace = '0';
+            }
+            var fullCite = citeStr + citeSpace + map[citeStr];
+            
+            ref['tex-ref-name'] = fullCite;
         }
-        if (map[citeStr] < 10) {
-            citeSpace = '0';
-        }
-        var fullCite = citeStr + citeSpace + map[citeStr];
         
-        elem.html(fullCite);
-        elem.attr('name', fullCite + '-' + counter++); // Link back to cite
-        refMap[fullCite] = href;
+        if (ref['tex-ref-count'] === undefined) {
+            ref['tex-ref-count'] = 0;
+        }
+        ref['tex-ref-count']++;        
+        
+        elem.html(ref['tex-ref-name']);
     });
-    return refMap;
+    return bib;
 }
 
 /**
@@ -78,27 +72,59 @@ function genBookRef(ref) {
             curHtml += '<span class="tex-book-' + item + '">' + ref[item] + '</span>';
         }
     });
-    curHtml += '<span class="tex-book-cite"></span>';
-        
+    if (ref['tex-ref-count'] !== undefined) {
+        curHtml += '<span class="tex-book-cite" tex-count="' + ref['tex-ref-count'] + '"></span>';
+    }
+       
     return curHtml + '</span>';
 }
 
 /**
  * Create references page and append to dom.
  */
-function makeRefPage(dom, bib, ref) {
-    var keys = getMapKeys(ref),
+function makeRefPage(dom, bib) {
+    var keys = getMapKeys(bib),
         curHtml = '<div class="tex-ref"><h1 class="tex-ref-title">References</h1>';
     
     // Iterate citations used.
     keys.forEach(function (item) {
-        curHtml += '<div class="tex-ref-row">';
-        curHtml += '<a name="' + ref[item] + '"></a>'; // Link for citations
-        curHtml += '<span class="tex-ref-name">' + item + '</span>';
-        curHtml += genBookRef(bib[ref[item]]);
+        curHtml += '<div class="tex-ref-row" tex-ref-name="' + item + '">';
+        curHtml += '<a name="' + item + '"></a>'; // Link for citations
+        curHtml += '<span class="tex-ref-name">' + bib[item]['tex-ref-name'] + '</span>';
+        curHtml += genBookRef(bib[item]);
         curHtml += '</div>';
     });
     
     curHtml += '</div>';
     dom.append(curHtml);
+}
+
+/**
+ * Fill the reference with pages numbers from citations.
+ */
+function fillCite(dom) {
+    // Iterate over rows in reference table.
+    dom.find('.tex-ref-row').each(function () {
+        var elem = $(this),
+            refName = elem.attr('tex-ref-name'),
+            pages = []; // Unique pages the reference is used
+        
+        // Find citations of a specific reference.
+        dom.find('a[cite=""][href="#' + refName + '"]').each(function () {
+            var inner = $(this),
+                pageNum = inner.closest('.page').attr('data-page');
+            pages[pageNum] = true;
+        });
+
+        var citePages = getMapKeys(pages),
+            cite = elem.find('.tex-book-cite'),
+            citeHtml = '';
+        citePages.forEach(function (item) {
+            citeHtml += '<a href="#tex-page-' + item + '">' + item + '</a>, ';
+        });
+        citeHtml = citeHtml.substr(0, citeHtml.length - 2);
+        
+        cite.html(citeHtml);
+        cite.attr('tex-count', citePages.length);
+    });
 }

@@ -197,6 +197,7 @@ function genFooter(options, page) {
  */
 function genPage(header, footer, page) {
     var curHtml = '<div class="page" data-page="' + page.number + '">';
+    curHtml += '<a name="tex-page-' + page.number + '"></a>';
     
     curHtml += header;
     curHtml += '<div class="content">' + stripWrapper(page.content) + '</div>';

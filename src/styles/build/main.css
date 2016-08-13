@@ -390,6 +390,12 @@ th {
   .toc a {
     color: black; }
 
+a[cite=""]:before {
+  content: "["; }
+
+a[cite=""]:after {
+  content: "]"; }
+
 .tex-ref {
   margin-bottom: 15pt; }
 
@@ -460,10 +466,16 @@ th {
   content: " "; }
 
 .tex-book-cite:before {
+  content: " (cit. on pp. "; }
+
+.tex-book-cite[tex-count="1"]:before {
   content: " (cit. on p. "; }
 
 .tex-book-cite:after {
   content: ")."; }
+
+.tex-book-cite a {
+  font-weight: normal; }
 
 body {
   margin: 0 auto;
@@ -537,6 +549,12 @@ figure {
 figcaption {
   text-align: center;
   font-style: italic; }
+
+a {
+  color: black;
+  text-decoration: none; }
+  a[url=""] {
+    font-weight: bold; }
 
 section .section-title {
   font-size: 18pt; }

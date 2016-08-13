@@ -1,3 +1,8 @@
+a[cite=""] {
+    &:before { content: "["; }
+    &:after { content: "]"; }
+}
+
 .tex-ref {
     margin-bottom: 15pt;
 }
@@ -69,6 +74,14 @@
     &:after { content: " "; }
 }
 .tex-book-cite {
-    &:before { content: " (cit. on p. "; }
+    &:before { content: " (cit. on pp. "; } // Multiple citations
+    &[tex-count="1"] {
+        &:before { content: " (cit. on p. "; } // Single citation
+    }
+    
     &:after { content: ")."; }
+    
+    a {
+        font-weight: normal;
+    }
 }
