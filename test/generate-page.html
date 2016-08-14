@@ -9,6 +9,7 @@
   <script src="../src/scripts/wrap.js"></script>
   <script src="../src/scripts/page.js"></script>
   <script src="../src/scripts/toc.js"></script>
+  <script src="../src/scripts/footnote.js"></script>
   <script>
 $(window).load(function () {
     // User specified options, example
@@ -23,6 +24,7 @@ $(window).load(function () {
     wrapper($('body'));
     indexToc($('body'));
     makeToc($('body'));
+    handleFootnote($('body'));
     texify(options, $('body'));
     fillToc($('body'));
 });
@@ -35,7 +37,8 @@ $(window).load(function () {
   <p class="p1">
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam metus diam, volutpat in purus posuere, porttitor fringilla erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam sollicitudin vulputate dolor id eleifend. Morbi sagittis tortor in urna ultricies, et convallis mi finibus. Aenean gravida mauris ut enim convallis condimentum vitae at lectus. Cras nisl mi, efficitur id mollis quis, blandit quis nisi. Morbi sem nulla, egestas egestas nibh non, mollis tincidunt eros. Donec mattis ullamcorper ex a consectetur. Etiam diam justo, suscipit eu eros in, semper vestibulum mauris. Donec id diam quis orci molestie facilisis ac id neque. Sed efficitur pellentesque lobortis. Donec urna magna, dapibus vel diam in, dictum dictum lorem. In pharetra, felis eget porttitor imperdiet, sapien risus tempus arcu, ut sollicitudin tellus ante nec nunc. Sed id libero dui. <a href="http://layer0.authentise.com/images/coding.gif" url></a>
 
-Praesent sit amet urna a ipsum cursus semper quis nec tortor. Ut quis nunc nec elit molestie dignissim. Aenean sodales nibh ut lobortis imperdiet. Cras laoreet est sed nulla porta mattis non quis ligula. Quisque vitae faucibus purus. Duis efficitur vehicula finibus. Nullam tincidunt enim quis nisi ullamcorper, et tempus dolor auctor. Fusce sodales porta interdum.
+Praesent sit amet urna a ipsum cursus semper quis nec tortor. Ut quis nunc nec elit molestie dignissim. Aenean sodales nibh ut lobortis imperdiet. Cras laoreet est sed nulla porta mattis non quis ligula. Quisque vitae faucibus purus. Duis efficitur vehicula finibus. Nullam tincidunt enim quis nisi ullamcorper, et tempus dolor auctor. Fusce sodales porta interdum. Footnote<footnote>Hello</footnote>
+    
 
 Suspendisse finibus lorem ut neque faucibus laoreet sed et eros. Vivamus sollicitudin turpis ornare, vehicula magna tincidunt, euismod mi. Nullam interdum lacinia dui, ac interdum leo lacinia vitae. Curabitur fermentum dolor quis aliquam aliquet. Sed bibendum augue mauris, nec scelerisque nibh sodales ac. Proin risus quam, porttitor eu accumsan et, tempus et metus. Aenean blandit tellus a ligula sodales volutpat.
 
