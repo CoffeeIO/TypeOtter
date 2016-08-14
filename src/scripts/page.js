@@ -227,11 +227,19 @@ function addToPage(dom, height) {
  * height is achieved or there's no more elements.
  */
 function recCheckDom(remDom, remainHeight) {
+    // Check if entire element can be added to the page.
     var obj = addToPage(remDom, remainHeight);
     if (obj !== null) {
         remDom.remove();
         return obj;
     }
+    
+    // Remove newpage element and return null to end page.
+    if (remDom.hasClass('tex-newpage')) {
+        remDom.remove();
+        return null;
+    }
+    
     if (remDom.children().length === 0) {
         return null;
     }

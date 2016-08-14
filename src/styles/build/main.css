@@ -476,6 +476,9 @@ section > section > section .section-title {
   font-weight: bold;
   margin-right: 10px; }
 
+.tex-newpage {
+  height: 2000px; }
+
 body {
   background-color: #525659; }
 
