@@ -3,6 +3,7 @@
  */
 function attrify(dom) {
     handleUrl(dom);
+    handleNewpage(dom);
     handleImages(dom);
     handleTitle(dom);
     handleName(dom);
@@ -83,5 +84,15 @@ function handleUrl(dom) {
         var elem = $(this),
             href = elem.attr('href');
         elem.html(href).attr('target', '_blank');
+    });
+}
+
+/**
+ * Handle newpage attribute on any element.
+ */
+function handleNewpage(dom) {
+    dom.find('*[newpage=""]').each(function () {
+        var elem = $(this);
+        elem.before('<div class="tex-newpage"></div>');
     });
 }
