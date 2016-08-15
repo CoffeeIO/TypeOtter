@@ -60,7 +60,9 @@ function handleImages(dom) {
  */
 function handleCaption(dom) {
     dom.find("img[caption!=''][caption]").each(function (index) {
-        $(this).after('<figcaption>' + $(this).attr('caption') + '</figcaption>');
+        var elem = $(this),
+            count = elem.closest('figure').attr('data-fig');
+        elem.after('<figcaption>Figure ' + count + ': ' + elem.attr('caption') + '</figcaption>');
     });
 }
 
