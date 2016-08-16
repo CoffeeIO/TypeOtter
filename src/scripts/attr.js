@@ -47,10 +47,13 @@ function handleName(dom) {
  * Wrap all images in <figure> tag to allow for name and captions.
  */
 function handleImages(dom) {
+    var counter = 1;
     dom.find("img").each(function (index) {
-        if ($(this).parent().prop('tagName') !== 'FIGURE') {
-            $(this).wrap('<figure>');
+        var elem = $(this);
+        if (elem.parent().prop('tagName') !== 'FIGURE') {
+            elem.wrap('<figure>');
         }
+        elem.closest('figure').attr('data-fig', counter++);
     });
 }
 
@@ -59,7 +62,9 @@ function handleImages(dom) {
  */
 function handleCaption(dom) {
     dom.find("img[caption!=''][caption]").each(function (index) {
-        $(this).after('<figcaption>' + $(this).attr('caption') + '</figcaption>');
+        var elem = $(this),
+            count = elem.closest('figure').attr('data-fig');
+        elem.after('<figcaption>Figure ' + count + ': ' + elem.attr('caption') + '</figcaption>');
     });
 }
 
