@@ -34,3 +34,10 @@ figcaption {
     text-align: center;
     font-style: italic;
 }
+a {
+    color: black;
+    text-decoration: none;
+    &[url=""] {
+        font-weight: bold;
+    }
+}

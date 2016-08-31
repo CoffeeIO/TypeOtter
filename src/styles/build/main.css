@@ -390,6 +390,99 @@ th {
   .toc a {
     color: black; }
 
+a[cite=""]:before {
+  content: "["; }
+
+a[cite=""]:after {
+  content: "]"; }
+
+.tex-ref {
+  margin-bottom: 15pt; }
+  .tex-ref tr {
+    border-bottom: 7pt solid transparent; }
+  .tex-ref td {
+    vertical-align: top;
+    border: none;
+    padding: 0; }
+
+.tex-ref-title {
+  text-align: center; }
+
+.tex-ref-row {
+  margin-bottom: 10pt; }
+
+.tex-ref-name {
+  margin-right: 10pt; }
+  .tex-ref-name:before {
+    content: "["; }
+  .tex-ref-name:after {
+    content: "]"; }
+
+.tex-ref-book span:nth-last-child(2):after {
+  content: " "; }
+
+.tex-book-author:after {
+  content: ". "; }
+
+.tex-book-title {
+  font-style: italic; }
+  .tex-book-title:after {
+    content: ". "; }
+
+.tex-book-editor:before {
+  content: "Ed. by "; }
+
+.tex-book-editor:after {
+  content: ". "; }
+
+.tex-book-edition:after {
+  content: ". "; }
+
+.tex-book-volume:before {
+  content: "Vol. "; }
+
+.tex-book-volume:after {
+  content: ". "; }
+
+.tex-book-series + span:before {
+  content: ". "; }
+
+.tex-book-series + .tex-book-number:before {
+  content: " "; }
+
+.tex-book-number:after {
+  content: ". "; }
+
+.tex-book-note:after {
+  content: ". "; }
+
+.tex-book-address + span:before {
+  content: ", "; }
+
+.tex-book-address + .tex-book-publisher:before {
+  content: ": "; }
+
+.tex-book-publisher:after {
+  content: ", "; }
+
+.tex-book-month:after {
+  content: ". " !important; }
+
+.tex-book-year:after {
+  content: " "; }
+
+.tex-book-cite:before {
+  content: " (cit. on pp. "; }
+
+.tex-book-cite[tex-count="1"]:before {
+  content: " (cit. on p. "; }
+
+.tex-book-cite:after {
+  content: ")."; }
+
+.tex-book-cite a {
+  font-weight: normal; }
+
 body {
   margin: 0 auto;
   font-family: 'Computer Modern Serif';
@@ -462,6 +555,12 @@ figure {
 figcaption {
   text-align: center;
   font-style: italic; }
+
+a {
+  color: black;
+  text-decoration: none; }
+  a[url=""] {
+    font-weight: bold; }
 
 section .section-title {
   font-size: 18pt; }
