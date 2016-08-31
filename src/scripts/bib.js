@@ -1,4 +1,6 @@
+// Order of attributes when doing article references **Not implemented**
 var refOrderArticle = ["author", "title", "journal", "volume", "number", "month", "year", "editor", "note"];
+// Order of attributes when doing book references
 var refOrderBook = ["author", "title", "editor", "edition", "volume", "series", "number", "note", "address", "publisher", "month", "year"];
 
 /**
