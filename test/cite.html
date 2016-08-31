@@ -27,7 +27,7 @@ $(window).load(function () {
         edition: "Edition",
         volume: "1st volume",
         series: "series",
-        number: "number", // '.' after series or number
+        number: "number",
         note: "Note",
         address: "Reading, Massachusetts",
         publisher: "Addison-Wesley",
@@ -43,8 +43,7 @@ $(window).load(function () {
     wrapper($('body'));
     indexToc($('body'));
     makeToc($('body'));
-    var ref = handleCite($('body'), cite);
-    makeRefPage($('body'), ref);
+    makeRefPage($('body'), cite);
     texify(options, $('body'));
     fillToc($('body'));
     fillCite($('body'));

@@ -83,6 +83,8 @@ function genBookRef(ref) {
  * Create references page and append to dom.
  */
 function makeRefPage(dom, bib) {
+    var bib = handleCite(dom, bib);
+    
     var keys = getMapKeys(bib),
         curHtml = '<div class="tex-ref"><h1 class="tex-ref-title">References</h1><table>';
     
