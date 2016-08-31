@@ -1,14 +1,17 @@
 var refOrderArticle = ["author", "title", "journal", "volume", "number", "month", "year", "editor", "note"];
+var refOrderBook = ["author", "title", "editor", "edition", "volume", "series", "number", "note", "address", "publisher", "month", "year"];
 
 /**
- * Find and replace cite tags in dom with values from biblography.
+ * Find citations in dom and insert shortname in the citation.
+ * **Currently single 'alpha' style is supported**
  */
 function handleCite(dom, bib) {
     var map = []; // Map for how many times the same generated cite name is used
     
     dom.find('a[cite=""]').each(function () {
         var elem = $(this),
-            href = elem.attr('href');
+            href = elem.attr('href'),
+            comment = '';
         if (href === undefined) {
             console.error('Cite needs "href" attribute: %s', elem.clone().wrap('<span>').parent().html());
             return true;
@@ -23,7 +26,7 @@ function handleCite(dom, bib) {
         }
         
         if (ref['tex-ref-name'] === undefined) {
-            var citeStr = ref.title.substr(0, 3),
+            var citeStr = ref.title.substr(0, 3), // Simply use first 3 char in title as shortname
                 citeSpace = '';
 
             if (map[citeStr] === undefined) {
@@ -45,7 +48,12 @@ function handleCite(dom, bib) {
         }
         ref['tex-ref-count']++;        
         
-        elem.html(ref['tex-ref-name']);
+        // Check for comment attr
+        if (elem.attr('cmt') !== undefined && elem.attr('cmt').trim() !== '') {
+            comment = ', ' + elem.attr('cmt');
+        }
+        
+        elem.html(ref['tex-ref-name'] + comment);
     });
     return bib;
 }
@@ -63,10 +71,12 @@ function getMapKeys(dictionary) {
     return keys;
 }
 
+/**
+ * Generate a single book reference, with specific order of attributes.
+ */
 function genBookRef(ref) {
     var curHtml = '<span class="tex-ref-book">';
-    var refOrderBook = ["author", "title", "editor", "edition", "volume", "series", "number", "note", "address", "publisher", "month", "year"];
-
+    
     refOrderBook.forEach(function (item) {
         if (ref[item] !== undefined) {
             curHtml += '<span class="tex-book-' + item + '">' + ref[item] + '</span>';
@@ -80,6 +90,21 @@ function genBookRef(ref) {
 }
 
 /**
+ * Check a reference for unused attributes and send console message to warn the user.
+ */
+function checkUnusedAttr(name, ref) {
+    var keys = getMapKeys(ref);
+    keys.forEach(function (item) {
+        // Ignore tex variables.
+        if (!item.startsWith('tex-')) {
+            if (refOrderBook.indexOf(item) === -1) {
+                console.warn('Unknown attribute in "%s": %s', name, item);
+            }
+        }
+    });
+}
+
+/**
  * Create references page and append to dom.
  */
 function makeRefPage(dom, bib) {
@@ -90,11 +115,16 @@ function makeRefPage(dom, bib) {
     
     // Iterate citations used.
     keys.forEach(function (item) {
-        curHtml += '<tr class="tex-ref-row" tex-ref-name="' + item + '">';
-        curHtml += '<a name="' + item + '"></a>'; // Link for citations
-        curHtml += '<td><span class="tex-ref-name">' + bib[item]['tex-ref-name'] + '</span></td>';
-        curHtml += '<td>' + genBookRef(bib[item]) + '</td>';
-        curHtml += '</tr>';
+        // Send errors for unused attributes in a reference.
+        checkUnusedAttr(item, bib[item]);
+        
+        if (bib[item]['tex-ref-name'] !== undefined) { // Ignore unused references
+            curHtml += '<tr class="tex-ref-row" tex-ref-name="' + item + '">';
+            curHtml += '<a name="' + item + '"></a>'; // Link for citations
+            curHtml += '<td><span class="tex-ref-name">' + bib[item]['tex-ref-name'] + '</span></td>';
+            curHtml += '<td>' + genBookRef(bib[item]) + '</td>';
+            curHtml += '</tr>';
+        }
     });
     
     curHtml += '</table></div>';
@@ -104,7 +134,7 @@ function makeRefPage(dom, bib) {
 /**
  * Fill the reference with pages numbers from citations.
  */
-function fillCite(dom) {
+function fillRef(dom) {
     // Iterate over rows in reference table.
     dom.find('.tex-ref-row').each(function () {
         var elem = $(this),
