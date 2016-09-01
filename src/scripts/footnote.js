@@ -1,3 +1,6 @@
+/**
+ * Find footnotes and replace their content with a number count.
+ */
 function handleFootnote(dom) {
     var counter = 1;
     dom.find('footnote').each(function () {
