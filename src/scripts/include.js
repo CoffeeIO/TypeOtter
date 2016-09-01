@@ -3,15 +3,15 @@
  */
 function includeFiles(dom) {
     var loading = 0; // Count number of active load requests
-    
-    dom.find('include').each(function (index) {
+
+    dom.find('a[include=""]').each(function (index) {
         var elem = $(this),
-            src = elem.attr('src');
-        if (src !== undefined && src !== '') {
+            href = elem.attr('href');
+        if (href !== undefined && href !== '') {
             loading++;
-            elem.load(src, function(data) {
+            elem.load(href, function(data) {
                 if (data === undefined) { // File not found
-                    console.error('File: "' + src + '" was not found');
+                    console.error('File: "%s" was not found', href);
                 } else {
                     elem.after(elem.html());
                 }
@@ -20,10 +20,10 @@ function includeFiles(dom) {
             });
         }
     });
-    
+
     var timer = setInterval(function () {
         if (loading <= 0) {
-            if (dom.find('include').length > 0) {
+            if (dom.find('a[include=""]').length > 0) {
                 includeFiles(dom);
             }
             clearInterval(timer);
