@@ -589,7 +589,30 @@ body {
   body {
     background-color: #ffffff; }
   .page {
-    margin: 0; } }
+    margin: 0; }
+  .tex-ui-controls {
+    display: none; } }
 
 @page {
   margin: 0; }
+
+.tex-ui-controls {
+  position: fixed;
+  bottom: 10px;
+  right: -45px;
+  transition: right 0.2s; }
+  .tex-ui-controls:hover {
+    right: 0; }
+
+.tex-print {
+  border-radius: 4px;
+  margin: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  color: #FFF; }
+  .tex-print:hover {
+    background-color: #286090; }
