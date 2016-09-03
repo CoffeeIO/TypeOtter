@@ -9,6 +9,7 @@ function attrify(dom) {
     handleName(dom);
     handleCaption(dom);
     handleImgSize(dom);
+    //handleMath(dom);
 }
 
 /**
@@ -23,7 +24,7 @@ function handleTitle(dom) {
         } else if ($(this).prop('tagName') === 'SECTION') {
             $(this).prepend('<h1 class="section-title">' + $(this).attr('title') + '</h1>');
         }
-        
+
         // Remove title attr to avoid browser hover effect
         $(this).attr('data-title', $(this).attr('title'));
         $(this).removeAttr('title');
@@ -38,7 +39,7 @@ function handleName(dom) {
         if ($(this).prop('tagName') === 'IMG') { //Images can't have nested <a> tag
             $(this).before('<a name="' + $(this).attr('name') + '"></a>');
         } else {
-            $(this).prepend('<a name="' + $(this).attr('name') + '"></a>');    
+            $(this).prepend('<a name="' + $(this).attr('name') + '"></a>');
         }
     });
 }
@@ -58,7 +59,7 @@ function handleImages(dom) {
 }
 
 /**
- * Create <figcaption> under images if caption attribute is specified. 
+ * Create <figcaption> under images if caption attribute is specified.
  */
 function handleCaption(dom) {
     dom.find("img[caption!=''][caption]").each(function (index) {
@@ -99,5 +100,16 @@ function handleNewpage(dom) {
     dom.find('*[newpage=""]').each(function () {
         var elem = $(this);
         elem.before('<div class="tex-newpage"></div>');
+    });
+}
+
+/**
+ *
+ */
+function handleMath(dom) {
+    var dollar = "58859d93c30e635814dc980ed86e3f84";
+    dom.find('e').each(function () {
+        var elem = $(this);
+        elem.html(dollar + elem.html() + dollar);
     });
 }
