@@ -10,8 +10,22 @@ function handleMath(dom) {
         var elem = $(this);
         if (elem.closest('p').length === 0) { // Check if equation is inside paragraph
             elem.html(blockMath + elem.html() + blockMath);
+            elem.attr('tex-math-style', 'block');
         } else {
             elem.html(inlineMath + elem.html() + inlineMath);
+            elem.attr('tex-math-style', 'inline');
         }
+    });
+}
+
+/**
+ *
+ */
+function fillMath(dom) {
+    var counter = 1;
+    dom.find('e[tex-math-style="block"]').each(function () {
+        var elem = $(this);
+        var mathjax = elem.find('.MathJax_Display');
+        mathjax.append('<span class="tex-math-count" style="line-height:' + mathjax.outerHeight() + 'px">' + counter++ + '</span>');
     });
 }

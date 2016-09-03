@@ -578,6 +578,16 @@ section > section > section .section-title {
 .tex-newpage {
   height: 2000pt; }
 
+.tex-math-count {
+  float: right; }
+  .tex-math-count:before {
+    content: '('; }
+  .tex-math-count:after {
+    content: ')'; }
+
+e .MathJax_Display {
+  margin: 0; }
+
 body {
   background-color: #525659; }
 
