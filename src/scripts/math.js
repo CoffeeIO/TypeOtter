@@ -9,9 +9,9 @@ function handleMath(dom) {
     dom.find('e').each(function () {
         var elem = $(this);
         if (elem.closest('p').length === 0) { // Check if equation is inside paragraph
-          elem.html(blockMath + elem.html() + blockMath);
+            elem.html(blockMath + elem.html() + blockMath);
         } else {
-          elem.html(inlineMath + elem.html() + inlineMath);
+            elem.html(inlineMath + elem.html() + inlineMath);
         }
     });
 }
