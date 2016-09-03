@@ -22,7 +22,14 @@ This library is intended as an improvement on LaTex, allowing users to write pro
 ``todo``
 
 ## Features
-``todo``
+- Table of contents
+- Latex equivalent font
+- Images and captions, w/ auto-numbering
+- Including html files into html files
+- Tables
+- Page setup w/ size, header, footer, page numbering
+- Sections, w/ auto-numbering
+- Links to websites and page locations
 
 ## Improvements
 ``todo``
