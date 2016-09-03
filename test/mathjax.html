@@ -6,23 +6,32 @@
   <!-- scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="../src/scripts/attr.js"></script>
+  <script src="../src/scripts/math.js"></script>
+  <script src="../src/scripts/include.js"></script>
+  <script src="../src/scripts/bib.js"></script>
   <script src="../src/scripts/wrap.js"></script>
   <script src="../src/scripts/page.js"></script>
   <script src="../src/scripts/toc.js"></script>
   <script src="../src/scripts/ref.js"></script>
   <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['58859d93c30e635814dc980ed86e3f84','58859d93c30e635814dc980ed86e3f84']],
-        displayMath: []
-    }
-      });
+    MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [[inlineMath, inlineMath]],
+        displayMath: [[blockMath, blockMath]],
+        processEscapes: true
+      },
+      "HTML-CSS": { availableFonts: ["TeX"] }
+    });
   </script>
   <script>
 $(document).ready(function () {
+    includeFiles($('body'));
     handleMath($('body'));
 });
   </script>
-  <script type="text/javascript" async  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <script type="text/javascript" src="../dependencies/MathJax/MathJax.js"></script>
 
   <script>
 $(window).load(function () {
@@ -36,12 +45,15 @@ $(window).load(function () {
 
     attrify($('body'));
     wrapper($('body'));
+
     indexToc($('body'));
     makeToc($('body'));
     makeRef($('body'));
+    makeRefPage($('body'), null);
 
     texify(options, $('body'));
     fillToc($('body'));
+    fillRef($('body'));
 });
   </script>
 </head>
@@ -49,9 +61,9 @@ $(window).load(function () {
   <toc title="Table of contents"></toc>
   <section title="Section 1" name="sec1" newpage>
     <section title="Section 1.1">...but can we reset section counter?</section>
-    $$\sqrt{\frac12\;+5}\;\ast\;pq^2\;+6$$
+    <e>\sqrt{\frac12\;+5}\;\ast\;pq^2\;+6</e>
   <p class="p1">
-    <e>\sqrt{\frac12\;+5}\;\ast\;pq^2\;+6</e>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam metus diam, volutpat in purus posuere, porttitor fringilla erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam sollicitudin vulputate dolor id eleifend. Morbi sagittis tortor in urna ultricies, et convallis mi finibus. Aenean gravida mauris ut enim convallis condimentum vitae at lectus. Cras nisl mi, efficitur id mollis quis, blandit quis nisi. Morbi sem nulla, egestas egestas nibh non, mollis tincidunt eros. Donec mattis ullamcorper ex a consectetur. Etiam diam justo, suscipit eu eros in, semper vestibulum mauris. Donec id diam quis orci molestie facilisis ac id neque. Sed efficitur pellentesque lobortis. Donec urna magna, dapibus vel diam in, dictum dictum lorem. In pharetra, felis eget porttitor imperdiet, sapien risus tempus arcu, ut sollicitudin tellus ante nec nunc. Sed id libero dui. <b>Also seen in section: <a href="#sec2" ref></a></b> <b>Also seen in figure: <a href="#figure1" ref></a></b> <a href="http://layer0.authentise.com/images/coding.gif" url></a>
+    <e>\sqrt{\frac12\;+5}\;\ast\;pq^2\;+6</e> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam metus diam, volutpat in purus posuere, porttitor fringilla erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam sollicitudin vulputate dolor id eleifend. Morbi sagittis tortor in urna ultricies, et convallis mi finibus. Aenean gravida mauris ut enim convallis condimentum vitae at lectus. Cras nisl mi, efficitur id mollis quis, blandit quis nisi. Morbi sem nulla, egestas egestas nibh non, mollis tincidunt eros. Donec mattis ullamcorper ex a consectetur. Etiam diam justo, suscipit eu eros in, semper vestibulum mauris. Donec id diam quis orci molestie facilisis ac id neque. Sed efficitur pellentesque lobortis. Donec urna magna, dapibus vel diam in, dictum dictum lorem. In pharetra, felis eget porttitor imperdiet, sapien risus tempus arcu, ut sollicitudin tellus ante nec nunc. Sed id libero dui. <b>Also seen in section: <a href="#sec2" ref></a></b> <b>Also seen in figure: <a href="#figure1" ref></a></b> <a href="http://layer0.authentise.com/images/coding.gif" url></a>
 
 Praesent sit amet urna a ipsum cursus semper quis nec tortor. Ut quis nunc nec elit molestie dignissim. Aenean sodales nibh ut lobortis imperdiet. Cras laoreet est sed nulla porta mattis non quis ligula. Quisque vitae faucibus purus. Duis efficitur vehicula finibus. Nullam tincidunt enim quis nisi ullamcorper, et tempus dolor auctor. Fusce sodales porta interdum.
 

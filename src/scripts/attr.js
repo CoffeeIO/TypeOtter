@@ -9,7 +9,6 @@ function attrify(dom) {
     handleName(dom);
     handleCaption(dom);
     handleImgSize(dom);
-    //handleMath(dom);
 }
 
 /**
@@ -100,16 +99,5 @@ function handleNewpage(dom) {
     dom.find('*[newpage=""]').each(function () {
         var elem = $(this);
         elem.before('<div class="tex-newpage"></div>');
-    });
-}
-
-/**
- *
- */
-function handleMath(dom) {
-    var dollar = "58859d93c30e635814dc980ed86e3f84";
-    dom.find('e').each(function () {
-        var elem = $(this);
-        elem.html(dollar + elem.html() + dollar);
     });
 }
