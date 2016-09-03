@@ -22,7 +22,7 @@ function handleMath(dom) {
 /**
  * Add numbering to block-level equations.
  */
-function indexMath(dom) {
+function fillMath(dom) {
     dom.find('e[tex-math-style="block"]').each(function () {
         var elem = $(this);
         var mathjax = elem.find('.MathJax_Display');

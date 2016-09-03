@@ -22,12 +22,12 @@ section {
 .tex-math-count {
     float: right;
     &:before {
-      content: '(';
+        content: '(';
     }
     &:after {
-      content: ')';
+        content: ')';
     }
 }
 e .MathJax_Display {
-  margin: 0;
+    margin: 0;
 }
