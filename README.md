@@ -1,4 +1,4 @@
-# mlTex 
+# mlTex
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21)](https://www.codacy.com/app/mgapcdev/mlTex?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MGApcDev/mlTex&amp;utm_campaign=Badge_Grade)
 
 mlTex is a Javascript library to render high quality typesetting in html and pdf.
@@ -31,7 +31,8 @@ This library is intended as an improvement on LaTex, allowing users to write pro
 ``todo``
 
 ## Dependencies
-- **Font** -->  [Computer Modern on the web by CheckMyWorking.com](http://checkmyworking.com/cm-web-fonts/)
+- **Font** --> [Computer Modern on the web by CheckMyWorking.com](http://checkmyworking.com/cm-web-fonts/)
+- **Math** --> [MathJax, Beautiful math in all browsers](https://www.mathjax.org/)
 
 ---
 
