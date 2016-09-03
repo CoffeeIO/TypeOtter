@@ -1,3 +1,6 @@
+/**
+ * Find reference links and their closest reference option.
+ */
 function makeRef(dom) {
     dom.find('a[ref=""]').each(function (){
         var elem = $(this),
@@ -7,9 +10,11 @@ function makeRef(dom) {
             return true;
         }
         var ref = dom.find('a[name="' + href.substr(1) + '"]').first();
-        if (ref.closest('figure').length !== 0) {
+        if (ref.closest('e').length !== 0) { // Equations
+            elem.html(ref.closest('e').attr('data-math'));
+        } else if (ref.closest('figure').length !== 0) { // Images
             elem.html(ref.closest('figure').attr('data-fig'));
-        } else if (ref.closest('section').length !== 0) {
+        } else if (ref.closest('section').length !== 0) { // Sections
             elem.html(ref.closest('section').attr('data-ref'));
         } else {
             console.error('Unknown reference: %s', elem.attr('href'));
