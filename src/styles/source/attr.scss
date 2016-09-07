@@ -1,3 +1,4 @@
+// Sections & sub-section
 section {
     @include section-size(18pt);
     > section {
@@ -7,10 +8,26 @@ section {
         }
     }
 }
+// Paragraph title
 .para-title {
     font-weight: bold;
     margin-right: 10px;
 }
+// Newpage element (**infinite height**)
 .tex-newpage {
     height: 2000pt;
+}
+
+// MathJax
+.tex-math-count {
+    float: right;
+    &:before {
+        content: '(';
+    }
+    &:after {
+        content: ')';
+    }
+}
+e .MathJax_Display {
+    margin: 0;
 }

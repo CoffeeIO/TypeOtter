@@ -8,7 +8,7 @@ function wrapper(elem) {
         clone = elem.clone();
 
     // Elements to skip
-    var skipElem = ["P", "SCRIPT", "TH", "TD", "LI", "STYLE", "FIGCAPTION", "H1", "H2", "H3", "H4", "H5"];
+    var skipElem = ["P", "SCRIPT", "TH", "TD", "LI", "STYLE", "FIGCAPTION", "H1", "H2", "H3", "H4", "H5", "E"];
     if (skipElem.indexOf(clone.prop('tagName')) !== -1) {
         return elem;
     }
