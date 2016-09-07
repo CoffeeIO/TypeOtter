@@ -3,13 +3,14 @@
   <!-- styles -->
   <link rel="stylesheet" href="../dependencies/computerModern/Serif/cmun-serif.css">
   <link rel="stylesheet" href="../src/styles/build/main.css">
-  <!-- scripts --> 
+  <!-- scripts -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   <script src="../src/scripts/attr.js"></script>
   <script src="../src/scripts/wrap.js"></script>
   <script src="../src/scripts/page.js"></script>
   <script src="../src/scripts/toc.js"></script>
   <script src="../src/scripts/ref.js"></script>
+  <script src="../src/scripts/ui.js"></script>
   <script>
 $(window).load(function () {
     // User specified options, example
@@ -28,6 +29,8 @@ $(window).load(function () {
 
     texify(options, $('body'));
     fillToc($('body'));
+
+    uiControls($('body'));
 });
   </script>
 </head>
