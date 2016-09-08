@@ -571,6 +571,9 @@ section > section .section-title {
 section > section > section .section-title {
   font-size: 14pt; }
 
+.section-title > span {
+  margin-right: 17pt; }
+
 .para-title {
   font-weight: bold;
   margin-right: 10px; }
