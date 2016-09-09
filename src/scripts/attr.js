@@ -21,7 +21,8 @@ function handleTitle(dom) {
         if ($(this).prop('tagName') === 'P') {
             $(this).prepend('<span class="para-title">' + $(this).attr('title') + '</span>');
         } else if ($(this).prop('tagName') === 'SECTION') {
-            $(this).prepend('<a href="#mltex-toc"><h1 class="section-title">' + $(this).attr('title') + '</h1></a>');
+            $(this).prepend('<h1 class="section-title">' + $(this).attr('title') + '</h1>');
+            //$(this).prepend('<a href="#mltex-toc"><h1 class="section-title">' + $(this).attr('title') + '</h1></a>'); // We'll fix this line later
         }
 
         // Remove title attr to avoid browser hover effect
