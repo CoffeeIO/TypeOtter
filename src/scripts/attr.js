@@ -9,6 +9,7 @@ function attrify(dom) {
     handleName(dom);
     handleCaption(dom);
     handleImgSize(dom);
+    removeScript(dom);
 }
 
 /**
@@ -101,4 +102,13 @@ function handleNewpage(dom) {
         var elem = $(this);
         elem.before('<div class="tex-newpage"></div>');
     });
+}
+
+/**
+ * Remove scripts from dom.
+ * Scripts to be running continuesly should be placed in the head.
+ * Scripts to output text should write to dom before window has finished loading.
+ */
+function removeScript(dom) {
+  dom.find('script').remove();
 }

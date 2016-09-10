@@ -1,3 +1,4 @@
+var DEBUG = false;
 // normal dpi --> height: 1123px, width: 794px
 //                1cm = 37.795275591px
 
@@ -96,6 +97,7 @@ function stripWrapper(html) {
 
 /**
  * Load page style based on default / user specified options.
+ * Styles are loaded in the head.
  */
 function loadStyleSettings(options) {
     var padding = getMargin(options.padding);
@@ -110,7 +112,7 @@ function loadStyleSettings(options) {
       + ".header { height: " + options.headerHeight + "; line-height: " + options.headerHeight + "; }"
       + ".footer { height: " + options.footerHeight + "; line-height: " + options.footerHeight + "; }";
 
-    $('<style>' + css + '</style>').appendTo('body');
+    $('<style type="text/css">' + css + '</style>').appendTo('head');
 }
 
 /**
@@ -200,7 +202,7 @@ function genPage(header, footer, page) {
     curHtml += '<div class="page" data-page="' + page.number + '">';
 
     curHtml += header;
-    curHtml += '<div class="content">' + stripWrapper(page.content) + '</div>';
+    curHtml += '<div class="content">' + page.content + '</div>';
     curHtml += footer;
     curHtml += '</div>';
 
@@ -211,14 +213,18 @@ function genPage(header, footer, page) {
  * Check if element fits within the height specified, returning the html as
  * string and the difference in height.
  */
-function addToPage(dom, height) {
-    if (dom.outerHeight(true) <= height) {
+function addToPage(element, testdom, totalHeight) {
+    var temp = testdom.html();
+    testdom.append(element.clone().wrap('<div>').parent().html());
+    if (DEBUG) console.log('compare --> %s <= %s', testdom.outerHeight(true), totalHeight);
+    if (testdom.outerHeight(true) <= totalHeight) {
         return {
-            height: height - dom.outerHeight(true),
-            content: dom.clone().wrap('<div>').parent().html(),
+            content: testdom.html(),
             remain: null
         };
     }
+
+    testdom.html(temp); // Revert to before the element was added
 
     return null;
 }
@@ -227,41 +233,41 @@ function addToPage(dom, height) {
  * Recursive check the specified element's children and add elements until the
  * height is achieved or there's no more elements.
  */
-function recCheckDom(totalHeight, domTest, domContent) {
+function recCheckDom(clone, testdom, totalHeight) {
+    if (DEBUG) console.log('rec --> ' + clone.clone().wrap('<div>').parent().html());
     // Check if entire element can be added to the page.
-    var obj = addToPage(domTest, totalHeight - domTest.height());
 
+    var obj = addToPage(clone, testdom, totalHeight);
     if (obj !== null) {
-        remDom.remove();
+        clone.remove();
         return obj;
     }
 
     // Remove newpage element and return null to end page.
-    if (remDom.hasClass('tex-newpage')) {
-        remDom.remove();
+    if (clone.hasClass('tex-newpage')) {
+        clone.remove();
         return null;
     }
 
-    if (remDom.children().length === 0) {
+    if (clone.children().length === 0) {
         return null;
     }
 
     // Elements that should not be recusively checked for children
     var skipElem = ["P", "SCRIPT", "TABLE", "STYLE", "FIGURE"];
-    if (skipElem.indexOf(remDom.prop('tagName')) !== -1) {
+    if (skipElem.indexOf(clone.prop('tagName')) !== -1) {
         return null;
     }
 
-    var curHtml = '';
-    while (remDom.children().length > 0) {
-        var elem = remDom.children(':nth-child(1)');
-        obj = recCheckDom(elem, remainHeight);
+    while (clone.children().length > 0) {
+        var elem = clone.children(':nth-child(1)');
+        if (DEBUG) console.log('-->' + elem.clone().wrap('<div>').parent().html());
+        obj = recCheckDom(elem, testdom, totalHeight);
         if (obj == null) {
-            break; // exit foreach loop
+            if (DEBUG) console.log('break loop');
+            break; // Exit foreach loop
         } else {
-            remainHeight = obj.height;
-            curHtml += obj.content;
-
+           if (DEBUG) console.log('tester state --> %s', testdom.html());
             // If done is true, then not all children were added so we can't remove the parent element
             if (obj.done === true) {
                 break;
@@ -270,12 +276,11 @@ function recCheckDom(totalHeight, domTest, domContent) {
             elem.remove();
         }
     }
-    var cur = remDom.clone().html(curHtml);
 
+    if (DEBUG) console.log('return rec --> ' + testdom.html());
     return {
-        height: remainHeight,
-        content: cur.wrap("<div>").parent().html(),
-        remain: remDom,
+        content: testdom.html(),
+        remain: clone,
         done: true
     };
 }
@@ -283,13 +288,13 @@ function recCheckDom(totalHeight, domTest, domContent) {
 /**
  * Construct the content of a page.
  */
-function makePage(basePage, dom) {
-    var remainingHeight = basePage.page.height,
-        curHtml = '';
-    dom.html('');
-    var  obj = recCheckDom(dom.clone(), remainingHeight, dom);
+function makePage(basePage, clone, testdom) {
+    var totalHeight = basePage.page.height,
+        obj = recCheckDom(clone, testdom, totalHeight);
     basePage.content = obj.content;
 
+    if (DEBUG) console.log('remain --> %s', obj.remain);
+    //testdom.html('');
     return {
         "page": basePage,
         "remain": obj.remain
@@ -304,24 +309,29 @@ function texify(customOptions, dom) {
         basePage = new Page();
 
     // Wrap the body in a page to get accurate height on elements
-    dom.wrapInner('<div>').wrapInner('<div class="content">').wrapInner('<div class="page">');
+    dom.wrapInner('<div>');
 
     // Add styling to get rendering dimensions
     loadStyleSettings(options);
 
-    // Detect rendered size
-    basePage.page.height = $('body').find('.content').height();
-
     var pages = [],
         fullHtml = '',
-        clone = dom.find('.content > div'),
+        clone = dom.find('> div').first().clone(),
         obj = null,
         curPage = 1;
 
+    dom.append('<div class="page" style="height: auto"><div class="content tex-testdom"></div></div>');
+    var testdom = dom.find('.tex-testdom');
+
+    // Detect rendered size
+    basePage.page.height = testdom.height();
+    testdom.css('height', 'auto');
     // Check there is still remaining html in the body
     while (clone.html().trim() !== '') {
-        // use extend to clone basePage obj and remove it's reference
-        pages.push(makePage($.extend(true, [], basePage), clone));
+        testdom.html('');
+        // use extend to clone pageSetting obj and remove it's reference
+        pages.push(makePage($.extend(true, [], basePage), clone, testdom));
+
         obj = pages[pages.length - 1];
 
         basePage.number = ++curPage;
@@ -343,9 +353,8 @@ function texify(customOptions, dom) {
         fullHtml += page;
     });
 
-    // Overwite the body
-    $('body').html(fullHtml);
+    testdom.parent().remove(); // Remove the test element
 
-    // Add styling again because they were just overwritten
-    loadStyleSettings(options);
+    // Overwite the body
+    dom.html(fullHtml);
 }
