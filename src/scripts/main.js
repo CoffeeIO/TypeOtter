@@ -1,10 +1,9 @@
 var mathDone = false,
-    dom = null,
-    start = null,
-    end = null;
+    dom = null;
 
 $(document).ready(function () {
-    start = new Date().getTime(); // Debug time
+    console.time("document prepare"); // Performance timers
+    console.time("document render");  // Performance timers
     dom = $('body');
     includeFiles(dom);
     handleMath(dom);
@@ -35,11 +34,11 @@ $(window).load(function () {
                 makeRef(dom);
                 makeRefPage(dom, null);
                 fillMath(dom);
+                console.timeEnd("document prepare"); // Performance timers
                 texify(options, dom);
                 fillToc(dom);
                 fillRef(dom);
-                end = new Date().getTime(); // Debug time
-                console.log(end - start); // Debug time
+                console.timeEnd("document render");  // Performance timers
 
                 clearInterval(timer);
             }

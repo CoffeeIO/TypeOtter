@@ -1,4 +1,6 @@
+// Variables
 var DEBUG = false;
+
 // normal dpi --> height: 1123px, width: 794px
 //                1cm = 37.795275591px
 
@@ -200,7 +202,6 @@ function genFooter(options, page) {
 function genPage(header, footer, page) {
     var curHtml = '<a name="tex-page-' + page.number + '"></a>';
     curHtml += '<div class="page" data-page="' + page.number + '">';
-
     curHtml += header;
     curHtml += '<div class="content">' + page.content + '</div>';
     curHtml += footer;
@@ -216,7 +217,6 @@ function genPage(header, footer, page) {
 function addToPage(element, testdom, totalHeight) {
     var temp = testdom.html();
     testdom.append(element.clone().wrap('<div>').parent().html());
-    if (DEBUG) console.log('compare --> %s <= %s', testdom.outerHeight(true), totalHeight);
     if (testdom.outerHeight(true) <= totalHeight) {
         return {
             content: testdom.html(),
@@ -234,9 +234,7 @@ function addToPage(element, testdom, totalHeight) {
  * height is achieved or there's no more elements.
  */
 function recCheckDom(clone, testdom, totalHeight) {
-    if (DEBUG) console.log('rec --> ' + clone.clone().wrap('<div>').parent().html());
     // Check if entire element can be added to the page.
-
     var obj = addToPage(clone, testdom, totalHeight);
     if (obj !== null) {
         clone.remove();
@@ -261,13 +259,10 @@ function recCheckDom(clone, testdom, totalHeight) {
 
     while (clone.children().length > 0) {
         var elem = clone.children(':nth-child(1)');
-        if (DEBUG) console.log('-->' + elem.clone().wrap('<div>').parent().html());
         obj = recCheckDom(elem, testdom, totalHeight);
         if (obj == null) {
-            if (DEBUG) console.log('break loop');
             break; // Exit foreach loop
         } else {
-           if (DEBUG) console.log('tester state --> %s', testdom.html());
             // If done is true, then not all children were added so we can't remove the parent element
             if (obj.done === true) {
                 break;
@@ -277,7 +272,6 @@ function recCheckDom(clone, testdom, totalHeight) {
         }
     }
 
-    if (DEBUG) console.log('return rec --> ' + testdom.html());
     return {
         content: testdom.html(),
         remain: clone,
@@ -293,8 +287,6 @@ function makePage(basePage, clone, testdom) {
         obj = recCheckDom(clone, testdom, totalHeight);
     basePage.content = obj.content;
 
-    if (DEBUG) console.log('remain --> %s', obj.remain);
-    //testdom.html('');
     return {
         "page": basePage,
         "remain": obj.remain
@@ -308,7 +300,6 @@ function texify(customOptions, dom) {
     var options = jsonConcat(defaultOptions, customOptions),
         basePage = new Page();
 
-    // Wrap the body in a page to get accurate height on elements
     dom.wrapInner('<div>');
 
     // Add styling to get rendering dimensions
@@ -320,6 +311,7 @@ function texify(customOptions, dom) {
         obj = null,
         curPage = 1;
 
+    // Create empty page for testing rendering dimensions.
     dom.append('<div class="page" style="height: auto"><div class="content tex-testdom"></div></div>');
     var testdom = dom.find('.tex-testdom');
 
@@ -328,7 +320,8 @@ function texify(customOptions, dom) {
     testdom.css('height', 'auto');
     // Check there is still remaining html in the body
     while (clone.html().trim() !== '') {
-        testdom.html('');
+        testdom.html(''); // Clear the testdom object
+
         // use extend to clone pageSetting obj and remove it's reference
         pages.push(makePage($.extend(true, [], basePage), clone, testdom));
 
