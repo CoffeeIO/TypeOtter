@@ -591,6 +591,9 @@ section > section > section .section-title {
 e .MathJax_Display {
   margin: 0; }
 
+.MathJax_Message {
+  display: none; }
+
 body {
   background-color: #525659; }
 
