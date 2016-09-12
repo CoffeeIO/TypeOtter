@@ -110,5 +110,5 @@ function handleNewpage(dom) {
  * Scripts to output text should write to dom before window has finished loading.
  */
 function removeScript(dom) {
-  dom.find('script').remove();
+    dom.find('script').remove();
 }
