@@ -34,6 +34,3 @@ section {
 e .MathJax_Display {
     margin: 0;
 }
-.MathJax_Message {
-    display: none; // Hide mathjax messages, their finish callback doesn't work as intended.
-}

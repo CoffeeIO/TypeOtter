@@ -1,6 +1,3 @@
-// Variables
-var DEBUG = false;
-
 // normal dpi --> height: 1123px, width: 794px
 //                1cm = 37.795275591px
 
