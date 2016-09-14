@@ -13,6 +13,7 @@
   <script src="../src/scripts/page.js"></script>
   <script src="../src/scripts/toc.js"></script>
   <script src="../src/scripts/ref.js"></script>
+
   <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       extensions: ["tex2jax.js"],
@@ -22,43 +23,18 @@
         displayMath: [[blockMath, blockMath]],
         processEscapes: true
       },
+      skipStartupTypeset: true,
       showProcessingMessages: false,
       messageStyle: "none",
       "HTML-CSS": { availableFonts: ["TeX"] }
     });
+    MathJax.Hub.Queue(function () { // Queue is finished
+      mathDone = true;
+    });
   </script>
-  <script>
-$(document).ready(function () {
-    includeFiles($('body'));
-    handleMath($('body'));
-});
-  </script>
+
   <script type="text/javascript" src="../dependencies/MathJax/MathJax.js"></script>
-
-  <script>
-$(window).load(function () {
-    // User specified options, example
-    var options = {
-        headerRight: 'MGApcDev',
-        headerCenter: '<i>by</i>',
-        pager : 'Page [cur] of [total]',
-        padding: "7mm 10mm"
-    };
-
-    attrify($('body'));
-    wrapper($('body'));
-
-    indexToc($('body'));
-    makeToc($('body'));
-    fillMath($('body'));
-    makeRef($('body'));
-    makeRefPage($('body'), null);
-
-    texify(options, $('body'));
-    fillToc($('body'));
-    fillRef($('body'));
-});
-  </script>
+  <script src="../src/scripts/main.js"></script>
 </head>
 <body>
   <toc title="Table of contents"></toc>
