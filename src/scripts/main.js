@@ -5,6 +5,8 @@ var mathDone = false,
 $(document).ready(function () {
     if (DEBUG) console.time("document prepare"); // Performance timers
     if (DEBUG) console.time("document render");  // Performance timers
+    if (DEBUG) console.time("document math done"); // Performance timers
+    if (DEBUG) console.time("window loaded"); // Performance timers
     dom = $('body');
     includeFiles(dom);
     handleMath(dom);
@@ -13,6 +15,7 @@ $(document).ready(function () {
 });
 
 $(window).load(function () {
+    if (DEBUG) console.timeEnd("window loaded"); // Performance timers
     // User specified options, example
     var options = {
         headerRight: 'MGApcDev',
@@ -24,24 +27,30 @@ $(window).load(function () {
     var innerDone = false;
     var timer = setInterval(function () { // Block until math is loaded
         if (mathDone) {
-            setTimeout(function(){
-                innerDone = true;
-            }, 100);
-            if (innerDone) {
-                attrify(dom);
-                wrapper(dom);
-                indexToc(dom);
-                makeToc(dom);
-                makeRef(dom);
-                makeRefPage(dom, null);
-                fillMath(dom);
-                if (DEBUG) console.timeEnd("document prepare"); // Performance timers
-                texify(options, dom);
-                fillToc(dom);
-                fillRef(dom);
-                if (DEBUG) console.timeEnd("document render");  // Performance timers
+            var mp = dom.find('.MathJax_Preview').length;     // MathJax equations detected
+                m = dom.find('.MathJax').length;              // MathJax equations prepared
+                mpr = dom.find('.MathJax_Processing').length; // MathJax equations being processed
+            if (mp === m && mpr === 0) {
+              innerDone = true;
+            }
 
+            if (innerDone) {
+                if (DEBUG) console.timeEnd("document math done"); // Performance timers
                 clearInterval(timer);
+                setTimeout(function(){
+                    attrify(dom);
+                    wrapper(dom);
+                    indexToc(dom);
+                    makeToc(dom);
+                    makeRef(dom);
+                    makeRefPage(dom, null);
+                    fillMath(dom);
+                    if (DEBUG) console.timeEnd("document prepare"); // Performance timers
+                    texify(options, dom);
+                    fillToc(dom);
+                    fillRef(dom);
+                    if (DEBUG) console.timeEnd("document render");  // Performance timers
+                }, 100);
             }
         }
     }, 100);

@@ -29,6 +29,7 @@
       "HTML-CSS": { availableFonts: ["TeX"] }
     });
     MathJax.Hub.Queue(function () { // Queue is finished
+      if (DEBUG) console.timeEnd("document math preprocess"); // Performance timers
       mathDone = true;
     });
   </script>
