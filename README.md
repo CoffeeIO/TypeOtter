@@ -19,7 +19,7 @@ This library is intended as an improvement on LaTex, allowing users to write pro
 5. Submit a pull request :smile:
 
 ## Typesetting
-- Kerning
+- Font Kerning
 
 ## Features
 - Table of contents
