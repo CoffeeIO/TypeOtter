@@ -27,11 +27,11 @@ $(window).load(function () {
     var innerDone = false;
     var timer = setInterval(function () { // Block until math is loaded
         if (mathDone) {
-            var mp = dom.find('.MathJax_Preview').length;     // MathJax equations detected
-                m = dom.find('.MathJax').length;              // MathJax equations prepared
+            var mp = dom.find('.MathJax_Preview').length,     // MathJax equations detected
+                m = dom.find('.MathJax').length,              // MathJax equations prepared
                 mpr = dom.find('.MathJax_Processing').length; // MathJax equations being processed
             if (mp === m && mpr === 0) {
-              innerDone = true;
+                innerDone = true;
             }
 
             if (innerDone) {
