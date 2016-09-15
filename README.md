@@ -19,7 +19,7 @@ This library is intended as an improvement on LaTex, allowing users to write pro
 5. Submit a pull request :smile:
 
 ## Typesetting
-``todo``
+- Kerning
 
 ## Features
 - Table of contents
@@ -31,15 +31,15 @@ This library is intended as an improvement on LaTex, allowing users to write pro
 - Sections, w/ auto-numbering
 - Links to websites and page locations
 
-## Improvements
-``todo``
-
 ## Sources
-``todo``
+- [Basic Rules of Good Typography](http://www.troytempleman.com/2010/02/08/basic-rules-of-good-typography/)
 
 ## Dependencies
 - **Font** --> [Computer Modern on the web by CheckMyWorking.com](http://checkmyworking.com/cm-web-fonts/)
 - **Math** --> [MathJax, Beautiful math in all browsers](https://www.mathjax.org/)
+
+## Special Thanks
+- [Frederik Madsen](https://www.linkedin.com/in/frederikmadsen/da) for inspiration and help with some of the code
 
 ---
 
