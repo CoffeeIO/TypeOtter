@@ -9,6 +9,7 @@ function attrify(dom) {
     handleName(dom);
     handleCaption(dom);
     handleImgSize(dom);
+    removeScript(dom);
 }
 
 /**
@@ -21,7 +22,7 @@ function handleTitle(dom) {
         if ($(this).prop('tagName') === 'P') {
             $(this).prepend('<span class="para-title">' + $(this).attr('title') + '</span>');
         } else if ($(this).prop('tagName') === 'SECTION') {
-            $(this).prepend('<h1 class="section-title">' + $(this).attr('title') + '</h1>');
+            $(this).prepend('<a href="#mltex-toc"><h1 class="section-title">' + $(this).attr('title') + '</h1></a>');
         }
 
         // Remove title attr to avoid browser hover effect
@@ -100,4 +101,13 @@ function handleNewpage(dom) {
         var elem = $(this);
         elem.before('<div class="tex-newpage"></div>');
     });
+}
+
+/**
+ * Remove scripts from dom.
+ * Scripts to be running continuesly should be placed in the head.
+ * Scripts to output text should write to dom before window has finished loading.
+ */
+function removeScript(dom) {
+    dom.find('script').remove();
 }

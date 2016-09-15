@@ -21,10 +21,13 @@ function indexToc(dom) {
         if (index !== -1) {
             join = join.substr(0, index);
         }
-        
+
         sec.attr('data-ref', join);
         // Make reference link
         sec.prepend('<a name="mltex-' + join + '"></a>');
+        // Prepend section to section title
+        sec.find('.section-title').first().prepend('<span>' + join + '</span>');
+
     });
 }
 
@@ -32,9 +35,9 @@ function indexToc(dom) {
  * Create the html of a single row in table of contents.
  */
 function makeTocRow(ref, section, title, className) {
-    return '<a href="#mltex-' + ref + '"><div class="' + className + '" data-ref="' + ref 
-         + '"><div class="left"><span>' + section + '</span>' + title 
-         + '</div><div class="right" data-pageref="">' + '</div></div></a>';
+    return '<a href="#mltex-' + ref + '"><div class="' + className + '" data-ref="' + ref + '">'
+         + '<div class="left"><span>' + section + '</span>' + title + '</div>'
+         + '<div class="right" data-pageref="">' + '</div></div></a>';
 }
 
 /**
@@ -46,7 +49,7 @@ function innerToc(dom) {
         var elem = $(this),
             secStr = elem.attr('data-ref'),
             secArr = secStr.split('.');
-        
+
         // Section
         if (secArr[1] === undefined || secArr[1] === '0') {
             curHtml += makeTocRow(secStr, secArr[0], elem.attr('data-title'), 'sec');
@@ -76,7 +79,7 @@ function innerToc(dom) {
  * Create html of table of content from title and inner content.
  */
 function genToc(inner, title) {
-    var curHtml = '<div class="toc"><h1 class="toc-title">' + title + '</h1>';
+    var curHtml = '<div class="toc"><a name="mltex-toc"></a><h1 class="toc-title">' + title + '</h1>';
     curHtml += inner + '</div>';
     return curHtml;
 }
