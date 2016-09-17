@@ -129,7 +129,7 @@ function genPager(options, page) {
 function genHeader(options, page) {
     var curHtml = page.header.wrapper,
         pager = '';
-    if (options.headerLeft === '[pager]' || options.headerCenter === '[pager]' || options.headerRight === '[pager]') {
+    if (options.texShowPager === true && (options.headerLeft === '[pager]' || options.headerCenter === '[pager]' || options.headerRight === '[pager]')) {
         pager = genPager(options, page);
     }
 
@@ -165,7 +165,7 @@ function genHeader(options, page) {
 function genFooter(options, page) {
     var curHtml = page.footer.wrapper,
         pager = '';
-    if (options.footerLeft === '[pager]' || options.footerCenter === '[pager]' || options.footerRight === '[pager]') {
+    if (options.texShowPager === true && (options.footerLeft === '[pager]' || options.footerCenter === '[pager]' || options.footerRight === '[pager]')) {
         pager = genPager(options, page);
     }
 
@@ -335,12 +335,11 @@ function texify(customOptions, dom) {
         }
     }
 
-    var startPager = false;
+    options.texShowPager = false;
     // Assemble the pages
     pages.forEach(function (item, index) {
-        if (!startPager && item.page.content.indexOf('data-page="2"') != -1) {
-          startPager = true;
-          options['tex-show-pager'] = true;
+        if (!options.texShowPager && (item.page.content).indexOf('data-page="2"') != -1) {
+          options.texShowPager = true;
         }
         item.page.total = pages.length;
         var header = genHeader(options, item.page),
