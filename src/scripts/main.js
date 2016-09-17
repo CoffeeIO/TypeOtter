@@ -1,6 +1,7 @@
 var mathDone = false,
     dom = null,
-    DEBUG = true;
+    DEBUG = true,
+    innerDone = false;
 
 $(document).ready(function () {
     if (DEBUG) console.time("document prepare"); // Performance timers
@@ -24,7 +25,6 @@ $(window).load(function () {
         padding: "7mm 10mm"
     };
 
-    var innerDone = false;
     var timer = setInterval(function () { // Block until math is loaded
         if (mathDone) {
             var mp = dom.find('.MathJax_Preview').length,     // MathJax equations detected
