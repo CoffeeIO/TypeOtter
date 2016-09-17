@@ -118,7 +118,9 @@ function loadStyleSettings(options) {
  * Construct the html of the pager of a specific page.
  */
 function genPager(options, page) {
-    return options.pager.replace('[cur]', page.number).replace('[total]', page.total);
+    if (options['tex-show-pager'] === true) {
+        return options.pager.replace('[cur]', page.number).replace('[total]', page.total);
+    }
 }
 
 /**
@@ -333,8 +335,13 @@ function texify(customOptions, dom) {
         }
     }
 
+    var startPager = false;
     // Assemble the pages
     pages.forEach(function (item, index) {
+        if (!startPager && item.page.content.indexOf('data-page="2"') != -1) {
+          startPager = true;
+          options['tex-show-pager'] = true;
+        }
         item.page.total = pages.length;
         var header = genHeader(options, item.page),
             footer = genFooter(options, item.page),
