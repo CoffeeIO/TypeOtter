@@ -1,6 +1,8 @@
 var mathDone = false,
     dom = null,
-    DEBUG = true;
+    DEBUG = true,
+    innerDone = false,
+    biblography = {};
 
 $(document).ready(function () {
     if (DEBUG) console.time("document prepare"); // Performance timers
@@ -24,7 +26,6 @@ $(window).load(function () {
         padding: "7mm 10mm"
     };
 
-    var innerDone = false;
     var timer = setInterval(function () { // Block until math is loaded
         if (mathDone) {
             var mp = dom.find('.MathJax_Preview').length,     // MathJax equations detected
@@ -43,7 +44,7 @@ $(window).load(function () {
                     indexToc(dom);
                     makeToc(dom);
                     makeRef(dom);
-                    makeRefPage(dom, null);
+                    makeRefPage(dom, biblography);
                     fillMath(dom);
                     if (DEBUG) console.timeEnd("document prepare"); // Performance timers
                     texify(options, dom);

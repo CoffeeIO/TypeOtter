@@ -9,7 +9,7 @@ var refOrderBook = ["author", "title", "editor", "edition", "volume", "series", 
  */
 function handleCite(dom, bib) {
     var map = []; // Map for how many times the same generated cite name is used
-    
+
     dom.find('a[cite=""]').each(function () {
         var elem = $(this),
             href = elem.attr('href'),
@@ -20,13 +20,20 @@ function handleCite(dom, bib) {
         } else {
             href = href.substr(1); // Ignore '#'
         }
-        
-        var ref = bib[href];
-        if (ref === undefined) {
+        if (bib === null) { // Check if biblography is null
             console.error('Could not find reference: %s', href);
             return true;
         }
-        
+        var ref = bib[href];
+        if (ref === undefined) { // Check if we could find reference
+            console.error('Could not find reference: %s', href);
+            return true;
+        }
+        if (ref.title === undefined || ref.title.trim() === '') {
+            console.error('Reference "%s" needs a title', href);
+            return true;
+        }
+
         if (ref['tex-ref-name'] === undefined) {
             var citeStr = ref.title.substr(0, 3), // Simply use first 3 char in title as shortname
                 citeSpace = '';
@@ -41,20 +48,20 @@ function handleCite(dom, bib) {
                 citeSpace = '0';
             }
             var fullCite = citeStr + citeSpace + map[citeStr];
-            
+
             ref['tex-ref-name'] = fullCite;
         }
-        
+
         if (ref['tex-ref-count'] === undefined) {
             ref['tex-ref-count'] = 0;
         }
-        ref['tex-ref-count']++;        
-        
+        ref['tex-ref-count']++;
+
         // Check for comment attr
         if (elem.attr('cmt') !== undefined && elem.attr('cmt').trim() !== '') {
             comment = ', ' + elem.attr('cmt');
         }
-        
+
         elem.html(ref['tex-ref-name'] + comment);
     });
     return bib;
@@ -78,7 +85,7 @@ function getMapKeys(dictionary) {
  */
 function genBookRef(ref) {
     var curHtml = '<span class="tex-ref-book">';
-    
+
     refOrderBook.forEach(function (item) {
         if (ref[item] !== undefined) {
             curHtml += '<span class="tex-book-' + item + '">' + ref[item] + '</span>';
@@ -87,7 +94,7 @@ function genBookRef(ref) {
     if (ref['tex-ref-count'] !== undefined) {
         curHtml += '<span class="tex-book-cite" tex-count="' + ref['tex-ref-count'] + '"></span>';
     }
-       
+
     return curHtml + '</span>';
 }
 
@@ -110,17 +117,19 @@ function checkUnusedAttr(name, ref) {
  * Create references page and append to dom.
  */
 function makeRefPage(dom, bib) {
-    var bib = handleCite(dom, bib);
-    
+    var bib = handleCite(dom, bib),
+        showSection = false;
+
     var keys = getMapKeys(bib),
         curHtml = '<div class="tex-ref"><h1 class="tex-ref-title">References</h1><table>';
-    
+
     // Iterate citations used.
     keys.forEach(function (item) {
         // Send errors for unused attributes in a reference.
         checkUnusedAttr(item, bib[item]);
-        
+
         if (bib[item]['tex-ref-name'] !== undefined) { // Ignore unused references
+            showSection = true;
             curHtml += '<tr class="tex-ref-row" tex-ref-name="' + item + '">';
             curHtml += '<a name="' + item + '"></a>'; // Link for citations
             curHtml += '<td><span class="tex-ref-name">' + bib[item]['tex-ref-name'] + '</span></td>';
@@ -128,9 +137,12 @@ function makeRefPage(dom, bib) {
             curHtml += '</tr>';
         }
     });
-    
+
     curHtml += '</table></div>';
-    dom.append(curHtml);
+
+    if (showSection) {
+      dom.append(curHtml);
+    }
 }
 
 /**
@@ -142,7 +154,7 @@ function fillRef(dom) {
         var elem = $(this),
             refName = elem.attr('tex-ref-name'),
             pages = []; // Unique pages the reference is used
-        
+
         // Find citations of a specific reference.
         dom.find('a[cite=""][href="#' + refName + '"]').each(function () {
             var inner = $(this),
@@ -157,7 +169,7 @@ function fillRef(dom) {
             citeHtml += '<a href="#tex-page-' + item + '">' + item + '</a>, ';
         });
         citeHtml = citeHtml.substr(0, citeHtml.length - 2);
-        
+
         cite.html(citeHtml);
         cite.attr('tex-count', citePages.length);
     });
