@@ -228,7 +228,15 @@ function addToPage(element, testdom, totalHeight, pointer) {
 
 /**
  * Recursive check the specified element's children and add elements until the
- * height is achieved or there's no more elements.
+ * maxheight is achieved or there's no more elements.
+ *
+ * @param  {jQuery object} clone       DOM element with remaining elements
+ * @param  {jQuery object} testdom     DOM element for contructing a page
+ * @param  {int}           totalHeight Max height of the content area of a page
+ * @param  {jQuery object} pointer     Insertion point of new elements in 'testdom'
+ * @return {object}                    content: the testdom,
+ *                                     remain: the remaining DOM of clone,
+ *                                     done: state of whether more elements can be added to testdom
  */
 function recCheckDom(clone, testdom, totalHeight, pointer) {
     // Check if entire element can be added to the page.
@@ -255,19 +263,15 @@ function recCheckDom(clone, testdom, totalHeight, pointer) {
     }
 
     var wrapper = clone.clone().empty(),
-        inWrap = wrapper.wrap('<div>').parent().html(),
-        temp = testdom.html();
-    // inWrap = inWrap.trim().substring(0, inWrap.length - (3 + wrapper.prop('tagName').length));
-    // outWrap = '</' + wrapper.prop('tagName').toLowerCase() + '>';
-    pointer.wrapInner(inWrap);
-    pointer = pointer.children(':nth-child(1)');
-    // testdom.append(inWrap);
-    console.log('pointer --> %s', pointer.parent().clone().wrap('<div>').parent().html());
-    console.log('--> %s', inWrap);
+        inWrap = wrapper.wrap('<div>').parent().html();
+
+    pointer.append(inWrap);
+    pointer = pointer.children(':last-child'); // Move pointer to wrap element
+
     while (clone.children().length > 0) {
         var elem = clone.children(':nth-child(1)');
         obj = recCheckDom(elem, testdom, totalHeight, pointer);
-        if (obj == null) {
+        if (obj === null) {
             break; // Exit foreach loop
         } else {
             // If done is true, then not all children were added so we can't remove the parent element
@@ -279,16 +283,9 @@ function recCheckDom(clone, testdom, totalHeight, pointer) {
         }
     }
 
-    if (pointer.children().length === 0) {
+    if (pointer.children().length === 0) { // Remove wrapper if no elements were added to it
         pointer.remove();
     }
-
-    // if (testdom.html().endsWith(inWrap)) {
-    //   testdom.html(temp);
-    // } else {
-    //   testdom.append(outWrap);
-    // }
-
 
     return {
         content: testdom,
