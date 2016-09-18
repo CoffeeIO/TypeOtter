@@ -7,6 +7,8 @@ $(document).ready(function () {
     if (DEBUG) console.time("document render");  // Performance timers
     if (DEBUG) console.time("document math done"); // Performance timers
     if (DEBUG) console.time("window loaded"); // Performance timers
+    if (DEBUG) console.time("document math preprocess"); // Performance timers
+
     dom = $('body');
     includeFiles(dom);
     handleMath(dom);
