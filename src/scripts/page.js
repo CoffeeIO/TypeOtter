@@ -208,8 +208,8 @@ function genPage(header, footer, page) {
 }
 
 /**
- * Check if element fits within the height specified, returning the html as
- * string and the difference in height.
+ * Add element to testdom and compare with maxheight, return new testdom if less, otherwise
+ * revert to previous state.
  */
 function addToPage(element, testdom, totalHeight, pointer) {
     var temp = pointer.html();
@@ -217,7 +217,8 @@ function addToPage(element, testdom, totalHeight, pointer) {
     if (testdom.outerHeight(true) <= totalHeight) {
         return {
             content: testdom,
-            remain: null
+            remain: null,
+            done: false
         };
     }
 
