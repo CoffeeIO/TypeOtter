@@ -29,6 +29,10 @@ function handleCite(dom, bib) {
             console.error('Could not find reference: %s', href);
             return true;
         }
+        if (ref.title === undefined || ref.title.trim() === '') {
+            console.error('Reference "%s" needs a title', href);
+            return true;
+        }
 
         if (ref['tex-ref-name'] === undefined) {
             var citeStr = ref.title.substr(0, 3), // Simply use first 3 char in title as shortname
