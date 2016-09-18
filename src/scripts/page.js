@@ -211,17 +211,17 @@ function genPage(header, footer, page) {
  * Check if element fits within the height specified, returning the html as
  * string and the difference in height.
  */
-function addToPage(element, testdom, totalHeight) {
-    var temp = testdom.html();
-    testdom.append(element.clone().wrap('<div>').parent().html());
+function addToPage(element, testdom, totalHeight, pointer) {
+    var temp = pointer.html();
+    pointer.append(element.clone().wrap('<div>').parent().html());
     if (testdom.outerHeight(true) <= totalHeight) {
         return {
-            content: testdom.html(),
+            content: testdom,
             remain: null
         };
     }
 
-    testdom.html(temp); // Revert to before the element was added
+    pointer.html(temp); // Revert to before the element was added
 
     return null;
 }
@@ -230,9 +230,9 @@ function addToPage(element, testdom, totalHeight) {
  * Recursive check the specified element's children and add elements until the
  * height is achieved or there's no more elements.
  */
-function recCheckDom(clone, testdom, totalHeight) {
+function recCheckDom(clone, testdom, totalHeight, pointer) {
     // Check if entire element can be added to the page.
-    var obj = addToPage(clone, testdom, totalHeight);
+    var obj = addToPage(clone, testdom, totalHeight, pointer);
     if (obj !== null) {
         clone.remove();
         return obj;
@@ -254,9 +254,19 @@ function recCheckDom(clone, testdom, totalHeight) {
         return null;
     }
 
+    var wrapper = clone.clone().empty(),
+        inWrap = wrapper.wrap('<div>').parent().html(),
+        temp = testdom.html();
+    // inWrap = inWrap.trim().substring(0, inWrap.length - (3 + wrapper.prop('tagName').length));
+    // outWrap = '</' + wrapper.prop('tagName').toLowerCase() + '>';
+    pointer.wrapInner(inWrap);
+    pointer = pointer.children(':nth-child(1)');
+    // testdom.append(inWrap);
+    console.log('pointer --> %s', pointer.parent().clone().wrap('<div>').parent().html());
+    console.log('--> %s', inWrap);
     while (clone.children().length > 0) {
         var elem = clone.children(':nth-child(1)');
-        obj = recCheckDom(elem, testdom, totalHeight);
+        obj = recCheckDom(elem, testdom, totalHeight, pointer);
         if (obj == null) {
             break; // Exit foreach loop
         } else {
@@ -269,8 +279,19 @@ function recCheckDom(clone, testdom, totalHeight) {
         }
     }
 
+    if (pointer.children().length === 0) {
+        pointer.remove();
+    }
+
+    // if (testdom.html().endsWith(inWrap)) {
+    //   testdom.html(temp);
+    // } else {
+    //   testdom.append(outWrap);
+    // }
+
+
     return {
-        content: testdom.html(),
+        content: testdom,
         remain: clone,
         done: true
     };
@@ -281,8 +302,8 @@ function recCheckDom(clone, testdom, totalHeight) {
  */
 function makePage(basePage, clone, testdom) {
     var totalHeight = basePage.page.height,
-        obj = recCheckDom(clone, testdom, totalHeight);
-    basePage.content = obj.content;
+        obj = recCheckDom(clone, testdom, totalHeight, testdom);
+    basePage.content = obj.content.html();
 
     return {
         "page": basePage,
