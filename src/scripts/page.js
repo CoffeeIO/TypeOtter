@@ -208,31 +208,40 @@ function genPage(header, footer, page) {
 }
 
 /**
- * Check if element fits within the height specified, returning the html as
- * string and the difference in height.
+ * Add element to testdom and compare with maxheight, return new testdom if less, otherwise
+ * revert to previous state.
  */
-function addToPage(element, testdom, totalHeight) {
-    var temp = testdom.html();
-    testdom.append(element.clone().wrap('<div>').parent().html());
+function addToPage(element, testdom, totalHeight, pointer) {
+    var temp = pointer.html();
+    pointer.append(element.clone().wrap('<div>').parent().html());
     if (testdom.outerHeight(true) <= totalHeight) {
         return {
-            content: testdom.html(),
-            remain: null
+            content: testdom,
+            remain: null,
+            done: false
         };
     }
 
-    testdom.html(temp); // Revert to before the element was added
+    pointer.html(temp); // Revert to before the element was added
 
     return null;
 }
 
 /**
  * Recursive check the specified element's children and add elements until the
- * height is achieved or there's no more elements.
+ * maxheight is achieved or there's no more elements.
+ *
+ * @param  {jQuery object} clone       DOM element with remaining elements
+ * @param  {jQuery object} testdom     DOM element for contructing a page
+ * @param  {int}           totalHeight Max height of the content area of a page
+ * @param  {jQuery object} pointer     Insertion point of new elements in 'testdom'
+ * @return {object}                    content: the testdom,
+ *                                     remain: the remaining DOM of clone,
+ *                                     done: state of whether more elements can be added to testdom
  */
-function recCheckDom(clone, testdom, totalHeight) {
+function recCheckDom(clone, testdom, totalHeight, pointer) {
     // Check if entire element can be added to the page.
-    var obj = addToPage(clone, testdom, totalHeight);
+    var obj = addToPage(clone, testdom, totalHeight, pointer);
     if (obj !== null) {
         clone.remove();
         return obj;
@@ -254,10 +263,16 @@ function recCheckDom(clone, testdom, totalHeight) {
         return null;
     }
 
+    var wrapper = clone.clone().empty(),
+        inWrap = wrapper.wrap('<div>').parent().html();
+
+    pointer.append(inWrap);
+    pointer = pointer.children(':last-child'); // Move pointer to wrap element
+
     while (clone.children().length > 0) {
         var elem = clone.children(':nth-child(1)');
-        obj = recCheckDom(elem, testdom, totalHeight);
-        if (obj == null) {
+        obj = recCheckDom(elem, testdom, totalHeight, pointer);
+        if (obj === null) {
             break; // Exit foreach loop
         } else {
             // If done is true, then not all children were added so we can't remove the parent element
@@ -269,8 +284,12 @@ function recCheckDom(clone, testdom, totalHeight) {
         }
     }
 
+    if (pointer.children().length === 0) { // Remove wrapper if no elements were added to it
+        pointer.remove();
+    }
+
     return {
-        content: testdom.html(),
+        content: testdom,
         remain: clone,
         done: true
     };
@@ -281,8 +300,8 @@ function recCheckDom(clone, testdom, totalHeight) {
  */
 function makePage(basePage, clone, testdom) {
     var totalHeight = basePage.page.height,
-        obj = recCheckDom(clone, testdom, totalHeight);
-    basePage.content = obj.content;
+        obj = recCheckDom(clone, testdom, totalHeight, testdom);
+    basePage.content = obj.content.html();
 
     return {
         "page": basePage,
