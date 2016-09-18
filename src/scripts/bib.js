@@ -141,7 +141,7 @@ function makeRefPage(dom, bib) {
     curHtml += '</table></div>';
 
     if (showSection) {
-      dom.append(curHtml);
+        dom.append(curHtml);
     }
 }
 

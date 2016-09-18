@@ -42,6 +42,7 @@ function jsonConcat(o1, o2) {
 var Page = function () {
     this.number = 1,
     this.total = 1,
+    this.showPager = false,
     this.content = "",
     this.page = {
         wrapper : '<div class="page">',
@@ -118,7 +119,12 @@ function loadStyleSettings(options) {
  * Construct the html of the pager of a specific page.
  */
 function genPager(options, page) {
-    return options.pager.replace('[cur]', page.number).replace('[total]', page.total);
+    if (page.showPager === true) {
+        return options.pager.replace('[cur]', (page.number - page.offset))
+                  .replace('[total]', (page.total - page.offset));
+    }
+
+    return '';
 }
 
 /**
@@ -300,12 +306,21 @@ function recCheckDom(clone, testdom, totalHeight, pointer) {
  */
 function makePage(basePage, clone, testdom) {
     var totalHeight = basePage.page.height,
-        obj = recCheckDom(clone, testdom, totalHeight, testdom);
+        obj = recCheckDom(clone, testdom, totalHeight, testdom),
+        showPager = false;
+
     basePage.content = obj.content.html();
+
+    if (basePage.showPager !== true) {
+        if (obj.content.find('section[data-ref="1"]').length > 0) {
+          showPager = true;
+        }
+    }
 
     return {
         "page": basePage,
-        "remain": obj.remain
+        "remain": obj.remain,
+        "showPager": showPager
     };
 }
 
@@ -342,7 +357,12 @@ function texify(customOptions, dom) {
         pages.push(makePage($.extend(true, [], basePage), clone, testdom));
 
         obj = pages[pages.length - 1];
-
+        if (obj.showPager === true) { // First section encountered
+            obj.page.showPager = true;
+            obj.page.offset = curPage - 1;
+            basePage.showPager = true;
+            basePage.offset = curPage - 1;
+        }
         basePage.number = ++curPage;
 
         if (obj.remain != null) {
