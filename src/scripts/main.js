@@ -1,7 +1,8 @@
 var mathDone = false,
     dom = null,
     DEBUG = true,
-    innerDone = false;
+    innerDone = false,
+    biblography = {};
 
 $(document).ready(function () {
     if (DEBUG) console.time("document prepare"); // Performance timers
@@ -43,7 +44,7 @@ $(window).load(function () {
                     indexToc(dom);
                     makeToc(dom);
                     makeRef(dom);
-                    makeRefPage(dom, null);
+                    makeRefPage(dom, biblography);
                     fillMath(dom);
                     if (DEBUG) console.timeEnd("document prepare"); // Performance timers
                     texify(options, dom);

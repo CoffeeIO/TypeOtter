@@ -20,9 +20,12 @@ function handleCite(dom, bib) {
         } else {
             href = href.substr(1); // Ignore '#'
         }
-
+        if (bib === null) { // Check if biblography is null
+            console.error('Could not find reference: %s', href);
+            return true;
+        }
         var ref = bib[href];
-        if (ref === undefined) {
+        if (ref === undefined) { // Check if we could find reference
             console.error('Could not find reference: %s', href);
             return true;
         }
@@ -110,10 +113,8 @@ function checkUnusedAttr(name, ref) {
  * Create references page and append to dom.
  */
 function makeRefPage(dom, bib) {
-    if (bib === null || bib.length === 0) {
-      return;
-    }
-    var bib = handleCite(dom, bib);
+    var bib = handleCite(dom, bib),
+        showSection = false;
 
     var keys = getMapKeys(bib),
         curHtml = '<div class="tex-ref"><h1 class="tex-ref-title">References</h1><table>';
@@ -124,6 +125,7 @@ function makeRefPage(dom, bib) {
         checkUnusedAttr(item, bib[item]);
 
         if (bib[item]['tex-ref-name'] !== undefined) { // Ignore unused references
+            showSection = true;
             curHtml += '<tr class="tex-ref-row" tex-ref-name="' + item + '">';
             curHtml += '<a name="' + item + '"></a>'; // Link for citations
             curHtml += '<td><span class="tex-ref-name">' + bib[item]['tex-ref-name'] + '</span></td>';
@@ -133,7 +135,10 @@ function makeRefPage(dom, bib) {
     });
 
     curHtml += '</table></div>';
-    dom.append(curHtml);
+
+    if (showSection) {
+      dom.append(curHtml);
+    }
 }
 
 /**
