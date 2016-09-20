@@ -21,5 +21,9 @@ function addSpinner(dom) {
  * Remove spinner from the dom.
  */
 function removeSpinner() {
-  $('.tex-spinner').remove();
+  $('.tex-spinner.bookshelf_wrapper').animate({
+    opacity: 0
+  }, 500, function () {
+    $('.tex-spinner').remove();
+  });
 }
