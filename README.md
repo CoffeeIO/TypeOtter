@@ -37,6 +37,7 @@ This library is intended as an improvement on LaTex, allowing users to write pro
 ## Dependencies
 - **Font** --> [Computer Modern on the web by CheckMyWorking.com](http://checkmyworking.com/cm-web-fonts/)
 - **Math** --> [MathJax, Beautiful math in all browsers](https://www.mathjax.org/)
+- **Spinner** --> [#Codevember - Day 6 - Bookshelf loader by Grélard Antoine](http://codepen.io/ikoshowa/pen/qOMvpy)
 
 ## Special Thanks
 - [Frederik Madsen](https://www.linkedin.com/in/frederikmadsen/da) for inspiration and help with some of the code

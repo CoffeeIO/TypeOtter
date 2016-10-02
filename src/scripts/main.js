@@ -12,6 +12,7 @@ $(document).ready(function () {
     if (DEBUG) console.time("document math preprocess"); // Performance timers
 
     dom = $('body');
+    addSpinner(dom);
     includeFiles(dom);
     handleMath(dom);
 
@@ -53,6 +54,7 @@ $(window).load(function () {
                     fillToc(dom);
                     fillRef(dom);
                     if (DEBUG) console.timeEnd("document render");  // Performance timers
+                    removeSpinner();
                 }, 100);
             }
         }
