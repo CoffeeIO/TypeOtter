@@ -12,9 +12,9 @@ $(document).ready(function () {
     if (DEBUG) console.time("document math preprocess"); // Performance timers
 
     dom = $('body');
-    addSpinner(dom);
-    includeFiles(dom);
-    handleMath(dom);
+    mlTex.addSpinner(dom);
+    mlTex.includeFiles(dom);
+    mlTex.handleMath(dom);
 
     MathJax.Hub.Queue(["Typeset",MathJax.Hub]); // Queue 'typeset' action
 });
@@ -42,19 +42,19 @@ $(window).load(function () {
                 if (DEBUG) console.timeEnd("document math done"); // Performance timers
                 clearInterval(timer);
                 setTimeout(function(){
-                    attrify(dom);
-                    wrapper(dom);
-                    indexToc(dom);
-                    makeToc(dom);
-                    makeRef(dom);
-                    makeRefPage(dom, biblography);
-                    fillMath(dom);
+                    mlTex.attrify(dom);
+                    mlTex.wrapper(dom);
+                    mlTex.indexToc(dom);
+                    mlTex.makeToc(dom);
+                    mlTex.makeRef(dom);
+                    mlTex.makeRefPage(dom, biblography);
+                    mlTex.fillMath(dom);
                     if (DEBUG) console.timeEnd("document prepare"); // Performance timers
-                    texify(options, dom);
-                    fillToc(dom);
-                    fillRef(dom);
+                    mlTex.texify(options, dom);
+                    mlTex.fillToc(dom);
+                    mlTex.fillRef(dom);
                     if (DEBUG) console.timeEnd("document render");  // Performance timers
-                    removeSpinner();
+                    mlTex.removeSpinner();
                 }, 100);
             }
         }
