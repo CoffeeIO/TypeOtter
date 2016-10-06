@@ -1,5 +1,5 @@
 var mlTex = (function(obj, $) {
-    
+
     /**
      * Index the sections in dom element.
      */
@@ -31,7 +31,7 @@ var mlTex = (function(obj, $) {
             sec.find('.section-title').first().prepend('<span>' + join + '</span>');
 
         });
-    }
+    };
 
     /**
      * Create the html of a single row in table of contents.
@@ -103,7 +103,7 @@ var mlTex = (function(obj, $) {
             elem.after(toc);
             elem.remove();
         });
-    }
+    };
 
     /**
      * Find rendered locations of sections and put them in their table of contents.
@@ -117,7 +117,7 @@ var mlTex = (function(obj, $) {
                 $(this).find('.right').html(page.attr('data-page'));
             });
         });
-    }
+    };
 
     return obj;
 }(mlTex || {}, jQuery));

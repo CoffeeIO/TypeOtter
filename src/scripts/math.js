@@ -2,7 +2,7 @@ var mlTex = (function(obj, $) {
     // Global MathJax variables
     obj.inlineMath = 'a579438542e77567a744e7abaeaac7ae'; // MD5 of '$$ inline'
     obj.blockMath  = '1a73f16f7ac6dc3674c729ed2524bcc6'; // MD5 of '$$ block'
-    
+
     /**
      * Preprocess 'e' tags so mathjax registers them
      * Note: MathJax doesn't allow tags to be used for finding equations.
@@ -19,7 +19,7 @@ var mlTex = (function(obj, $) {
                 elem.attr('tex-math-style', 'inline');
             }
         });
-    }
+    };
 
     /**
      * Add numbering to block-level equations.
@@ -31,7 +31,7 @@ var mlTex = (function(obj, $) {
             mathjax.append('<span class="tex-math-count" style="line-height: ' + mathjax.outerHeight() + 'px">'
                 + elem.attr('data-math') + '</span>');
         });
-    }
+    };
 
     return obj;
 }(mlTex || {}, jQuery));

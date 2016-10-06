@@ -367,7 +367,7 @@ var mlTex = (function(obj, $) {
 
         // Overwite the body
         dom.html(fullHtml);
-    }
+    };
 
     return obj;
 }(mlTex || {}, jQuery));

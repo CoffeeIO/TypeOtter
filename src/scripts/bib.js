@@ -142,7 +142,7 @@ var mlTex = (function(obj, $) {
         curHtml += '</table></div>';
 
         if (showSection) {
-          dom.append(curHtml);
+            dom.append(curHtml);
         }
     }
 
@@ -174,7 +174,7 @@ var mlTex = (function(obj, $) {
             cite.html(citeHtml);
             cite.attr('tex-count', citePages.length);
         });
-    }
+    };
 
     return obj;
 }(mlTex || {}, jQuery));

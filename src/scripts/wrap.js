@@ -47,7 +47,7 @@ var mlTex = (function(obj, $) {
         // Overwrite dom html
         elem.html(html);
         return elem;
-    }
+    };
 
     return obj;
 }(mlTex || {}, jQuery));

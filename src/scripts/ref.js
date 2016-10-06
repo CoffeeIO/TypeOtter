@@ -1,5 +1,5 @@
 var mlTex = (function(obj, $) {
-    
+
     /**
      * Find reference links and their closest reference option.
      */
@@ -22,7 +22,7 @@ var mlTex = (function(obj, $) {
                 console.error('Unknown reference: %s', elem.attr('href'));
             }
         });
-    }
+    };
 
     return obj;
 }(mlTex || {}, jQuery));

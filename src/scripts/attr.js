@@ -1,5 +1,5 @@
 var mlTex = (function(obj, $) {
-    
+
     /**
      * Look for specific attributes in dom and generate elements.
      */
@@ -12,7 +12,7 @@ var mlTex = (function(obj, $) {
         handleCaption(dom);
         handleImgSize(dom);
         removeScript(dom);
-    }
+    };
 
     /**
      * Allow title attribute on <p> and <section> tags to generate titles.
