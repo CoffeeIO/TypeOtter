@@ -1,4 +1,5 @@
 var mlTex = (function(obj, $) {
+    
     /**
      * Look for specific attributes in dom and generate elements.
      */

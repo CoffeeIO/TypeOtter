@@ -1,4 +1,5 @@
 var mlTex = (function(obj, $) {
+
     /**
      * Add spinner after dom element.
      */

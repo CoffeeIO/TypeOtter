@@ -1,6 +1,10 @@
 var mlTex = (function(obj, $) {
 
     var regMarkup = /^[\s\b]*<[\w]+/;
+
+    /**
+     * Wrap plain text in paragraph tags to make dom more consistent.
+     */
     obj.wrapper = function (elem) {
         if (elem.html() === undefined) {
             return elem; // ignore special elements without markup: style, script..

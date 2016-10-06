@@ -1,4 +1,5 @@
 var mlTex = (function(obj, $) {
+    
     /**
      * Find reference links and their closest reference option.
      */

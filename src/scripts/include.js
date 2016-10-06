@@ -1,4 +1,5 @@
 var mlTex = (function(obj, $) {
+    
     /**
      * Find include tags in dom and include their sources.
      */

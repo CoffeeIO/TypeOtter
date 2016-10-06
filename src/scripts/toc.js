@@ -1,4 +1,5 @@
 var mlTex = (function(obj, $) {
+    
     /**
      * Index the sections in dom element.
      */
