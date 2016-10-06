@@ -15,5 +15,10 @@
     "gulp-uglify": "*",
     "gulp-watch": "*",
     "gulp-sass": "*"
+  },
+  "devDependencies": {
+    "gulp-uglify": "~2.0.0",
+    "pump": "~1.0.1",
+    "gulp-concat": "~2.6.0"
   }
 }
