@@ -34,7 +34,9 @@ var mlTex = (function(obj, $) {
      */
     function jsonConcat(o1, o2) {
         for (var key in o2) {
-            o1[key] = o2[key];
+            if ({}.hasOwnProperty.call(o2, key)) {
+                o1[key] = o2[key];
+            }
         }
         return o1;
     }

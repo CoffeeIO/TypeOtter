@@ -144,7 +144,7 @@ var mlTex = (function(obj, $) {
         if (showSection) {
             dom.append(curHtml);
         }
-    }
+    };
 
     /**
      * Fill the reference with pages numbers from citations.
