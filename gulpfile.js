@@ -20,16 +20,16 @@ gulp.task('sass:watch', function () {
 });
 
 gulp.task('uglify', function() {
-    return gulp.src([ 'src/scripts/source/attr.js',
-                      'src/scripts/source/bib.js',
-                      'src/scripts/source/include.js',
-                      'src/scripts/source/math.js',
-                      'src/scripts/source/page.js',
-                      'src/scripts/source/ref.js',
-                      'src/scripts/source/spinner.js',
-                      'src/scripts/source/toc.js',
-                      'src/scripts/source/wrap.js',
-                      'src/scripts/source/main.js'
+    return gulp.src(['src/scripts/source/attr.js',
+                     'src/scripts/source/bib.js',
+                     'src/scripts/source/include.js',
+                     'src/scripts/source/math.js',
+                     'src/scripts/source/page.js',
+                     'src/scripts/source/ref.js',
+                     'src/scripts/source/spinner.js',
+                     'src/scripts/source/toc.js',
+                     'src/scripts/source/wrap.js',
+                     'src/scripts/source/main.js'
                     ])
     .pipe(concat('main.min.js'))
     .pipe(uglify())
