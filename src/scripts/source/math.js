@@ -35,3 +35,17 @@ var mlTex = (function(obj, $) {
 
     return obj;
 }(mlTex || {}, jQuery));
+
+window.MathJax = {
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX", "output/HTML-CSS"],
+    tex2jax: {
+        inlineMath: [['a579438542e77567a744e7abaeaac7ae', 'a579438542e77567a744e7abaeaac7ae']],
+        displayMath: [['1a73f16f7ac6dc3674c729ed2524bcc6', '1a73f16f7ac6dc3674c729ed2524bcc6']],
+        processEscapes: true
+    },
+    skipStartupTypeset: true,
+    showProcessingMessages: false,
+    messageStyle: "none",
+    "HTML-CSS": { availableFonts: ["TeX"] },
+};

@@ -26,7 +26,7 @@ var mlTex = (function(obj, $) {
         var timer = setInterval(function () {
             if (loading <= 0) {
                 if (dom.find('a[include=""]').length > 0) {
-                    includeFiles(dom);
+                    this.includeFiles(dom);
                 }
                 clearInterval(timer);
             }

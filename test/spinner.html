@@ -3,31 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <!-- styles -->
-    <link rel="stylesheet" href="../dependencies/computerModern/Serif/cmun-serif.css">
-    <link rel="stylesheet" href="../src/styles/build/main.min.css">
+    <link rel="stylesheet" href="/dependencies/computerModern/Serif/cmun-serif.css">
+    <link rel="stylesheet" href="/src/styles/build/main.min.css">
     <!-- scripts -->
-    <script src="../dependencies/jQuery/jquery-2.2.0.min.js"></script>
-    <script src="../src/scripts/build/main.min.js"></script>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            extensions: ["tex2jax.js"],
-            jax: ["input/TeX", "output/HTML-CSS"],
-            tex2jax: {
-                inlineMath: [[mlTex.inlineMath, mlTex.inlineMath]],
-                displayMath: [[mlTex.blockMath, mlTex.blockMath]],
-                processEscapes: true
-            },
-            skipStartupTypeset: true,
-            showProcessingMessages: false,
-            messageStyle: "none",
-            "HTML-CSS": { availableFonts: ["TeX"] }
-        });
-        MathJax.Hub.Queue(function () { // Queue is finished
-            if (DEBUG) console.timeEnd("document math preprocess"); // Performance timers
-            mathDone = true;
-        });
+    <script src="/dependencies/jQuery/jquery-2.2.0.min.js"></script>
+    <script src="/src/scripts/build/main.min.js"></script>
+    <script>
+    var options = {
+        headerRight: 'MGApcDev',
+        headerCenter: '<i>by</i>',
+        pager : 'Page [cur] of [total]',
+        padding: "7mm 10mm"
+    };
+    mlTex.run('body', options, {});
     </script>
-    <script type="text/javascript" src="../dependencies/MathJax/MathJax.js"></script>
+
+    <script type="text/javascript" src="/dependencies/MathJax/MathJax.js"></script>
 </head>
 <body>
 <toc title="Table of contents"></toc>
