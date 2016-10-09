@@ -3,7 +3,38 @@ var mlTex = (function(obj, $) {
     obj.DEBUG = true;
     var innerDone = false;
 
-    obj.run = function (selector, options, biblography) {
+    /**
+     * Validate settings otherwise return default values.
+     */
+    function getSettings(settings) {
+        if (settings == null || !(settings instanceof Object)) {
+            return { selector: 'body', options: {}, biblography: {}};
+        }
+        if (!(typeof settings.selector === "string") || settings.selector.trim() == '') {
+            settings.selector = 'body';
+        }
+        // Check selector can find an element.
+        var count = $(settings.selector).length;
+        if (count !== 1) {
+            if (count === 0) {
+                console.error('Selector "%s" not found', settings.selector);
+            } else if (count > 1) {
+                console.error('Selector "%s" found mutiple elements, selector needs to be unique', settings.selector);
+            }
+            return null;
+        }
+        if (settings.options == null || !(settings.options instanceof Object)) {
+            settings.options = {};
+        }
+        if (settings.biblography == null || !(settings.biblography instanceof Object)) {
+            settings.biblography = {};
+        }
+
+        return settings;
+    }
+
+    obj.run = function (settings) {
+
         $(document).ready(function () {
             if (obj.DEBUG) console.time("document prepare"); // Performance timers
             if (obj.DEBUG) console.time("document render");  // Performance timers
@@ -11,7 +42,12 @@ var mlTex = (function(obj, $) {
             if (obj.DEBUG) console.time("window loaded"); // Performance timers
             if (obj.DEBUG) console.time("document math preprocess"); // Performance timers
 
-            dom = $(selector);
+            settings = getSettings(settings);
+            if (settings == null) {
+                return;
+            }
+
+            dom = $(settings.selector);
             obj.addSpinner(dom);
             obj.includeFiles(dom);
             obj.handleMath(dom);
@@ -44,10 +80,10 @@ var mlTex = (function(obj, $) {
                             obj.indexToc(dom);
                             obj.makeToc(dom);
                             obj.makeRef(dom);
-                            obj.makeRefPage(dom, biblography);
+                            obj.makeRefPage(dom, settings.biblography);
                             obj.fillMath(dom);
                             if (obj.DEBUG) console.timeEnd("document prepare"); // Performance timers
-                            obj.texify(options, dom);
+                            obj.texify(settings.options, dom);
                             obj.fillToc(dom);
                             obj.fillRef(dom);
                             if (obj.DEBUG) console.timeEnd("document render");  // Performance timers
