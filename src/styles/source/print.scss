@@ -1,23 +1,23 @@
 body {
-  background-color: #525659;
+    background-color: #525659;
 }
 .page {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  page-break-after: always;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    page-break-after: always;
 }
 
 // Print styling
 @media print {
-  body {
-    background-color: #ffffff;
-  }
-  .page {
-    margin: 0;
-  }
+    body {
+        background-color: #ffffff;
+    }
+    .page {
+        margin: 0;
+    }
 }
 
 // Overwrite default browser print properties
 @page {
-  margin: 0;
+    margin: 0;
 }
