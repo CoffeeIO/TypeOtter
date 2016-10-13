@@ -8,9 +8,13 @@ var mlTex = (function(obj, $) {
      */
     function getSettings(settings) {
         if (settings == null || !(settings instanceof Object)) {
-            return { selector: 'body', options: {}, biblography: {}};
+            return {
+                selector: 'body',
+                options: {},
+                biblography: {}
+            };
         }
-        if (!(typeof settings.selector === "string") || settings.selector.trim() == '') {
+        if (!(typeof settings.selector === "string") || settings.selector.trim() === '') {
             settings.selector = 'body';
         }
         // Check selector can find an element.
@@ -93,7 +97,7 @@ var mlTex = (function(obj, $) {
                 }
             }, 100);
         });
-    }
+    };
 
     return obj;
 }(mlTex || {}, jQuery));

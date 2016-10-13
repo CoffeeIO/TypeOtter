@@ -86,9 +86,9 @@ a[cite=""] {
     &[tex-count="1"] {
         &:before { content: " (cit. on p. "; } // Single citation
     }
-    
+
     &:after { content: ")."; }
-    
+
     a {
         font-weight: normal;
     }

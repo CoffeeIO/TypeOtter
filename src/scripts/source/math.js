@@ -47,5 +47,5 @@ window.MathJax = {
     skipStartupTypeset: true,
     showProcessingMessages: false,
     messageStyle: "none",
-    "HTML-CSS": { availableFonts: ["TeX"] },
+    "HTML-CSS": {availableFonts: ["TeX"]}
 };
