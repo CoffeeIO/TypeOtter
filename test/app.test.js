@@ -7,29 +7,31 @@ describe('Main simple test', function () {
     });
 
     // $('body').append('<p class="box">test</p>');
+    $(document).ready(function () {
+        // Multiple tests
+        it('jQuery dom test', function () {
+            expect($('.box').length).toEqual(1);
+        });
 
-    // Multiple tests
-    it('jQuery dom test', function () {
-        expect($('.box').length).toEqual(1);
+        // Multiple tests
+        it('jQuery dom test 2', function () {
+            expect($('.unknown').length).toEqual(0);
+        });
+
+        it('jQuery dom height test', function () {
+            expect($('.box').height()).toEqual(16);
+        });
+
+        it('jQuery dom height test', function () {
+            expect($('.box').outerHeight( true )).toEqual(36);
+        });
+
+        it('jQuery dom html', function () {
+            var a = { bar: $('html').html() };
+
+            expect(a.bar).not.toBeDefined();
+        });
     });
 
-    // Multiple tests
-    it('jQuery dom test 2', function () {
-        expect($('.unknown').length).toEqual(0);
-    });
-
-    it('jQuery dom height test', function () {
-        expect($('.box').height()).toEqual(16);
-    });
-
-    it('jQuery dom height test', function () {
-        expect($('.box').outerHeight( true )).toEqual(36);
-    });
-
-    it('jQuery dom html', function () {
-        var a = { bar: $('html').html() };
-
-        expect(a.bar).not.toBeDefined();
-    });
 
 });
