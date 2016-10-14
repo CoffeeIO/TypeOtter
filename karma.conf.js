@@ -24,7 +24,7 @@ module.exports = function(config) {
             'test/app.html'
         ],
         proxies: {
-          "/": "http://localhost:9876/"
+          //"/": "http://localhost:9876/"
         },
 
         // list of files to exclude
