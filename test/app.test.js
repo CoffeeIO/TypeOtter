@@ -17,6 +17,10 @@ describe('Main simple test', function () {
     });
 
     it('jQuery dom height test', function () {
-        expect($('.box').height()).toEqual(16);
+        expect($('.box').height()).toEqual(17);
+    });
+
+    it('jQuery dom height test', function () {
+        expect($('.box').outerHeight( true )).toEqual(17);
     });
 });
