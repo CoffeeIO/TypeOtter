@@ -25,7 +25,7 @@ module.exports = function(config) {
             // 'test/app.html'
         ],
         proxies: {
-          "/": "/base/"
+        //   "/": "/base/"
         },
 
         // list of files to exclude
