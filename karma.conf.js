@@ -16,10 +16,12 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             // dependencies
+            // {pattern: 'dependencies/computerModern', watched: true, included: true, served: true},
             {pattern: 'src/scripts/build/*.js', watched: true, included: true, served: true},
             {pattern: 'src/styles/build/*.css', watched: true, included: true, served: true},
 
             // tests
+            {pattern: 'test/input.html', watched: true, included: true, served: true},
             {pattern: 'test/app.test.js', watched: true, included: true, served: true},
 
         ],

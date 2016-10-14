@@ -6,7 +6,7 @@ describe('Main simple test', function () {
         expect(3).toEqual(3);
     });
 
-    $('body').append('<p class="box">test</p>');
+    // $('body').append('<p class="box">test</p>');
 
     // Multiple tests
     it('jQuery dom test', function () {
@@ -29,7 +29,7 @@ describe('Main simple test', function () {
     it('jQuery dom html', function () {
         var a = { bar: $('html').html() };
 
-        expect(a.bar).toBeDefined();
+        expect(a.bar).not.toBeDefined();
     });
 
 });
