@@ -5,8 +5,12 @@
   "author": "Mathias Grundtvig Andreasen (MGApcDev)",
   "license": "GPLv3",
   "dependencies": {
-
-    "pump": "~1.0.1",
+    "gulp": "*",
+    "gulp-sass": "*",
+    "gulp-watch": "*",
+    "gulp-uglify": "*",
+    "gulp-rename": "*",
+    "gulp-concat": "*",
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.1",
     "karma-chrome-launcher": "^1.0.1",
