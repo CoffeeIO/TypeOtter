@@ -19,7 +19,7 @@ module.exports = function(config) {
             {pattern: 'src/scripts/build/*.js', watched: true, included: false, served: true},
             {pattern: 'src/styles/build/*.css', watched: true, included: false, served: true},
             {pattern: 'test/app.test.js', watched: true, included: false, served: true},
-            {pattern: 'test/app.html', watched: false, included: false, served: true},
+            {pattern: 'test/app.html', watched: false, included: true, served: true},
 
             // tests
             // 'test/app.html'
