@@ -23,4 +23,11 @@ describe('Main simple test', function () {
     it('jQuery dom height test', function () {
         expect($('.box').outerHeight( true )).toEqual(36);
     });
+
+    it('jQuery dom html', function () {
+        var a = { bar: $('html').html() };
+
+        expect(a.bar).toBeUndefined();
+    });
+
 });
