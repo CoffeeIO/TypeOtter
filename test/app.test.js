@@ -29,7 +29,7 @@ describe('Main simple test', function () {
     it('jQuery dom html', function () {
         var a = { bar: $('html').html() };
 
-        expect(a.bar).toBeUndefined();
+        expect(a.bar).toBeDefined();
     });
 
 });
