@@ -3,7 +3,9 @@
 describe('Main simple test', function () {
 
     it('should be equal to 3', function () {
-        expect(3).toEqual(3);
+        $(document).ready(function () {
+            expect(3).toEqual(4);
+        });
     });
 
     // $('body').append('<p class="box">test</p>');
@@ -26,7 +28,9 @@ describe('Main simple test', function () {
     });
 
     it('jQuery dom height test', function () {
-        expect($('.box').outerHeight( true )).toEqual(36);
+        $(document).ready(function () {
+            expect($('.box').outerHeight( true )).toEqual(36);
+        });
     });
 
     it('jQuery dom html', function () {
