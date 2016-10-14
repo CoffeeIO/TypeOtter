@@ -5,7 +5,7 @@ describe('Main simple test', function () {
     it('should be equal to 3', function () {
         expect(3).toEqual(3);
     });
-    $('body').append('<div class="box">test</div>');
+    $('body').append('<p class="box">test</p>');
     // Multiple tests
     it('jQuery dom test', function () {
         expect($('.box').length).toEqual(1);
