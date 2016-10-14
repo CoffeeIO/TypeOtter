@@ -5,6 +5,7 @@
   "author": "Mathias Grundtvig Andreasen (MGApcDev)",
   "license": "GPLv3",
   "dependencies": {
+    "gulp": "*",
     "gulp-sass": "*",
     "gulp-watch": "*",
     "gulp-uglify": "*",
@@ -17,7 +18,7 @@
     "karma-jasmine": "^1.0.2"
   },
   "devDependencies": {
-    "require": "~2.4.20"
+
   },
   "scripts": {
     "test": "karma start karma.conf.js"
