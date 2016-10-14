@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "description": "",
   "author": "Mathias Grundtvig Andreasen (MGApcDev)",
-  "license": "GPLv3",
+  "license": "GPL-3.0",
   "dependencies": {
-      
+
       "jasmine-core": "^2.4.1",
       "karma": "^1.1.1",
       "karma-chrome-launcher": "^1.0.1",
