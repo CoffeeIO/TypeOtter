@@ -16,13 +16,12 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             // dependencies
-            {pattern: 'src/scripts/build/*.js', watched: true, included: false, served: true},
-            {pattern: 'src/styles/build/*.css', watched: true, included: false, served: true},
-            {pattern: 'test/app.test.js', watched: true, included: false, served: true},
-            {pattern: 'test/app.html', watched: false, included: true, served: true},
+            {pattern: 'src/scripts/build/*.js', watched: true, included: true, served: true},
+            {pattern: 'src/styles/build/*.css', watched: true, included: true, served: true},
 
             // tests
-            // 'test/app.html'
+            {pattern: 'test/app.test.js', watched: true, included: true, served: true},
+
         ],
         proxies: {
           "/": "/base/"
