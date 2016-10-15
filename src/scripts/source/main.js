@@ -37,7 +37,7 @@ var mlTex = (function(obj, $) {
         return settings;
     }
 
-    obj.run = function (settings) {
+    obj.run = function (settings, callback) {
 
         $(document).ready(function () {
             if (obj.DEBUG) console.time("document prepare"); // Performance timers
@@ -92,6 +92,9 @@ var mlTex = (function(obj, $) {
                             obj.fillRef(dom);
                             if (obj.DEBUG) console.timeEnd("document render");  // Performance timers
                             obj.removeSpinner();
+                            if (callback != null) {
+                                callback();
+                            }
                         }, 100);
                     }
                 }
