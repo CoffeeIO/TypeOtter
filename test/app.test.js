@@ -6,7 +6,7 @@ describe('Main simple test', function () {
         expect(3).toEqual(3);
     });
 
-    $('body').append('<div class="box">test</div>');
+    $('body').append('<section title="First section">Test</section>');
     // Multiple tests
     it('jQuery dom test', function () {
         expect($('.box').length).toEqual(1);
@@ -26,7 +26,7 @@ describe('Main simple test', function () {
     });
 
     it('jQuery dom html', function () {
-        mlTex.run({ selector: '.box' });
+        mlTex.attrify($('.box'));
         var a = { bar: $('html').html() };
 
         expect(a.bar).not.toBeDefined();
