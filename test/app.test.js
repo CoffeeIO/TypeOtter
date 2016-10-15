@@ -6,10 +6,10 @@ describe('Main simple test', function () {
         expect(3).toEqual(3);
     });
 
-    $('body').append('<div id="wrapper"><section title="First sec">Test</section></div>');
+    $('body').append('<div id="wrapper"><p title="First sec">Test</p></div>');
     // Multiple tests
     it('jQuery dom test', function () {
-        expect($('.box').length).toEqual(1);
+        expect($('#wrapper > p').length).toEqual(1);
     });
 
     // Multiple tests
@@ -18,12 +18,13 @@ describe('Main simple test', function () {
     });
 
     it('jQuery dom height test', function () {
-        expect($('.box').height()).toEqual(16);
+        expect($('#wrapper > p').height()).toEqual(16);
     });
 
     it('jQuery dom height test', function () {
-        expect($('.box').outerHeight( true )).toEqual(36);
+        expect($('#wrapper > p').outerHeight( true )).toEqual(36);
     });
+
     describe("when retrieved by name", function() {
         beforeEach(function(done) {
             mlTex.run({ selector: '#wrapper'}, function () {
