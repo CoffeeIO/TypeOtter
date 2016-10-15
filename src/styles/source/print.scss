@@ -1,4 +1,4 @@
-body {
+.tex-document {
     background-color: #525659;
 }
 .page {
@@ -9,7 +9,7 @@ body {
 
 // Print styling
 @media print {
-    body {
+    .tex-document {
         background-color: #ffffff;
     }
     .page {

@@ -104,7 +104,7 @@ var mlTex = (function(obj, $) {
     function loadStyleSettings(options) {
         var padding = getMargin(options.padding);
         var css =
-            "body {  width: " + options.width + "; }"
+            ".tex-document {  width: " + options.width + "; }"
           + ".page { height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + "); "
           + "width: calc(" + options.width + " - " + padding.left + " - " + padding.right + "); "
           + "padding: " + options.padding + "; "
@@ -366,6 +366,9 @@ var mlTex = (function(obj, $) {
         });
 
         testdom.parent().remove(); // Remove the test element
+
+        // Wrap document in div, to apply relative styling.
+        fullHtml = '<div class="tex-document">' + fullHtml + '</div>';
 
         // Overwite the body
         dom.html(fullHtml);
