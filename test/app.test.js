@@ -6,7 +6,7 @@ describe('Main simple test', function () {
         expect(3).toEqual(3);
     });
 
-    $('body').append('<div id="wrapper"><p title="First sec">Test</p></div>');
+
     // Multiple tests
     it('jQuery dom test', function () {
         expect($('#wrapper > p').length).toEqual(1);
@@ -27,7 +27,8 @@ describe('Main simple test', function () {
 
     describe("when retrieved by name", function() {
         beforeEach(function(done) {
-            mlTex.run({ selector: '#wrapper'}, function () {
+            $('body').append('<div id="wrapper"><p title="First sec">Test</p></div>');
+            mlTex.run({ selector: '#wrapper' }, function () {
                 console.dir('server says: ');
                 done();
             });
