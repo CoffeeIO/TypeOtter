@@ -26,9 +26,22 @@ describe('Main simple test', function () {
     });
 
     it('jQuery dom html', function () {
-        mlTex.run({ selector: '#wrapper'}, function () {
-            var a = { bar: $('html').html() };
 
+
+        runs(function() {
+            mlTex.run({ selector: '#wrapper'}, function () {
+                console.dir('server says: ');
+                flag = true;
+
+            });
+        });
+
+        waitsFor(function() {
+            return flag;
+        }, "Flag should be set", 750);
+
+        runs(function() {
+            var a = { bar: $('html').html() };
             expect(a.bar).not.toBeDefined();
         });
 
