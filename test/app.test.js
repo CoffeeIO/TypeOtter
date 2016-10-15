@@ -34,7 +34,7 @@ describe('Main simple test', function () {
                 flag = true;
 
             });
-        });
+        }, 500);
 
         waitsFor(function() {
             return flag;
