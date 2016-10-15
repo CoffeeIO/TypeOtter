@@ -4,8 +4,8 @@ var mlTex = (function(obj, $) {
     var innerDone = false;
 
     /**
-    * Validate settings otherwise return default values.
-    */
+     * Validate settings otherwise return default values.
+     */
     function getSettings(settings) {
         if (settings == null || !(settings instanceof Object)) {
             return {
@@ -37,6 +37,9 @@ var mlTex = (function(obj, $) {
         return settings;
     }
 
+    /**
+     * Main function to start typesetting a dom element with all preprocess functions.
+     */
     obj.run = function (settings) {
 
         $(document).ready(function () {
@@ -75,15 +78,15 @@ var mlTex = (function(obj, $) {
             var timer = setInterval(function () { // Block until math is loaded
                 if (obj.mathDone) {
                     var mp = dom.find('.MathJax_Preview').length,     // MathJax equations detected
-                    m = dom.find('.MathJax').length,              // MathJax equations prepared
-                    mpr = dom.find('.MathJax_Processing').length; // MathJax equations being processed
+                        m = dom.find('.MathJax').length,              // MathJax equations prepared
+                        mpr = dom.find('.MathJax_Processing').length; // MathJax equations being processed
                     if (mp === m && mpr === 0) {
                         innerDone = true;
                     }
 
                     if (innerDone) {
                         if (obj.DEBUG) {
-                            console.timeEnd("document math done"); // Performance timers    
+                            console.timeEnd("document math done"); // Performance timers
                         }
                         clearInterval(timer);
                         setTimeout(function(){
