@@ -3,17 +3,13 @@
 describe('Main simple test', function () {
 
     it('should be equal to 3', function () {
-        $(document).ready(function () {
-            expect(3).toEqual(4);
-        });
+        expect(3).toEqual(3);
     });
 
-    // $('body').append('<p class="box">test</p>');
+    $('body').append('<div class="box">test</div>');
     // Multiple tests
     it('jQuery dom test', function () {
-        $(document).ready(function () {
-            expect($('.box').length).toEqual(1);
-        });
+        expect($('.box').length).toEqual(1);
     });
 
     // Multiple tests
@@ -22,24 +18,18 @@ describe('Main simple test', function () {
     });
 
     it('jQuery dom height test', function () {
-        $(document).ready(function () {
-            expect($('.box').height()).toEqual(16);
-        });
+        expect($('.box').height()).toEqual(16);
     });
 
     it('jQuery dom height test', function () {
-        $(document).ready(function () {
-            expect($('.box').outerHeight( true )).toEqual(36);
-        });
+        expect($('.box').outerHeight( true )).toEqual(36);
     });
 
     it('jQuery dom html', function () {
-        $(document).ready(function () {
-            var a = { bar: $('html').html() };
+        mlTex.run({ selector: '.box' });
+        var a = { bar: $('html').html() };
 
-            expect(a.bar).not.toBeDefined();
-        });
-
+        expect(a.bar).not.toBeDefined();
     });
 
 
