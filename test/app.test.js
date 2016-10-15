@@ -24,27 +24,20 @@ describe('Main simple test', function () {
     it('jQuery dom height test', function () {
         expect($('.box').outerHeight( true )).toEqual(36);
     });
-
-    it('jQuery dom html', function () {
-
-
-        runs(function() {
+    describe("when retrieved by name", function() {
+        beforeEach(function(done) {
             mlTex.run({ selector: '#wrapper'}, function () {
                 console.dir('server says: ');
-                flag = true;
-
+                done();
             });
-        }, 500);
-
-        waitsFor(function() {
-            return flag;
-        }, "Flag should be set", 750);
-
-        runs(function() {
-            var a = { bar: $('html').html() };
-            expect(a.bar).not.toBeDefined();
         });
 
+        it('jQuery dom html', function () {
+
+            var a = { bar: $('html').html() };
+            expect(a.bar).not.toBeDefined();
+
+        });
     });
 
 
