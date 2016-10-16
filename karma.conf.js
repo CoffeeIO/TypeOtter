@@ -29,9 +29,6 @@ module.exports = function(config) {
             {pattern: 'test/app.test.js', watched: true, included: true, served: true},
 
         ],
-        proxies: {
-          "/": "/base/"
-        },
 
         // list of files to exclude
         exclude: [
