@@ -5,14 +5,19 @@
 sudo: required
 dist: trusty
 
-# Alternative using addons:
-
 notifications:
   email: false
+
+os:
+  - linux
+  - osx
 
 language: node_js
 node_js:
   - 'node'
+  - '6'
+  - '5'
+  - '4'
 
 before_install:
  - export CHROME_BIN=/usr/bin/google-chrome
