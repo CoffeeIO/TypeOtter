@@ -1,46 +1,41 @@
 'use strict';
 
 describe('Main simple test', function () {
+    $('body').append('<div id="wrapper"><section title="First sec">Test</section></div>');
+    var run = false;
+    beforeEach(function(done) {
+        if (run) {
+            done();
+        } else {
+            mlTex.run({ selector: '#wrapper' }, function () {
+                run = true;
+                done();
+            });
+        }
+    });
+
+    it('jQuery dom html', function () {
+        expect($('.page section').attr('data-ref')).toEqual('1');
+    });
 
     it('should be equal to 3', function () {
         expect(3).toEqual(3);
     });
 
-
     // Multiple tests
     it('jQuery dom test', function () {
-        expect($('#wrapper > p').length).toEqual(1);
+        expect($('#wrapper section').length).toEqual(1);
     });
 
-    // Multiple tests
     it('jQuery dom test 2', function () {
         expect($('.unknown').length).toEqual(0);
     });
 
     it('jQuery dom height test', function () {
-        expect($('#wrapper > p').height()).toEqual(16);
+        expect($('#wrapper p').height()).toEqual(17);
     });
-
     it('jQuery dom height test', function () {
-        expect($('#wrapper > p').outerHeight( true )).toEqual(36);
+        expect($('#wrapper p').outerHeight( true )).toEqual(37);
     });
-
-    describe("when retrieved by name", function() {
-        beforeEach(function(done) {
-            $('body').append('<div id="wrapper"><p title="First sec">Test</p></div>');
-            mlTex.run({ selector: '#wrapper' }, function () {
-                console.dir('server says: ');
-                done();
-            });
-        });
-
-        it('jQuery dom html', function () {
-
-            var a = { bar: $('html').html() };
-            expect(a.bar).not.toBeDefined();
-
-        });
-    });
-
 
 });

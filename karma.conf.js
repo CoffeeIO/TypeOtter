@@ -15,12 +15,17 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            // dependencies
-            // {pattern: 'dependencies/computerModern', watched: true, included: true, served: true},
-            {pattern: 'src/scripts/build/*.js', watched: true, included: true, served: true},
-            {pattern: 'src/styles/build/*.css', watched: true, included: true, served: true},
+            // Dependency files
+            {pattern: 'dependencies/MathJax/**/*', watched: true, included: false, served: true},
+            {pattern: 'dependencies/computerModern/**/*', watched: true, included: false, served: true},
 
-            // tests
+            // Source files
+            {pattern: 'dependencies/computerModern/Serif/cmun-serif.css', watched: true, included: true, served: true},
+            {pattern: 'src/styles/build/*.css', watched: true, included: true, served: true},
+            {pattern: 'src/scripts/build/*.js', watched: true, included: true, served: true},
+            {pattern: 'dependencies/MathJax/MathJax.js', watched: true, included: true, served: true},
+
+            // Test files
             {pattern: 'test/app.test.js', watched: true, included: true, served: true},
 
         ],
