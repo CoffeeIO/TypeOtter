@@ -40,7 +40,7 @@ var mlTex = (function(obj, $) {
     /**
      * Main function to start typesetting a dom element with all preprocess functions.
      */
-    obj.run = function (settings) {
+    obj.run = function (settings, callback) {
 
         $(document).ready(function () {
             if (obj.DEBUG) {
@@ -107,6 +107,9 @@ var mlTex = (function(obj, $) {
                                 console.timeEnd("document render");  // Performance timers
                             }
                             obj.removeSpinner();
+                            if (callback != null) {
+                                callback();
+                            }
                         }, 100);
                     }
                 }
