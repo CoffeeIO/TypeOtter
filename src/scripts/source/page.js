@@ -330,8 +330,8 @@ var mlTex = (function(obj, $) {
             obj = null,
             curPage = 1;
 
-        // Create empty page for testing rendering dimensions.
-        dom.append('<div class="page" style="height: auto"><div class="content tex-testdom"></div></div>');
+        // Create empty tex-document for testing rendering dimensions.
+        dom.append('<div class="tex-document"><div class="page" style="height: auto"><div class="content tex-testdom"></div></div></div>');
         var testdom = dom.find('.tex-testdom');
 
         // Detect rendered size
