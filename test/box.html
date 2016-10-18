@@ -9,11 +9,16 @@
     var options = {
         headerRight: 'Mathias G. Andreasen',
         pager : 'Page [cur] of [total]',
-        padding: "10mm 25mm"
+        padding: "10mm 25mm",
+        spinner: false,
     };
     mlTex.run({ selector: '.box', options: options });
     </script>
     <style>
+        body {
+            max-width: 900px;
+            margin: 0 auto;
+        }
         .box {
             width: 500px;
             height: 500px;
@@ -23,8 +28,9 @@
     </style>
 </head>
 <body>
-    This text should be unaffected
-    <div class="box">
+    This text should be unaffected, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat lectus mauris, in condimentum nisl pretium eget. Sed eget lectus vel nisl vestibulum aliquam. Sed aliquet metus at congue dignissim. Cras et elementum sem. Sed dapibus ut leo ac venenatis. Nunc elementum fringilla lacus, in luctus felis rutrum vel.
+
+<div class="box"> <!-- begin document -->
 <toc title="Table of contents"></toc>
 <section title="Section 1" name="sec1" newpage>
 <section title="Section 1.1">...but can we reset section counter?<script>document.write('test ')</script></section>
@@ -102,6 +108,10 @@ Phasellus sit amet eros lobortis, fermentum nunc id, pharetra nisl. Nulla ligula
 <img src="http://www.petpaw.com.au/wp-content/uploads/2014/06/Pug-5.jpg" name="figure1" caption="Sad pug" width="50%">
 </section>
 </section>
-</div>
+</div> <!-- end document -->
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin consequat lectus mauris, in condimentum nisl pretium eget. Sed eget lectus vel nisl vestibulum aliquam. Sed aliquet metus at congue dignissim. Cras et elementum sem. Sed dapibus ut leo ac venenatis. Nunc elementum fringilla lacus, in luctus felis rutrum vel. Suspendisse potenti. Fusce sapien nulla, semper sed congue quis, sollicitudin quis enim. Donec eu nunc lacus. Sed et libero eget ex vulputate malesuada. Sed rhoncus felis id nulla pulvinar consequat. Nam finibus ex maximus mauris suscipit, non maximus tortor condimentum. Suspendisse accumsan malesuada ex, ac auctor neque faucibus in. Maecenas non velit quis nisi interdum posuere ac euismod enim. Mauris vel pharetra tellus.
+
+
 </body>
 </html>

@@ -1,14 +1,23 @@
 .tex-document {
     margin: 0 auto;
-
+    padding: 15px 10px;
     font-family: 'Computer Modern Serif';
     color: #000000;
     font-size: $font-size;
     letter-spacing: -0.2pt;
 }
+e {
+    font-size: $font-size;
+}
 
 .page {
     background-color: #ffffff;
+    &:first-of-type {
+        margin-top: 0;
+    }
+    &:last-of-type {
+        margin-bottom: 0;
+    }
 }
 
 .content {

@@ -57,7 +57,10 @@ var mlTex = (function(obj, $) {
             }
 
             dom = $(settings.selector);
-            obj.addSpinner(dom);
+
+            if (settings.options.spinner !== false) {
+                obj.addSpinner(dom);
+            }
             obj.includeFiles(dom);
             obj.handleMath(dom);
 
@@ -106,7 +109,9 @@ var mlTex = (function(obj, $) {
                             if (obj.DEBUG) {
                                 console.timeEnd("document render");  // Performance timers
                             }
-                            obj.removeSpinner();
+                            if (settings.options.spinner !== false) {
+                                obj.removeSpinner();
+                            }
                             if (callback != null) {
                                 callback();
                             }

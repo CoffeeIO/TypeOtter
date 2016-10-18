@@ -28,7 +28,8 @@ var mlTex = (function(obj, $) {
         dom.find('e[tex-math-style="block"]').each(function () {
             var elem = $(this);
             var mathjax = elem.find('.MathJax_Display');
-            mathjax.append('<span class="tex-math-count" style="line-height: ' + mathjax.outerHeight() + 'px">'
+            elem.wrapInner('<div style="height: ' + mathjax.height() + 'px">');
+            mathjax.append('<span class="tex-math-count" style="line-height: ' + mathjax.height() + 'px">'
                 + elem.attr('data-math') + '</span>');
         });
     };
