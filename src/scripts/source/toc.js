@@ -28,7 +28,7 @@ var mlTex = (function(obj, $) {
             // Make reference link
             sec.prepend('<a name="mltex-' + join + '"></a>');
             // Prepend section to section title
-            sec.find('.section-title').first().prepend('<span>' + join + '</span>');
+            sec.find('.tex-section-title').first().prepend('<span>' + join + '</span>');
 
         });
     };

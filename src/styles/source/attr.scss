@@ -1,9 +1,9 @@
 // Sections & sub-section
 section {
     @include section-size(18pt);
-    > section {
+    section {
         @include section-size(16pt);
-        > section {
+        section {
             @include section-size(14pt);
         }
     }
