@@ -6,10 +6,9 @@ var mlTex = (function(obj, $) {
         // Dimensions
         height : '296mm', // Issue: printing makes blank page at the end **reduced height from 297mm**
         width : '210mm',
-        padding : '10mm',
+        padding: "10mm 25mm",
         headerHeight : '6mm',
         footerHeight : '6mm',
-        padding: "10mm 25mm",
 
         // Header
         headerRight : '',
