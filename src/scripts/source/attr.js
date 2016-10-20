@@ -16,15 +16,19 @@ var mlTex = (function(obj, $) {
 
     /**
      * Allow title attribute on <p> and <section> tags to generate titles.
-     * Note: title are changed to data-title to avoid browser interaction, but without hiding the attribute from developer
-     * tools.
+     * Note: title are changed to data-title to avoid browser interaction, but without hiding the attribute from
+     * developer tools.
      */
     function handleTitle(dom) {
         dom.find("*[title!=''][title]").each(function (index) {
             if ($(this).prop('tagName') === 'P') {
                 $(this).prepend('<span class="tex-para-title">' + $(this).attr('title') + '</span>');
             } else if ($(this).prop('tagName') === 'SECTION') {
-                $(this).prepend('<a href="#mltex-toc"><h1 class="tex-section-title">' + $(this).attr('title') + '</h1></a>');
+                $(this).prepend(
+                    '<a href="#mltex-toc">' +
+                        '<h1 class="tex-section-title">' + $(this).attr('title') + '</h1>' +
+                    '</a>'
+                );
             }
 
             // Remove title attr to avoid browser hover effect

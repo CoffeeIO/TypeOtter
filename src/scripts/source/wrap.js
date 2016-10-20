@@ -27,7 +27,7 @@ var mlTex = (function(obj, $) {
         // Iterate over all children
         while (clone.children().length > 0) {
             if (regMarkup.test(clone.html()) === false) {
-                clone.html('<p>' + clone.html());
+                clone.html('<p>' + clone.html()); // When rendering the browser will wrap the end </p> appropriately
                 html += clone.children(':nth-child(1)').clone().wrap('<div>').parent().html();
                 clone.children(':nth-child(1)').remove();
             }

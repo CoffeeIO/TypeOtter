@@ -62,15 +62,18 @@ var mlTex = (function(obj, $) {
     function loadStyleSettings(options) {
         var padding = getMargin(options.padding);
         var css =
-            ".tex-document {  width: " + options.width + "; }"
-          + ".tex-page { height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + "); "
-          + "width: calc(" + options.width + " - " + padding.left + " - " + padding.right + "); "
-          + "padding: " + options.padding + "; "
-          + "}"
-          + ".tex-content { height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + " - "
-          + options.headerHeight + " - " + options.footerHeight + "); }"
-          + ".tex-header { height: " + options.headerHeight + "; line-height: " + options.headerHeight + "; }"
-          + ".tex-footer { height: " + options.footerHeight + "; line-height: " + options.footerHeight + "; }";
+            ".tex-document {  width: " + options.width + "; }" +
+            ".tex-page { " +
+                "height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + "); " +
+                "width: calc(" + options.width + " - " + padding.left + " - " + padding.right + "); " +
+                "padding: " + options.padding + "; " +
+            "}" +
+            ".tex-content { " +
+                "height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + " - " +
+                options.headerHeight + " - " + options.footerHeight + "); " +
+            "}" +
+            ".tex-header { height: " + options.headerHeight + "; line-height: " + options.headerHeight + "; }" +
+            ".tex-footer { height: " + options.footerHeight + "; line-height: " + options.footerHeight + "; }";
 
         $('<style type="text/css">' + css + '</style>').appendTo('head');
     }
@@ -88,7 +91,8 @@ var mlTex = (function(obj, $) {
     function genHeader(options, page) {
         var curHtml = page.header.wrapper,
             pager = '';
-        if (options.headerLeft === '[pager]' || options.headerCenter === '[pager]' || options.headerRight === '[pager]') {
+        if (options.headerLeft === '[pager]' || options.headerCenter === '[pager]' ||
+            options.headerRight === '[pager]') {
             pager = genPager(options, page);
         }
 
@@ -124,7 +128,8 @@ var mlTex = (function(obj, $) {
     function genFooter(options, page) {
         var curHtml = page.footer.wrapper,
             pager = '';
-        if (options.footerLeft === '[pager]' || options.footerCenter === '[pager]' || options.footerRight === '[pager]') {
+        if (options.footerLeft === '[pager]' || options.footerCenter === '[pager]' ||
+            options.footerRight === '[pager]') {
             pager = genPager(options, page);
         }
 
@@ -158,12 +163,13 @@ var mlTex = (function(obj, $) {
      * Construct the html of the page.
      */
     function genPage(header, footer, page) {
-        var curHtml = '<a name="tex-page-' + page.number + '"></a>';
-        curHtml += '<div class="tex-page" data-page="' + page.number + '">';
-        curHtml += header;
-        curHtml += '<div class="tex-content">' + page.content + '</div>';
-        curHtml += footer;
-        curHtml += '</div>';
+        var curHtml =
+            '<a name="tex-page-' + page.number + '"></a>' +
+            '<div class="tex-page" data-page="' + page.number + '">' +
+                header +
+                '<div class="tex-content">' + page.content + '</div>' +
+                footer +
+            '</div>';
 
         return curHtml;
     }
@@ -288,7 +294,12 @@ var mlTex = (function(obj, $) {
             curPage = 1;
 
         // Create empty tex-document for testing rendering dimensions.
-        dom.append('<div class="tex-document"><div class="tex-page" style="height: auto"><div class="tex-content tex-testdom"></div></div></div>');
+        dom.append(
+            '<div class="tex-document">' +
+                '<div class="tex-page" style="height: auto">' +
+                    '<div class="tex-content tex-testdom">' +
+            '</div></div></div>'
+        );
         var testdom = dom.find('.tex-testdom');
 
         // Detect rendered size

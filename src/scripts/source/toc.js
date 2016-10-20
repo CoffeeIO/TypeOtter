@@ -37,9 +37,13 @@ var mlTex = (function(obj, $) {
      * Create the html of a single row in table of contents.
      */
     function makeTocRow(ref, section, title, className) {
-        return '<a href="#mltex-' + ref + '"><div class="' + className + '" data-ref="' + ref + '">'
-             + '<div class="left"><span>' + section + '</span>' + title + '</div>'
-             + '<div class="right" data-pageref="">' + '</div></div></a>';
+        var curHtml =
+            '<a href="#mltex-' + ref + '">' +
+                '<div class="' + className + '" data-ref="' + ref + '">' +
+                    '<div class="left"><span>' + section + '</span>' + title + '</div>' +
+                    '<div class="right" data-pageref=""></div>' +
+            '</div></a>';
+        return curHtml;
     }
 
     /**
@@ -54,22 +58,38 @@ var mlTex = (function(obj, $) {
 
             // Section
             if (secArr[1] === undefined || secArr[1] === '0') {
-                curHtml += makeTocRow(secStr, secArr[0], elem.attr('data-title'), 'sec');
+                curHtml += makeTocRow(
+                    secStr, secArr[0],
+                    elem.attr('data-title'),
+                    'sec'
+                );
                 return true;
             }
             // Sub-section
             if (secArr[2] === undefined || secArr[2] === '0') {
-                curHtml += makeTocRow(secStr, secArr[0] + '.' + secArr[1], elem.attr('data-title'), 'subsec');
+                curHtml += makeTocRow(
+                    secStr, secArr[0] + '.' + secArr[1],
+                    elem.attr('data-title'),
+                    'subsec'
+                );
                 return true;
             }
             // Sub-sub-section
             if (secArr[3] === undefined || secArr[3] === '0') {
-                curHtml += makeTocRow(secStr, secArr[0] + '.' + secArr[1] + '.' + secArr[2], elem.attr('data-title'), 'subsubsec');
+                curHtml += makeTocRow(
+                    secStr, secArr[0] + '.' + secArr[1] + '.' + secArr[2],
+                    elem.attr('data-title'),
+                    'subsubsec'
+                );
                 return true;
             }
             // Sub-sub-sub-section
             if (secArr[4] === undefined || secArr[4] === '0') {
-                curHtml += makeTocRow(secStr, secArr[0] + '.' + secArr[1] + '.' + secArr[2] + '.' + secArr[3], elem.attr('data-title'), 'subsubsubsec');
+                curHtml += makeTocRow(
+                    secStr, secArr[0] + '.' + secArr[1] + '.' + secArr[2] + '.' + secArr[3],
+                    elem.attr('data-title'),
+                    'subsubsubsec'
+                );
                 return true;
             }
             console.error('Only 3 subsection levels supported');
@@ -81,8 +101,12 @@ var mlTex = (function(obj, $) {
      * Create html of table of content from title and inner content.
      */
     function genToc(inner, title) {
-        var curHtml = '<div class="tex-toc"><a name="mltex-toc"></a><h1 class="toc-title">' + title + '</h1>';
-        curHtml += inner + '</div>';
+        var curHtml =
+            '<div class="tex-toc">' +
+                '<a name="mltex-toc"></a>' +
+                '<h1 class="toc-title">' + title + '</h1>' +
+                inner +
+            '</div>';
         return curHtml;
     }
 
