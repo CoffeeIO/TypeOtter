@@ -1,46 +1,4 @@
 var mlTex = (function(obj, $) {
-    // normal dpi --> height: 1123px, width: 794px
-    //                1cm = 37.795275591px
-
-    // Default options the program will use.
-    var defaultOptions = {
-        // Dimensions
-        height : '296mm', // Issue: printing makes blank page at the end **reduced height from 297mm**
-        width : '210mm',
-        padding : '10mm',
-        headerHeight : '6mm',
-        footerHeight : '6mm',
-
-        // Header
-        headerRight : '',
-        headerCenter : '',
-        headerLeft : '',
-
-        // Footer
-        footerRight : '',
-        footerCenter : '[pager]',
-        footerLeft : '',
-
-        // Pager
-        pager : '[cur]',
-        pagerStyle : '1'
-    };
-
-    /**
-     * Merge two json objects
-     *
-     * @param o1 The default json, base
-     * @param o2 The custom json, overwrite existing elements
-     */
-    function jsonConcat(o1, o2) {
-        for (var key in o2) {
-            if ({}.hasOwnProperty.call(o2, key)) {
-                o1[key] = o2[key];
-            }
-        }
-        return o1;
-    }
-
     // Base empty Page Object
     var Page = function () {
         this.number = 1,
@@ -315,9 +273,8 @@ var mlTex = (function(obj, $) {
     /**
      * Convert a dom element to a series of printable pages.
      */
-    obj.texify = function(customOptions, dom) {
-        var options = jsonConcat(defaultOptions, customOptions),
-            basePage = new Page();
+    obj.texify = function(options, dom) {
+        var basePage = new Page();
 
         dom.wrapInner('<div>');
 
