@@ -1,7 +1,7 @@
 .tex-document {
     background-color: #525659;
 }
-.page {
+.tex-page {
     margin-top: 15px;
     margin-bottom: 15px;
     page-break-after: always;
@@ -12,7 +12,7 @@
     .tex-document {
         background-color: #ffffff;
     }
-    .page {
+    .tex-page {
         margin: 0;
     }
 }

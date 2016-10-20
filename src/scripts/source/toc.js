@@ -81,7 +81,7 @@ var mlTex = (function(obj, $) {
      * Create html of table of content from title and inner content.
      */
     function genToc(inner, title) {
-        var curHtml = '<div class="toc"><a name="mltex-toc"></a><h1 class="toc-title">' + title + '</h1>';
+        var curHtml = '<div class="tex-toc"><a name="mltex-toc"></a><h1 class="toc-title">' + title + '</h1>';
         curHtml += inner + '</div>';
         return curHtml;
     }

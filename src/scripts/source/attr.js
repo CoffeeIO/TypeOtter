@@ -22,9 +22,9 @@ var mlTex = (function(obj, $) {
     function handleTitle(dom) {
         dom.find("*[title!=''][title]").each(function (index) {
             if ($(this).prop('tagName') === 'P') {
-                $(this).prepend('<span class="para-title">' + $(this).attr('title') + '</span>');
+                $(this).prepend('<span class="tex-para-title">' + $(this).attr('title') + '</span>');
             } else if ($(this).prop('tagName') === 'SECTION') {
-                $(this).prepend('<a href="#mltex-toc"><h1 class="section-title">' + $(this).attr('title') + '</h1></a>');
+                $(this).prepend('<a href="#mltex-toc"><h1 class="tex-section-title">' + $(this).attr('title') + '</h1></a>');
             }
 
             // Remove title attr to avoid browser hover effect

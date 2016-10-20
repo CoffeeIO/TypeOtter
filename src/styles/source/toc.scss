@@ -1,4 +1,4 @@
-.toc {
+.tex-toc {
     margin-bottom: 16pt;
 
     > a > div {
@@ -24,6 +24,8 @@
         margin-left: 57pt;
     }
     .left {
+        text-align: left;
+        float: left;
         position: relative;
         background: white;
         z-index: 1;
@@ -33,6 +35,8 @@
         }
     }
     .right {
+        text-align: right;
+        float: right;
         position: absolute;
         right: 0;
         top: 0;

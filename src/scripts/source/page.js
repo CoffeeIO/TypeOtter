@@ -5,17 +5,17 @@ var mlTex = (function(obj, $) {
         this.total = 1,
         this.content = "",
         this.page = {
-            wrapper : '<div class="page">',
+            wrapper : '<div class="tex-page">',
             height: ''
         },
         this.header = {
-            wrapper : '<div class="header">',
+            wrapper : '<div class="tex-header">',
             right : "",
             center : "",
             left : ""
         },
         this.footer = {
-            wrapper : '<div class="footer">',
+            wrapper : '<div class="tex-footer">',
             right : "",
             center : "",
             left : ""
@@ -63,14 +63,14 @@ var mlTex = (function(obj, $) {
         var padding = getMargin(options.padding);
         var css =
             ".tex-document {  width: " + options.width + "; }"
-          + ".page { height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + "); "
+          + ".tex-page { height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + "); "
           + "width: calc(" + options.width + " - " + padding.left + " - " + padding.right + "); "
           + "padding: " + options.padding + "; "
           + "}"
-          + ".content { height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + " - "
+          + ".tex-content { height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + " - "
           + options.headerHeight + " - " + options.footerHeight + "); }"
-          + ".header { height: " + options.headerHeight + "; line-height: " + options.headerHeight + "; }"
-          + ".footer { height: " + options.footerHeight + "; line-height: " + options.footerHeight + "; }";
+          + ".tex-header { height: " + options.headerHeight + "; line-height: " + options.headerHeight + "; }"
+          + ".tex-footer { height: " + options.footerHeight + "; line-height: " + options.footerHeight + "; }";
 
         $('<style type="text/css">' + css + '</style>').appendTo('head');
     }
@@ -159,9 +159,9 @@ var mlTex = (function(obj, $) {
      */
     function genPage(header, footer, page) {
         var curHtml = '<a name="tex-page-' + page.number + '"></a>';
-        curHtml += '<div class="page" data-page="' + page.number + '">';
+        curHtml += '<div class="tex-page" data-page="' + page.number + '">';
         curHtml += header;
-        curHtml += '<div class="content">' + page.content + '</div>';
+        curHtml += '<div class="tex-content">' + page.content + '</div>';
         curHtml += footer;
         curHtml += '</div>';
 
@@ -288,7 +288,7 @@ var mlTex = (function(obj, $) {
             curPage = 1;
 
         // Create empty tex-document for testing rendering dimensions.
-        dom.append('<div class="tex-document"><div class="page" style="height: auto"><div class="content tex-testdom"></div></div></div>');
+        dom.append('<div class="tex-document"><div class="tex-page" style="height: auto"><div class="tex-content tex-testdom"></div></div></div>');
         var testdom = dom.find('.tex-testdom');
 
         // Detect rendered size

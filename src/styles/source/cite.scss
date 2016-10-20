@@ -1,6 +1,8 @@
-a[cite=""] {
-    &:before { content: "["; }
-    &:after { content: "]"; }
+.tex-document {
+    a[cite=""] {
+        &:before { content: "["; }
+        &:after { content: "]"; }
+    }
 }
 
 .tex-ref {

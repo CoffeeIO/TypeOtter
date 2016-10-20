@@ -1,43 +1,44 @@
-img {
-    display: block;
-    margin: 10px auto;
-    max-width: 100%;
+.tex-document {
+    img {
+        display: block;
+        margin: 10px auto;
+        max-width: 100%;
+    }
+    table {
+        width: 96%;
+        margin: 10px 2%;
+        border: none;
+        border-collapse: collapse;
+        border-spacing: 0;
+        display: table;
 
-}
-table {
-    width: 96%;
-    margin: 10px 2%;
-    border: none;
-    border-collapse: collapse;
-    border-spacing: 0;
-    display: table;
-
-    th {
-        font-weight: bold;
-        border-bottom: 2px solid #ddd;
-        text-align: left;
+        th {
+            font-weight: bold;
+            border-bottom: 2px solid #ddd;
+            text-align: left;
+        }
+        td {
+            border-top: 1px solid #ddd;
+        }
+        tr {
+            vertical-align: middle;
+        }
+        th, td {
+            padding: 8px;
+        }
     }
-    td {
-        border-top: 1px solid #ddd;
+    figure {
+        margin: 0;
     }
-    tr {
-        vertical-align: middle;
+    figcaption {
+        text-align: center;
+        font-style: italic;
     }
-    th, td {
-        padding: 8px;
-    }
-}
-figure {
-    margin: 0;
-}
-figcaption {
-    text-align: center;
-    font-style: italic;
-}
-a {
-    color: black;
-    text-decoration: none;
-    &[url=""] {
-        font-weight: bold;
+    a {
+        color: black;
+        text-decoration: none;
+        &[url=""] {
+            font-weight: bold;
+        }
     }
 }
