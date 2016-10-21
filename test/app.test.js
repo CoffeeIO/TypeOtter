@@ -15,7 +15,7 @@ describe('Main simple test', function () {
     });
 
     it('jQuery dom html', function () {
-        expect($('.page section').attr('data-ref')).toEqual('1');
+        expect($('.tex-page section').attr('data-ref')).toEqual('1');
     });
 
     it('should be equal to 3', function () {
@@ -32,10 +32,10 @@ describe('Main simple test', function () {
     });
 
     it('jQuery dom height test', function () {
-        expect($('#wrapper p').height()).toEqual(17);
+        expect($('#wrapper p').height()).toEqual(16);
     });
     it('jQuery dom height test', function () {
-        expect($('#wrapper p').outerHeight( true )).toEqual(37);
+        expect($('#wrapper p').outerHeight( true )).toEqual(36);
     });
 
 });

@@ -20,8 +20,8 @@ module.exports = function(config) {
             {pattern: 'dependencies/computerModern/**/*', watched: true, included: false, served: true},
 
             // Source files
-            {pattern: 'dependencies/computerModern/Serif/cmun-serif.css', watched: true, included: true, served: true},
             {pattern: 'src/styles/build/*.css', watched: true, included: true, served: true},
+            {pattern: 'dependencies/computerModern/Serif/cmun-serif.css', watched: true, included: true, served: true},
             {pattern: 'src/scripts/build/*.js', watched: true, included: true, served: true},
             {pattern: 'dependencies/MathJax/MathJax.js', watched: true, included: true, served: true},
 
