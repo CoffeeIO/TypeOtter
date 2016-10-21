@@ -11,11 +11,11 @@ This library is intended as an improvement on LaTex, allowing users to write pro
 
 Get the code
 
-    ``git clone https://github.com/MGApcDev/mlTex.git your-project``
+    git clone https://github.com/MGApcDev/mlTex.git your-project
 
 Go into the folder
 
-    ``cd  your-project``
+    cd  your-project
 
 Make an index.html file using your favorite editor (<i>use this template for full documents</i>)
 
@@ -55,13 +55,13 @@ Start a local server (to make sure all features work as intended)
 ## Developers
 Install node modules (make sure you have [nodejs](https://nodejs.org/en/) installed)
 
-    ``npm install -g gulp`` (use ``sudo npm install -g gulp`` if it doesn't work)
+    npm install -g gulp`` (use 'sudo npm install -g gulp' if it doesn't work)
 
-    ``npm install`` (use ``sudo npm install`` if it doesn't work)
+    npm install (use 'sudo npm install' if it doesn't work)
 
 Recompile js and scss files
 
-    ``gulp``
+    gulp
 
 ## Contributions
 1. Fork it!
