@@ -11,7 +11,10 @@ var mlTex = (function(obj, $) {
                 console.error('Reference needs "href" attribute: %s', elem.clone().wrap('<span>').parent().html());
                 return true;
             }
+            // Find the referenced element.
             var ref = dom.find('a[name="' + href.substr(1) + '"]').first();
+
+            // Find closest association.
             if (ref.closest('e').length !== 0) { // Equations
                 elem.html(ref.closest('e').attr('data-math'));
             } else if (ref.closest('figure').length !== 0) { // Images

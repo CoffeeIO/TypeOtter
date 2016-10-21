@@ -1,7 +1,8 @@
-body {
+.tex-document {
     background-color: #525659;
+    padding: 15px 10px;
 }
-.page {
+.tex-page {
     margin-top: 15px;
     margin-bottom: 15px;
     page-break-after: always;
@@ -9,10 +10,12 @@ body {
 
 // Print styling
 @media print {
-    body {
+    .tex-document {
         background-color: #ffffff;
+        padding: 0;
+        margin: 0;
     }
-    .page {
+    .tex-page {
         margin: 0;
     }
 }

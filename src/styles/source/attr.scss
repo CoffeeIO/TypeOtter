@@ -1,18 +1,18 @@
 // Sections & sub-section
 section {
     @include section-size(18pt);
-    > section {
+    section {
         @include section-size(16pt);
-        > section {
+        section {
             @include section-size(14pt);
         }
     }
 }
-.section-title > span {
+.tex-section-title > span {
     margin-right: 17pt;
 }
 // Paragraph title
-.para-title {
+.tex-para-title {
     font-weight: bold;
     margin-right: 10px;
 }

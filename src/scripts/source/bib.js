@@ -2,7 +2,10 @@ var mlTex = (function(obj, $) {
     // Order of attributes when doing article references **Not implemented**
     var refOrderArticle = ["author", "title", "journal", "volume", "number", "month", "year", "editor", "note"];
     // Order of attributes when doing book references
-    var refOrderBook = ["author", "title", "editor", "edition", "volume", "series", "number", "note", "address", "publisher", "month", "year"];
+    var refOrderBook = [
+        "author", "title", "editor", "edition", "volume", "series", "number", "note", "address", "publisher", "month",
+        "year"
+    ];
 
     /**
      * Find citations in dom and insert shortname in the citation.
@@ -92,6 +95,7 @@ var mlTex = (function(obj, $) {
                 curHtml += '<span class="tex-book-' + item + '">' + ref[item] + '</span>';
             }
         });
+
         if (ref['tex-ref-count'] !== undefined) {
             curHtml += '<span class="tex-book-cite" tex-count="' + ref['tex-ref-count'] + '"></span>';
         }
@@ -122,7 +126,10 @@ var mlTex = (function(obj, $) {
             showSection = false;
 
         var keys = getMapKeys(bib),
-            curHtml = '<div class="tex-ref"><h1 class="tex-ref-title">References</h1><table>';
+            curHtml =
+                '<div class="tex-ref">' +
+                    '<h1 class="tex-ref-title">References</h1>' +
+                    '<table>';
 
         // Iterate citations used.
         keys.forEach(function (item) {
@@ -131,11 +138,12 @@ var mlTex = (function(obj, $) {
 
             if (bib[item]['tex-ref-name'] !== undefined) { // Ignore unused references
                 showSection = true;
-                curHtml += '<tr class="tex-ref-row" tex-ref-name="' + item + '">';
-                curHtml += '<a name="' + item + '"></a>'; // Link for citations
-                curHtml += '<td><span class="tex-ref-name">' + bib[item]['tex-ref-name'] + '</span></td>';
-                curHtml += '<td>' + genBookRef(bib[item]) + '</td>';
-                curHtml += '</tr>';
+                curHtml +=
+                    '<tr class="tex-ref-row" tex-ref-name="' + item + '">' +
+                        '<a name="' + item + '"></a>' + // Link for citations
+                        '<td><span class="tex-ref-name">' + bib[item]['tex-ref-name'] + '</span></td>' +
+                        '<td>' + genBookRef(bib[item]) + '</td>' +
+                    '</tr>';
             }
         });
 

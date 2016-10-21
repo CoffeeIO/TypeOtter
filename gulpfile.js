@@ -24,6 +24,7 @@ gulp.task('sass:watch', function () {
 gulp.task('uglify', function() {
     return gulp.src([
         'dependencies/jQuery/jquery-2.2.0.min.js',
+        'src/scripts/source/settings.js',
         'src/scripts/source/attr.js',
         'src/scripts/source/bib.js',
         'src/scripts/source/include.js',

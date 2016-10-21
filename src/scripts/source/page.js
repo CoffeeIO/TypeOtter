@@ -1,63 +1,21 @@
 var mlTex = (function(obj, $) {
-    // normal dpi --> height: 1123px, width: 794px
-    //                1cm = 37.795275591px
-
-    // Default options the program will use.
-    var defaultOptions = {
-        // Dimensions
-        height : '296mm', // Issue: printing makes blank page at the end **reduced height from 297mm**
-        width : '210mm',
-        padding : '10mm',
-        headerHeight : '6mm',
-        footerHeight : '6mm',
-
-        // Header
-        headerRight : '',
-        headerCenter : '',
-        headerLeft : '',
-
-        // Footer
-        footerRight : '',
-        footerCenter : '[pager]',
-        footerLeft : '',
-
-        // Pager
-        pager : '[cur]',
-        pagerStyle : '1'
-    };
-
-    /**
-     * Merge two json objects
-     *
-     * @param o1 The default json, base
-     * @param o2 The custom json, overwrite existing elements
-     */
-    function jsonConcat(o1, o2) {
-        for (var key in o2) {
-            if ({}.hasOwnProperty.call(o2, key)) {
-                o1[key] = o2[key];
-            }
-        }
-        return o1;
-    }
-
     // Base empty Page Object
     var Page = function () {
         this.number = 1,
         this.total = 1,
         this.content = "",
         this.page = {
-            wrapper : '<div class="page">',
+            wrapper : '<div class="tex-page">',
             height: ''
         },
         this.header = {
-            wrapper : '<div class="header">',
+            wrapper : '<div class="tex-header">',
             right : "",
             center : "",
             left : ""
         },
         this.footer = {
-            wrapper : '<div class="footer">',
+            wrapper : '<div class="tex-footer">',
             right : "",
             center : "",
             left : ""
@@ -104,15 +62,18 @@ var mlTex = (function(obj, $) {
     function loadStyleSettings(options) {
         var padding = getMargin(options.padding);
         var css =
-            "body {  width: " + options.width + "; }"
-          + ".page { height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + "); "
-          + "width: calc(" + options.width + " - " + padding.left + " - " + padding.right + "); "
-          + "padding: " + options.padding + "; "
-          + "}"
-          + ".content { height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + " - "
-          + options.headerHeight + " - " + options.footerHeight + "); }"
-          + ".header { height: " + options.headerHeight + "; line-height: " + options.headerHeight + "; }"
-          + ".footer { height: " + options.footerHeight + "; line-height: " + options.footerHeight + "; }";
+            ".tex-document {  width: " + options.width + "; }" +
+            ".tex-page { " +
+                "height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + "); " +
+                "width: calc(" + options.width + " - " + padding.left + " - " + padding.right + "); " +
+                "padding: " + options.padding + "; " +
+            "}" +
+            ".tex-content { " +
+                "height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + " - " +
+                options.headerHeight + " - " + options.footerHeight + "); " +
+            "}" +
+            ".tex-header { height: " + options.headerHeight + "; line-height: " + options.headerHeight + "; }" +
+            ".tex-footer { height: " + options.footerHeight + "; line-height: " + options.footerHeight + "; }";
 
         $('<style type="text/css">' + css + '</style>').appendTo('head');
     }
@@ -130,7 +91,8 @@ var mlTex = (function(obj, $) {
     function genHeader(options, page) {
         var curHtml = page.header.wrapper,
             pager = '';
-        if (options.headerLeft === '[pager]' || options.headerCenter === '[pager]' || options.headerRight === '[pager]') {
+        if (options.headerLeft === '[pager]' || options.headerCenter === '[pager]' ||
+            options.headerRight === '[pager]') {
             pager = genPager(options, page);
         }
 
@@ -166,7 +128,8 @@ var mlTex = (function(obj, $) {
     function genFooter(options, page) {
         var curHtml = page.footer.wrapper,
             pager = '';
-        if (options.footerLeft === '[pager]' || options.footerCenter === '[pager]' || options.footerRight === '[pager]') {
+        if (options.footerLeft === '[pager]' || options.footerCenter === '[pager]' ||
+            options.footerRight === '[pager]') {
             pager = genPager(options, page);
         }
 
@@ -200,12 +163,13 @@ var mlTex = (function(obj, $) {
      * Construct the html of the page.
      */
     function genPage(header, footer, page) {
-        var curHtml = '<a name="tex-page-' + page.number + '"></a>';
-        curHtml += '<div class="page" data-page="' + page.number + '">';
-        curHtml += header;
-        curHtml += '<div class="content">' + page.content + '</div>';
-        curHtml += footer;
-        curHtml += '</div>';
+        var curHtml =
+            '<a name="tex-page-' + page.number + '"></a>' +
+            '<div class="tex-page" data-page="' + page.number + '">' +
+                header +
+                '<div class="tex-content">' + page.content + '</div>' +
+                footer +
+            '</div>';
 
         return curHtml;
     }
@@ -315,9 +279,8 @@ var mlTex = (function(obj, $) {
     /**
      * Convert a dom element to a series of printable pages.
      */
-    obj.texify = function(customOptions, dom) {
-        var options = jsonConcat(defaultOptions, customOptions),
-            basePage = new Page();
+    obj.texify = function(options, dom) {
+        var basePage = new Page();
 
         dom.wrapInner('<div>');
 
@@ -330,8 +293,13 @@ var mlTex = (function(obj, $) {
             obj = null,
             curPage = 1;
 
-        // Create empty page for testing rendering dimensions.
-        dom.append('<div class="page" style="height: auto"><div class="content tex-testdom"></div></div>');
+        // Create empty tex-document for testing rendering dimensions.
+        dom.append(
+            '<div class="tex-document">' +
+                '<div class="tex-page" style="height: auto">' +
+                    '<div class="tex-content tex-testdom">' +
+            '</div></div></div>'
+        );
         var testdom = dom.find('.tex-testdom');
 
         // Detect rendered size
@@ -366,6 +334,9 @@ var mlTex = (function(obj, $) {
         });
 
         testdom.parent().remove(); // Remove the test element
+
+        // Wrap document in div, to apply relative styling.
+        fullHtml = '<div class="tex-document">' + fullHtml + '</div>';
 
         // Overwite the body
         dom.html(fullHtml);
