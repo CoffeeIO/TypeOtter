@@ -3,22 +3,28 @@
   "version": "0.0.0",
   "description": "",
   "author": "Mathias Grundtvig Andreasen (MGApcDev)",
-  "license": "ISC",
+  "license": "GPL-3.0",
   "dependencies": {
     "gulp": "*",
-    "gulp-ruby-sass": "*",
-    "gulp-util": "*",
-    "gulp-rename": "*",
-    "map-stream": "*",
-    "gulp-livereload": "*",
-    "gulp-concat": "*",
-    "gulp-uglify": "*",
+    "gulp-sass": "*",
     "gulp-watch": "*",
-    "gulp-sass": "*"
+    "gulp-uglify": "*",
+    "gulp-rename": "*",
+    "gulp-concat": "*",
+    "pump": "~1.0.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^1.1.1",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2"
   },
   "devDependencies": {
-    "gulp-uglify": "~2.0.0",
-    "pump": "~1.0.1",
-    "gulp-concat": "~2.6.0"
+
+  },
+  "scripts": {
+    "test": "karma start karma.conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MGApcDev/mlTex"
   }
 }
