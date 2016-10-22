@@ -42,7 +42,7 @@ Start a local server (to make sure all features work as intended)
 
 - Mac and Linux users
 
-    Run ``python -m SimpleHTTPServer`` and go to localhost:8000 in your browser
+    Open terminal and run ``python -m SimpleHTTPServer`` and go to localhost:8000 in your browser
 
 - Windows users (2 options)
 
@@ -55,13 +55,13 @@ Start a local server (to make sure all features work as intended)
 ## Developers
 Install node modules (make sure you have [nodejs](https://nodejs.org/en/) installed)
 
-    npm install -g gulp (use 'sudo npm install -g gulp' if it doesn't work)
+`npm install -g gulp` (use `sudo npm install -g gulp` if it doesn't work)
 
-    npm install (use 'sudo npm install' if it doesn't work)
+`npm install` (use `sudo npm install` if it doesn't work)
 
 Recompile js and scss files
 
-    gulp
+`gulp`
 
 ## Contributions
 1. Fork it!
