@@ -26,8 +26,8 @@ module.exports = function(config) {
             {pattern: 'dependencies/MathJax/MathJax.js', watched: true, included: true, served: true},
 
             // Test files
-            {pattern: 'test/app.test.js', watched: true, included: true, served: true},
-
+            {pattern: '**/*.html'},
+            {pattern: 'test/attr.test.js', watched: true, included: true, served: true},
         ],
 
         // list of files to exclude
@@ -38,6 +38,7 @@ module.exports = function(config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
+            '**/*.html': ['html2js']
         },
 
 
@@ -81,7 +82,21 @@ module.exports = function(config) {
 
         // Concurrency level
         // how many browser should be started simultaneous
-        concurrency: Infinity
+        concurrency: Infinity,
+
+        html2JsPreprocessor: {
+            // strip this from the file path
+            stripPrefix: 'public/',
+
+            // prepend this to the file path
+            prependPrefix: 'served/',
+
+            // or define a custom transform function
+            processPath: function(filePath) {
+            // Drop the file extension
+                return filePath.replace(/\.html$/, '');
+            }
+        }
     };
 
     // Change some config (Chrome to Chrome Canary) if Running on TravisCI.

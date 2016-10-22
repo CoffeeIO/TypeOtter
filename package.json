@@ -18,7 +18,7 @@
     "karma-jasmine": "^1.0.2"
   },
   "devDependencies": {
-
+    "karma-html2js-preprocessor": "~1.1.0"
   },
   "scripts": {
     "test": "karma start karma.conf.js"
