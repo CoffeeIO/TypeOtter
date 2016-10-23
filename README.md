@@ -8,12 +8,15 @@ This library is intended as an improvement on LaTex, allowing users to write pro
 #### Pre release:
 
 Get the code
-
-    git clone https://github.com/MGApcDev/mlTex.git your-project
+```bash
+$ git clone https://github.com/MGApcDev/mlTex.git your-project
+```
 
 Go into the folder
 
-    cd  your-project
+```bash
+$ cd your-project
+```
 
 Make an index.html file using your favorite editor (<i>use this template for full documents</i>)
 
@@ -40,7 +43,7 @@ Start a local server (to make sure all features work as intended)
 
 - Mac and Linux users
 
-    Open terminal and run ``python -m SimpleHTTPServer`` and go to localhost:8000 in your browser
+    Open terminal and run ``$ python -m SimpleHTTPServer`` and go to localhost:8000 in your browser
 
 - Windows users (2 options)
 
@@ -48,18 +51,25 @@ Start a local server (to make sure all features work as intended)
 
     <i>or</i>
 
-    Install the [Bash on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide) and run the same command as linux users ``python -m SimpleHTTPServer`` and go to localhost:8000 in your browser
+    Install the [Bash on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide) and run the same command as linux users ``$ python -m SimpleHTTPServer`` and go to localhost:8000 in your browser
 
 ## Developers
 Install node modules (make sure you have [nodejs](https://nodejs.org/en/) installed)
 
-`npm install -g gulp` (use `sudo npm install -g gulp` if it doesn't work)
+Install gulp (use `sudo` if it doesn't work)
+```bash
+$ npm install -g gulp
+```
 
-`npm install` (use `sudo npm install` if it doesn't work)
+Install node modules (use `sudo` if it doesn't work)
+```bash
+$ npm install
+```
 
 Recompile js and scss files
-
-`gulp`
+```bash
+$ gulp
+```
 
 ## Contributions
 1. Fork it!
