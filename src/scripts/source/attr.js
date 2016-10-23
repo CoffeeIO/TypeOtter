@@ -20,20 +20,34 @@ var mlTex = (function(obj, $) {
      * developer tools.
      */
     function handleTitle(dom) {
-        dom.find("*[title!=''][title]").each(function (index) {
-            if ($(this).prop('tagName') === 'P') {
-                $(this).prepend('<span class="tex-para-title">' + $(this).attr('title') + '</span>');
-            } else if ($(this).prop('tagName') === 'SECTION') {
-                $(this).prepend(
-                    '<a href="#mltex-toc">' +
-                        '<h1 class="tex-section-title">' + $(this).attr('title') + '</h1>' +
-                    '</a>'
-                );
+        dom.find("p").each(function () {
+            var elem = $(this),
+                title = '';
+            if (elem.attr('title') !== undefined) {
+                title = elem.attr('title');
             }
+            elem.prepend('<span class="tex-para-title">' + title + '</span>');
 
             // Remove title attr to avoid browser hover effect
-            $(this).attr('data-title', $(this).attr('title'));
-            $(this).removeAttr('title');
+            elem.attr('data-title', title);
+            elem.removeAttr('title');
+
+        });
+        dom.find("section").each(function () {
+            var elem = $(this),
+                title = '';
+            if (elem.attr('title') !== undefined) {
+                title = elem.attr('title');
+            }
+            elem.prepend(
+                '<a href="#mltex-toc">' +
+                    '<h1 class="tex-section-title"><span>' + title + '</span></h1>' +
+                '</a>'
+            );
+
+            // Remove title attr to avoid browser hover effect
+            elem.attr('data-title', title);
+            elem.removeAttr('title');
         });
     }
 
@@ -95,7 +109,10 @@ var mlTex = (function(obj, $) {
         dom.find('a[url=""]').each(function (index) {
             var elem = $(this),
                 href = elem.attr('href');
-            elem.html(href).attr('target', '_blank');
+            if (elem.html().trim() === '') {
+                elem.html(href);
+            }
+            elem.attr('target', '_blank');
         });
     }
 
