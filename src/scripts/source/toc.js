@@ -133,11 +133,11 @@ var mlTex = (function(obj, $) {
      * Find rendered locations of sections and put them in their table of contents.
      */
     obj.fillToc = function(dom) {
-        dom.find('.toc').each(function () {
+        dom.find('.tex-toc').each(function () {
             var elem = $(this);
             elem.find('> a > div').each(function () {
                 var sec = dom.find('section[data-ref="' + $(this).attr('data-ref') + '"]').first(),
-                    page = sec.closest('.page');
+                    page = sec.closest('.tex-page');
                 $(this).find('.right').html(page.attr('data-page'));
             });
         });

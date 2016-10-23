@@ -24,9 +24,9 @@ module.exports = function(config) {
             {pattern: 'dependencies/computerModern/Serif/cmun-serif.css', watched: true, included: true, served: true},
             {pattern: 'src/scripts/build/*.js', watched: true, included: true, served: true},
             {pattern: 'dependencies/MathJax/MathJax.js', watched: true, included: true, served: true},
+            {pattern: 'fixtures/*.html'},
 
             // Test files
-            {pattern: '**/*.html'},
             {pattern: 'test/attr.test.js', watched: true, included: true, served: true},
         ],
 
