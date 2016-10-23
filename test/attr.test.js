@@ -4,9 +4,9 @@ var dom = '';
 describe('Attribute preprocess:', function () {
     var run = false;
     $('.unit-texting').remove(); // Remove existing tex documents
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
     beforeEach(function(done) {
-        jasmine.DEFUALT_TIMEOUT_INTERVAL = 10000;
         if (run) {
             done();
         } else {
@@ -48,5 +48,5 @@ describe('Attribute preprocess:', function () {
             expect($('section[name="sec2"] .tex-section-title > span:nth-of-type(2)').html()).toEqual('');
         });
     });
-    
+
 });
