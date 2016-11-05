@@ -29,7 +29,6 @@ var mlTex = (function(obj, $) {
             sec.prepend('<a name="mltex-' + join + '"></a>');
             // Prepend section to section title
             sec.find('.tex-section-title').first().prepend('<span>' + join + '</span>');
-
         });
     };
 
@@ -40,8 +39,11 @@ var mlTex = (function(obj, $) {
         var curHtml =
             '<a href="#mltex-' + ref + '">' +
                 '<div class="' + className + '" data-ref="' + ref + '">' +
-                    '<div class="left"><span>' + section + '</span>' + title + '</div>' +
-                    '<div class="right" data-pageref=""></div>' +
+                    '<div class="left">' +
+                        '<span>' + section + '</span>' +
+                        '<span>' + title + '</span>' +
+                    '</div>' +
+                    '<div class="right" data-pageref=""><span></span></div>' +
             '</div></a>';
         return curHtml;
     }
@@ -102,11 +104,9 @@ var mlTex = (function(obj, $) {
      */
     function genToc(inner, title) {
         var curHtml =
-            '<div class="tex-toc">' +
-                '<a name="mltex-toc"></a>' +
-                '<h1 class="toc-title">' + title + '</h1>' +
-                inner +
-            '</div>';
+            '<a name="mltex-toc"></a>' +
+            '<h1 class="toc-title">' + title + '</h1>' +
+            inner;
         return curHtml;
     }
 
@@ -115,17 +115,15 @@ var mlTex = (function(obj, $) {
      */
     obj.makeToc = function(dom) {
         var inner = innerToc(dom);
-        dom.find('toc').each(function () {
+        dom.find('div[toc=""]').each(function () {
             var elem = $(this),
-                title = '';
-            if (elem.attr('data-title') === undefined) {
                 title = 'Contents';
-            } else {
-                title = elem.attr('data-title');
+            if (elem.text().trim() !== '') {
+                title = elem.text().trim();
             }
             var toc = genToc(inner, title);
-            elem.after(toc);
-            elem.remove();
+
+            elem.html(toc);
         });
     };
 
@@ -133,12 +131,12 @@ var mlTex = (function(obj, $) {
      * Find rendered locations of sections and put them in their table of contents.
      */
     obj.fillToc = function(dom) {
-        dom.find('.tex-toc').each(function () {
+        dom.find('div[toc=""]').each(function () {
             var elem = $(this);
             elem.find('> a > div').each(function () {
                 var sec = dom.find('section[data-ref="' + $(this).attr('data-ref') + '"]').first(),
                     page = sec.closest('.tex-page');
-                $(this).find('.right').html(page.attr('data-page'));
+                $(this).find('.right > span').html(page.attr('data-page'));
             });
         });
     };

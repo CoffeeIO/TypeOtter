@@ -7,7 +7,8 @@ var mlTex = (function(obj, $) {
      * Main function to start typesetting a dom element with all preprocess functions.
      */
     obj.run = function (settings, callback) {
-
+        obj.mathDone = false;
+        innerDone = false;
         $(document).ready(function () {
             if (obj.DEBUG) {
                 console.time("document prepare"); // Performance timers
@@ -37,9 +38,20 @@ var mlTex = (function(obj, $) {
                 }
                 mlTex.mathDone = true;
             });
+            var timer = setInterval(function () { // Block until window is loaded
+                if (window.load) {
+                    clearInterval(timer);
+                    innerRun();
+                }
+            }, 100);
+
         });
 
         $(window).load(function () {
+            window.load = true;
+        });
+
+        function innerRun() {
             if (obj.DEBUG) {
                 console.timeEnd("window loaded"); // Performance timers
             }
@@ -85,7 +97,7 @@ var mlTex = (function(obj, $) {
                     }
                 }
             }, 100);
-        });
+        }
     };
 
     return obj;

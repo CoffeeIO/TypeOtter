@@ -28,6 +28,7 @@ module.exports = function(config) {
 
             // Test files
             {pattern: 'test/attr.test.js', watched: true, included: true, served: true},
+            {pattern: 'test/toc.test.js', watched: true, included: true, served: true},
         ],
 
         // list of files to exclude
@@ -93,7 +94,7 @@ module.exports = function(config) {
 
             // or define a custom transform function
             processPath: function(filePath) {
-            // Drop the file extension
+                // Drop the file extension
                 return filePath.replace(/\.html$/, '');
             }
         }

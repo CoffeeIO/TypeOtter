@@ -1,18 +1,17 @@
 'use strict';
-var dom = '';
 
 describe('Attribute preprocess:', function () {
     var run = false;
-    $('.unit-texting').remove(); // Remove existing tex documents
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
     beforeEach(function(done) {
         if (run) {
             done();
         } else {
+            $('.unit-texting').remove(); // Remove existing tex documents
             $('body').append(__html__['fixtures/test1']);
 
-            mlTex.run({ selector: '.unit-texting' }, function () {
+            mlTex.run({selector: '.unit-texting'}, function () {
                 run = true;
                 done();
             });
@@ -35,7 +34,8 @@ describe('Attribute preprocess:', function () {
             expect($('section[name="sec1"] .tex-section-title > span:nth-of-type(2)').html()).toEqual('Section 1');
 
             expect($('section[name="nestedSec"]').attr('data-title')).toEqual('Deep nesting');
-            expect($('section[name="nestedSec"] .tex-section-title > span:nth-of-type(2)').html()).toEqual('Deep nesting');
+            expect($('section[name="nestedSec"] .tex-section-title > span:nth-of-type(2)').html())
+                .toEqual('Deep nesting');
         });
 
         it('Undefined title', function () {
