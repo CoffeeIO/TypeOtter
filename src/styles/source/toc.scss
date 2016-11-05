@@ -1,4 +1,4 @@
-.tex-toc {
+div[toc=""] {
     margin-bottom: 16pt;
 
     > a > div {
@@ -51,5 +51,10 @@
     // Hyperlink
     a {
         color: black;
+    }
+    p {
+        text-indent: 0;
+        margin: 0;
+        padding: 0;
     }
 }

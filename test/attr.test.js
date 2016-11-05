@@ -1,15 +1,14 @@
 'use strict';
-var dom = '';
 
 describe('Attribute preprocess:', function () {
     var run = false;
-    $('.unit-texting').remove(); // Remove existing tex documents
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
     beforeEach(function(done) {
         if (run) {
             done();
         } else {
+            $('.unit-texting').remove(); // Remove existing tex documents
             $('body').append(__html__['fixtures/test1']);
 
             mlTex.run({ selector: '.unit-texting' }, function () {
