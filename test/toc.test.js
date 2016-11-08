@@ -26,4 +26,19 @@ describe('TOC testing:', function () {
             expect($('.toc2 .toc-title').text()).toEqual('Contents');
         });
     });
+
+    describe('Section indexing:', function () {
+        it('Section', function () {
+            expect($('section[name="sec1"]').attr('data-ref')).toEqual('1');
+        });
+        it('Sub-section', function () {
+            expect($('section[name="sec1.1"]').attr('data-ref')).toEqual('1.1');
+        });
+        it('Sub-sub-section', function () {
+            expect($('section[name="nestedSec"]').attr('data-ref')).toEqual('2.1.1');
+        });
+        it('sub-section counter reset', function () {
+            expect($('section[name="sec2"]').attr('data-ref')).toEqual('2');
+        });
+    });
 });
