@@ -94,7 +94,7 @@ module.exports = function(config) {
 
             // or define a custom transform function
             processPath: function(filePath) {
-            // Drop the file extension
+                // Drop the file extension
                 return filePath.replace(/\.html$/, '');
             }
         }

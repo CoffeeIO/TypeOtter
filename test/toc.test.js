@@ -11,7 +11,7 @@ describe('TOC testing:', function () {
             $('.unit-texting').remove(); // Remove existing tex documents
             $('body').append(__html__['fixtures/test2']);
 
-            mlTex.run({ selector: '.unit-texting' }, function () {
+            mlTex.run({selector: '.unit-texting'}, function () {
                 run = true;
                 done();
             });

@@ -97,7 +97,7 @@ var mlTex = (function(obj, $) {
                     }
                 }
             }, 100);
-        };
+        }
     };
 
     return obj;
