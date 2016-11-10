@@ -29,16 +29,32 @@ describe('TOC testing:', function () {
 
     describe('Section indexing:', function () {
         it('Section', function () {
-            expect($('section[name="sec1"]').attr('data-ref')).toEqual('1');
+            var selector = ['section[name="sec1"]', 'a[name="mltex-1"]'];
+            var index = '1';
+            expect($(selector[0]).attr('data-ref')).toEqual(index);
+            expect($(selector[1]).closest('section').attr('data-ref')).toEqual(index);
+            expect($(selector[0]).find('.tex-section-title > span:nth-of-type(1)').html()).toEqual(index);
         });
         it('Sub-section', function () {
-            expect($('section[name="sec1.1"]').attr('data-ref')).toEqual('1.1');
+            var selector = ['section[name="sec1.1"]', 'a[name="mltex-1.1"]'];
+            var index = '1.1';
+            expect($(selector[0]).attr('data-ref')).toEqual(index);
+            expect($(selector[1]).closest('section').attr('data-ref')).toEqual(index);
+            expect($(selector[0]).find('.tex-section-title > span:nth-of-type(1)').html()).toEqual(index);
         });
         it('Sub-sub-section', function () {
-            expect($('section[name="nestedSec"]').attr('data-ref')).toEqual('2.1.1');
+            var selector = ['section[name="nestedSec"]', 'a[name="mltex-2.1.1"]'];
+            var index = '2.1.1';
+            expect($(selector[0]).attr('data-ref')).toEqual(index);
+            expect($(selector[1]).closest('section').attr('data-ref')).toEqual(index);
+            expect($(selector[0]).find('.tex-section-title > span:nth-of-type(1)').html()).toEqual(index);
         });
         it('sub-section counter reset', function () {
-            expect($('section[name="sec2"]').attr('data-ref')).toEqual('2');
+            var selector = ['section[name="sec2"]', 'a[name="mltex-2"]'];
+            var index = '2';
+            expect($(selector[0]).attr('data-ref')).toEqual(index);
+            expect($(selector[1]).closest('section').attr('data-ref')).toEqual(index);
+            expect($(selector[0]).find('.tex-section-title > span:nth-of-type(1)').html()).toEqual(index);
         });
     });
 });
