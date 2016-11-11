@@ -39,8 +39,11 @@ var mlTex = (function(obj, $) {
         var curHtml =
             '<a href="#mltex-' + ref + '">' +
                 '<div class="' + className + '" data-ref="' + ref + '">' +
-                    '<div class="left"><span>' + section + '</span>' + title + '</div>' +
-                    '<div class="right" data-pageref=""></div>' +
+                    '<div class="left">' +
+                        '<span>' + section + '</span>' +
+                        '<span>' + title + '</span>' +
+                    '</div>' +
+                    '<div class="right" data-pageref=""><span></span></div>' +
             '</div></a>';
         return curHtml;
     }
@@ -133,7 +136,7 @@ var mlTex = (function(obj, $) {
             elem.find('> a > div').each(function () {
                 var sec = dom.find('section[data-ref="' + $(this).attr('data-ref') + '"]').first(),
                     page = sec.closest('.tex-page');
-                $(this).find('.right').html(page.attr('data-page'));
+                $(this).find('.right > span').html(page.attr('data-page'));
             });
         });
     };
