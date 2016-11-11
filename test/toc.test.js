@@ -102,7 +102,7 @@ describe('TOC testing:', function () {
             expect($('a[href="#mltex-2.1.2"] .right span').html()).toEqual($('a[name="mltex-2.1.2"]')
                 .closest('.tex-page').attr('data-page'));
         });
-        it('Sub-sub-Section', function () {
+        it('Sub-sub-sub-Section', function () {
             expect($('a[href="#mltex-2.1.1.1"] .right span').html()).toEqual($('a[name="mltex-2.1.1.1"]')
                 .closest('.tex-page').attr('data-page'));
         });
