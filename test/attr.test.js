@@ -93,12 +93,13 @@ describe('Attribute preprocess:', function () {
 
     describe('Handle image captions:', function () {
         it('Normal caption', function () {
-            var figure = $('img[name="figure1"]').closest('figure')
-            expect(figure.find('figcaption > span:nth-of-type(1)').html().trim()).toEqual('Figure ' + figure.attr('data-fig') + ':');
+            var figure = $('img[name="figure1"]').closest('figure');
+            expect(figure.find('figcaption > span:nth-of-type(1)').html().trim())
+                .toEqual('Figure ' + figure.attr('data-fig') + ':');
             expect(figure.find('figcaption > span:nth-of-type(2)').html().trim()).toEqual('Sad pug');
         });
         it('Empty caption', function () {
-            var figure = $('img[name="figure2"]').closest('figure')
+            var figure = $('img[name="figure2"]').closest('figure');
             expect(figure.find('figcaption').length).toEqual(0);
         });
     });
