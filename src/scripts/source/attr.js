@@ -23,15 +23,13 @@ var mlTex = (function(obj, $) {
         dom.find("p").each(function () {
             var elem = $(this),
                 title = '';
-            if (elem.attr('title') !== undefined) {
+            if (elem.attr('title') !== undefined && elem.attr('title').trim() !== '') {
                 title = elem.attr('title');
+                elem.prepend('<span class="tex-para-title">' + title + '</span>');
+
+                // Remove title attr to avoid browser hover effect
+                elem.attr('data-title', title).removeAttr('title');
             }
-            elem.prepend('<span class="tex-para-title">' + title + '</span>');
-
-            // Remove title attr to avoid browser hover effect
-            elem.attr('data-title', title);
-            elem.removeAttr('title');
-
         });
         dom.find("section").each(function () {
             var elem = $(this),
@@ -46,8 +44,7 @@ var mlTex = (function(obj, $) {
             );
 
             // Remove title attr to avoid browser hover effect
-            elem.attr('data-title', title);
-            elem.removeAttr('title');
+            elem.attr('data-title', title).removeAttr('title');
         });
     }
 
@@ -85,7 +82,12 @@ var mlTex = (function(obj, $) {
         dom.find("img[caption!=''][caption]").each(function (index) {
             var elem = $(this),
                 count = elem.closest('figure').attr('data-fig');
-            elem.after('<figcaption>Figure ' + count + ': ' + elem.attr('caption') + '</figcaption>');
+            elem.after(
+                '<figcaption>' +
+                    '<span>Figure ' + count + ': </span>' +
+                    '<span>' + elem.attr('caption') + '</span>' +
+                '</figcaption>'
+            );
         });
     }
 
