@@ -49,4 +49,74 @@ describe('Attribute preprocess:', function () {
         });
     });
 
+    describe('Handle paragraph title:', function () {
+        it('Normal title', function () {
+            expect($('#paragraph1 > .tex-para-title').html()).toEqual('Para title');
+            expect($('#paragraph1').css('text-indent')).toEqual('0px');
+        });
+        it('Ignore empty title', function () {
+            expect($('#paragraph2 > .tex-para-title').length).toEqual(0);
+            expect($('#paragraph2').css('text-indent')).not.toEqual('0px');
+        });
+    });
+
+    describe('Handle newpage attribute:', function () {
+        it('Normal newpage', function () {
+            // Check that the first section or paragraph on page is itself.
+            expect($('section[name="sec1"]').closest('.tex-content').find('section, p').attr('name')).toEqual('sec1');
+        });
+        it('Nested newpage', function () {
+            // Check that the first nestedSec is in the first row of sections on the page is itself.
+            expect($('section[name="nestedSec"]').closest('.tex-content').find('section section section').attr('name'))
+                .toEqual('nestedSec');
+        });
+    });
+
+    describe('Handle image numbering:', function () {
+        it('Normal image', function () {
+            expect($('img[name="figure2"]').closest('figure').attr('data-fig')).toEqual('1');
+            expect($('img[name="figure1"]').closest('figure').attr('data-fig')).toEqual('2');
+        });
+    });
+
+    describe('Handle image size:', function () {
+        it('Width Procentage', function () {
+            expect($('img[name="figure1"]').attr('style').split(';')[0].trim()).toEqual('width: 50%');
+        });
+        it('Width fixed length', function () {
+            expect($('img[name="figure2"]').attr('style').split(';')[0].trim()).toEqual('width: 8cm');
+        });
+        it('Height', function () {
+            expect($('img[name="figure2"]').attr('style').split(';')[1].trim()).toEqual('height: 150px');
+        });
+    });
+
+    describe('Handle image captions:', function () {
+        it('Normal caption', function () {
+            var figure = $('img[name="figure1"]').closest('figure');
+            expect(figure.find('figcaption > span:nth-of-type(1)').html().trim())
+                .toEqual('Figure ' + figure.attr('data-fig') + ':');
+            expect(figure.find('figcaption > span:nth-of-type(2)').html().trim()).toEqual('Sad pug');
+        });
+        it('Empty caption', function () {
+            var figure = $('img[name="figure2"]').closest('figure');
+            expect(figure.find('figcaption').length).toEqual(0);
+        });
+    });
+
+    describe('Handle name attribute:', function () {
+        it('Section name', function () {
+            expect($('section[name="sec2"] > a:nth-of-type(2)').attr('name')).toEqual('sec2');
+        });
+        it('Image name', function () {
+            expect($('img[name="figure1"]').closest('figure').find('> a').attr('name')).toEqual('figure1');
+        });
+        it('Paragraph name', function () {
+            expect($('p[name="para1"] > a:nth-of-type(1)').attr('name')).toEqual('para1');
+        });
+    });
+
+    it('Remove scripts', function () {
+        expect($('.tex-document script').length).toEqual(0);
+    });
 });

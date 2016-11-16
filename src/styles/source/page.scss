@@ -11,7 +11,7 @@
         text-indent: 16pt;
         padding: 0;
         margin: 10px 0;
-        &[title], &[data-title] {
+        &[data-title] {
             text-indent: 0;
         }
     }
