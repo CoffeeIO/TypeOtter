@@ -1,6 +1,6 @@
 'use strict';
 
-describe('TOC testing:', function () {
+describe('TOC test:', function () {
     var run = false;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
 

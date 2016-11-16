@@ -29,6 +29,7 @@ module.exports = function(config) {
             // Test files
             {pattern: 'test/attr.test.js', watched: true, included: true, served: true},
             {pattern: 'test/toc.test.js', watched: true, included: true, served: true},
+            {pattern: 'test/settings.test.js', watched: true, included: true, served: true},
         ],
 
         // list of files to exclude
