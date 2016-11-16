@@ -1,6 +1,10 @@
 'use strict';
 
 describe('Settings test:', function () {
+    beforeEach(function() {
+        spyOn(console, 'error');
+    });
+
     // Copy from /src/scripts/source/settings.js
     var defaultOptions = {
         // Dimensions
@@ -28,28 +32,45 @@ describe('Settings test:', function () {
         selector: 'body',
         options: defaultOptions,
         biblography: {}
-    }
+    };
 
     it('Overwrite default options', function () {
         var custom = {
-            selector: '',
+            selector: '.unit-texting',
             options: {
                 height: '190mm',
                 headerCenter: 'Your name',
                 footerCenter: '',
                 headerRight: '[pager]',
-                pager: '[cur]/[total]'
-            }
+                pager: '[cur]/[total]',
+            },
+            biblography: {
+                'book1': {
+                    author: "Michel Goossens and Frank Mittelbach and Alexander Samarin",
+                    title: "The LaTeX Companion",
+                    year: "1993",
+                },
+            },
         };
         var newSettings = mlTex.getSettings(custom);
 
-        expect(newSettings.selector).toEqual('body');
-        expect(newSettings.biblography).toEqual({});
-        expect(newSettings.options.headerCenter).toEqual('Your name');
-        expect(newSettings.options.width).toEqual('210mm');
-        expect(newSettings.options.footerCenter).toEqual('');
+        expect(newSettings.selector).toEqual('.unit-texting');
+        expect(newSettings.biblography.book1.title).toEqual('The LaTeX Companion');
+        expect(newSettings.options.headerCenter).toEqual('Your name'); // Overwrite
+        expect(newSettings.options.width).toEqual('210mm'); // No overwrite use default
+        expect(newSettings.options.footerCenter).toEqual(''); // Overwrite with empty
     });
-    
+
+    it('Missing selector', function () {
+        var custom = {
+            selector: '.unknown-selector',
+        };
+
+        var newSettings = mlTex.getSettings(custom);
+        expect(console.error).toHaveBeenCalled(); // Selector doesn't exist, should throw error
+        expect(newSettings).toEqual(null);
+    });
+
     it('Empty settings', function () {
         var newSettings = mlTex.getSettings({});
         expect(newSettings).toEqual(wrapOptions);
@@ -72,7 +93,6 @@ describe('Settings test:', function () {
 
     it('Null settings', function () {
         var newSettings = mlTex.getSettings(null);
-        expect(newSettings).toEqual(wrapOptions)
+        expect(newSettings).toEqual(wrapOptions);
     });
-
 });

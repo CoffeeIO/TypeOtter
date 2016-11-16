@@ -17,6 +17,7 @@ describe('TOC test:', function () {
             });
         }
     });
+
     describe('Handle title:', function () {
         it('Normal title', function () {
             expect($('.toc1 .toc-title').text()).toEqual('Table of contents');

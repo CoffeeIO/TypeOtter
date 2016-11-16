@@ -17,6 +17,7 @@ describe('Attribute preprocess:', function () {
             });
         }
     });
+
     describe('Handle url:', function () {
         it('Without content', function () {
             expect($('#url1').html()).toEqual("http://layer0.authentise.com/images/coding.gif");
