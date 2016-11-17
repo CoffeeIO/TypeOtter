@@ -83,7 +83,7 @@ var mlTex = (function(obj, $) {
             return null;
         }
 
-        settings.options = jsonConcat(defaultOptions, settings.options);
+        settings.options = jsonConcat($.extend(true, {}, defaultOptions), settings.options);
 
         return settings;
     };

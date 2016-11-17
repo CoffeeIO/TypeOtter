@@ -17,12 +17,13 @@ describe('Attribute preprocess:', function () {
             });
         }
     });
+
     describe('Handle url:', function () {
-        it('Without content:', function () {
+        it('Without content', function () {
             expect($('#url1').html()).toEqual("http://layer0.authentise.com/images/coding.gif");
             expect($('#url1').attr('target')).toEqual('_blank');
         });
-        it('With content:', function () {
+        it('With content', function () {
             expect($('#url2').html()).toEqual("Github link");
             expect($('#url2').attr('target')).toEqual('_blank');
         });

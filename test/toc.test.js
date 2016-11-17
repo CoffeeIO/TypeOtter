@@ -1,6 +1,6 @@
 'use strict';
 
-describe('TOC testing:', function () {
+describe('TOC test:', function () {
     var run = false;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
 
@@ -17,6 +17,7 @@ describe('TOC testing:', function () {
             });
         }
     });
+
     describe('Handle title:', function () {
         it('Normal title', function () {
             expect($('.toc1 .toc-title').text()).toEqual('Table of contents');
