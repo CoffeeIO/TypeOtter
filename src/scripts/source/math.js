@@ -43,8 +43,8 @@ window.MathJax = {
     extensions: ["tex2jax.js"],
     jax: ["input/TeX", "output/HTML-CSS"],
     tex2jax: {
-        inlineMath: [['a579438542e77567a744e7abaeaac7ae', 'a579438542e77567a744e7abaeaac7ae']],
-        displayMath: [['1a73f16f7ac6dc3674c729ed2524bcc6', '1a73f16f7ac6dc3674c729ed2524bcc6']],
+        inlineMath: [[mlTex.inlineMath, mlTex.inlineMath]],
+        displayMath: [[mlTex.blockMath, mlTex.blockMath]],
         processEscapes: true
     },
     skipStartupTypeset: true,

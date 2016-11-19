@@ -41,4 +41,15 @@ describe('MathJax processing:', function () {
             expect($('.eq3 .tex-math-count').length).toEqual(0);
         });
     });
+
+    describe('MathJax done:', function () {
+        it('Equation count', function () {
+            expect($('e').length).toEqual($('.MathJax_Preview').length);
+        });
+
+        it('Processing finished', function () {
+            expect($('.MathJax_Preview').length).toEqual($('.MathJax').length);
+            expect($('.MathJax_Processing').length).toEqual(0);
+        });
+    });
 });
