@@ -1,4 +1,4 @@
-'use strict';
+// 'use strict';
 
 describe('MathJax processing:', function () {
     var run = false;
@@ -19,14 +19,26 @@ describe('MathJax processing:', function () {
     });
 
     describe('Preprocess equation tag:', function () {
-        it('Without content', function () {
-            expect(1).toEqual(0);
+        it('Block equation', function () {
+            expect($('.eq1').attr('tex-math-style')).toEqual('block');
+            expect($('.eq1').attr('data-math')).toEqual('1');
+
+            expect($('*[name="eq2"]').attr('tex-math-style')).toEqual('block');
+            expect($('*[name="eq2"]').attr('data-math')).toEqual('2');
+        });
+        it('Inline equation', function () {
+            expect($('.eq3').attr('tex-math-style')).toEqual('inline');
         });
     });
 
-//     describe('Numbering block equations:', function () {
-//         it('Without content', function () {
-//             expect(1).toEqual('');
-//         });
-//     });
+    describe('Numbering block equations:', function () {
+        it('Block equation', function () {
+            expect($('.eq1 .tex-math-count').html()).toEqual('1');
+
+            expect($('*[name="eq2"] .tex-math-count').html()).toEqual('2');
+        });
+        it('Inline equation', function () {
+            expect($('.eq3 .tex-math-count').length).toEqual(0);
+        });
+    });
 });
