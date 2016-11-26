@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Ref testing:', function () {
+describe('Reference testing:', function () {
     var run = false;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
@@ -18,6 +18,15 @@ describe('Ref testing:', function () {
         }
     });
 
+    describe('Closest tag:', function () {
+        it('A inside P', function () {
+            expect($('a[href="#invis-ref"]').text()).toEqual('1'); // Section is closest
+            expect($('a[href="#invis-ref"]').closest('e').length).toEqual(0);
+            expect($('a[href="#invis-ref"]').closest('figure').length).toEqual(0);
+            expect($('a[href="#invis-ref"]').closest('section').length).toEqual(1);
+        });
+    });
+
     describe('Equations:', function () {
         it('Normal', function () {
             expect($('a[href="#eq2"]').text()).toEqual('2');
@@ -30,7 +39,6 @@ describe('Ref testing:', function () {
         });
 
     });
-
     describe('Sections:', function () {
         it('Normal', function () {
             expect($('a[href="#sec2"]').text()).toEqual('2');
@@ -42,7 +50,7 @@ describe('Ref testing:', function () {
 
     describe('Bad request:', function () {
         it('Unknown reference', function () {
-            expect($('a[href="#Unknown"]').text()).toEqual('');
+            expect($('a[href="#Unknown"]').text()).toEqual('Could not find reference'); // Unknown reference, keep inside html.
         });
     });
 
