@@ -53,10 +53,13 @@ var mlTex = (function(obj, $) {
      */
     function handleName(dom) {
         dom.find("*[name!=''][name]").each(function (index) {
-            if ($(this).prop('tagName') === 'IMG') { //Images can't have nested <a> tag
-                $(this).before('<a name="' + $(this).attr('name') + '"></a>');
+            var elem = $(this);
+            if (elem.prop('tagName') === 'IMG') { //Images can't have nested <a> tag
+                elem.before('<a name="' + $(this).attr('name') + '"></a>');
+            } else if (elem.prop('tagName') === 'A') {
+                // 'A' is a valid tag, ignore modification.
             } else {
-                $(this).prepend('<a name="' + $(this).attr('name') + '"></a>');
+                elem.prepend('<a name="' + $(this).attr('name') + '"></a>');
             }
         });
     }
