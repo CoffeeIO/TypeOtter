@@ -2,10 +2,7 @@ var mlTex = (function(obj, $) {
 
     var regMarkup = /^[\s\b]*<[\w]+/;
 
-    /**
-     * Wrap plain text in paragraph tags to make dom more consistent.
-     */
-    obj.wrapper = function (elem) {
+    function recWrap(elem) {
         if (elem.html() === undefined) {
             return elem; // ignore special elements without markup: style, script..
         }
@@ -31,7 +28,7 @@ var mlTex = (function(obj, $) {
                 html += clone.children(':nth-child(1)').clone().wrap('<div>').parent().html();
                 clone.children(':nth-child(1)').remove();
             }
-            var temp = this.wrapper(clone.children(':nth-child(1)'));
+            var temp = recWrap(clone.children(':nth-child(1)'));
             if (temp.html() !== undefined) {
                 html += temp.wrap('<div>').parent().html();
             }
@@ -47,6 +44,14 @@ var mlTex = (function(obj, $) {
         // Overwrite dom html
         elem.html(html);
         return elem;
+    }
+
+    /**
+     * Wrap plain text in paragraph tags to make dom more consistent.
+     */
+    obj.wrapper = function (dom) {
+        var html = dom.html().replace(/<!--(.*?)-->/g, ""); // Remove all html comments
+        recWrap(dom.html(html));
     };
 
     return obj;
