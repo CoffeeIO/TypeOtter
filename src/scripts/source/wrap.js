@@ -50,7 +50,7 @@ var mlTex = (function(obj, $) {
      * Wrap plain text in paragraph tags to make dom more consistent.
      */
     obj.wrapper = function (dom) {
-        var html = dom.html().replace(/<!--(.*?)-->/g, "");
+        var html = dom.html().replace(/<!--(.*?)-->/g, ""); // Remove all html comments
         recWrap(dom.html(html));
     };
 
