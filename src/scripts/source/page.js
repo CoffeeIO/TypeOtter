@@ -297,8 +297,9 @@ var mlTex = (function(obj, $) {
         dom.append(
             '<div class="tex-document">' +
                 '<div class="tex-page" style="height: auto">' +
-                    '<div class="tex-content tex-testdom">' +
-            '</div></div></div>'
+                    '<div class="tex-content tex-testdom"></div>' +
+                '</div>' +
+            '</div>'
         );
         var testdom = dom.find('.tex-testdom');
 

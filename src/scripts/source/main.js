@@ -84,6 +84,7 @@ var mlTex = (function(obj, $) {
                             obj.texify(settings.options, dom);
                             obj.fillToc(dom);
                             obj.fillRef(dom);
+                            obj.addControls(dom);
                             if (obj.DEBUG) {
                                 console.timeEnd("document render");  // Performance timers
                             }
