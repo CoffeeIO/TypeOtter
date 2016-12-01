@@ -19,7 +19,7 @@
     height: 50px;
     background: rgb(50, 54, 57);
     position: fixed;
-    width: 100%;
+    width: inherit;
     z-index: 5;
     transform: translateY(-100%);
     transition: all 1s ease, height 0.2s ease;
@@ -38,5 +38,5 @@
     z-index: 4;
     position: fixed;
     height: 25px;
-    width: 100%;
+    width: inherit;
 }
