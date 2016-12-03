@@ -1,6 +1,11 @@
 var mlTex = (function(obj, $) {
 
-    function setZoom(elem, scale) {
+    /**
+     *
+     */
+    function setZoom(dom, scale) {
+        var elem = dom.closest('.tex-controls').parent().find('.tex-document');
+
         var newZoom = elem.attr('zoom') * scale,
             newZoomScale = 'scale(' + newZoom + ')';
 
@@ -43,14 +48,10 @@ var mlTex = (function(obj, $) {
             window.print();
         });
         $('.tex-control-zoomin').click(function () {
-            var elem = $(this);
-            var doc = elem.closest('.tex-controls').parent().find('.tex-document');
-            setZoom(doc, 0.9); // 10% decrease
+            setZoom($(this), 0.9); // 10% decrease
         });
         $('.tex-control-zoomout').click(function () {
-            var elem = $(this);
-            var doc = elem.closest('.tex-controls').parent().find('.tex-document');
-            setZoom(doc, 1.1); // 10% increase
+            setZoom($(this), 1.1); // 10% increase
         });
     };
 
