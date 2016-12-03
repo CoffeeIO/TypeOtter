@@ -337,7 +337,7 @@ var mlTex = (function(obj, $) {
         testdom.parent().remove(); // Remove the test element
 
         // Wrap document in div, to apply relative styling.
-        fullHtml = '<div class="tex-document">' + fullHtml + '</div>';
+        fullHtml = '<div class="tex-document" zoom="1">' + fullHtml + '</div>';
 
         // Overwite the body
         dom.html(fullHtml);

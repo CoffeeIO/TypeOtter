@@ -4,16 +4,15 @@
         float: right;
         margin-top: 10px;
         margin-right: 5px;
-    }
-    // Icon
-    > div > div {
-        margin: 5px 5px;
-        padding: 0 5px;
-        font-size: 24px;
-        color: rgb(241,241,241);
-        display: inline;
-        &:hover {
-            cursor: pointer;
+        > div { // Icons
+            margin: 5px 5px;
+            padding: 0 5px;
+            font-size: 24px;
+            color: rgb(241,241,241);
+            display: inline;
+            &:hover {
+                cursor: pointer;
+            }
         }
     }
     height: 50px;
@@ -23,17 +22,17 @@
     z-index: 5;
     transform: translateY(-100%);
     transition: all 1s ease, height 0.2s ease;
-
     height: 0;
     &.show {
         transform: none;
         height: 50px;
         transition: all 0.1s ease, height 0.5s ease;
     }
+    .tex-control-print {
+        margin-left: 20px;
+    }
 }
-.tex-document {
-    position: relative;
-}
+
 .tex-hover {
     z-index: 4;
     position: fixed;
