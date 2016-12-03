@@ -1,6 +1,8 @@
 .tex-document {
     background-color: #525659;
     padding: 15px 10px;
+    zoom: 100%; // default
+    // -moz-transform: scale(1.0);
 }
 .tex-page {
     margin-top: 15px;
@@ -30,6 +32,7 @@
         position: absolute;
         left: 0;
         top: 0;
+        zoom: 100% !important;
     }
 }
 
