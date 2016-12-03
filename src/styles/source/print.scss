@@ -19,6 +19,19 @@
         margin: 0;
     }
 }
+@media print {
+    body *, tex-controls, tex-controls * {
+        visibility: hidden;
+    }
+    .tex-document, .tex-document * {
+        visibility: visible;
+    }
+    .tex-document {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
 
 // Overwrite default browser print properties
 @page {
