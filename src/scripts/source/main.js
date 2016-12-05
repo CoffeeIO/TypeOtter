@@ -1,10 +1,29 @@
 var mlTex = (function(obj, $) {
     obj.mathDone = false;
     obj.DEBUG = true;
+    obj.mltexIndex = 1;
     var innerDone = false;
 
     /**
-     * Main function to start typesetting a dom element with all preprocess functions.
+     * Add eventlistener to window resize.
+     */
+    function addResizeEvent() {
+        var id;
+        $(window).resize(function() {
+            clearTimeout(id);
+            id = setTimeout(resizeDone, 200);
+        });
+    }
+
+    /**
+     * Actions to perform when resize is done.
+     */
+    function resizeDone() {
+        obj.updateControlsWidth();
+    }
+
+    /**
+     * Main function to start typesetting dom element with all preprocess functions.
      */
     obj.run = function (settings, callback) {
         obj.mathDone = false;
@@ -91,6 +110,14 @@ var mlTex = (function(obj, $) {
                             if (settings.options.spinner !== false) {
                                 obj.removeSpinner();
                             }
+                            dom.wrapInner(
+                                '<div class="mltex" id="mltex-' + obj.mltexIndex + '"></div>'
+                            );
+                            obj.mltexIndex++;
+
+                            addResizeEvent();
+                            obj.updateControlsWidth();
+
                             if (callback != null) {
                                 callback();
                             }

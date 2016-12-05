@@ -1,10 +1,11 @@
 var mlTex = (function(obj, $) {
 
     /**
-     *
+     * Set zoom level on dom element relative to scale.
+     * Instead of checking all posible css properties for a defined value, we store it as an attribute.
      */
     function setZoom(dom, scale) {
-        var elem = dom.closest('.tex-controls').parent().find('.tex-document');
+        var elem = dom.closest('.mltex').find('.tex-document');
 
         var newZoom = elem.attr('zoom') * scale,
             newZoomScale = 'scale(' + newZoom + ')';
@@ -22,8 +23,19 @@ var mlTex = (function(obj, $) {
     }
 
     /**
-    *
-    */
+     * Update width of UI controls.
+     */
+    obj.updateControlsWidth = function () {
+        $('.mltex').each(function () {
+            var elem = $(this),
+                width = elem.parent().width();
+            elem.css('width', width);
+        });
+    };
+
+    /**
+     * Add UI controls to the dom.
+     */
     obj.addControls = function (dom) {
         dom.prepend(
             '<div class="tex-controls">' +
@@ -36,20 +48,27 @@ var mlTex = (function(obj, $) {
             '<div class="tex-hover"></div>'
         );
 
+        // Show controls when entering small invisible top element.
         $(".tex-hover").mouseenter(function() {
             $('.tex-controls').addClass('show');
         });
 
-        $(".tex-document").mouseenter(function() {
+        // Hide controls when leaving the controls.
+        $(".tex-controls").mouseleave(function() {
             $('.tex-controls').removeClass('show');
         });
 
+        // Handle print button.
         $('.tex-control-print').click(function () {
             window.print();
         });
+
+        // Handle zoom-in button.
         $('.tex-control-zoomin').click(function () {
             setZoom($(this), 0.9); // 10% decrease
         });
+
+        // Handle zoom-out button.
         $('.tex-control-zoomout').click(function () {
             setZoom($(this), 1.1); // 10% increase
         });
