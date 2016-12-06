@@ -4,7 +4,7 @@ var mlTex = (function(obj, $) {
     obj.blockMath  = '1a73f16f7ac6dc3674c729ed2524bcc6'; // MD5 of '$$ block'
 
     /**
-     * Preprocess 'e' tags so mathjax registers them
+     * Preprocess 'e' tags so mathjax registers them.
      * Note: MathJax doesn't allow tags to be used for finding equations.
      */
     obj.handleMath = function(dom) {
@@ -39,6 +39,7 @@ var mlTex = (function(obj, $) {
     return obj;
 }(mlTex || {}, jQuery));
 
+// MathJax properties.
 window.MathJax = {
     extensions: ["tex2jax.js"],
     jax: ["input/TeX", "output/HTML-CSS"],

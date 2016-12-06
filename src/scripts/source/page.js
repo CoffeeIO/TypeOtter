@@ -1,5 +1,5 @@
 var mlTex = (function(obj, $) {
-    // Base empty Page Object
+    // Base empty Page Object.
     var Page = function () {
         this.number = 1,
         this.total = 1,
@@ -56,7 +56,7 @@ var mlTex = (function(obj, $) {
     }
 
     /**
-     * Load page style based on default / user specified options.
+     * Load page style based on settings.
      * Styles are loaded in the head.
      */
     function loadStyleSettings(options) {
@@ -202,9 +202,9 @@ var mlTex = (function(obj, $) {
      * @param  {jQuery object} testdom     DOM element for contructing a page
      * @param  {int}           totalHeight Max height of the content area of a page
      * @param  {jQuery object} pointer     Insertion point of new elements in 'testdom'
-     * @return {object}                    content: the testdom,
-     *                                     remain: the remaining DOM of clone,
-     *                                     done: state of whether more elements can be added to testdom
+     * @return {object}        content     The testdom,
+     *                         remain      The remaining DOM of clone,
+     *                         done        State of whether more elements can be added to testdom
      */
     function recCheckDom(clone, testdom, totalHeight, pointer) {
         // Check if entire element can be added to the page.

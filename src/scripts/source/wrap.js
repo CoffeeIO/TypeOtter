@@ -2,6 +2,9 @@ var mlTex = (function(obj, $) {
 
     var regMarkup = /^[\s\b]*<[\w]+/;
 
+    /**
+     * Wrap free text in paragraph tags, call recusively on children.
+     */
     function recWrap(elem) {
         if (elem.html() === undefined) {
             return elem; // ignore special elements without markup: style, script..
