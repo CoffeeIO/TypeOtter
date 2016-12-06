@@ -29,7 +29,7 @@ var mlTex = (function(obj, $) {
         $('.mltex').each(function () {
             var elem = $(this),
                 width = elem.parent().width();
-            elem.css('width', width);
+            elem.find('.tex-controls, .tex-hover').css('width', width);
         });
     };
 

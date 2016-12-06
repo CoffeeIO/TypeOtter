@@ -21,12 +21,12 @@
     width: inherit;
     z-index: 5;
     transform: translateY(-100%);
-    transition: all 1s ease, height 0.2s ease;
+    transition: transform 1s ease, height 0.2s ease;
     height: 0;
     &.show {
         transform: none;
         height: 50px;
-        transition: all 0.1s ease, height 0.5s ease;
+        transition: transform 0.1s ease, height 0.5s ease;
     }
     .tex-control-print {
         margin-left: 20px;
