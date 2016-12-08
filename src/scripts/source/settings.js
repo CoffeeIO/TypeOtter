@@ -1,6 +1,5 @@
 var mlTex = (function(obj, $) {
-    // normal dpi --> height: 1123px, width: 794px
-    //                1cm = 37.795275591px
+
     // Default options the program will use.
     var defaultOptions = {
         // Dimensions
@@ -26,7 +25,7 @@ var mlTex = (function(obj, $) {
     };
 
     /**
-     * Merge two json objects
+     * Merge two json objects.
      *
      * @param o1 The default json, base
      * @param o2 The custom json, overwrite existing elements

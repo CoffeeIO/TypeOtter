@@ -49,7 +49,7 @@ var mlTex = (function(obj, $) {
     }
 
     /**
-     * Create the inner content of table of contents from dom element
+     * Create the inner content of table of contents from dom element.
      */
     function innerToc(dom) {
         var curHtml = '';

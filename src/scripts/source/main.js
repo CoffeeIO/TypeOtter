@@ -1,23 +1,34 @@
 var mlTex = (function(obj, $) {
     obj.mathDone = false;
     obj.DEBUG = true;
+    obj.mltexIndex = 1;
     var innerDone = false;
 
     /**
-     * Main function to start typesetting a dom element with all preprocess functions.
+     * Add eventlistener to window resize.
+     */
+    function addResizeEvent() {
+        var id;
+        $(window).resize(function() {
+            clearTimeout(id);
+            id = setTimeout(resizeDone, 200);
+        });
+    }
+
+    /**
+     * Actions to perform when resize is done.
+     */
+    function resizeDone() {
+        obj.updateControlsWidth();
+    }
+
+    /**
+     * Main function to start typesetting dom element with all preprocess functions.
      */
     obj.run = function (settings, callback) {
         obj.mathDone = false;
         innerDone = false;
         $(document).ready(function () {
-            if (obj.DEBUG) {
-                console.time("document prepare"); // Performance timers
-                console.time("document render");  // Performance timers
-                console.time("document math done"); // Performance timers
-                console.time("window loaded"); // Performance timers
-                console.time("document math preprocess"); // Performance timer
-            }
-
             settings = obj.getSettings(settings);
             if (settings == null) {
                 return;
@@ -33,9 +44,6 @@ var mlTex = (function(obj, $) {
 
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]); // Queue 'typeset' action
             MathJax.Hub.Queue(function () { // Queue is finished
-                if (mlTex.DEBUG) {
-                    console.timeEnd("document math preprocess"); // Performance timers
-                }
                 mlTex.mathDone = true;
             });
             var timer = setInterval(function () { // Block until window is loaded
@@ -52,10 +60,6 @@ var mlTex = (function(obj, $) {
         });
 
         function innerRun() {
-            if (obj.DEBUG) {
-                console.timeEnd("window loaded"); // Performance timers
-            }
-
             var timer = setInterval(function () { // Block until math is loaded
                 if (obj.mathDone) {
                     var mp = dom.find('.MathJax_Preview').length,     // MathJax equations detected
@@ -66,9 +70,6 @@ var mlTex = (function(obj, $) {
                     }
 
                     if (innerDone) {
-                        if (obj.DEBUG) {
-                            console.timeEnd("document math done"); // Performance timers
-                        }
                         clearInterval(timer);
                         setTimeout(function(){
                             obj.attrify(dom);
@@ -78,18 +79,21 @@ var mlTex = (function(obj, $) {
                             obj.makeRef(dom);
                             obj.makeRefPage(dom, settings.biblography);
                             obj.fillMath(dom);
-                            if (obj.DEBUG) {
-                                console.timeEnd("document prepare"); // Performance timers
-                            }
                             obj.texify(settings.options, dom);
                             obj.fillToc(dom);
                             obj.fillRef(dom);
-                            if (obj.DEBUG) {
-                                console.timeEnd("document render");  // Performance timers
-                            }
+                            obj.addControls(dom);
                             if (settings.options.spinner !== false) {
                                 obj.removeSpinner();
                             }
+                            dom.wrapInner(
+                                '<div class="mltex" id="mltex-' + obj.mltexIndex + '"></div>'
+                            );
+                            obj.mltexIndex++;
+
+                            addResizeEvent();
+                            obj.updateControlsWidth();
+
                             if (callback != null) {
                                 callback();
                             }

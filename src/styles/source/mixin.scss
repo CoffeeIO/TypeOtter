@@ -3,3 +3,18 @@
         font-size: $size;
     }
 }
+
+@mixin zoom($zoom, $important:"") {
+    -webkit-transform: scale($zoom) $important; /* Safari And Chrome */
+       -moz-transform: scale($zoom) $important; /* Firefox */
+         -o-transform: scale($zoom) $important; /* Opera */
+            transform: scale($zoom) $important; /* Standard Property */
+                 zoom:        $zoom $important; /* Chrome */
+}
+
+@mixin origin($x, $y) {
+  -webkit-transform-origin: $x $y;
+     -moz-transform-origin: $x $y;
+       -o-transform-origin: $x $y;
+          transform-origin: $x $y;
+}

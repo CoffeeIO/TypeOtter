@@ -1,6 +1,8 @@
 .tex-document {
     background-color: #525659;
     padding: 15px 10px;
+    @include zoom(1);
+    @include origin(0, 0);
 }
 .tex-page {
     margin-top: 15px;
@@ -17,6 +19,21 @@
     }
     .tex-page {
         margin: 0;
+    }
+}
+@media print {
+    body *, tex-controls, tex-controls * {
+        visibility: hidden;
+    }
+    .tex-document, .tex-document * {
+        visibility: visible;
+    }
+    .tex-document {
+        position: absolute;
+        left: 0;
+        top: 0;
+        @include zoom(1, !important);
+        @include origin(0, 0);
     }
 }
 

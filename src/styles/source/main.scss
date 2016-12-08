@@ -1,11 +1,13 @@
+@import "variables";
 @import "vendor/normalize";
 @import "vendor/bookshelf";
-@import "fontface";
-@import "variables";
+@import "vendor/computerModern";
+@import "vendor/font-awesome";
 @import "mixin";
 @import "toc";
 @import "cite";
 @import "page";
 @import "various";
 @import "attr";
+@import "controls";
 @import "print";

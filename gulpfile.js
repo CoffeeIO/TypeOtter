@@ -32,6 +32,7 @@ gulp.task('uglify', function() {
         'src/scripts/source/page.js',
         'src/scripts/source/ref.js',
         'src/scripts/source/spinner.js',
+        'src/scripts/source/controls.js',
         'src/scripts/source/toc.js',
         'src/scripts/source/wrap.js',
         'src/scripts/source/main.js'
