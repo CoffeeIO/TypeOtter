@@ -3,8 +3,6 @@
 describe('Spinner testing:', function () {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
 
-
-
     describe('Done processing:', function () {
         var run = false;
         beforeEach(function(done) {
@@ -16,7 +14,9 @@ describe('Spinner testing:', function () {
 
                 mlTex.run({selector: '.unit-texting'}, function () {
                     run = true;
-                    setTimeout(function(){ done(); }, 500); // Wait for spinner fadeout to end
+                    setTimeout(function(){
+                        done();
+                    }, 500); // Wait for spinner fadeout to end
                 });
             }
         });
