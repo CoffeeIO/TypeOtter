@@ -57,7 +57,9 @@ describe('Spinner testing:', function () {
 
                 mlTex.run({selector: '.unit-texting'});
                 run = true;
-                setTimeout(function(){ done(); }, 500); // Wait to some time so we're in the middle of processing
+                setTimeout(function(){
+                    done();
+                }, 500); // Wait to some time so we're in the middle of processing
             }
         });
         it('Spinner while processing', function () {
