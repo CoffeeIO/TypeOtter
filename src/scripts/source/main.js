@@ -39,7 +39,18 @@ var mlTex = (function(obj, $) {
         obj.fillRef(dom);
         obj.addControls(dom);
     }
+    function cleanup(dom, settings) {
+        if (settings.options.spinner !== false) {
+            obj.removeSpinner();
+        }
+        dom.wrapInner(
+            '<div class="mltex" id="mltex-' + obj.mltexIndex + '"></div>'
+        );
+        obj.mltexIndex++;
 
+        addResizeEvent();
+        obj.updateControlsWidth();
+    }
 
     /**
      * Main function to start typesetting dom element with all preprocess functions.
@@ -47,6 +58,7 @@ var mlTex = (function(obj, $) {
     obj.run = function (settings, callback) {
         obj.mathDone = false;
         innerDone = false;
+
         $(document).ready(function () {
             settings = obj.getSettings(settings);
             if (settings == null) {
@@ -95,20 +107,7 @@ var mlTex = (function(obj, $) {
                             process(dom, settings);
                             postprocess(dom, settings);
 
-                            obj.fillMath(dom);
-                            obj.fillToc(dom);
-                            obj.fillRef(dom);
-                            obj.addControls(dom);
-                            if (settings.options.spinner !== false) {
-                                obj.removeSpinner();
-                            }
-                            dom.wrapInner(
-                                '<div class="mltex" id="mltex-' + obj.mltexIndex + '"></div>'
-                            );
-                            obj.mltexIndex++;
-
-                            addResizeEvent();
-                            obj.updateControlsWidth();
+                            cleanup(dom, settings);
 
                             if (callback != null) {
                                 callback();
