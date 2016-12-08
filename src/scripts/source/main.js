@@ -22,6 +22,25 @@ var mlTex = (function(obj, $) {
         obj.updateControlsWidth();
     }
 
+    function preprocess(dom, settings) {
+        obj.attrify(dom);
+        obj.wrapper(dom);
+        obj.indexToc(dom);
+        obj.makeToc(dom);
+        obj.makeRef(dom);
+        obj.makeRefPage(dom, settings.biblography);
+    }
+    function process(dom, settings) {
+        obj.texify(settings.options, dom);
+    }
+    function postprocess(dom, settings) {
+        obj.fillMath(dom);
+        obj.fillToc(dom);
+        obj.fillRef(dom);
+        obj.addControls(dom);
+    }
+
+
     /**
      * Main function to start typesetting dom element with all preprocess functions.
      */
@@ -72,14 +91,11 @@ var mlTex = (function(obj, $) {
                     if (innerDone) {
                         clearInterval(timer);
                         setTimeout(function(){
-                            obj.attrify(dom);
-                            obj.wrapper(dom);
-                            obj.indexToc(dom);
-                            obj.makeToc(dom);
-                            obj.makeRef(dom);
-                            obj.makeRefPage(dom, settings.biblography);
+                            preprocess(dom, settings);
+                            process(dom, settings);
+                            postprocess(dom, settings);
+
                             obj.fillMath(dom);
-                            obj.texify(settings.options, dom);
                             obj.fillToc(dom);
                             obj.fillRef(dom);
                             obj.addControls(dom);
