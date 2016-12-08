@@ -34,9 +34,11 @@ describe('Spinner testing:', function () {
                 $('.unit-texting').remove(); // Remove existing tex documents
                 $('body').append(__html__['fixtures/test2']);
 
-                mlTex.run({selector: '.unit-texting', options: { spinner: false }}); // Hide spinner option
+                mlTex.run({selector: '.unit-texting', options: {spinner: false}}); // Hide spinner option
                 run = true;
-                setTimeout(function(){ done(); }, 500); // Wait to some time so we're in the middle of processing
+                setTimeout(function(){
+                    done();
+                }, 500); // Wait to some time so we're in the middle of processing
             }
         });
         it('No spinner while processing', function () {
