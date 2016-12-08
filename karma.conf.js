@@ -13,20 +13,18 @@ module.exports = function(config) {
         frameworks: ['jasmine'],
 
 
-        // list of files / patterns to load in the browser
+        // list of files / patterns to load in the browser.
         files: [
-            // Dependency files
-            {pattern: 'dependencies/MathJax/**/*', watched: true, included: false, served: true},
-            {pattern: 'dependencies/computerModern/**/*', watched: true, included: false, served: true},
+            // Dependency files, only include them when requested.
+            {pattern: 'dependencies/**/*', watched: true, included: false, served: true},
 
-            // Source files
+            // Source files.
             {pattern: 'src/styles/build/*.css', watched: true, included: true, served: true},
-            {pattern: 'dependencies/computerModern/Serif/cmun-serif.css', watched: true, included: true, served: true},
             {pattern: 'src/scripts/build/*.js', watched: true, included: true, served: true},
             {pattern: 'dependencies/MathJax/MathJax.js', watched: true, included: true, served: true},
             {pattern: 'fixtures/*.html'},
 
-            // Test files
+            // Test files.
             {pattern: 'test/attr.test.js', watched: true, included: true, served: true},
             {pattern: 'test/toc.test.js', watched: true, included: true, served: true},
             {pattern: 'test/settings.test.js', watched: true, included: true, served: true},
