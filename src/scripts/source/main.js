@@ -22,6 +22,13 @@ var mlTex = (function(obj, $) {
         obj.updateControlsWidth();
     }
 
+    function preMathjax(dom, settings) {
+        if (settings.options.spinner !== false) {
+            obj.addSpinner(dom);
+        }
+        obj.includeFiles(dom);
+        obj.handleMath(dom);
+    }
     function preprocess(dom, settings) {
         obj.attrify(dom);
         obj.wrapper(dom);
@@ -67,11 +74,7 @@ var mlTex = (function(obj, $) {
 
             dom = $(settings.selector);
 
-            if (settings.options.spinner !== false) {
-                obj.addSpinner(dom);
-            }
-            obj.includeFiles(dom);
-            obj.handleMath(dom);
+            preMathjax(dom, settings);
 
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]); // Queue 'typeset' action
             MathJax.Hub.Queue(function () { // Queue is finished
@@ -104,7 +107,9 @@ var mlTex = (function(obj, $) {
                         clearInterval(timer);
                         setTimeout(function(){
                             preprocess(dom, settings);
+
                             process(dom, settings);
+
                             postprocess(dom, settings);
 
                             cleanup(dom, settings);
