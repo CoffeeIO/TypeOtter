@@ -61,8 +61,8 @@ var mlTex = (function(obj, $) {
      * Main function to start typesetting dom element with all preprocess functions.
      */
     obj.run = function (settings, callback) {
-        var mathDone = false,
-            innerDone = false,
+        var mathjaxProcessed = false,
+            mathjaxRendered = false,
             dom = null;
 
         // Wait till fonts are rendered.
@@ -83,7 +83,7 @@ var mlTex = (function(obj, $) {
 
             MathJax.Hub.Queue(["Typeset", MathJax.Hub]); // Queue 'typeset' action
             MathJax.Hub.Queue(function () { // Queue is finished
-                mathDone = true;
+                mathjaxProcessed = true;
             });
 
             var timer = setInterval(function () { // Block until window is loaded
@@ -97,15 +97,15 @@ var mlTex = (function(obj, $) {
 
         function innerRun() {
             var timer = setInterval(function () { // Block until math is loaded
-                if (mathDone) {
+                if (mathjaxProcessed) {
                     var mp = dom.find('.MathJax_Preview').length,     // MathJax equations detected
                         m = dom.find('.MathJax').length,              // MathJax equations prepared
                         mpr = dom.find('.MathJax_Processing').length; // MathJax equations being processed
                     if (mp === m && mpr === 0) {
-                        innerDone = true;
+                        mathjaxRendered = true;
                     }
 
-                    if (innerDone) {
+                    if (mathjaxRendered) {
                         clearInterval(timer);
                         setTimeout(function(){
                             preprocessDom(dom, settings);
