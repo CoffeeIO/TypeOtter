@@ -3,8 +3,6 @@
 describe('Spinner testing:', function () {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
 
-
-
     describe('Done processing:', function () {
         var run = false;
         beforeEach(function(done) {
@@ -16,7 +14,9 @@ describe('Spinner testing:', function () {
 
                 mlTex.run({selector: '.unit-texting'}, function () {
                     run = true;
-                    setTimeout(function(){ done(); }, 500); // Wait for spinner fadeout to end
+                    setTimeout(function(){
+                        done();
+                    }, 500); // Wait for spinner fadeout to end
                 });
             }
         });
@@ -34,9 +34,11 @@ describe('Spinner testing:', function () {
                 $('.unit-texting').remove(); // Remove existing tex documents
                 $('body').append(__html__['fixtures/test2']);
 
-                mlTex.run({selector: '.unit-texting', options: { spinner: false }}); // Hide spinner option
+                mlTex.run({selector: '.unit-texting', options: {spinner: false}}); // Hide spinner option
                 run = true;
-                setTimeout(function(){ done(); }, 500); // Wait to some time so we're in the middle of processing
+                setTimeout(function(){
+                    done();
+                }, 500); // Wait to some time so we're in the middle of processing
             }
         });
         it('No spinner while processing', function () {
@@ -55,7 +57,9 @@ describe('Spinner testing:', function () {
 
                 mlTex.run({selector: '.unit-texting'});
                 run = true;
-                setTimeout(function(){ done(); }, 500); // Wait to some time so we're in the middle of processing
+                setTimeout(function(){
+                    done();
+                }, 500); // Wait to some time so we're in the middle of processing
             }
         });
         it('Spinner while processing', function () {

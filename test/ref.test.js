@@ -50,7 +50,8 @@ describe('Reference testing:', function () {
 
     describe('Bad request:', function () {
         it('Unknown reference', function () {
-            expect($('a[href="#Unknown"]').text()).toEqual('Could not find reference'); // Unknown reference, keep inside html.
+            // Unknown reference, keep inside html.
+            expect($('a[href="#Unknown"]').text()).toEqual('Could not find reference');
         });
     });
 
