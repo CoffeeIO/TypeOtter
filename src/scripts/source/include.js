@@ -1,6 +1,10 @@
 var mlTex = (function(obj, $) {
 
-    // @see http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
+    /**
+     * Javascript implementation of Java’s String.hashCode() method.
+     * **Modified**
+     * @see http://werxltd.com/wp/2010/05/13/javascript-implementation-of-javas-string-hashcode-method/
+     */
     function hashCode(str) {
     	var hash = 0;
     	if (str.length == 0) return hash;
@@ -27,10 +31,7 @@ var mlTex = (function(obj, $) {
                         var hash = hashCode(elem.html());
                         if (map[hash] === true) {
                             console.error('File: "%s" recursive include detected, abort abort!', href);
-
                             elem.html(''); // Empty element
-                            console.log(elem.parent().html());
-
                             return;
                         }
                         var copy = $.extend(true, {}, map);
