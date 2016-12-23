@@ -22,7 +22,7 @@ module.exports = function(config) {
             {pattern: 'src/styles/build/*.css', watched: true, included: true, served: true},
             {pattern: 'src/scripts/build/*.js', watched: true, included: true, served: true},
             {pattern: 'dependencies/MathJax/MathJax.js', watched: true, included: true, served: true},
-            {pattern: 'fixtures/*.html'},
+            {pattern: 'fixtures/**/*.html'},
 
             // Test files.
             {pattern: 'test/attr.test.js', watched: true, included: true, served: true},
@@ -33,6 +33,7 @@ module.exports = function(config) {
             {pattern: 'test/ref.test.js', watched: true, included: true, served: true},
             {pattern: 'test/wrap.test.js', watched: true, included: true, served: true},
             {pattern: 'test/controls.test.js', watched: true, included: true, served: true},
+            {pattern: 'test/include.test.js', watched: true, included: true, served: true},
         ],
 
         // list of files to exclude
