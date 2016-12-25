@@ -2,128 +2,138 @@ var mlTex = (function(obj, $) {
     obj.mltexIndex = 1;
 
     /**
-     * Actions to perform before mathjax equations are rendered.
-     */
-    function preMathjax(dom, settings) {
-        if (settings.options.spinner !== false) {
-            obj.addSpinner(dom);
-        }
-        obj.includeFiles(dom);
-        obj.handleMath(dom);
-    }
-
-    /**
-     * Actions to perform before pagination.
-     */
-    function preprocessDom(dom, settings) {
-        obj.attrify(dom);
-        obj.wrapper(dom);
-        obj.indexToc(dom);
-        obj.makeToc(dom);
-        obj.makeRef(dom);
-        obj.makeRefPage(dom, settings.biblography);
-    }
-
-    /**
-     * Actions to construct document dom.
-     */
-    function processDom(dom, settings) {
-        obj.texify(settings.options, dom);
-    }
-
-    /**
-     * Document relevant actions to perform after pagination.
-     */
-    function postprocessDom(dom, settings) {
-        obj.fillMath(dom);
-        obj.fillToc(dom);
-        obj.fillRef(dom);
-        obj.addControls(dom);
-    }
-
-    /**
-     * Cleanup actions to make document viewable/interactable.
-     */
-    function cleanupDom(dom, settings) {
-        if (settings.options.spinner !== false) {
-            obj.removeSpinner();
-        }
-        dom.wrapInner(
-            '<div class="mltex" id="mltex-' + obj.mltexIndex + '"></div>'
-        );
-        obj.mltexIndex++;
-
-        addResizeEvent();
-        obj.updateControlsWidth();
-    }
-
-    /**
      * Main function to start typesetting dom element with all preprocess functions.
      */
     obj.run = function (settings, callback) {
-        var mathjaxProcessed = false,
-            mathjaxRendered = false,
-            dom = null;
+        var dom = null;
+
+        // Validate settings.
+        var step1 = function(callback) {
+            settings = obj.getSettings(settings);
+            if (settings == null) {
+                callback();
+                return;
+            }
+
+            dom = $(settings.selector);
+            callback();
+        };
+
+        // Preprocess dom.
+        var step2 = function(callback) {
+            if (settings.options.spinner !== false) {
+                obj.addSpinner(dom);
+            }
+            obj.includeFiles(dom, function () {
+                obj.handleMath(dom);
+                callback();
+            });
+        };
+
+        // Render mathjax.
+        var step3 = function(callback) {
+            // Wait with callback till math is rendered.
+            var checkMathRendered = function() {
+                var timer = setInterval(function () {
+                    if (window.load) {
+                        var mp = dom.find('.MathJax_Preview').length,     // MathJax equations detected
+                            m = dom.find('.MathJax').length,              // MathJax equations prepared
+                            mpr = dom.find('.MathJax_Processing').length; // MathJax equations being processed
+                        if (mp === m && mpr === 0) { // All equations prepared and finished processing
+                            clearInterval(timer);
+                            callback();
+
+                        }
+                    }
+                }, 100);
+            };
+
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]); // Queue 'typeset' action
+            MathJax.Hub.Queue(function () { // Queue finished
+                checkMathRendered();
+            });
+        };
+
+        // Process dom.
+        var step4 = function(callback) {
+            obj.attrify(dom);
+            obj.wrapper(dom);
+            obj.indexToc(dom);
+            obj.makeToc(dom);
+            obj.makeRef(dom);
+            obj.makeRefPage(dom, settings.biblography);
+            callback();
+
+        };
+
+        // Texify document.
+        var step5 = function(callback) {
+            obj.texify(settings.options, dom);
+            callback();
+        };
+
+        // Postprocess dom.
+        var step6 = function(callback) {
+            obj.fillMath(dom);
+            obj.fillToc(dom);
+            obj.fillRef(dom);
+            obj.addControls(dom);
+            callback();
+        };
+
+        // Cleanup dom.
+        var step7 = function(callback) {
+            if (settings.options.spinner !== false) {
+                obj.removeSpinner();
+            }
+            dom.wrapInner(
+                '<div class="mltex" id="mltex-' + obj.mltexIndex + '"></div>'
+            );
+            obj.mltexIndex++;
+
+            addResizeEvent();
+            obj.updateControlsWidth();
+            callback();
+        };
 
         // Wait till fonts are rendered.
         $(window).load(function () {
             window.load = true;
         });
 
+        var callArr = [step1, step2, step3, step4, step5, step6, step7];
+
         // Wait till all content is retrieved.
         $(document).ready(function () {
-            settings = obj.getSettings(settings);
-            if (settings == null) {
+            // Execute functions in series, so they don't interfere with each other.
+            execFunc(callArr, function() {
+                if (callback != null) {
+                    callback();
+                }
+            });
+        });
+
+        /**
+         * Execute array of functions, and end with callback.
+         */
+        function execFunc(funArr, callback) {
+            if (settings === null) { // If settings is null something went wrong
+                console.error("Exiting... fix errors to complete execution");
+                callback();
+                return;
+            }
+            if (funArr.length === 0) { // If there are no more functions callback and return
+                callback();
                 return;
             }
 
-            dom = $(settings.selector);
-
-            preMathjax(dom, settings);
-
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]); // Queue 'typeset' action
-            MathJax.Hub.Queue(function () { // Queue is finished
-                mathjaxProcessed = true;
+            // Take first function in array.
+            var fun = funArr.shift();
+            // Call function and wait for callback to continue with next.
+            fun(function() {
+                execFunc(funArr, callback);
             });
-
-            var timer = setInterval(function () { // Block until window is loaded
-                if (window.load) {
-                    clearInterval(timer);
-                    innerRun();
-                }
-            }, 100);
-
-        });
-
-        function innerRun() {
-            var timer = setInterval(function () { // Block until math is loaded
-                if (mathjaxProcessed) {
-                    var mp = dom.find('.MathJax_Preview').length,     // MathJax equations detected
-                        m = dom.find('.MathJax').length,              // MathJax equations prepared
-                        mpr = dom.find('.MathJax_Processing').length; // MathJax equations being processed
-                    if (mp === m && mpr === 0) {
-                        mathjaxRendered = true;
-                    }
-
-                    if (mathjaxRendered) {
-                        clearInterval(timer);
-                        setTimeout(function(){
-                            preprocessDom(dom, settings);
-
-                            processDom(dom, settings);
-
-                            postprocessDom(dom, settings);
-
-                            cleanupDom(dom, settings);
-
-                            if (callback != null) {
-                                callback();
-                            }
-                        }, 100);
-                    }
-                }
-            }, 100);
-        }
+        };
     };
 
     /**
