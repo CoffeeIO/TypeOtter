@@ -1,4 +1,4 @@
-# [mlTex](http://mgapcdev.github.io/mlTex/) [![Build Status](https://travis-ci.org/MGApcDev/mlTex.svg?branch=master)](https://travis-ci.org/MGApcDev/mlTex) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21)](https://www.codacy.com/app/mgapcdev/mlTex?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MGApcDev/mlTex&amp;utm_campaign=Badge_Grade)
+# [mlTex](http://mgapcdev.github.io/mlTex/) [![Build Status](https://travis-ci.org/MGApcDev/mlTex.svg?branch=master)](https://travis-ci.org/MGApcDev/mlTex) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21)](https://www.codacy.com/app/mgapcdev/mlTex?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MGApcDev/mlTex&amp;utm_campaign=Badge_Grade) [![Stories in Ready](https://badge.waffle.io/MGApcDev/mlTex.png?label=ready&title=Ready)](http://waffle.io/MGApcDev/mlTex)
 
 mlTex is a Javascript library to render high quality typesetting in html and pdf.
 
