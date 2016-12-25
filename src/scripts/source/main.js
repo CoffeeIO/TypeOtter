@@ -8,7 +8,7 @@ var mlTex = (function(obj, $) {
         if (settings.options.spinner !== false) {
             obj.addSpinner(dom);
         }
-        obj.includeFiles(dom, {});
+        obj.includeFiles(dom);
         obj.handleMath(dom);
     }
 
