@@ -31,7 +31,6 @@ var mlTex = (function(obj, $) {
                 if (href !== undefined && href !== '') {
                     calls++;
                     elem.load(href, function(responseText, statusText, xhr) {
-                        // console.log(statusText);
                         if (statusText === 'error') { // File not found
                             console.error('File: "%s" was not found', href);
                             calls--; // Recursive call didn't happen
@@ -39,7 +38,7 @@ var mlTex = (function(obj, $) {
                             var hash = hashCode(elem.html());
                             if (map[hash] === true) {
                                 console.error('File: "%s" recursive include detected, abort abort!', href);
-                                elem.html(''); // Empty element
+                                elem.html(''); // Remove content of element
                                 calls--; // Recursive call didn't happen
                                 return;
                             }
