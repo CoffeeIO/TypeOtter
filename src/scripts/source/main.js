@@ -2,8 +2,8 @@ var mlTex = (function(obj, $) {
     obj.mltexIndex = 1;
 
     /**
-    * Main function to start typesetting dom element with all preprocess functions.
-    */
+     * Main function to start typesetting dom element with all preprocess functions.
+     */
     obj.run = function (settings, callback) {
         var dom = null;
 
@@ -93,6 +93,26 @@ var mlTex = (function(obj, $) {
             callback();
         };
 
+        // Wait till fonts are rendered.
+        $(window).load(function () {
+            window.load = true;
+        });
+
+        var callArr = [step1, step2, step3, step4, step5, step6, step7];
+
+        // Wait till all content is retrieved.
+        $(document).ready(function () {
+            // Execute functions in series, so they don't interfere with each other.
+            execFunc(callArr, function() {
+                if (callback != null) {
+                    callback();
+                }
+            });
+        });
+        
+        /**
+         * Execute array of functions, and end with callback.
+         */
         function execFunc(funArr, callback) {
             if (settings === null) { // If settings is null something went wrong
                 console.error("Exiting... fix errors to complete execution");
@@ -111,23 +131,6 @@ var mlTex = (function(obj, $) {
                 execFunc(funArr, callback);
             });
         };
-
-        // Wait till fonts are rendered.
-        $(window).load(function () {
-            window.load = true;
-        });
-
-        var callArr = [step1, step2, step3, step4, step5, step6, step7];
-
-        // Wait till all content is retrieved.
-        $(document).ready(function () {
-            // Execute functions in series, so they don't interfere with each other.
-            execFunc(callArr, function() {
-                if (callback != null) {
-                    callback();
-                }
-            });
-        });
     };
 
     /**
