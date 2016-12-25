@@ -21,29 +21,47 @@ var mlTex = (function(obj, $) {
     /**
      * Find include tags in dom and include their sources.
      */
-    obj.includeFiles = function(dom, map) {
-        dom.find('a[include=""]').each(function () {
-            var elem = $(this),
-                href = elem.attr('href');
-            if (href !== undefined && href !== '') {
-                elem.load(href, function(data) {
-                    if (data === undefined) { // File not found
-                        console.error('File: "%s" was not found', href);
-                    } else {
-                        var hash = hashCode(elem.html());
-                        if (map[hash] === true) {
-                            console.error('File: "%s" recursive include detected, abort abort!', href);
-                            elem.html(''); // Empty element
-                            return;
+    obj.includeFiles = function(dom, callback) {
+        var calls = 1;
+
+        var recursive = function (dom, map) {
+            dom.find('a[include=""]').each(function () {
+                var elem = $(this),
+                    href = elem.attr('href');
+                if (href !== undefined && href !== '') {
+                    calls++;
+                    elem.load(href, function(responseText, statusText, xhr) {
+                        // console.log(statusText);
+                        if (statusText === 'error') { // File not found
+                            console.error('File: "%s" was not found', href);
+                            calls--; // Recursive call didn't happen
+                        } else {
+                            var hash = hashCode(elem.html());
+                            if (map[hash] === true) {
+                                console.error('File: "%s" recursive include detected, abort abort!', href);
+                                elem.html(''); // Empty element
+                                calls--; // Recursive call didn't happen
+                                return;
+                            }
+                            var copy = $.extend(true, {}, map);
+                            copy[hash] = true;
+                            recursive(elem, copy); // Check included file for other includes.
+                            elem.contents().unwrap(); // Unwrap <a> from content
                         }
-                        var copy = $.extend(true, {}, map);
-                        copy[hash] = true;
-                        obj.includeFiles(elem, copy); // Check included file for other includes.
-                        elem.contents().unwrap(); // Unwrap <a> from content
-                    }
-                });
+                    });
+                }
+            });
+
+            calls--;
+        };
+
+        recursive(dom, {});
+        var timer = setInterval(function () {
+            if (calls === 0) {
+                clearTimeout(timer);
+                callback();
             }
-        });
+        }, 100);
     };
 
     return obj;

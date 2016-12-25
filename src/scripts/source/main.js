@@ -24,9 +24,10 @@ var mlTex = (function(obj, $) {
             if (settings.options.spinner !== false) {
                 obj.addSpinner(dom);
             }
-            obj.includeFiles(dom);
-            obj.handleMath(dom);
-            callback();
+            obj.includeFiles(dom, function () {
+                obj.handleMath(dom);
+                callback();
+            });
         };
 
         // Render mathjax.
@@ -41,6 +42,7 @@ var mlTex = (function(obj, $) {
                         if (mp === m && mpr === 0) { // All equations prepared and finished processing
                             clearInterval(timer);
                             callback();
+
                         }
                     }
                 }, 100);
@@ -61,6 +63,7 @@ var mlTex = (function(obj, $) {
             obj.makeRef(dom);
             obj.makeRefPage(dom, settings.biblography);
             callback();
+
         };
 
         // Texify document.
@@ -109,7 +112,7 @@ var mlTex = (function(obj, $) {
                 }
             });
         });
-        
+
         /**
          * Execute array of functions, and end with callback.
          */
