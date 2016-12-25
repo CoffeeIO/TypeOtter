@@ -47,7 +47,9 @@ describe('Include preprocess:', function () {
             expect($('section[data-title="Analysis"] > a > .tex-section-title').length).toEqual(1);
         });
         it('Error thrown', function () {
-            expect(console.error).toHaveBeenCalledWith(jasmine.stringMatching(/recursive include/), jasmine.stringMatching(/.*/));
+            expect(console.error).toHaveBeenCalledWith(
+                jasmine.stringMatching(/recursive include/), jasmine.stringMatching(/.*/)
+            );
         });
     });
 
@@ -64,7 +66,9 @@ describe('Include preprocess:', function () {
         });
 
         it('Error thrown', function () {
-            expect(console.error).toHaveBeenCalledWith(jasmine.stringMatching(/not found/), jasmine.stringMatching(/.*/));
+            expect(console.error).toHaveBeenCalledWith(
+                jasmine.stringMatching(/not found/), jasmine.stringMatching(/.*/)
+            );
         });
     });
 });
