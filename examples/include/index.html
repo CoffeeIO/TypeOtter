@@ -2,27 +2,28 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <!-- styles -->
-    <link rel="stylesheet" href="/dependencies/computerModern/Serif/cmun-serif.css">
     <link rel="stylesheet" href="/src/styles/build/main.min.css">
-    <!-- scripts -->
     <script type="text/javascript" src="/src/scripts/build/main.min.js"></script>
+    <script type="text/javascript" src="/dependencies/MathJax/MathJax.js"></script>
     <script>
     var options = {
         headerRight: 'Mathias G. Andreasen',
         pager : 'Page [cur] of [total]',
         padding: "10mm 25mm"
     };
-
-    mlTex.run({ selector: 'body', options: options });
+    mlTex.run({ options: options });
     </script>
-    <script type="text/javascript" src="/dependencies/MathJax/MathJax.js"></script>
+    <style>
+        body {
+            background-color: #525659;
+        }
+    </style>
 </head>
   <body>
     <div toc></div>
     <a include href="introduction.html"></a>
     <a include href="https://raw.githubusercontent.com/MGApcDev/mlTex/master/examples/include/background.html"></a>
-    <a include href="analysis.html" newpage></a>
+    <a include href="analysis.html"></a>
     <a include href="conclusion.html"></a>
   </body>
 </html>
