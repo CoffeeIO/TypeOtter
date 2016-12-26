@@ -49,13 +49,6 @@ var mlTex = (function(obj, $) {
     }
 
     /**
-     * Strip simple '<div></div>' wrap of a string.
-     */
-    function stripWrapper(html) {
-        return html.substring(0, html.length - 6).substring(5);
-    }
-
-    /**
      * Load page style based on settings.
      * Styles are loaded in the head.
      */
