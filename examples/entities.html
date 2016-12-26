@@ -24,7 +24,7 @@
     <section title="Tests" name="sec1" newpage>
         <section title="Structures">
             <section title="Tables">
-                <table>
+                <table class="pure-table pure-table-horizontal">
                     <tr>
                         <th>Header 1</th><th>Header 2</th>
                     </tr>
@@ -64,7 +64,7 @@
             </section>
         </section>
         <section title="Text manipulation" newpage>
-            <table>
+            <table class="pure-table pure-table-horizontal">
                 <tr>
                     <th>Function</th><th>Output</th>
                 </tr>
@@ -88,17 +88,6 @@
                 </tr>
                 <tr>
                     <td>Strike through / deleted text</td><td>mlTex is <s>not</s> great <del>shit</del></td>
-                </tr>
-                <tr>
-                    <td>Select and options</td>
-                    <td>
-                        <select>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="opel">Opel</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    </td>
                 </tr>
                 <tr>
                     <td>Underlined text</td><td>This is a <u>parragraph</u></td>
@@ -130,7 +119,7 @@
                         <img src="http://i.imgur.com/oITmuXk.gif" name="figure1"  height="200px">
 
                     </section>
-                    <section title="Video">
+                    <section title="Video" newpage>
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameborder="0" allowfullscreen></iframe>
                     </section>
                     <section title="Code" newpage>
@@ -139,62 +128,73 @@
                         <script src="https://gist.github.com/MGApcDev/02cc972eeafd0562600f56c9bf56c766.js"></script>
 
                         <em newpage>Running code</em>
-                        <p data-height="265" data-theme-id="0" data-slug-hash="zvqGEG" data-default-tab="js,result" data-user="hoqqanen" data-embed-version="2" data-pen-title="Corange Loading Screen" class="codepen">See the Pen <a href="http://codepen.io/hoqqanen/pen/zvqGEG/">Corange Loading Screen</a> by George Hoqqanen (<a href="http://codepen.io/hoqqanen">@hoqqanen</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                        <p data-height="350" data-theme-id="0" data-slug-hash="zvqGEG" data-default-tab="js,result" data-user="hoqqanen" data-embed-version="2" data-pen-title="Corange Loading Screen" class="codepen">See the Pen <a href="http://codepen.io/hoqqanen/pen/zvqGEG/">Corange Loading Screen</a> by George Hoqqanen (<a href="http://codepen.io/hoqqanen">@hoqqanen</a>) on <a href="http://codepen.io">CodePen</a>.</p>
                         <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
                     </section>
                 </section>
                 <section title="Inputs" newpage>
-                    <table>
-                        <tr>
-                            <th>Function</th><th>Output</th>
-                        </tr>
-                        <tr>
-                            <td>Textarea</td><td><textarea rows="3"></textarea></td>
-                        </tr>
-                        <tr>
-                            <td>Textfield</td><td><input type="text"></td>
-                        </tr>
-                        <tr>
-                            <td>Button</td><td><input type="button" value="Click me"></td>
-                        </tr>
-                        <tr>
-                            <td>Checkbox</td><td><input type="checkbox"></td>
-                        </tr>
-                        <tr>
-                            <td>Datetime</td><td><input type="datetime" ></td>
-                        </tr>
-                        <tr>
-                            <td>Date</td><td><input type="date"></td>
-                        </tr>
-                        <tr>
-                            <td>Email</td><td><input type="email" ></td>
-                        </tr>
-                        <tr>
-                            <td>Password</td><td><input type="password" ></td>
-                        </tr>
-                        <tr>
-                            <td>Number</td><td><input type="number" ></td>
-                        </tr>
-                        <tr>
-                            <td>Submit</td><td><input type="submit"></td>
-                        </tr>
-                        <tr>
-                            <td>Time</td><td><input type="time"></td>
-                        </tr>
-                        <tr>
-                            <td>Radio buttons</td>
-                            <td>
-                                <form>
+                    <form class="pure-form">
+                        <table class="pure-table pure-table-horizontal">
+                            <tr>
+                                <th>Function</th><th>Output</th>
+                            </tr>
+                            <tr>
+                                <td>Textarea</td><td><textarea rows="3"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td>Textfield</td><td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>Button</td><td><input type="button" class="pure-button" value="Click me"></td>
+                            </tr>
+                            <tr>
+                                <td>Checkbox</td><td><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Datetime</td><td><input type="datetime" ></td>
+                            </tr>
+                            <tr>
+                                <td>Date</td><td><input type="date"></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td><td><input type="email" ></td>
+                            </tr>
+                            <tr>
+                                <td>Password</td><td><input type="password" ></td>
+                            </tr>
+                            <tr>
+                                <td>Number</td><td><input type="number" ></td>
+                            </tr>
+                            <tr>
+                                <td>Submit</td><td><input type="submit" class="pure-button"></td>
+                            </tr>
+                            <tr>
+                                <td>Time</td><td><input type="time"></td>
+                            </tr>
+                            <tr>
+                                <td>Radio buttons</td>
+                                <td>
                                     <input type="radio" name="gender" value="male" checked> Male<br>
                                     <input type="radio" name="gender" value="female"> Female<br>
                                     <input type="radio" name="gender" value="other"> Other
-                                </form>
-                            </td>
-                        </tr>
-                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Select and options</td>
+                                <td>
+                                    <select>
+                                        <option value="volvo">Volvo</option>
+                                        <option value="saab">Saab</option>
+                                        <option value="opel">Opel</option>
+                                        <option value="audi">Audi</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
                 </section>
                 <section title="Html entities - UTF-8" newpage>
-                    <table>
+                    <table class="pure-table pure-table-horizontal">
                         <tr>
                             <th>Function</th><th>Output</th><th>Full reference</th>
                         </tr>
