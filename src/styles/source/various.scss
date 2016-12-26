@@ -4,27 +4,12 @@
         margin: 10px auto;
         max-width: 100%;
     }
+    // Default table styling.
     table {
         width: 96%;
         margin: 10px 2%;
-        border: none;
-        border-collapse: collapse;
-        border-spacing: 0;
-        display: table;
-
         th {
-            font-weight: bold;
-            border-bottom: 2px solid #ddd;
             text-align: left;
-        }
-        td {
-            border-top: 1px solid #ddd;
-        }
-        tr {
-            vertical-align: middle;
-        }
-        th, td {
-            padding: 8px;
         }
     }
     figure {

@@ -133,7 +133,7 @@ var mlTex = (function(obj, $) {
             fun(function() {
                 execFunc(funArr, callback);
             });
-        };
+        }
     };
 
     /**

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/src/styles/build/main.min.css">
+    <script type="text/javascript" src="/src/scripts/build/main.min.js"></script>
+    <script type="text/javascript" src="/dependencies/MathJax/MathJax.js"></script>
+    <script>
+    var options = {
+        headerRight: 'Mathias G. Andreasen',
+        pager : 'Page [cur] of [total]',
+        padding: "10mm 25mm"
+    };
+    mlTex.run({ options: options });
+    </script>
+    <style>
+    body {
+        background-color: #525659;
+    }
+    </style>
+</head>
+<body>
+    <div toc>Table of contents</div>
+    <section title="Tests" name="sec1" newpage>
+        <section title="Structures">
+            <section title="Tables">
+                <table class="pure-table pure-table-horizontal">
+                    <tr>
+                        <th>Header 1</th><th>Header 2</th>
+                    </tr>
+                    <tr>
+                        <td>Cell 1</td><td>Cell 2</td>
+                    </tr>
+                    <tr>
+                        <td>Row 3: Cell 1</td><td>Cell 2</td>
+                    </tr>
+                </table>
+            </section>
+            <section title="Lists">
+                Unordered list
+                <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                </ul>
+
+                <hr> <em>'hr' - thematic change in the content</em>
+
+                Ordered list
+                <ol>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                </ol>
+
+                <hr>
+                Description list
+                <dl>
+                    <dt>Coffee</dt>
+                    <dd>Black hot drink</dd>
+                    <dt>Milk</dt>
+                    <dd>White cold drink</dd>
+                </dl>
+            </section>
+        </section>
+        <section title="Text manipulation" newpage>
+            <table class="pure-table pure-table-horizontal">
+                <tr>
+                    <th>Function</th><th>Output</th>
+                </tr>
+                <tr>
+                    <td>Bold/strong tex</td><td><b>Bold</b> / <strong>Strong</strong></td>
+                </tr>
+                <tr>
+                    <td>Italic/emphasized text</td><td> <i>italic</i> / <em>emphasized</em></td>
+                </tr>
+                <tr>
+                    <td>Hyperlink</td><td><a href="https://github.com/MGApcDev/mlTex" target="_blank">Github Repo</a></td>
+                </tr>
+                <tr>
+                    <td>Preformatted text</td><td><pre>This   is more than    1 space.</pre></td>
+                </tr>
+                <tr>
+                    <td>Progress bar</td><td><progress value="22" max="100"></progress></td>
+                </tr>
+                <tr>
+                    <td>Short quotation</td><td><q>Quote</q></td>
+                </tr>
+                <tr>
+                    <td>Strike through / deleted text</td><td>mlTex is <s>not</s> great <del>shit</del></td>
+                </tr>
+                <tr>
+                    <td>Underlined text</td><td>This is a <u>parragraph</u></td>
+                </tr>
+                <tr>
+                    <td>Superscripted text</td><td>E = mc<sup>2</sup></td>
+                </tr>
+                <tr>
+                    <td>Subscripted text</td><td>H<sub>2</sub>0</td>
+                </tr>
+                <tr>
+                    <td>Equations</td>
+                    <td>
+                        <e>
+                            \frac{1}{\displaystyle 1+
+                                \frac{1}{\displaystyle 2+
+                                    \frac{1}{\displaystyle 3+x}}} +
+                                    \frac{1}{1+\frac{1}{2+\frac{1}{3+x}}}
+                                </e>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+                <section title="Visuals" newpage>
+                    <section title="Images">
+                        <em>Still image</em>
+                        <img src="http://www.petpaw.com.au/wp-content/uploads/2014/06/Pug-5.jpg" name="figure1" caption="Sad pug" width="75%">
+                        <em>Gif</em>
+                        <img src="http://i.imgur.com/oITmuXk.gif" name="figure1"  height="200px">
+
+                    </section>
+                    <section title="Video" newpage>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameborder="0" allowfullscreen></iframe>
+                    </section>
+                    <section title="Code" newpage>
+
+                        <em>Source code</em>
+                        <script src="https://gist.github.com/MGApcDev/02cc972eeafd0562600f56c9bf56c766.js"></script>
+
+                        <em newpage>Running code</em>
+                        <p data-height="350" data-theme-id="0" data-slug-hash="zvqGEG" data-default-tab="js,result" data-user="hoqqanen" data-embed-version="2" data-pen-title="Corange Loading Screen" class="codepen">See the Pen <a href="http://codepen.io/hoqqanen/pen/zvqGEG/">Corange Loading Screen</a> by George Hoqqanen (<a href="http://codepen.io/hoqqanen">@hoqqanen</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+                        <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+                    </section>
+                </section>
+                <section title="Inputs" newpage>
+                    <form class="pure-form">
+                        <table class="pure-table pure-table-horizontal">
+                            <tr>
+                                <th>Function</th><th>Output</th>
+                            </tr>
+                            <tr>
+                                <td>Textarea</td><td><textarea rows="3"></textarea></td>
+                            </tr>
+                            <tr>
+                                <td>Textfield</td><td><input type="text"></td>
+                            </tr>
+                            <tr>
+                                <td>Button</td><td><input type="button" class="pure-button" value="Click me"></td>
+                            </tr>
+                            <tr>
+                                <td>Checkbox</td><td><input type="checkbox"></td>
+                            </tr>
+                            <tr>
+                                <td>Datetime</td><td><input type="datetime" ></td>
+                            </tr>
+                            <tr>
+                                <td>Date</td><td><input type="date"></td>
+                            </tr>
+                            <tr>
+                                <td>Email</td><td><input type="email" ></td>
+                            </tr>
+                            <tr>
+                                <td>Password</td><td><input type="password" ></td>
+                            </tr>
+                            <tr>
+                                <td>Number</td><td><input type="number" ></td>
+                            </tr>
+                            <tr>
+                                <td>Submit</td><td><input type="submit" class="pure-button"></td>
+                            </tr>
+                            <tr>
+                                <td>Time</td><td><input type="time"></td>
+                            </tr>
+                            <tr>
+                                <td>Radio buttons</td>
+                                <td>
+                                    <input type="radio" name="gender" value="male" checked> Male<br>
+                                    <input type="radio" name="gender" value="female"> Female<br>
+                                    <input type="radio" name="gender" value="other"> Other
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Select and options</td>
+                                <td>
+                                    <select>
+                                        <option value="volvo">Volvo</option>
+                                        <option value="saab">Saab</option>
+                                        <option value="opel">Opel</option>
+                                        <option value="audi">Audi</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </section>
+                <section title="Html entities - UTF-8" newpage>
+                    <table class="pure-table pure-table-horizontal">
+                        <tr>
+                            <th>Function</th><th>Output</th><th>Full reference</th>
+                        </tr>
+                        <tr>
+                            <td>Greater than</td><td>&gt;</td><td></td>
+                        </tr>
+                        <tr>
+                            <td>Less than</td><td>&lt;</td><td></td>
+                        </tr>
+                        <tr>
+                            <td>Punctuation</td>
+                            <td>
+                                &lsquo; &rsquo; &rdquo; &bdquo; &#8285; &#8241; &hellip; &bull; &dagger; &ndash; &mdash;
+                            </td>
+                            <td><a href="http://www.w3schools.com/charsets/ref_utf_punctuation.asp" target="_blank"><em>here</em></a></td>
+                        </tr>
+                        <tr>
+                            <td>Currency</td>
+                            <td>
+                                &cent; &pound; &yen; &euro;
+                            </td>
+                            <td><a href="http://www.w3schools.com/charsets/ref_utf_currency.asp" target="_blank"><em>here</em></a></td>
+                        </tr>
+                        <tr>
+                            <td>Trademark</td><td>&copy; &reg; &trade;</td><td></td>
+                        </tr>
+                        <tr>
+                            <td>Math symbols (outside of equations)</td>
+                            <td>
+                                &forall; &part; &exist; &empty; &sum;
+                            </td>
+                            <td><a href="http://www.w3schools.com/charsets/ref_utf_math.asp" target="_blank"><em>here</em></a></td>
+                        </tr>
+                        <tr>
+                            <td>Greek Letters</td>
+                            <td>
+                                &Delta; &Epsilon; &Omega; &Sigma; &gamma;
+                            </td>
+                            <td><a href="http://www.w3schools.com/charsets/ref_utf_greek.asp" target="_blank"><em>here</em></a></td>
+                        </tr>
+                        <tr>
+                            <td>Arrows</td>
+                            <td>
+                                &larr; &darr; &#8600; &#8631;
+                            </td>
+                            <td><a href="http://www.w3schools.com/charsets/ref_utf_arrows.asp" target="_blank"><em>here</em></a></td>
+                        </tr>
+                        <tr>
+                            <td>Miscellaneous symbols</td>
+                            <td>
+                                &#9729; &#9762; &#9774; &#9822;
+                            </td>
+                            <td><a href="http://www.w3schools.com/charsets/ref_utf_symbols.asp" target="_blank"><em>here</em></a></td>
+                        </tr>
+                        <tr>
+                            <td>Geometric shapes</td>
+                            <td>
+                                &#9640; &#9672; &#9714;
+                            </td>
+                            <td><a href="http://www.w3schools.com/charsets/ref_utf_geometric.asp" target="_blank"><em>here</em></a></td>
+                        </tr>
+                        <tr>
+                            <td>Font Awesome icons</td>
+                            <td>
+                                <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                                <i class="fa fa-battery-three-quarters" aria-hidden="true"></i>
+                                <i class="fa fa-coffee" aria-hidden="true"></i>
+                                <i class="fa fa-code" aria-hidden="true"></i>
+                                <i class="fa fa-refresh" aria-hidden="true"></i>
+                            </td>
+                            <td><a href="http://fontawesome.io/icons/" target="_blank"><em>here</em></a></td>
+                        </tr>
+                    </table>
+                </section>
+            </section>
+        </body>
+        </html>
