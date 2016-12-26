@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/src/styles/build/main.min.css">
+    <script type="text/javascript" src="/src/scripts/build/main.min.js"></script>
+    <script type="text/javascript" src="/dependencies/MathJax/MathJax.js"></script>
+    <script>
+    var options = {
+        headerRight: 'Mathias G. Andreasen',
+        pager : 'Page [cur] of [total]',
+        padding: "10mm 25mm"
+    };
+    mlTex.run({ options: options });
+    </script>
+    <style>
+    body {
+        background-color: #525659;
+    }
+    </style>
+</head>
+<body>
+    <div toc>Table of contents</div>
+    <section title="Tests" name="sec1" newpage>
+        <section title="Structures">
+            <section title="Tables">
+                <table>
+                    <tr>
+                        <th>Header 1</th><th>Header 2</th>
+                    </tr>
+                    <tr>
+                        <td>Cell 1</td><td>Cell 2</td>
+                    </tr>
+                    <tr>
+                        <td>Row 3: Cell 1</td><td>Cell 2</td>
+                    </tr>
+                </table>
+            </section>
+            <section title="Lists">
+                Unordered list
+                <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                </ul>
+
+                <hr> <em>'hr' - thematic change in the content</em>
+
+                Ordered list
+                <ol>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                </ol>
+
+                <hr>
+                Description list
+                <dl>
+                    <dt>Coffee</dt>
+                    <dd>Black hot drink</dd>
+                    <dt>Milk</dt>
+                    <dd>White cold drink</dd>
+                </dl>
+            </section>
+        </section>
+        <section title="Text manipulation" newpage>
+            <table>
+                <tr>
+                    <th>Function</th><th>Output</th>
+                </tr>
+                <tr>
+                    <td>Bold/strong tex</td><td><b>Bold</b> / <strong>Strong</strong></td>
+                </tr>
+                <tr>
+                    <td>Italic/emphasized text</td><td> <i>italic</i> / <em>emphasized</em></td>
+                </tr>
+                <tr>
+                    <td>Hyperlink</td><td><a href="https://github.com/MGApcDev/mlTex" target="_blank">Github Repo</a></td>
+                </tr>
+                <tr>
+                    <td>Preformatted text</td><td><pre>This   is more than    1 space.</pre></td>
+                </tr>
+                <tr>
+                    <td>Progress bar</td><td><progress value="22" max="100"></progress></td>
+                </tr>
+                <tr>
+                    <td>Short quotation</td><td><q>Quote</q></td>
+                </tr>
+                <tr>
+                    <td>Strike through / deleted text</td><td>mlTex is <s>not</s> great <del>shit</del></td>
+                </tr>
+                <tr>
+                    <td>Select and options</td>
+                    <td>
+                        <select>
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="opel">Opel</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Input field</td><td><input type="text" name="" value=""></td>
+                </tr>
+                <tr>
+                    <td>Underlined text</td><td>This is a <u>parragraph</u></td>
+                </tr>
+                <tr>
+                    <td>Superscripted text</td><td>E = mc<sup>2</sup></td>
+                </tr>
+                <tr>
+                    <td>Subscripted text</td><td>H<sub>2</sub>0</td>
+                </tr>
+                <tr>
+                    <td>Equations</td>
+                    <td>
+                        <e>
+                            \frac{1}{\displaystyle 1+
+                                \frac{1}{\displaystyle 2+
+                                    \frac{1}{\displaystyle 3+x}}} +
+                                    \frac{1}{1+\frac{1}{2+\frac{1}{3+x}}}
+                                </e>
+                            </td>
+                        </tr>
+                    </table>
+                </section>
+                <section title="Visuals" newpage>
+                    <section title="Images">
+
+                        <img src="http://www.petpaw.com.au/wp-content/uploads/2014/06/Pug-5.jpg" name="figure1" caption="Sad pug" width="75%">
+
+                    </section>
+                    <section title="Video">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/9bZkp7q19f0" frameborder="0" allowfullscreen></iframe>
+                    </section>
+                    <section title="Code" newpage>
+
+                        <p><em>Source code</em></p>
+                        <script src="https://gist.github.com/MGApcDev/02cc972eeafd0562600f56c9bf56c766.js"></script>
+
+                        <p newpage><em>Running code</em></p>
+                        <p data-height="415" data-theme-id="0" data-slug-hash="qOMvpy" data-default-tab="result" data-user="ikoshowa" data-embed-version="2" data-pen-title="#Codevember - Day 6 - Bookshelf loader" class="codepen">See the Pen <a href="https://codepen.io/ikoshowa/pen/qOMvpy/">#Codevember - Day 6 - Bookshelf loader</a> by Grélard Antoine (<a href="http://codepen.io/ikoshowa">@ikoshowa</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+                    </section>
+
+                </section>
+                <section title="Inputs" newpage>
+                    To be continued...
+                </section>
+            </section>
+        </body>
+        </html>
