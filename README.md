@@ -97,7 +97,10 @@ $ gulp
 - **jQuery** --> [jQuery write less, do more](https://jquery.com/)
 - **Font** --> [Computer Modern on the web by CheckMyWorking.com](http://checkmyworking.com/cm-web-fonts/)
 - **Math** --> [MathJax, Beautiful math in all browsers](https://www.mathjax.org/)
+- **Icons** --> [Font Awesome, The iconic font and CSS toolkit](http://fontawesome.io/)
+- **CSS modules** --> [Pure CSS, A set of small, responsive CSS modules that you can use in every web project](http://purecss.io/)
 - **Spinner** --> [#Codevember - Day 6 - Bookshelf loader by Grélard Antoine](http://codepen.io/ikoshowa/pen/qOMvpy)
+- **CSS Normalize** --> [Normalize.css, A modern, HTML5-ready alternative to CSS resets](https://necolas.github.io/normalize.css/)
 
 ## Special Thanks
 - [Frederik Madsen](https://www.linkedin.com/in/frederikmadsen/da) for inspiration and help with some of the code
