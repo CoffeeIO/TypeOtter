@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/src/styles/build/main.min.css">
+    <script type="text/javascript" src="/src/scripts/build/main.min.js"></script>
+    <script type="text/javascript" src="/dependencies/MathJax/MathJax.js"></script>
+    <script>
+    var options = {
+        headerRight: 'Mathias G. Andreasen',
+        pager : 'Page [cur] of [total]',
+        padding: "10mm 25mm"
+    };
+    mlTex.run({ options: options });
+    </script>
+    <style>
+    body {
+        background-color: #525659;
+    }
+    </style>
+</head>
+<body>
+    <div toc></div>
+    <a include href="intro.html"></a>
+    <a include href="syntax.html"></a>
+    <a include href="math.html"></a>
+    <a include href="typesetting.html"></a>
+</body>
+</html>
