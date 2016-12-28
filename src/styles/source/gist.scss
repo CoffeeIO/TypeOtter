@@ -1,6 +1,17 @@
 .gist .gist-file {
     letter-spacing: normal;
-    table td {
-        border: 0;
+    .gist-meta {
+        display: none;
+    }
+    table {
+        table-layout: fixed;
+        td, span {
+            border: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    }
+    .blob-num {
+        width: 8%;
     }
 }

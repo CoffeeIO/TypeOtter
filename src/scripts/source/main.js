@@ -25,8 +25,11 @@ var mlTex = (function(obj, $) {
                 obj.addSpinner(dom);
             }
             obj.includeFiles(dom, function () {
-                obj.handleMath(dom);
-                callback();
+                obj.loadGist(function () {
+                    obj.handleMath(dom);
+                    callback();
+
+                });
             });
         };
 
@@ -42,7 +45,6 @@ var mlTex = (function(obj, $) {
                         if (mp === m && mpr === 0) { // All equations prepared and finished processing
                             clearInterval(timer);
                             callback();
-
                         }
                     }
                 }, 100);
