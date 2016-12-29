@@ -10,6 +10,10 @@ var mlTex = (function(obj, $) {
         var GIST_HOST, code, elements, gists, loader, stylesheets, gistCount, gistRendered;
         GIST_HOST = 'https://gist.github.com';
         elements = $('div[data-gist]');
+        if (elements.length === 0) {
+            callback();
+            return;
+        }
         gists = {};
         gistCount = 0;
         gistRendered = 0;
