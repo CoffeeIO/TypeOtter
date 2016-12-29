@@ -76,6 +76,15 @@ var mlTex = (function(obj, $) {
                         });
                     });
                 });
+            })
+            .fail(function() {
+                console.error('Gist id: "%s" was not found', id);
+                gistCount -= data.targets.length;
+                if (gistCount == gistRendered) {
+                    if (callback != null) {
+                        callback();
+                    }
+                }
             });
         });
     };
