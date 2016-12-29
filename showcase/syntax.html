@@ -1,0 +1,76 @@
+<section title="The syntax">
+    <section title="Table of contents">
+        To create a table of contents we you simply make a div element with 'toc' attribute.
+
+        <p>Optional attribute:</p>
+        <ul>
+            <li>title : overwrite default title ("Table of contents")</li>
+        </ul>
+        <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="toc.html"></div>
+        <section title="Sections">
+            The table is contructed based on 'section' elements in the document, sections are sections, sections inside sections are sub-sections and so on. The indexing and page numbering happens automatically, no need to run the program multiple times.
+            <p>Optional attribute:</p>
+            <ul>
+                <li>title : add title to section (default: no title, only number)</li>
+            </ul>
+            <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="section.html"></div>
+        </section>
+    </section>
+    <section title="Includes">
+        Obviously when we contruct bigger documents you need to be able to include files from other locations. For this we allow both <em>local and online</em> resources to be used.
+        <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="index.html"></div>
+        </div>
+    </section>
+    <section title="Code">
+        Oh code... oh sweet and lovely code. I really like how github highlights my code, so currently the only option is to make a gist, add your code and use this syntax to load it (note: you need an internet connection with this method).
+        <p>Attribute:</p>
+        <ul>
+            <li>data-gist : id of gist (public or secret)</li>
+            <li>data-gist-file (optional) : name of specific file to show (default: show all files in gist)</li>
+        </ul>
+        <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="gist.html"></div>
+
+        Using the power to 'embed' we can also include running code from for example CodePen.
+        <p data-height="300" data-theme-id="0" data-slug-hash="zvqGEG" data-default-tab="js,result" data-user="hoqqanen" data-embed-version="2" data-pen-title="Corange Loading Screen" class="codepen">See the Pen <a href="http://codepen.io/hoqqanen/pen/zvqGEG/">Corange Loading Screen</a> by George Hoqqanen (<a href="http://codepen.io/hoqqanen">@hoqqanen</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+        <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+    </section>
+    <section title="Links">
+        For link most webdeveloper will know how to use the 'a' tag, but for new users: Make an 'a' tag, give it href attribute with link to the content and url attribute for general styling and behavior of link.
+        <p>Fx: <a url href="https://www.google.dk">This text is optional</a></p>
+        <p>Attribute:</p>
+        <ul>
+            <li>href : link to content</li>
+            <li>url : copy href to linktext if linktext is empty, bold style linktext and target blank page when clicking on link</li>
+        </ul>
+        <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="link.html"></div>
+    </section>
+    <section title="References">
+        Elements move around depending on their relative placement, so knowing image number or section number is pointless. Similar to LaTeX you can reference a name and mlTex will find the closest relatable element.
+
+        <p>Fx: Section <a ref href="#math"></a> (see code below)</p>
+        <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="ref.html"></div>
+
+    </section>
+    <section title="Footnote">
+        ...I'll make a note, to implement that later <a href="https://github.com/MGApcDev/mlTex/issues/57" url></a>.
+    </section>
+    <section title="Citations">
+        Implemented... just gotta testes it through and stuff.
+    </section>
+    <section title="Attributes">
+        <section title="title">
+            On sections and paragraphs you can use the title attribute. On section the work as the header for the section and on paragraphs they are a bolded text before the content.
+            <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="title.html"></div>
+        </section>
+        <section title="name">
+            'name' attribute can be used on any element. This works like a label in LaTeX and can be referenced or linked to directly.
+            <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="name.html"></div>
+        </section>
+        <section title="newpage" newpage>
+            'newpage' attribute can be used on any element. This ensures that the element start on a new page.
+            <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="newpage.html"></div>
+        </section>
+    </section>
+    <a include href="general.html"></a>
+
+</section>
