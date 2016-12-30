@@ -74,7 +74,7 @@ var mlTex = (function(obj, $) {
             setZoom($(this), 1.1); // 10% increase
         });
 
-        // Handle zoom-out button.
+        // Download an html file with the content.
         $('.tex-control-download').click(function () {
             obj.download(obj.originalContent, "content.html", "text/html");
         });
