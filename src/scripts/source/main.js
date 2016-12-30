@@ -1,6 +1,6 @@
 var mlTex = (function(obj, $) {
     obj.mltexIndex = 1;
-
+    obj.originalContent = '';
     /**
      * Main function to start typesetting dom element with all preprocess functions.
      */
@@ -16,6 +16,8 @@ var mlTex = (function(obj, $) {
             }
 
             dom = $(settings.selector);
+            obj.originalContent = '<html>' + dom.closest('html').html() + '</html>';
+
             callback();
         };
 

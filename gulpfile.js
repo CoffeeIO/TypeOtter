@@ -29,6 +29,7 @@ gulp.task('uglify', function() {
         'src/scripts/source/bib.js',
         'src/scripts/source/include.js',
         'src/scripts/source/math.js',
+        'src/scripts/source/download.js',
         'src/scripts/source/code.js',
         'src/scripts/source/page.js',
         'src/scripts/source/ref.js',
