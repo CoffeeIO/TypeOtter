@@ -42,6 +42,7 @@ var mlTex = (function(obj, $) {
                 '<div>' +
                     '<div class="tex-control-zoomin"><i class="fa fa-minus"></i></div>' +
                     '<div class="tex-control-zoomout"><i class="fa fa-plus"></i></div>' +
+                    '<div class="tex-control-download"><i class="fa fa-download"></i></div>' +
                     '<div class="tex-control-print"><i class="fa fa-print"></i></div>' +
                 '</div>' +
             '</div>' +
@@ -71,6 +72,11 @@ var mlTex = (function(obj, $) {
         // Handle zoom-out button.
         $('.tex-control-zoomout').click(function () {
             setZoom($(this), 1.1); // 10% increase
+        });
+
+        // Handle zoom-out button.
+        $('.tex-control-download').click(function () {
+            obj.download(obj.originalContent, "content.html", "text/html");
         });
     };
 
