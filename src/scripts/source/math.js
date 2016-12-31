@@ -46,7 +46,9 @@ window.MathJax = {
     tex2jax: {
         inlineMath: [[mlTex.inlineMath, mlTex.inlineMath]],
         displayMath: [[mlTex.blockMath, mlTex.blockMath]],
-        processEscapes: true
+        processEscapes: true,
+        processRefs: false,
+        processEnvironments: false
     },
     skipStartupTypeset: true,
     showProcessingMessages: false,

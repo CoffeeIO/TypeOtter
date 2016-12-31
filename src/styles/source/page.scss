@@ -10,6 +10,9 @@
     letter-spacing: -0.2pt;
 
     // Default text styling
+    .tex-noindent {
+        text-indent: 0;
+    }
     p {
         text-align: justify;
         text-indent: 16pt;
