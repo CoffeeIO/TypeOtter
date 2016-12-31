@@ -26,4 +26,20 @@
     section {
         margin-bottom: 8px;
     }
+    q {
+        &:before {
+            content:"\201C";
+        }
+        &:after {
+            content:"\201D";
+        }
+        display: block;
+        margin: 10px auto;
+        width: 90%;
+    }
+    p q {
+        display: inline;
+        margin: 0;
+        width: auto;
+    }
 }
