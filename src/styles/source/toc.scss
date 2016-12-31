@@ -5,11 +5,11 @@
         > a > div {
             position: relative;
             overflow: hidden;
-            margin-bottom: 7px;
+            margin-bottom: 0;
         }
         .sec {
             margin-left: 0;
-            margin-top: 16pt;
+            margin-top: 10pt;
             font-weight: bold;
             .right:before {
                 content: '';
@@ -30,9 +30,12 @@
             position: relative;
             background: white;
             z-index: 1;
-            padding-right: 9pt;
+            padding-right: 0;
             > span {
                 margin-right: 9pt;
+                &:nth-of-type(2) {
+                    margin-right: 3px;
+                }
             }
         }
         .right {
