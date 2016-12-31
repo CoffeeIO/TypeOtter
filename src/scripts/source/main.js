@@ -30,7 +30,6 @@ var mlTex = (function(obj, $) {
                 obj.loadGist(function () {
                     obj.handleMath(dom);
                     callback();
-
                 });
             });
         };
@@ -60,14 +59,13 @@ var mlTex = (function(obj, $) {
 
         // Process dom.
         var step4 = function(callback) {
-            obj.attrify(dom);
             obj.wrapper(dom);
+            obj.attrify(dom);
             obj.indexToc(dom);
             obj.makeToc(dom);
             obj.makeRef(dom);
             obj.makeRefPage(dom, settings.biblography);
             callback();
-
         };
 
         // Texify document.

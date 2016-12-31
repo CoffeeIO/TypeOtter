@@ -1,36 +1,17 @@
-// Sections & sub-section
-section {
-    @include section-size(18pt);
-    section {
-        @include section-size(16pt);
-        section {
-            @include section-size(14pt);
-        }
+.tex-document {
+    .tex-section-title {
+        margin: 0;
     }
-}
-.tex-section-title > span {
-    margin-right: 17pt;
-}
-// Paragraph title
-.tex-para-title {
-    font-weight: bold;
-    margin-right: 10px;
-}
-// Newpage element (**infinite height**)
-.tex-newpage {
-    height: 2000pt;
-}
-
-// MathJax
-.tex-math-count {
-    float: right;
-    &:before {
-        content: '(';
+    .tex-section-title > span {
+        margin-right: 17pt;
     }
-    &:after {
-        content: ')';
+    // Paragraph title
+    .tex-para-title {
+        font-weight: bold;
+        margin-right: 10px;
     }
-}
-e .MathJax_Display {
-    margin: 0;
+    // Newpage element (**infinite height**)
+    .tex-newpage {
+        height: 2000pt;
+    }
 }

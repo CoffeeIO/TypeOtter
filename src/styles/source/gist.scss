@@ -1,17 +1,20 @@
-.gist .gist-file {
-    letter-spacing: normal;
-    .gist-meta {
-        display: none;
-    }
-    table {
-        table-layout: fixed;
-        td, span {
-            border: 0;
-            white-space: pre-wrap;
-            word-wrap: break-word;
+.tex-document {
+    .gist .gist-file {
+        margin: 8px 0;
+        letter-spacing: normal;
+        .gist-meta {
+            display: none;
         }
-    }
-    .blob-num {
-        width: 8%;
+        table {
+            table-layout: fixed;
+            td, span {
+                border: 0;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+        }
+        .blob-num {
+            width: 8%;
+        }
     }
 }

@@ -136,9 +136,9 @@ var mlTex = (function(obj, $) {
      * Unindent first paragraph in each section.
      */
     function unindentPara(dom) {
-        dom.find('section').each(function (){
-          var elem = $(this);
-          elem.find('p').first().addClass('tex-noindent');
+        dom.find('section').each(function () {
+            var elem = $(this);
+            elem.find('p').first().addClass('tex-noindent');
         });
     }
 

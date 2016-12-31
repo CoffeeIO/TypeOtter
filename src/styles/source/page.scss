@@ -4,65 +4,43 @@
 .tex-document {
     position: relative;
     margin: 0 auto;
-    font-family: 'Computer Modern Serif';
-    color: #000000;
-    font-size: $font-size;
-    letter-spacing: -0.2pt;
 
-    // Default text styling
-    .tex-noindent {
-        text-indent: 0;
-    }
-    p {
-        text-align: justify;
-        text-indent: 16pt;
-        padding: 0;
-        margin: 10px 0;
-        &[data-title] {
-            text-indent: 0;
+    .tex-page {
+        background-color: #ffffff;
+        &:first-of-type {
+            margin-top: 0;
+        }
+        &:last-of-type {
+            margin-bottom: 0;
         }
     }
-    pre {
-        margin: 0;
-        padding: 0;
-    }
-}
 
-.tex-page {
-    background-color: #ffffff;
-    &:first-of-type {
-        margin-top: 0;
+    .tex-content {
+        overflow: hidden;
     }
-    &:last-of-type {
-        margin-bottom: 0;
-    }
-}
 
-.tex-content {
-    overflow: hidden;
-}
-
-.tex-header, .tex-footer {
-    overflow: hidden;
-    text-align: center;
-    position: relative;
-    > * {
-        height: inherit;
-    }
-    // left / center / right styles
-    .left {
-        text-align: left;
-        float: left;
-    }
-    .center {
-        display: inline-block;
-        margin: 0 auto;
-        position: absolute;
-        left: 0;
-        width: 100%;
-    }
-    .right {
-        text-align: right;
-        float: right;
+    .tex-header, .tex-footer {
+        overflow: hidden;
+        text-align: center;
+        position: relative;
+        > * {
+            height: inherit;
+        }
+        // left / center / right styles
+        .left {
+            text-align: left;
+            float: left;
+        }
+        .center {
+            display: inline-block;
+            margin: 0 auto;
+            position: absolute;
+            left: 0;
+            width: 100%;
+        }
+        .right {
+            text-align: right;
+            float: right;
+        }
     }
 }

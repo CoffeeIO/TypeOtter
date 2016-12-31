@@ -3,11 +3,12 @@
     padding: 15px 10px;
     @include zoom(1);
     @include origin(0, 0);
-}
-.tex-page {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    page-break-after: always;
+
+    .tex-page {
+        margin-top: 15px;
+        margin-bottom: 15px;
+        page-break-after: always;
+    }
 }
 
 // Print styling
@@ -16,9 +17,10 @@
         background-color: #ffffff;
         padding: 0;
         margin: 0;
-    }
-    .tex-page {
-        margin: 0;
+
+        .tex-page {
+            margin: 0;
+        }
     }
 }
 @media print {
