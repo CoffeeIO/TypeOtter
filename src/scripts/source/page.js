@@ -63,10 +63,16 @@ var mlTex = (function(obj, $) {
             "}" +
             ".tex-content { " +
                 "height: calc(" + options.height + " - " + padding.top + " - " + padding.bottom + " - " +
-                options.headerHeight + " - " + options.footerHeight + "); " +
+                    options.headerHeight + " - " + options.footerHeight + "); " +
             "}" +
-            ".tex-header { height: " + options.headerHeight + "; line-height: " + options.headerHeight + "; }" +
-            ".tex-footer { height: " + options.footerHeight + "; line-height: " + options.footerHeight + "; }";
+            ".tex-header { " +
+                "height: " + options.headerHeight + "; " +
+                "line-height: " + options.headerHeight + "; " +
+            "}" +
+            ".tex-footer { " +
+                "height: " + options.footerHeight + "; " +
+                "line-height: " + options.footerHeight + "; " +
+            "}";
 
         $('<style type="text/css">' + css + '</style>').appendTo('head');
     }
@@ -273,6 +279,7 @@ var mlTex = (function(obj, $) {
      * Convert a dom element to a series of printable pages.
      */
     obj.texify = function(options, dom) {
+        dom.find('.tex-testdom').remove(); // Remove testing element we used to force font load
         var basePage = new Page();
 
         dom.wrapInner('<div>');
@@ -296,14 +303,16 @@ var mlTex = (function(obj, $) {
         );
         var testdom = dom.find('.tex-testdom');
 
-        // Detect rendered size
+        // Detect rendered size.
         basePage.page.height = testdom.height();
-        testdom.css('height', 'auto');
-        // Check there is still remaining html in the body
+
+        testdom.css('height', 'auto'); // Set height auto, so content area adjust in size depending on content
+
+        // Check there is still remaining html in the body.
         while (clone.html().trim() !== '') {
             testdom.html(''); // Clear the testdom object
 
-            // use extend to clone pageSetting obj and remove it's reference
+            // Use extend to clone pageSetting obj and remove its reference.
             pages.push(makePage($.extend(true, [], basePage), clone, testdom));
 
             obj = pages[pages.length - 1];
