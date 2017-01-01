@@ -10,6 +10,10 @@
         margin: 10px 2%;
         th {
             text-align: left;
+            vertical-align: top;
+        }
+        td {
+            vertical-align: top;
         }
     }
 
@@ -17,7 +21,9 @@
         margin: 0;
         text-align: center;
     }
-
+    ol, ul {
+        padding-left: 30px;
+    }
     hr {
         border: 0;
         height: 1px;
@@ -38,7 +44,7 @@
         margin: 10px auto;
         width: 90%;
     }
-    p q {
+    p q, li q, td q, th q, figcaption q {
         display: inline;
         margin: 0;
         width: auto;
