@@ -1,0 +1,15 @@
+// MathJax
+.tex-document {
+    e .MathJax_Display {
+        margin: 0;
+    }
+}
+.tex-math-count {
+    float: right;
+    &:before {
+        content: '(';
+    }
+    &:after {
+        content: ')';
+    }
+}

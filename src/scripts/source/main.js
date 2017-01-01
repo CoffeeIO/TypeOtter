@@ -1,6 +1,7 @@
 var mlTex = (function(obj, $) {
     obj.mltexIndex = 1;
     obj.originalContent = '';
+
     /**
      * Main function to start typesetting dom element with all preprocess functions.
      */
@@ -16,6 +17,9 @@ var mlTex = (function(obj, $) {
             }
 
             dom = $(settings.selector);
+            // Append element using computer modern font to request font load, we'll remove it later.
+            dom.append('<div class="tex-document tex-testdom">Testing</div>');
+
             obj.originalContent = '<html>' + dom.closest('html').html() + '</html>';
 
             callback();
@@ -30,7 +34,6 @@ var mlTex = (function(obj, $) {
                 obj.loadGist(function () {
                     obj.handleMath(dom);
                     callback();
-
                 });
             });
         };
@@ -60,14 +63,13 @@ var mlTex = (function(obj, $) {
 
         // Process dom.
         var step4 = function(callback) {
-            obj.attrify(dom);
             obj.wrapper(dom);
+            obj.attrify(dom);
             obj.indexToc(dom);
             obj.makeToc(dom);
             obj.makeRef(dom);
             obj.makeRefPage(dom, settings.biblography);
             callback();
-
         };
 
         // Texify document.

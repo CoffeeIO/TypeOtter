@@ -59,6 +59,9 @@ describe('Attribute preprocess:', function () {
             expect($('#paragraph2 > .tex-para-title').length).toEqual(0);
             expect($('#paragraph2').css('text-indent')).not.toEqual('0px');
         });
+        it('Don\'t indent first paragraph in section title, regardless of nesting', function () {
+            expect($('#paraFIS').css('text-indent')).toEqual('0px');
+        });
     });
 
     describe('Handle newpage attribute:', function () {

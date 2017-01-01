@@ -11,7 +11,7 @@ var mlTex = (function(obj, $) {
         var counter = 1;
         dom.find('e').each(function () {
             var elem = $(this);
-            if (elem.closest('p').length === 0) { // Check if equation is inside paragraph
+            if (elem.closest('p, li, th, td, figcaption').length === 0) { // Check if equation is inside inline element
                 elem.html(obj.blockMath + elem.html() + obj.blockMath);
                 elem.attr('data-math', counter++).attr('tex-math-style', 'block');
             } else {
@@ -46,7 +46,9 @@ window.MathJax = {
     tex2jax: {
         inlineMath: [[mlTex.inlineMath, mlTex.inlineMath]],
         displayMath: [[mlTex.blockMath, mlTex.blockMath]],
-        processEscapes: true
+        processEscapes: true,
+        processRefs: false,
+        processEnvironments: false
     },
     skipStartupTypeset: true,
     showProcessingMessages: false,

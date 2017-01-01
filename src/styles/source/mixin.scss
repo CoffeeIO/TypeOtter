@@ -3,6 +3,12 @@
         font-size: $size;
     }
 }
+@mixin section-margin($top, $bottom) {
+    .tex-section-title {
+        margin-top: $top;
+        margin-bottom: $bottom;
+    }
+}
 
 @mixin zoom($zoom, $important:"") {
     -webkit-transform: scale($zoom) $important; /* Safari And Chrome */

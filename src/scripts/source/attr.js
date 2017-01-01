@@ -11,6 +11,7 @@ var mlTex = (function(obj, $) {
         handleName(dom);
         handleCaption(dom);
         handleImgSize(dom);
+        unindentPara(dom);
         removeScript(dom);
     };
 
@@ -20,7 +21,7 @@ var mlTex = (function(obj, $) {
      * developer tools.
      */
     function handleTitle(dom) {
-        dom.find("p").each(function () {
+        dom.find('p').each(function () {
             var elem = $(this),
                 title = '';
             if (elem.attr('title') !== undefined && elem.attr('title').trim() !== '') {
@@ -31,7 +32,7 @@ var mlTex = (function(obj, $) {
                 elem.attr('data-title', title).removeAttr('title');
             }
         });
-        dom.find("section").each(function () {
+        dom.find('section').each(function () {
             var elem = $(this),
                 title = '';
             if (elem.attr('title') !== undefined) {
@@ -128,6 +129,16 @@ var mlTex = (function(obj, $) {
         dom.find('*[newpage=""]').each(function () {
             var elem = $(this);
             elem.before('<div class="tex-newpage"></div>');
+        });
+    }
+
+    /**
+     * Unindent first paragraph in each section.
+     */
+    function unindentPara(dom) {
+        dom.find('section').each(function () {
+            var elem = $(this);
+            elem.find('p').first().addClass('tex-noindent');
         });
     }
 

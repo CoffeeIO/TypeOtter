@@ -4,27 +4,7 @@
 .tex-document {
     position: relative;
     margin: 0 auto;
-    font-family: 'Computer Modern Serif';
-    color: #000000;
-    font-size: $font-size;
-    letter-spacing: -0.2pt;
-
-    // Default text styling
-    p {
-        text-align: justify;
-        text-indent: 16pt;
-        padding: 0;
-        margin: 10px 0;
-        &[data-title] {
-            text-indent: 0;
-        }
-    }
-    pre {
-        margin: 0;
-        padding: 0;
-    }
 }
-
 .tex-page {
     background-color: #ffffff;
     &:first-of-type {
@@ -34,7 +14,6 @@
         margin-bottom: 0;
     }
 }
-
 .tex-content {
     overflow: hidden;
 }
