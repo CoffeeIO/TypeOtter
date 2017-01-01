@@ -1,17 +1,15 @@
-.tex-document {
-    .tex-section-title {
-        margin: 0;
-    }
-    .tex-section-title > span {
-        margin-right: 17pt;
-    }
-    // Paragraph title
-    .tex-para-title {
-        font-weight: bold;
-        margin-right: 10px;
-    }
-    // Newpage element (**infinite height**)
-    .tex-newpage {
-        height: 2000pt;
-    }
+.tex-section-title {
+    margin: 0;
+}
+.tex-section-title > span {
+    margin-right: 17pt;
+}
+// Paragraph title
+.tex-para-title {
+    font-weight: bold;
+    margin-right: 10px;
+}
+// Newpage element (**infinite height**)
+.tex-newpage {
+    height: 2000pt;
 }

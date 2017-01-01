@@ -1,48 +1,46 @@
-.mltex {
-    .tex-controls {
-        overflow: hidden;
-        > div {
-            float: right;
-            margin-top: 10px;
-            margin-right: 5px;
-            > div { // Icons
-                font-size: 24px;
-                margin: 5px 5px;
-                padding: 0 5px;
-                color: rgb(241,241,241);
-                display: inline;
-                &:hover {
-                    cursor: pointer;
-                }
+.tex-controls {
+    overflow: hidden;
+    > div {
+        float: right;
+        margin-top: 10px;
+        margin-right: 5px;
+        > div { // Icons
+            font-size: 24px;
+            margin: 5px 5px;
+            padding: 0 5px;
+            color: rgb(241,241,241);
+            display: inline;
+            &:hover {
+                cursor: pointer;
             }
         }
+    }
+    height: 50px;
+    background: rgb(50, 54, 57);
+    position: fixed;
+    width: inherit;
+    z-index: 5;
+    transform: translateY(-100%);
+    transition: transform 1s ease, height 0.2s ease;
+    height: 0;
+    &.show {
+        transform: none;
         height: 50px;
-        background: rgb(50, 54, 57);
-        position: fixed;
-        width: inherit;
-        z-index: 5;
-        transform: translateY(-100%);
-        transition: transform 1s ease, height 0.2s ease;
-        height: 0;
-        &.show {
-            transform: none;
-            height: 50px;
-            transition: transform 0.1s ease, height 0.5s ease;
-        }
-        .tex-control-print, .tex-control-download {
-            margin-left: 20px;
-        }
+        transition: transform 0.1s ease, height 0.5s ease;
     }
-    .tex-hover {
-        z-index: 4;
-        position: fixed;
-        height: 25px;
-        width: inherit;
+    .tex-control-print, .tex-control-download {
+        margin-left: 20px;
     }
-    .tex-icons > div > i {
-        font-family: FontAwesome;
-        font-style: normal;
-        font-variant: normal;
-        font-weight: normal;
-    }
+}
+.tex-hover {
+    z-index: 4;
+    position: fixed;
+    height: 25px;
+    width: inherit;
+}
+.tex-icons > div > i {
+    font-family: FontAwesome;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: normal;
 }
