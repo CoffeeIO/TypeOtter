@@ -23,7 +23,6 @@ var mlTex = (function(obj, $) {
             obj.originalContent = '<html>' + dom.closest('html').html() + '</html>';
 
             callback();
-
         };
 
         // Preprocess dom.
