@@ -7,20 +7,6 @@ This library is intended as an improvement on LaTex, allowing users to write pro
 ## Setup and Syntax
 --> [CodePen Showcase: Setup, syntax, math, typesetting, support](http://codepen.io/MGApcDev/full/RKbxom/)
 
-Start a local server (to make sure all features work as intended)
-
-- Mac and Linux users
-
-    Open terminal and run ``$ python -m SimpleHTTPServer`` and go to localhost:8000 in your browser
-
-- Windows users (2 options)
-
-    Install the [Backets editor](http://brackets.io/) and user it's one click live preview to start a server
-
-    <i>or</i>
-
-    Install the [Bash on Windows](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide) and run the same command as linux users ``$ python -m SimpleHTTPServer`` and go to localhost:8000 in your browser
-
 ## Developers
 Install node modules (make sure you have [nodejs](https://nodejs.org/en/) installed)
 
