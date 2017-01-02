@@ -4,39 +4,8 @@ mlTex is a Javascript library to render high quality typesetting in html and pdf
 
 This library is intended as an improvement on LaTex, allowing users to write professional documents in markup.
 
-## Setup
-__Pre release:__
-
-Get the code
-```bash
-$ git clone https://github.com/MGApcDev/mlTex.git your-project
-```
-
-Go into the folder
-
-```bash
-$ cd your-project
-```
-
-Make an index.html file using your favorite editor (<i>use this template for full documents</i>)
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/src/styles/build/main.min.css">
-    <script type="text/javascript" src="/src/scripts/build/main.min.js"></script>
-    <script type="text/javascript" src="/dependencies/MathJax/MathJax.js"></script>
-    <script>
-        mlTex.run();
-    </script>
-</head>
-<body>
-    <!-- your document -->
-</body>
-</html>
-```
+## Setup and Syntax
+--> [CodePen Showcase: Setup, syntax, math, typesetting, support](http://codepen.io/MGApcDev/full/RKbxom/)
 
 Start a local server (to make sure all features work as intended)
 
@@ -77,18 +46,24 @@ $ gulp
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :smile:
 
-## Typesetting
-- Font Kerning
-
 ## Features
 - Table of contents
 - Latex equivalent font
-- Images and captions, w/ auto-numbering
-- Including html files into html files
-- Tables
+- Local and online images and captions w/ numbering
+- Sub-/subsub-/sections w/ numbering
+- Including local and online html files
+- Tables, lists
 - Page setup w/ size, header, footer, page numbering
-- Sections, w/ auto-numbering
 - Links to websites and page locations
+- References
+- Equations with LaTeX syntax
+- Rendering code with support for many languages (online only)
+- Quotes
+- Most symbols you can think of using html entities
+- Various text manipulation, bold, italic, etc.
+- Citations (needs testing)
+- Form w/ various input types
+- Local or online fonts
 
 ## Sources
 - [Basic Rules of Good Typography](http://www.troytempleman.com/2010/02/08/basic-rules-of-good-typography/)
