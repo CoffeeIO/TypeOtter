@@ -68,7 +68,7 @@ var mlTex = (function(obj, $) {
                         $(this).replaceWith(outer);
                         return outer.show(function () {
                             gistRendered++;
-                            if (gistCount == gistRendered) {
+                            if (gistCount === gistRendered) {
                                 if (callback != null) {
                                     callback();
                                 }
