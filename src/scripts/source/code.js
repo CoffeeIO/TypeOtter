@@ -58,7 +58,10 @@ var mlTex = (function(obj, $) {
                     file = target.data('gist-file');
                     if (file) {
                         outer = gist.outer.clone();
-                        inner = "<div class=\"gist-file\">" + $(gist.files.get(gist.data.files.indexOf(file))).html() + "</div>";
+                        inner =
+                            "<div class=\"gist-file\">" +
+                                $(gist.files.get(gist.data.files.indexOf(file))).html() +
+                            "</div>";
                         outer.html(inner);
                     } else {
                         outer = $(div);
@@ -80,7 +83,7 @@ var mlTex = (function(obj, $) {
             .fail(function() {
                 console.error('Gist id: "%s" was not found', id);
                 gistCount -= data.targets.length;
-                if (gistCount == gistRendered) {
+                if (gistCount === gistRendered) {
                     if (callback != null) {
                         callback();
                     }
