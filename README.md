@@ -48,6 +48,7 @@ $ gulp
 
 ## Special Thanks
 - [Frederik Madsen](https://www.linkedin.com/in/frederikmadsen/da) for inspiration and help with some of the code
+- [Anders Munck Højsgaard](https://www.linkedin.com/in/anders-munck-49a10188/da) for feedback and suggestions
 
 ---
 
