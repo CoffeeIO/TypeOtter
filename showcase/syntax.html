@@ -1,71 +1,273 @@
-<section title="Table of contents">
-    <p>To create a table of contents we you simply make a div element with 'toc' attribute.</p>
-    <span>Optional attribute:</span>
-    <ul>
-        <li>title : overwrite default title ("Table of contents")</li>
-    </ul>
-    <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="toc.html"></div>
-    <section title="Sections">
-        <p>The table is contructed based on 'section' elements in the document, sections are sections, sections inside sections are sub-sections and so on. The indexing and page numbering happens automatically, no need to run the program multiple times.</p>
-        <span>Optional attribute:</span>
+<section title="Syntax">
+    <section title="Structures">
+        <section title="Tables">
+            Styling for tables are optional, but <a href="http://purecss.io/" url>Pure CSS</a> is included so you can choose the styling preset you want <a href="http://purecss.io/tables/" url>Pure Tables</a> or style it yourself.
+            <table class="pure-table pure-table-horizontal">
+                <tr>
+                    <th>Header 1</th><th>Header 2</th>
+                </tr>
+                <tr>
+                    <td>Cell 1</td><td>Cell 2</td>
+                </tr>
+                <tr>
+                    <td>Row 3: Cell 1</td><td>Cell 2</td>
+                </tr>
+            </table>
+            <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="table.html"></div>
+
+        </section>
+        <section title="Lists">
+            Unordered list
+            <ul>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ul>
+            <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="ul-list.html"></div>
+
+            <hr> <em>'hr' - thematic change in the content</em>
+
+            Ordered list
+            <ol>
+                <li>Item 1</li>
+                <li>Item 2</li>
+                <li>Item 3</li>
+            </ol>
+            <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="ol-list.html"></div>
+
+            <hr>
+            Description list
+            <dl>
+                <dt>Coffee</dt>
+                <dd>Black hot drink</dd>
+                <dt>Milk</dt>
+                <dd>White cold drink</dd>
+            </dl>
+            <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="dl-list.html"></div>
+
+        </section>
+    </section>
+    <section title="Text manipulation">
+        <table class="pure-table pure-table-horizontal">
+            <tr>
+                <th>Function</th><th>Output</th><th>Reference</th>
+            </tr>
+            <tr>
+                <td>Bold/strong tex</td><td><b>Bold</b> / <strong>Strong</strong></td>
+                <td><a href="http://www.w3schools.com/tags/tag_b.asp" url>'b'</a>, <a href="http://www.w3schools.com/tags/tag_del.asp" url>'strong'</a></td>
+            </tr>
+            <tr>
+                <td>Italic/emphasized text</td><td> <i>italic</i> / <em>emphasized</em></td>
+                <td><a href="http://www.w3schools.com/tags/tag_i.asp" url>'i'</a>, <a href="http://www.w3schools.com/tags/tag_em.asp" url>'em'</a></td>
+            </tr>
+            <tr>
+                <td>Hyperlink</td><td><a href="https://github.com/MGApcDev/mlTex" target="_blank">Github Repo</a></td>
+                <td><a href="http://www.w3schools.com/tags/tag_a.asp" url>'a'</a></td>
+            </tr>
+            <tr>
+                <td>Preformatted text</td><td><pre>This   is more than    1 space.</pre></td>
+                <td><a href="http://www.w3schools.com/tags/tag_pre.asp" url>'pre'</a></td>
+            </tr>
+            <tr>
+                <td>Progress bar</td><td><progress value="22" max="100"></progress></td>
+                <td><a href="http://www.w3schools.com/tags/tag_progress.asp" url>'progress'</a></td>
+            </tr>
+            <tr>
+                <td>Short quotation</td><td><q>Quote</q></td>
+                <td><a href="http://www.w3schools.com/tags/tag_q.asp" url>'q'</a></td>
+            </tr>
+            <tr>
+                <td>Strike through / deleted text</td><td>mlTex is <s>not</s> great <del>shit</del></td>
+                <td><a href="http://www.w3schools.com/tags/tag_s.asp" url>'s'</a>, <a href="http://www.w3schools.com/tags/tag_del.asp" url>'del'</a></td>
+            </tr>
+            <tr>
+                <td>Underlined text</td><td>This is a <u>parragraph</u></td>
+                <td><a href="http://www.w3schools.com/tags/tag_u.asp" url>'u'</a></td>
+            </tr>
+            <tr>
+                <td>Superscripted text</td><td>E = mc<sup>2</sup></td>
+                <td><a href="http://www.w3schools.com/tags/tag_sup.asp" url>'sup'</a></td>
+            </tr>
+            <tr>
+                <td>Subscripted text</td><td>H<sub>2</sub>0</td>
+                <td><a href="http://www.w3schools.com/tags/tag_sub.asp" url>'sub'</a></td>
+            </tr>
+            <tr>
+                <td>Equations</td>
+                <td>
+                    <p><e>
+                    \frac{1}{\displaystyle 1+
+                    \frac{1}{\displaystyle 2+
+                    \frac{1}{\displaystyle 3+x}}} +
+                    \frac{1}{1+\frac{1}{2+\frac{1}{3+x}}}
+                    </e></p>
+                </td>
+                <td>Section <a href="#math" ref></a></td>
+            </tr>
+        </table>
+    </section>
+    <section title="Images">
+        <p>Images can be made using 'img' tag</p>
+        <span>Attributes:</span>
         <ul>
-            <li>title : add title to section (default: no title, only number)</li>
+            <li>src : source of the image</li>
+            <li>width : width of image (px / % / cm / ...)</li>
+            <li>height : height of image (px / % / cm / ...)</li>
+            <li>caption : the caption for the image</li>
         </ul>
-        <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="section.html"></div>
-    </section>
-</section>
-<section title="Includes">
-    Obviously when we contruct bigger documents you need to be able to include files from other locations. For this we allow both <em>local and online</em> resources to be used.
-    <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="index.html"></div>
-</div>
-</section>
-<section title="Code">
-    <p>Oh code... oh sweet and lovely code. I really like how github highlights my code, so currently the only option is to make a gist, add your code and use this syntax to load it (note: you need an internet connection with this method).</p>
-    <span>Attribute:</span>
-    <ul>
-        <li>data-gist : id of gist (public or secret)</li>
-        <li>data-gist-file (optional) : name of specific file to show (default: show all files in gist)</li>
-    </ul>
-    <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="gist.html"></div>
+        <img src="http://www.petpaw.com.au/wp-content/uploads/2014/06/Pug-5.jpg" name="figure1" caption="Sad pug" width="75%">
+        <hr>
+        <figure>
+            <figcaption>Three corgi</figcaption>
+            <img src="https://s-media-cache-ak0.pinimg.com/originals/66/b5/2c/66b52cd3106ef7e61856717899b1fa2b.jpg" name="figure1" width="75%">
+            <figcaption>Two captions</figcaption>
+        </figure>
+        <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="image.html"></div>
 
-    Using the power to 'embed' we can also include running code from for example CodePen.
-    <p data-height="300" data-theme-id="0" data-slug-hash="zvqGEG" data-default-tab="js,result" data-user="hoqqanen" data-embed-version="2" data-pen-title="Corange Loading Screen" class="codepen">See the Pen <a href="http://codepen.io/hoqqanen/pen/zvqGEG/">Corange Loading Screen</a> by George Hoqqanen (<a href="http://codepen.io/hoqqanen">@hoqqanen</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-    <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
-</section>
-<section title="Links">
-    For link most webdeveloper will know how to use the 'a' tag, but for new users: Make an 'a' tag, give it href attribute with link to the content and url attribute for general styling and behavior of link.
-    <p>Fx: <a url href="https://www.google.dk">This text is optional</a></p>
-    <span>Attribute:</span>
-    <ul>
-        <li>href : link to content</li>
-        <li>url : copy href to linktext if linktext is empty, bold style linktext and target blank page when clicking on link</li>
-    </ul>
-    <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="link.html"></div>
-</section>
-<section title="References">
-    Elements move around depending on their relative placement, so knowing image number or section number is pointless. Similar to LaTeX you can reference a name and mlTex will find the closest relatable element.
-
-    <p>Fx: Section <a ref href="#math"></a> (see code below)</p>
-    <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="ref.html"></div>
-
-</section>
-<section title="Footnote">
-    ...I'll make a note, to implement that later <a href="https://github.com/MGApcDev/mlTex/issues/57" url></a>.
-</section>
-<section title="Citations">
-    Implemented... just gotta testes it through and stuff.
-</section>
-<section title="Attributes">
-    <section title="title">
-        On sections and paragraphs you can use the title attribute. On section the work as the header for the section and on paragraphs they are a bolded text before the content.
-        <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="title.html"></div>
     </section>
-    <section title="name">
-        'name' attribute can be used on any element. This works like a label in LaTeX and can be referenced or linked to directly.
-        <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="name.html"></div>
+    <section title="Inputs">
+        Styling for inputs are optional, but <a href="http://purecss.io/" url>Pure CSS</a> is included so you can choose to use the styling preset if you want by applying a 'pure-form' class to your form <a href="http://purecss.io/forms/" url>Pure Forms</a> or style it yourself.
+        Check <a href="http://www.w3schools.com/tags/tag_input.asp" url>w3schools for reference on inputs</a>.
+        <form class="pure-form">
+            <table class="pure-table pure-table-horizontal">
+                <tr>
+                    <th>Function</th><th>Output</th>
+                </tr>
+                <tr>
+                    <td>Textarea</td><td><textarea rows="3"></textarea></td>
+                </tr>
+                <tr>
+                    <td>Textfield</td><td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td>Button</td><td><input type="button" class="pure-button" value="Click me"></td>
+                </tr>
+                <tr>
+                    <td>Checkbox</td><td><input type="checkbox"></td>
+                </tr>
+                <tr>
+                    <td>Datetime</td><td><input type="datetime" ></td>
+                </tr>
+                <tr>
+                    <td>Date</td><td><input type="date"></td>
+                </tr>
+                <tr>
+                    <td>Email</td><td><input type="email" ></td>
+                </tr>
+                <tr>
+                    <td>Password</td><td><input type="password" ></td>
+                </tr>
+                <tr>
+                    <td>Number</td><td><input type="number" ></td>
+                </tr>
+                <tr>
+                    <td>Submit</td><td><input type="submit" class="pure-button"></td>
+                </tr>
+                <tr>
+                    <td>Time</td><td><input type="time"></td>
+                </tr>
+                <tr>
+                    <td>Radio buttons</td>
+                    <td>
+                        <input type="radio" name="gender" value="male" checked> Male<br>
+                        <input type="radio" name="gender" value="female"> Female<br>
+                        <input type="radio" name="gender" value="other"> Other
+                    </td>
+                </tr>
+                <tr>
+                    <td>Select and options</td>
+                    <td>
+                        <select>
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="opel">Opel</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </form>
     </section>
-    <section title="newpage" newpage>
-        'newpage' attribute can be used on any element. This ensures that the element start on a new page.
-        <div class="gist" data-gist="9dc07f3cef06dcff40328bc481ea0f3e" data-gist-file="newpage.html"></div>
+    <section title="Html entities">
+        <table class="pure-table pure-table-horizontal">
+            <tr>
+                <th>Function</th><th>Output</th><th>Full reference</th>
+            </tr>
+            <tr>
+                <td>Greater than</td><td>&gt;</td><td></td>
+            </tr>
+            <tr>
+                <td>Less than</td><td>&lt;</td><td></td>
+            </tr>
+            <tr>
+                <td>Punctuation</td>
+                <td>
+                    &lsquo; &rsquo; &rdquo; &bdquo; &#8285; &#8241; &hellip; &bull; &dagger; &ndash; &mdash;
+                </td>
+                <td><a href="http://www.w3schools.com/charsets/ref_utf_punctuation.asp" target="_blank"><em>here</em></a></td>
+            </tr>
+            <tr>
+                <td>Currency</td>
+                <td>
+                    &cent; &pound; &yen; &euro;
+                </td>
+                <td><a href="http://www.w3schools.com/charsets/ref_utf_currency.asp" target="_blank"><em>here</em></a></td>
+            </tr>
+            <tr>
+                <td>Trademark</td><td>&copy; &reg; &trade;</td><td></td>
+            </tr>
+            <tr>
+                <td>Math symbols (outside of equations)</td>
+                <td>
+                    &forall; &part; &exist; &empty; &sum;
+                </td>
+                <td><a href="http://www.w3schools.com/charsets/ref_utf_math.asp" target="_blank"><em>here</em></a></td>
+            </tr>
+            <tr>
+                <td>Greek Letters</td>
+                <td>
+                    &Delta; &Epsilon; &Omega; &Sigma; &gamma;
+                </td>
+                <td><a href="http://www.w3schools.com/charsets/ref_utf_greek.asp" target="_blank"><em>here</em></a></td>
+            </tr>
+            <tr>
+                <td>Arrows</td>
+                <td>
+                    &larr; &darr; &#8600; &#8631;
+                </td>
+                <td><a href="http://www.w3schools.com/charsets/ref_utf_arrows.asp" target="_blank"><em>here</em></a></td>
+            </tr>
+            <tr>
+                <td>Miscellaneous symbols</td>
+                <td>
+                    &#9729; &#9762; &#9774; &#9822;
+                </td>
+                <td><a href="http://www.w3schools.com/charsets/ref_utf_symbols.asp" target="_blank"><em>here</em></a></td>
+            </tr>
+            <tr>
+                <td>Geometric shapes</td>
+                <td>
+                    &#9640; &#9672; &#9714;
+                </td>
+                <td><a href="http://www.w3schools.com/charsets/ref_utf_geometric.asp" target="_blank"><em>here</em></a></td>
+            </tr>
+            <tr>
+                <td>Font Awesome icons</td>
+                <td>
+                    <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                    <i class="fa fa-battery-three-quarters" aria-hidden="true"></i>
+                    <i class="fa fa-coffee" aria-hidden="true"></i>
+                    <i class="fa fa-code" aria-hidden="true"></i>
+                    <i class="fa fa-refresh" aria-hidden="true"></i>
+                </td>
+                <td><a href="http://fontawesome.io/icons/" target="_blank"><em>here</em></a></td>
+            </tr>
+        </table>
+    </section>
+    <section title="Fonts">
+        <p title="computerModern">Ut sed pretium quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vehicula massa eget congue commodo. Vestibulum nunc elit, gravida nec gravida nec, suscipit convallis lacus. Proin accumsan mauris at lectus viverra, eget dapibus arcu mollis. Fusce a tristique est. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eget faucibus orci. Aenean sollicitudin at ipsum non ultricies. Duis laoreet pulvinar mi. Ut a quam eget elit pharetra tincidunt. Cras dignissim faucibus mauris sed pretium. Etiam condimentum neque ut suscipit viverra.</p>
+        <p style="font-family: Verdana" title="Verdana">Ut sed pretium quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vehicula massa eget congue commodo. Vestibulum nunc elit, gravida nec gravida nec, suscipit convallis lacus. Proin accumsan mauris at lectus viverra, eget dapibus arcu mollis. Fusce a tristique est. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eget faucibus orci. Aenean sollicitudin at ipsum non ultricies. Duis laoreet pulvinar mi. Ut a quam eget elit pharetra tincidunt. Cras dignissim faucibus mauris sed pretium. Etiam condimentum neque ut suscipit viverra.</p>
+        <p style="font-family: Comic Sans MS" title="Comic Sans">Ut sed pretium quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vehicula massa eget congue commodo. Vestibulum nunc elit, gravida nec gravida nec, suscipit convallis lacus. Proin accumsan mauris at lectus viverra, eget dapibus arcu mollis. Fusce a tristique est. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eget faucibus orci. Aenean sollicitudin at ipsum non ultricies. Duis laoreet pulvinar mi. Ut a quam eget elit pharetra tincidunt. Cras dignissim faucibus mauris sed pretium. Etiam condimentum neque ut suscipit viverra.</p>
+        <p style="font-family: Palanquin" title="Palanquin">Ut sed pretium quam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vehicula massa eget congue commodo. Vestibulum nunc elit, gravida nec gravida nec, suscipit convallis lacus. Proin accumsan mauris at lectus viverra, eget dapibus arcu mollis. Fusce a tristique est. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Sed eget faucibus orci. Aenean sollicitudin at ipsum non ultricies. Duis laoreet pulvinar mi. Ut a quam eget elit pharetra tincidunt. Cras dignissim faucibus mauris sed pretium. Etiam condimentum neque ut suscipit viverra.</p>
     </section>
 </section>
