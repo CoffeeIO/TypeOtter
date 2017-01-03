@@ -4,7 +4,7 @@ mlTex is a Javascript library to render high quality typesetting in html and pdf
 
 This library is intended as an improvement on LaTex, allowing users to write professional documents in markup.
 
-## Setup and Syntax
+## Setup and Features
 --> [CodePen Showcase: Setup, syntax, math, typesetting, support](http://codepen.io/MGApcDev/full/RKbxom/)
 
 ## Developers
@@ -32,25 +32,6 @@ $ gulp
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request :smile:
 
-## Features
-- Table of contents
-- Latex equivalent font
-- Local and online images and captions w/ numbering
-- Sub-/subsub-/sections w/ numbering
-- Including local and online html files
-- Tables, lists
-- Page setup w/ size, header, footer, page numbering
-- Links to websites and page locations
-- References
-- Equations with LaTeX syntax
-- Rendering code with support for many languages (online only)
-- Quotes
-- Most symbols you can think of using html entities
-- Various text manipulation, bold, italic, etc.
-- Citations (needs testing)
-- Form w/ various input types
-- Local or online fonts
-
 ## Sources
 - [Basic Rules of Good Typography](http://www.troytempleman.com/2010/02/08/basic-rules-of-good-typography/)
 
@@ -62,6 +43,8 @@ $ gulp
 - **CSS modules** --> [Pure CSS, A set of small, responsive CSS modules that you can use in every web project](http://purecss.io/)
 - **Spinner** --> [#Codevember - Day 6 - Bookshelf loader by Grélard Antoine](http://codepen.io/ikoshowa/pen/qOMvpy)
 - **CSS Normalize** --> [Normalize.css, A modern, HTML5-ready alternative to CSS resets](https://necolas.github.io/normalize.css/)
+- **Download file** --> [download by dandavis](https://github.com/rndme/download)
+- **Code rendering** --> [GitHub gist](https://gist.github.com/)
 
 ## Special Thanks
 - [Frederik Madsen](https://www.linkedin.com/in/frederikmadsen/da) for inspiration and help with some of the code
