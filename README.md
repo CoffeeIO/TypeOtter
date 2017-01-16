@@ -1,6 +1,6 @@
-# [mlTex](http://mgapcdev.github.io/mlTex/) [![Build Status](https://travis-ci.org/MGApcDev/mlTex.svg?branch=master)](https://travis-ci.org/MGApcDev/mlTex) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21)](https://www.codacy.com/app/mgapcdev/mlTex?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MGApcDev/mlTex&amp;utm_campaign=Badge_Grade) [![Stories in Ready](https://badge.waffle.io/MGApcDev/mlTex.png?label=ready&title=Ready)](http://waffle.io/MGApcDev/mlTex)
+# [TypeOtter](http://mgapcdev.github.io/TypeOtter/) [![Build Status](https://travis-ci.org/MGApcDev/TypeOtter.svg?branch=master)](https://travis-ci.org/MGApcDev/TypeOtter) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21)](https://www.codacy.com/app/mgapcdev/TypeOtter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MGApcDev/mlTex&amp;utm_campaign=Badge_Grade) [![Stories in Ready](https://badge.waffle.io/MGApcDev/TypeOtter.png?label=ready&title=Ready)](http://waffle.io/MGApcDev/TypeOtter)
 
-mlTex is a Javascript library to render high quality typesetting in html and pdf.
+TypeOtter is a Javascript library to render high quality typesetting in html and pdf.
 
 This library is intended as an improvement on LaTex, allowing users to write professional documents in markup.
 
@@ -48,7 +48,7 @@ $ gulp
 
 ## Special Thanks
 - [Frederik Madsen](https://www.linkedin.com/in/frederikmadsen/da) for inspiration and help with some of the code
-- [Anders Munck Højsgaard](https://www.linkedin.com/in/anders-munck-49a10188/da) for feedback and suggestions
+- [Anders Munck Højsgaard](https://www.linkedin.com/in/anders-munck-49a10188/da) for feedback and discussions
 
 ---
 
