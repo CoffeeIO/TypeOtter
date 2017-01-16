@@ -7,9 +7,10 @@
 Create documents with great typesetting on the web.
 </p>
 <p align="center">
-<img alt="TypeOtter" src="https://travis-ci.org/MGApcDev/TypeOtter.svg?branch=master">
-<img src="https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21"/>
-<img alt="TypeOtter" src="https://badge.waffle.io/MGApcDev/TypeOtter.svg?label=ready&title=Ready">
+<a href="https://travis-ci.org/MGApcDev/TypeOtter"><img alt="TypeOtter" src="https://travis-ci.org/MGApcDev/TypeOtter.svg?branch=master"></a>
+<a href="https://www.codacy.com/app/mgapcdev/TypeOtter/dashboard"><img src="https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21"/></a>
+<a href="https://waffle.io/MGApcDev/TypeOtter"><img alt="TypeOtter" src="https://badge.waffle.io/MGApcDev/TypeOtter.svg?label=ready&title=Ready"></a>
+<a href="LICENSE.md"><img alt="TypeOtter" src="https://img.shields.io/aur/license/yaourt.svg"></a>
 </p>
 
 ---
