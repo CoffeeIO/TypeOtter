@@ -1,4 +1,18 @@
-# [TypeOtter](http://mgapcdev.github.io/TypeOtter/) [![Build Status](https://travis-ci.org/MGApcDev/TypeOtter.svg?branch=master)](https://travis-ci.org/MGApcDev/TypeOtter) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21)](https://www.codacy.com/app/mgapcdev/TypeOtter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MGApcDev/mlTex&amp;utm_campaign=Badge_Grade) [![Stories in Ready](https://badge.waffle.io/MGApcDev/TypeOtter.png?label=ready&title=Ready)](http://waffle.io/MGApcDev/TypeOtter)
+<p align="center">
+    <a href="http://mgapcdev.github.io/TypeOtter/">
+        <img alt="Rax" src="http://i.imgur.com/tGz40Of.png" width="300">
+    </a>
+</p>
+<p align="center">
+Create documents with great typesetting on the web.
+</p>
+<p align="center">
+<img alt="TypeOtter" src="https://travis-ci.org/MGApcDev/TypeOtter.svg?branch=master">
+<img src="https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21"/>
+<img alt="TypeOtter" src="https://badge.waffle.io/MGApcDev/TypeOtter.svg?label=ready&title=Ready">
+</p>
+
+---
 
 TypeOtter is a Javascript library to render high quality typesetting in html and pdf.
 
