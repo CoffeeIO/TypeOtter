@@ -1,4 +1,4 @@
-var mlTex = (function(obj, $) {
+var TextOtter = (function(obj, $) {
 
     /**
      * Load GitHub gists, modified.
@@ -93,4 +93,4 @@ var mlTex = (function(obj, $) {
     };
 
     return obj;
-}(mlTex || {}, jQuery));
+}(TextOtter || {}, jQuery));

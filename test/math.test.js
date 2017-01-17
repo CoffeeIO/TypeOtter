@@ -11,7 +11,7 @@ describe('MathJax processing:', function () {
             $('.unit-texting').remove(); // Remove existing tex documents
             $('body').append(__html__['fixtures/test1']);
 
-            mlTex.run({selector: '.unit-texting'}, function () {
+            TextOtter.run({selector: '.unit-texting'}, function () {
                 run = true;
                 done();
             });

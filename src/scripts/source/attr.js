@@ -1,4 +1,4 @@
-var mlTex = (function(obj, $) {
+var TextOtter = (function(obj, $) {
 
     /**
      * Look for specific attributes in dom and generate elements.
@@ -152,4 +152,4 @@ var mlTex = (function(obj, $) {
     }
 
     return obj;
-}(mlTex || {}, jQuery));
+}(TextOtter || {}, jQuery));

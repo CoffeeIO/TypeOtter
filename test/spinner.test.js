@@ -12,7 +12,7 @@ describe('Spinner testing:', function () {
                 $('.unit-texting').remove(); // Remove existing tex documents
                 $('body').append(__html__['fixtures/test2']);
 
-                mlTex.run({selector: '.unit-texting'}, function () {
+                TextOtter.run({selector: '.unit-texting'}, function () {
                     run = true;
                     setTimeout(function(){
                         done();
@@ -34,7 +34,7 @@ describe('Spinner testing:', function () {
                 $('.unit-texting').remove(); // Remove existing tex documents
                 $('body').append(__html__['fixtures/test2']);
 
-                mlTex.run({selector: '.unit-texting', options: {spinner: false}}); // Hide spinner option
+                TextOtter.run({selector: '.unit-texting', options: {spinner: false}}); // Hide spinner option
                 run = true;
                 setTimeout(function(){
                     done();
@@ -55,7 +55,7 @@ describe('Spinner testing:', function () {
                 $('.unit-texting').remove(); // Remove existing tex documents
                 $('body').append(__html__['fixtures/test2']);
 
-                mlTex.run({selector: '.unit-texting'});
+                TextOtter.run({selector: '.unit-texting'});
                 run = true;
                 setTimeout(function(){
                     done();
