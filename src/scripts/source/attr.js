@@ -39,7 +39,7 @@ var TextOtter = (function(obj, $) {
                 title = elem.attr('title');
             }
             elem.prepend(
-                '<a href="#mltex-toc">' +
+                '<a href="#tex-toc">' +
                     '<h1 class="tex-section-title"><span>' + title + '</span></h1>' +
                 '</a>'
             );

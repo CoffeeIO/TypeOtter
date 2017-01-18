@@ -31,21 +31,21 @@ describe('Controls test:', function () {
 
     describe('Controls width:', function () {
         it('Matching width', function () {
-            var elem = $('.mltex');
+            var elem = $('.typeotter');
             expect(elem.find('.tex-controls, .tex-hover').width()).toEqual(elem.parent().width());
         });
     });
 
     describe('Document zoom:', function () {
         it('Zoom out', function () {
-            var zoom = $('.mltex .tex-document').attr('zoom');
+            var zoom = $('.typeotter .tex-document').attr('zoom');
             $('.tex-control-zoomout').trigger('click');
-            expect($('.mltex .tex-document').attr('zoom')).not.toBeLessThan(zoom);
+            expect($('.typeotter .tex-document').attr('zoom')).not.toBeLessThan(zoom);
         });
         it('Zoom in', function () {
-            var zoom = $('.mltex .tex-document').attr('zoom');
+            var zoom = $('.typeotter .tex-document').attr('zoom');
             $('.tex-control-zoomin').trigger('click');
-            expect($('.mltex .tex-document').attr('zoom')).toBeLessThan(zoom);
+            expect($('.typeotter .tex-document').attr('zoom')).toBeLessThan(zoom);
         });
     });
 

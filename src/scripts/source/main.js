@@ -93,7 +93,7 @@ var TextOtter = (function(obj, $) {
                 obj.removeSpinner();
             }
             dom.wrapInner(
-                '<div class="mltex" id="mltex-' + obj.documentIndex + '"></div>'
+                '<div class="typeotter" id="typeotter-' + obj.documentIndex + '"></div>'
             );
             obj.documentIndex++;
 

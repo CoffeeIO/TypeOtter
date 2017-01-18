@@ -5,7 +5,7 @@ var TextOtter = (function(obj, $) {
      * Instead of checking all posible css properties for a defined value, we store it as an attribute.
      */
     function setZoom(dom, scale) {
-        var elem = dom.closest('.mltex').find('.tex-document');
+        var elem = dom.closest('.typeotter').find('.tex-document');
 
         var newZoom = elem.attr('zoom') * scale,
             newZoomScale = 'scale(' + newZoom + ')';
@@ -26,7 +26,7 @@ var TextOtter = (function(obj, $) {
      * Update width of UI controls.
      */
     obj.updateControlsWidth = function () {
-        $('.mltex').each(function () {
+        $('.typeotter').each(function () {
             var elem = $(this),
                 width = elem.parent().width();
             elem.find('.tex-controls, .tex-hover').css('width', width);
