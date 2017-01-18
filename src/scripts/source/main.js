@@ -1,5 +1,5 @@
-var mlTex = (function(obj, $) {
-    obj.mltexIndex = 1;
+var TextOtter = (function(obj, $) {
+    obj.documentIndex = 1;
     obj.originalContent = '';
 
     /**
@@ -93,9 +93,9 @@ var mlTex = (function(obj, $) {
                 obj.removeSpinner();
             }
             dom.wrapInner(
-                '<div class="mltex" id="mltex-' + obj.mltexIndex + '"></div>'
+                '<div class="typeotter" id="typeotter-' + obj.documentIndex + '"></div>'
             );
-            obj.mltexIndex++;
+            obj.documentIndex++;
 
             addResizeEvent();
             obj.updateControlsWidth();
@@ -161,4 +161,4 @@ var mlTex = (function(obj, $) {
     }
 
     return obj;
-}(mlTex || {}, jQuery));
+}(TextOtter || {}, jQuery));

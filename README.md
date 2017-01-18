@@ -1,6 +1,21 @@
-# [mlTex](http://mgapcdev.github.io/mlTex/) [![Build Status](https://travis-ci.org/MGApcDev/mlTex.svg?branch=master)](https://travis-ci.org/MGApcDev/mlTex) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21)](https://www.codacy.com/app/mgapcdev/mlTex?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=MGApcDev/mlTex&amp;utm_campaign=Badge_Grade) [![Stories in Ready](https://badge.waffle.io/MGApcDev/mlTex.png?label=ready&title=Ready)](http://waffle.io/MGApcDev/mlTex)
+<p align="center">
+    <a href="http://mgapcdev.github.io/TypeOtter/">
+        <img alt="Rax" src="http://i.imgur.com/tGz40Of.png" width="300">
+    </a>
+</p>
+<p align="center">
+Create documents with great typesetting on the web.
+</p>
+<p align="center">
+<a href="https://travis-ci.org/MGApcDev/TypeOtter"><img alt="TypeOtter" src="https://travis-ci.org/MGApcDev/TypeOtter.svg?branch=master"></a>
+<a href="https://www.codacy.com/app/mgapcdev/TypeOtter/dashboard"><img src="https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21"/></a>
+<a href="https://waffle.io/MGApcDev/TypeOtter"><img alt="TypeOtter" src="https://badge.waffle.io/MGApcDev/TypeOtter.svg?label=ready&title=Ready"></a>
+<a href="LICENSE.md"><img alt="TypeOtter" src="https://img.shields.io/aur/license/yaourt.svg"></a>
+</p>
 
-mlTex is a Javascript library to render high quality typesetting in html and pdf.
+---
+
+TypeOtter is a Javascript library to render high quality typesetting in html and pdf.
 
 This library is intended as an improvement on LaTex, allowing users to write professional documents in markup.
 
@@ -48,7 +63,7 @@ $ gulp
 
 ## Special Thanks
 - [Frederik Madsen](https://www.linkedin.com/in/frederikmadsen/da) for inspiration and help with some of the code
-- [Anders Munck Højsgaard](https://www.linkedin.com/in/anders-munck-49a10188/da) for feedback and suggestions
+- [Anders Munck Højsgaard](https://www.linkedin.com/in/anders-munck-49a10188/da) for feedback and discussions
 
 ---
 

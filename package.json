@@ -1,5 +1,5 @@
 {
-  "name": "mlTex",
+  "name": "TextOtter",
   "version": "0.1.0",
   "description": "",
   "author": "Mathias Grundtvig Andreasen (MGApcDev)",
@@ -25,6 +25,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MGApcDev/mlTex"
+    "url": "https://github.com/MGApcDev/TypeOtter"
   }
 }

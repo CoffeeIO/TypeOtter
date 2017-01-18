@@ -1,4 +1,4 @@
-var mlTex = (function(obj, $) {
+var TextOtter = (function(obj, $) {
 
     /**
      * Javascript implementation of Java’s String.hashCode() method.
@@ -64,4 +64,4 @@ var mlTex = (function(obj, $) {
     };
 
     return obj;
-}(mlTex || {}, jQuery));
+}(TextOtter || {}, jQuery));

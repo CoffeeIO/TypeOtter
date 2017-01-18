@@ -52,7 +52,7 @@ describe('Settings test:', function () {
                 },
             },
         };
-        var newSettings = mlTex.getSettings(custom);
+        var newSettings = TextOtter.getSettings(custom);
 
         expect(newSettings.selector).toEqual('.unit-texting');
         expect(newSettings.biblography.book1.title).toEqual('The LaTeX Companion');
@@ -66,13 +66,13 @@ describe('Settings test:', function () {
             selector: '.unknown-selector',
         };
 
-        var newSettings = mlTex.getSettings(custom);
+        var newSettings = TextOtter.getSettings(custom);
         expect(console.error).toHaveBeenCalled(); // Selector doesn't exist, should throw error
         expect(newSettings).toEqual(null);
     });
 
     it('Empty settings', function () {
-        var newSettings = mlTex.getSettings({});
+        var newSettings = TextOtter.getSettings({});
         expect(newSettings).toEqual(wrapOptions);
     });
 
@@ -85,14 +85,14 @@ describe('Settings test:', function () {
             },
             newOption: 'Custom option'
         };
-        var newSettings = mlTex.getSettings(custom);
+        var newSettings = TextOtter.getSettings(custom);
         expect(newSettings.newOption).toEqual('Custom option');
         expect(newSettings.options.unknownOption).toEqual('unknown');
         expect(newSettings.options.headerCenter).toEqual('Your name');
     });
 
     it('Null settings', function () {
-        var newSettings = mlTex.getSettings(null);
+        var newSettings = TextOtter.getSettings(null);
         expect(newSettings).toEqual(wrapOptions);
     });
 });

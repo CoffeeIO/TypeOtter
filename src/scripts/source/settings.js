@@ -1,4 +1,4 @@
-var mlTex = (function(obj, $) {
+var TextOtter = (function(obj, $) {
 
     // Default options the program will use.
     var defaultOptions = {
@@ -88,4 +88,4 @@ var mlTex = (function(obj, $) {
     };
 
     return obj;
-}(mlTex || {}, jQuery));
+}(TextOtter || {}, jQuery));

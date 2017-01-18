@@ -15,7 +15,7 @@ describe('Text wrap testing:', function () {
             $('.unit-texting').remove(); // Remove existing tex documents
             $('body').append(__html__['fixtures/test3']);
 
-            mlTex.wrapper($('.unit-texting'));
+            TextOtter.wrapper($('.unit-texting'));
             run = true;
             sec1o2 = $('.sec1-2');
             sec1o3 = $('.sec1-3');

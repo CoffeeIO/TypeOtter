@@ -1,4 +1,4 @@
-var mlTex = (function(obj, $) {
+var TextOtter = (function(obj, $) {
     // Global MathJax variables
     obj.inlineMath = 'a579438542e77567a744e7abaeaac7ae'; // MD5 of '$$ inline'
     obj.blockMath  = '1a73f16f7ac6dc3674c729ed2524bcc6'; // MD5 of '$$ block'
@@ -37,15 +37,15 @@ var mlTex = (function(obj, $) {
     };
 
     return obj;
-}(mlTex || {}, jQuery));
+}(TextOtter || {}, jQuery));
 
 // MathJax properties.
 window.MathJax = {
     extensions: ["tex2jax.js"],
     jax: ["input/TeX", "output/HTML-CSS"],
     tex2jax: {
-        inlineMath: [[mlTex.inlineMath, mlTex.inlineMath]],
-        displayMath: [[mlTex.blockMath, mlTex.blockMath]],
+        inlineMath: [[TextOtter.inlineMath, TextOtter.inlineMath]],
+        displayMath: [[TextOtter.blockMath, TextOtter.blockMath]],
         processEscapes: true,
         processRefs: false,
         processEnvironments: false

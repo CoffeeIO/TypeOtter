@@ -1,11 +1,11 @@
-var mlTex = (function(obj, $) {
+var TextOtter = (function(obj, $) {
 
     /**
      * Set zoom level on dom element relative to scale.
      * Instead of checking all posible css properties for a defined value, we store it as an attribute.
      */
     function setZoom(dom, scale) {
-        var elem = dom.closest('.mltex').find('.tex-document');
+        var elem = dom.closest('.typeotter').find('.tex-document');
 
         var newZoom = elem.attr('zoom') * scale,
             newZoomScale = 'scale(' + newZoom + ')';
@@ -26,7 +26,7 @@ var mlTex = (function(obj, $) {
      * Update width of UI controls.
      */
     obj.updateControlsWidth = function () {
-        $('.mltex').each(function () {
+        $('.typeotter').each(function () {
             var elem = $(this),
                 width = elem.parent().width();
             elem.find('.tex-controls, .tex-hover').css('width', width);
@@ -81,4 +81,4 @@ var mlTex = (function(obj, $) {
     };
 
     return obj;
-}(mlTex || {}, jQuery));
+}(TextOtter || {}, jQuery));

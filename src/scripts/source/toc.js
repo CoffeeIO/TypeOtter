@@ -1,4 +1,4 @@
-var mlTex = (function(obj, $) {
+var TextOtter = (function(obj, $) {
 
     /**
      * Index the sections in dom element.
@@ -26,7 +26,7 @@ var mlTex = (function(obj, $) {
 
             sec.attr('data-ref', join);
             // Make reference link
-            sec.prepend('<a name="mltex-' + join + '"></a>');
+            sec.prepend('<a name="tex-' + join + '"></a>');
             // Prepend section to section title
             sec.find('.tex-section-title').first().prepend('<span>' + join + '</span>');
         });
@@ -37,7 +37,7 @@ var mlTex = (function(obj, $) {
      */
     function makeTocRow(ref, section, title, className) {
         var curHtml =
-            '<a href="#mltex-' + ref + '">' +
+            '<a href="#tex-' + ref + '">' +
                 '<div class="' + className + '" data-ref="' + ref + '">' +
                     '<div class="left">' +
                         '<span>' + section + '</span>' +
@@ -104,7 +104,7 @@ var mlTex = (function(obj, $) {
      */
     function genToc(inner, title) {
         var curHtml =
-            '<a name="mltex-toc"></a>' +
+            '<a name="tex-toc"></a>' +
             '<h1 class="toc-title">' + title + '</h1>' +
             inner;
         return curHtml;
@@ -142,4 +142,4 @@ var mlTex = (function(obj, $) {
     };
 
     return obj;
-}(mlTex || {}, jQuery));
+}(TextOtter || {}, jQuery));
