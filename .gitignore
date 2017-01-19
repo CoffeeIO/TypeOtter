@@ -1,3 +1,2 @@
 *.pdf
 node_modules
-dist/mainNoMath.min.js

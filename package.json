@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "python -m SimpleHTTPServer",
-    "pretest": "gulp uglifyNoMath",
+    "pretest": "gulp",
     "test": "karma start karma.conf.js"
   },
   "repository": {

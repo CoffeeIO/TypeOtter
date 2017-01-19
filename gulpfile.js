@@ -4,7 +4,7 @@ var uglify = require('gulp-uglify');
 var pump = require('pump');
 var concat = require('gulp-concat');
 
-gulp.task('default', ['sass', 'uglify'], function () {
+gulp.task('default', ['sass', 'uglify', 'uglifyNoMath'], function () {
 
 });
 
