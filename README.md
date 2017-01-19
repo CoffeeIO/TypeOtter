@@ -25,11 +25,11 @@ This library is intended as an improvement on LaTex, allowing users to write pro
 $ npm install typeotter
 ```
 
-or
+_or_
 
 [Download compressed: TypeOtter-0.2.0.zip](https://github.com/MGApcDev/TypeOtter/releases/download/v0.2.0/TypeOtter-0.2.0.zip)
 
-or
+_or_
 
 [Just link it, no download!(see example)](http://codepen.io/MGApcDev/full/jyyJOe/)
 
