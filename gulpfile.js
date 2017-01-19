@@ -10,36 +10,49 @@ gulp.task('default', ['sass', 'uglify'], function () {
 
 gulp.task('sass', function () {
     return gulp.src(
-        './src/styles/source/main.scss'
+        './src/styles/main.scss'
     )
     .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
     .pipe(concat('main.min.css'))
-    .pipe(gulp.dest('./src/styles/build'));
+    .pipe(gulp.dest('dist'));
 });
 
-gulp.task('sass:watch', function () {
-    gulp.watch('./src/styles/source/*.scss', ['sass']);
-});
+var js = [
+    'src/scripts/settings.js',
+    'src/scripts/attr.js',
+    'src/scripts/bib.js',
+    'src/scripts/include.js',
+    'src/scripts/math.js',
+    'src/scripts/download.js',
+    'src/scripts/code.js',
+    'src/scripts/page.js',
+    'src/scripts/ref.js',
+    'src/scripts/spinner.js',
+    'src/scripts/controls.js',
+    'src/scripts/toc.js',
+    'src/scripts/wrap.js',
+    'src/scripts/main.js'
+];
 
 gulp.task('uglify', function() {
     return gulp.src([
-        'dependencies/jQuery/jquery-2.2.0.min.js',
-        'src/scripts/source/settings.js',
-        'src/scripts/source/attr.js',
-        'src/scripts/source/bib.js',
-        'src/scripts/source/include.js',
-        'src/scripts/source/math.js',
-        'src/scripts/source/download.js',
-        'src/scripts/source/code.js',
-        'src/scripts/source/page.js',
-        'src/scripts/source/ref.js',
-        'src/scripts/source/spinner.js',
-        'src/scripts/source/controls.js',
-        'src/scripts/source/toc.js',
-        'src/scripts/source/wrap.js',
-        'src/scripts/source/main.js'
-    ])
+        'node_modules/jquery/dist/jquery.min.js' // jQuery
+    ]
+    .concat(js)
+    .concat([
+        'src/scripts/MathJax.js' // MathJax:668
+    ]))
     .pipe(concat('main.min.js'))
     .pipe(uglify())
-    .pipe(gulp.dest('src/scripts/build'));
+    .pipe(gulp.dest('dist'));
+});
+
+gulp.task('uglifyNoMath', function() {
+    return gulp.src([
+        'node_modules/jquery/dist/jquery.min.js' // jQuery
+    ]
+    .concat(js))
+    .pipe(concat('mainNoMath.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('dist'));
 });

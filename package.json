@@ -5,6 +5,11 @@
   "author": "Mathias Grundtvig Andreasen (MGApcDev)",
   "license": "GPL-3.0",
   "dependencies": {
+    "jquery": "~3.1.1",
+    "font-awesome": "~4.7.0",
+    "mathjax": "~2.7.0"
+  },
+  "devDependencies": {
     "gulp": "*",
     "gulp-sass": "*",
     "gulp-watch": "*",
@@ -15,13 +20,11 @@
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.1",
     "karma-chrome-launcher": "^1.0.1",
-    "karma-jasmine": "^1.0.2"
-  },
-  "devDependencies": {
+    "karma-jasmine": "^1.0.2",
     "karma-html2js-preprocessor": "~1.1.0"
   },
   "scripts": {
-    "test": "karma start karma.conf.js"
+    "test": "gulp uglifyNoMath; karma start karma.conf.js"
   },
   "repository": {
     "type": "git",
