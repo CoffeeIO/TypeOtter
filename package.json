@@ -1,6 +1,6 @@
 {
   "name": "TypeOtter",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "",
   "author": "Mathias Grundtvig Andreasen (MGApcDev)",
   "license": "GPL-3.0",
@@ -25,7 +25,8 @@
   },
   "scripts": {
     "start": "python -m SimpleHTTPServer",
-    "test": "gulp uglifyNoMath; karma start karma.conf.js"
+    "pretest": "gulp uglifyNoMath",
+    "test": "karma start karma.conf.js"
   },
   "repository": {
     "type": "git",
