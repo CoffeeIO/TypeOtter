@@ -11,7 +11,7 @@ describe('Controls test:', function () {
             $('.unit-texting').remove(); // Remove existing tex documents
             $('body').append(__html__['fixtures/test1']);
 
-            TextOtter.run({selector: '.unit-texting'}, function () {
+            TypeOtter.run({selector: '.unit-texting'}, function () {
                 run = true;
                 done();
             });

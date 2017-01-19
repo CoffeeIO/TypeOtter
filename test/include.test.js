@@ -12,7 +12,7 @@ describe('Include preprocess:', function () {
                 $('.unit-texting').remove(); // Remove existing tex documents
                 $('body').append(__html__['fixtures/include/index']);
 
-                TextOtter.run({selector: '.unit-texting'}, function () {
+                TypeOtter.run({selector: '.unit-texting'}, function () {
                     run = true;
                     done();
                 });
@@ -38,7 +38,7 @@ describe('Include preprocess:', function () {
             $('.unit-texting').remove(); // Remove existing tex documents
             $('body').append(__html__['fixtures/include/index2']);
 
-            TextOtter.run({selector: '.unit-texting'}, function () {
+            TypeOtter.run({selector: '.unit-texting'}, function () {
                 done();
             });
         });
@@ -60,7 +60,7 @@ describe('Include preprocess:', function () {
             $('.unit-texting').remove(); // Remove existing tex documents
             $('body').append(__html__['fixtures/include/index3']);
 
-            TextOtter.run({selector: '.unit-texting'}, function () {
+            TypeOtter.run({selector: '.unit-texting'}, function () {
                 done();
             });
         });

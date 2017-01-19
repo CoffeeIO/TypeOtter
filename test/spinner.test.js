@@ -12,7 +12,7 @@ describe('Spinner testing:', function () {
                 $('.unit-texting').remove(); // Remove existing tex documents
                 $('body').append(__html__['fixtures/test2']);
 
-                TextOtter.run({selector: '.unit-texting'}, function () {
+                TypeOtter.run({selector: '.unit-texting'}, function () {
                     run = true;
                     setTimeout(function(){
                         done();
@@ -26,15 +26,23 @@ describe('Spinner testing:', function () {
     });
 
     describe('Test while processing:', function () {
-        var run = false;
+        var run = false,
+            continueExecution = false;
         beforeEach(function(done) {
             if (run) {
-                done();
+                var timer = setInterval(function () { // Block until window is loaded
+                    if (continueExecution === true) {
+                        done();
+                        clearInterval(timer);
+                    }
+                }, 200);
             } else {
                 $('.unit-texting').remove(); // Remove existing tex documents
                 $('body').append(__html__['fixtures/test2']);
 
-                TextOtter.run({selector: '.unit-texting', options: {spinner: false}}); // Hide spinner option
+                TypeOtter.run({selector: '.unit-texting', options: {spinner: false}}, function () {
+                    continueExecution = true;
+                }); // Hide spinner option
                 run = true;
                 setTimeout(function(){
                     done();
@@ -44,18 +52,29 @@ describe('Spinner testing:', function () {
         it('No spinner while processing', function () {
             expect($('.tex-spinner').length).toEqual(0);
         });
+        it('Block execution until last call is finished', function () {
+            expect(0).toEqual(0);
+        });
     });
 
     describe('Test while processing:', function () {
-        var run = false;
+        var run = false,
+            continueExecution = false;
         beforeEach(function(done) {
             if (run) {
-                done();
+                var timer = setInterval(function () { // Block until window is loaded
+                    if (continueExecution === true) {
+                        done();
+                        clearInterval(timer);
+                    }
+                }, 200);
             } else {
                 $('.unit-texting').remove(); // Remove existing tex documents
                 $('body').append(__html__['fixtures/test2']);
 
-                TextOtter.run({selector: '.unit-texting'});
+                TypeOtter.run({selector: '.unit-texting'}, function () {
+                    continueExecution = true;
+                });
                 run = true;
                 setTimeout(function(){
                     done();
@@ -64,6 +83,9 @@ describe('Spinner testing:', function () {
         });
         it('Spinner while processing', function () {
             expect($('.tex-spinner').length).toEqual(2); // tex-spinner is two elements
+        });
+        it('Block execution until last call is finished', function () {
+            expect(0).toEqual(0);
         });
     });
 });

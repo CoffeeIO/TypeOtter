@@ -11,7 +11,7 @@ describe('Reference testing:', function () {
             $('.unit-texting').remove(); // Remove existing tex documents
             $('body').append(__html__['fixtures/test2']);
 
-            TextOtter.run({selector: '.unit-texting'}, function () {
+            TypeOtter.run({selector: '.unit-texting'}, function () {
                 run = true;
                 done();
             });

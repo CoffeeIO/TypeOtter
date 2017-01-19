@@ -17,11 +17,14 @@ module.exports = function(config) {
         files: [
             // Dependency files, only include them when requested.
             {pattern: 'dependencies/**/*', watched: true, included: false, served: true},
+            {pattern: 'node_modules/mathjax/**/*', watched: true, included: false, served: true},
+            {pattern: 'node_modules/font-awesome/**/*', watched: true, included: false, served: true},
 
             // Source files.
-            {pattern: 'src/styles/build/*.css', watched: true, included: true, served: true},
-            {pattern: 'src/scripts/build/*.js', watched: true, included: true, served: true},
-            {pattern: 'dependencies/MathJax/MathJax.js', watched: true, included: true, served: true},
+            {pattern: 'dist/main.min.css', watched: true, included: true, served: true},
+            {pattern: 'dist/mainNoMath.min.js', watched: true, included: true, served: true},
+            {pattern: 'node_modules/mathjax/MathJax.js', watched: true, included: true, served: true},
+
             {pattern: 'fixtures/**/*.html'},
 
             // Test files.
