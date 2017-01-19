@@ -24,6 +24,7 @@
     "karma-html2js-preprocessor": "~1.1.0"
   },
   "scripts": {
+    "start": "python -m SimpleHTTPServer",
     "test": "gulp uglifyNoMath; karma start karma.conf.js"
   },
   "repository": {
