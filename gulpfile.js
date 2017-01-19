@@ -40,7 +40,7 @@ gulp.task('uglify', function() {
     ]
     .concat(js)
     .concat([
-        'src/scripts/MathJax.js' // MathJax:668
+        'src/scripts/vendor/MathJax.js' // MathJax:668
     ]))
     .pipe(concat('main.min.js'))
     .pipe(uglify())
