@@ -20,7 +20,7 @@ TypeOtter is a Javascript library to render high quality typesetting in html and
 This library is intended as an improvement on LaTex, allowing users to write professional documents in markup.
 
 ## Installing
-Use node
+
 ```bash
 $ npm install typeotter
 ```
