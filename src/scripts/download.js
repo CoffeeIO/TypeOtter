@@ -1,4 +1,4 @@
-// *Modified to work under the TextOtter module*
+// *Modified to work under the TypeOtter module*
 
 //download.js v4.2, by dandavis; 2008-2016. [CCBY2] see http://danml.com/download.html for tests/usage
 // v1 landed a FF+Chrome compat way of downloading strings to local un-named files, upgraded to use a hidden frame and optional mime
@@ -9,7 +9,7 @@
 // v4.2 adds semantic variable names, long (over 2MB) dataURL support, and hidden by default temp anchors
 // https://github.com/rndme/download
 
-TextOtter.download = function(data, strFileName, strMimeType) {
+TypeOtter.download = function(data, strFileName, strMimeType) {
 	var self = window, // this script is only for browsers anyway...
 		defaultMime = "application/octet-stream", // this default mime also triggers iframe downloads
 		mimeType = strMimeType || defaultMime,

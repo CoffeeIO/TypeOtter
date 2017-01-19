@@ -1,4 +1,4 @@
-var TextOtter = (function(obj, $) {
+var TypeOtter = (function(obj, $) {
 
     /**
      * Find reference links and their closest reference option.
@@ -28,4 +28,4 @@ var TextOtter = (function(obj, $) {
     };
 
     return obj;
-}(TextOtter || {}, jQuery));
+}(TypeOtter || {}, jQuery));

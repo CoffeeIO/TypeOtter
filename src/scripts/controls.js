@@ -1,4 +1,4 @@
-var TextOtter = (function(obj, $) {
+var TypeOtter = (function(obj, $) {
 
     /**
      * Set zoom level on dom element relative to scale.
@@ -81,4 +81,4 @@ var TextOtter = (function(obj, $) {
     };
 
     return obj;
-}(TextOtter || {}, jQuery));
+}(TypeOtter || {}, jQuery));

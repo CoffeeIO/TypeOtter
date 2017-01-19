@@ -1,4 +1,4 @@
-var TextOtter = (function(obj, $) {
+var TypeOtter = (function(obj, $) {
 
     /**
      * Load GitHub gists, modified.
@@ -93,4 +93,4 @@ var TextOtter = (function(obj, $) {
     };
 
     return obj;
-}(TextOtter || {}, jQuery));
+}(TypeOtter || {}, jQuery));

@@ -1,4 +1,4 @@
-var TextOtter = (function(obj, $) {
+var TypeOtter = (function(obj, $) {
 
     /**
      * Add spinner after dom element.
@@ -32,4 +32,4 @@ var TextOtter = (function(obj, $) {
     };
 
     return obj;
-}(TextOtter || {}, jQuery));
+}(TypeOtter || {}, jQuery));

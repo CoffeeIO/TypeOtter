@@ -1,4 +1,4 @@
-var TextOtter = (function(obj, $) {
+var TypeOtter = (function(obj, $) {
 
     // Default options the program will use.
     var defaultOptions = {
@@ -88,4 +88,4 @@ var TextOtter = (function(obj, $) {
     };
 
     return obj;
-}(TextOtter || {}, jQuery));
+}(TypeOtter || {}, jQuery));

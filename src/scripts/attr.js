@@ -1,4 +1,4 @@
-var TextOtter = (function(obj, $) {
+var TypeOtter = (function(obj, $) {
 
     /**
      * Look for specific attributes in dom and generate elements.
@@ -152,4 +152,4 @@ var TextOtter = (function(obj, $) {
     }
 
     return obj;
-}(TextOtter || {}, jQuery));
+}(TypeOtter || {}, jQuery));

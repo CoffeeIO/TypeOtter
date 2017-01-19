@@ -1,4 +1,4 @@
-var TextOtter = (function(obj, $) {
+var TypeOtter = (function(obj, $) {
     obj.documentIndex = 1;
     obj.originalContent = '';
 
@@ -161,4 +161,4 @@ var TextOtter = (function(obj, $) {
     });
 
     return obj;
-}(TextOtter || {}, jQuery));
+}(TypeOtter || {}, jQuery));

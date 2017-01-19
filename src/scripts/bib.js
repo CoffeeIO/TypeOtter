@@ -1,4 +1,4 @@
-var TextOtter = (function(obj, $) {
+var TypeOtter = (function(obj, $) {
     // Order of attributes when doing article references **Not implemented**
     var refOrderArticle = ["author", "title", "journal", "volume", "number", "month", "year", "editor", "note"];
     // Order of attributes when doing book references
@@ -185,4 +185,4 @@ var TextOtter = (function(obj, $) {
     };
 
     return obj;
-}(TextOtter || {}, jQuery));
+}(TypeOtter || {}, jQuery));

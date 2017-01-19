@@ -1,4 +1,4 @@
-var TextOtter = (function(obj, $) {
+var TypeOtter = (function(obj, $) {
     // Global MathJax variables
     obj.inlineMath = 'a579438542e77567a744e7abaeaac7ae'; // MD5 of '$$ inline'
     obj.blockMath  = '1a73f16f7ac6dc3674c729ed2524bcc6'; // MD5 of '$$ block'
@@ -37,15 +37,15 @@ var TextOtter = (function(obj, $) {
     };
 
     return obj;
-}(TextOtter || {}, jQuery));
+}(TypeOtter || {}, jQuery));
 
 // MathJax properties.
 window.MathJax = {
     extensions: ["tex2jax.js"],
     jax: ["input/TeX", "output/HTML-CSS"],
     tex2jax: {
-        inlineMath: [[TextOtter.inlineMath, TextOtter.inlineMath]],
-        displayMath: [[TextOtter.blockMath, TextOtter.blockMath]],
+        inlineMath: [[TypeOtter.inlineMath, TypeOtter.inlineMath]],
+        displayMath: [[TypeOtter.blockMath, TypeOtter.blockMath]],
         processEscapes: true,
         processRefs: false,
         processEnvironments: false
