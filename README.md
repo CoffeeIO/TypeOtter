@@ -19,13 +19,23 @@ TypeOtter is a Javascript library to render high quality typesetting in html and
 
 This library is intended as an improvement on LaTex, allowing users to write professional documents in markup.
 
-[Download compressed: TypeOtter-0.2.0.zip](https://github.com/MGApcDev/TypeOtter/releases/download/v0.2.0/TypeOtter-0.2.0.zip)
+## Installing
+
+--> `$ npm install typeotter`
+
+or
+
+--> [Download compressed: TypeOtter-0.2.0.zip](https://github.com/MGApcDev/TypeOtter/releases/download/v0.2.0/TypeOtter-0.2.0.zip)
+
+or
+
+--> [Just link it, see example](http://codepen.io/MGApcDev/full/jyyJOe/)
 
 ## Setup and Features
---> [CodePen Showcase: Setup, syntax, math, typesetting, support](http://codepen.io/MGApcDev/full/jyyJOe/)
+[CodePen Showcase: Setup, syntax, math, typesetting, support](http://codepen.io/MGApcDev/full/jyyJOe/)
 
 ## Developers
-Install node modules (make sure you have [nodejs](https://nodejs.org/en/) installed)
+Make sure you have [node](https://nodejs.org/en/) installed
 
 Install gulp (use `sudo` if it doesn't work)
 ```bash
@@ -37,9 +47,14 @@ Install node modules (use `sudo` if it doesn't work)
 $ npm install
 ```
 
-Recompile js and scss files
+Compile js and scss files
 ```bash
 $ gulp
+```
+
+Run tests command and open your browser
+```bash
+$ npm test
 ```
 
 ## Contributions
