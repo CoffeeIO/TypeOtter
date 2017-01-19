@@ -665,7 +665,7 @@ MathJax.cdnFileVersions = {};  // can be used to specify revisions for individua
   };
 
   var PATH = {};
-  PATH[BASENAME] = "../node_modules/mathjax/";  // empty path gets the root URL
+  PATH[BASENAME] = "../dependencies/mathjax/";  // empty path gets the root URL
   PATH.Contrib = "https://cdn.mathjax.org/mathjax/contrib";   // the third-party extensions
 
   BASE.Ajax = {

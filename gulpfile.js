@@ -36,7 +36,7 @@ var js = [
 
 gulp.task('uglify', function() {
     return gulp.src([
-        'node_modules/jquery/dist/jquery.min.js' // jQuery
+        'dependencies/jquery/jquery.min.js' // jQuery
     ]
     .concat(js)
     .concat([
@@ -49,7 +49,7 @@ gulp.task('uglify', function() {
 
 gulp.task('uglifyNoMath', function() {
     return gulp.src([
-        'node_modules/jquery/dist/jquery.min.js' // jQuery
+        'dependencies/jquery/jquery.min.js' // jQuery
     ]
     .concat(js))
     .pipe(concat('mainNoMath.min.js'))
