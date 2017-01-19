@@ -1,7 +1,7 @@
 {
   "name": "TypeOtter",
   "version": "0.2.0",
-  "description": "",
+  "description": "TypeOtter is a javascript library for creating documents with great typesetting on the web. TypeOtter is created purely with html, css and javascript with the intent to run completely client-side while also allowing the flexibility to run server side with no local files.",
   "author": "Mathias Grundtvig Andreasen (MGApcDev)",
   "license": "GPL-3.0",
   "devDependencies": {
