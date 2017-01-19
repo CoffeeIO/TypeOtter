@@ -102,15 +102,10 @@ var TextOtter = (function(obj, $) {
             callback();
         };
 
-        // Wait till fonts are rendered.
-        $(window).load(function () {
-            window.load = true;
-        });
-
         var callArr = [step1, step2, step3, step4, step5, step6, step7];
 
         // Wait till all content is retrieved.
-        $(document).ready(function () {
+        $(function () {
             // Execute functions in series, so they don't interfere with each other.
             execFunc(callArr, function() {
                 if (callback != null) {
@@ -159,6 +154,11 @@ var TextOtter = (function(obj, $) {
     function resizeDone() {
         obj.updateControlsWidth();
     }
+
+    // Wait till fonts are rendered.
+    $(window).on("load", function () {
+        window.load = true;
+    });
 
     return obj;
 }(TextOtter || {}, jQuery));
