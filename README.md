@@ -20,7 +20,7 @@ TypeOtter is a Javascript library to render high quality typesetting in html and
 This library is intended as an improvement on LaTex, allowing users to write professional documents in markup.
 
 ## Setup and Features
---> [CodePen Showcase: Setup, syntax, math, typesetting, support](http://codepen.io/MGApcDev/full/RKbxom/)
+--> [CodePen Showcase: Setup, syntax, math, typesetting, support](http://codepen.io/MGApcDev/full/jyyJOe/)
 
 ## Developers
 Install node modules (make sure you have [nodejs](https://nodejs.org/en/) installed)
