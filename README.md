@@ -9,7 +9,7 @@ Create documents with great typesetting on the web.
 <p align="center">
 <a href="https://travis-ci.org/MGApcDev/TypeOtter"><img alt="TypeOtter" src="https://travis-ci.org/MGApcDev/TypeOtter.svg?branch=master"></a>
 <a href="https://www.codacy.com/app/mgapcdev/TypeOtter/dashboard"><img src="https://api.codacy.com/project/badge/Grade/c098136ef81345b78c480ee695314a21"/></a>
-<a href="https://waffle.io/MGApcDev/TypeOtter"><img alt="TypeOtter" src="https://badge.waffle.io/MGApcDev/TypeOtter.svg?label=ready&title=Ready"></a>
+<a href="https://waffle.io/MGApcDev/TypeOtter"><img alt="TypeOtter" src="https://img.shields.io/waffle/label/MGApcDev/TypeOtter.svg"></a>
 <a href="LICENSE.md"><img alt="TypeOtter" src="https://img.shields.io/aur/license/yaourt.svg"></a>
 <br>
 <a href="https://www.npmjs.com/package/typeotter"><img alt="TypeOtter" src="https://img.shields.io/npm/v/typeotter.svg"></a>
