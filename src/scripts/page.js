@@ -224,7 +224,6 @@ var TypeOtter = (function(obj, $) {
 
         if (elem.children().length === 0) {
             if (elemsOnPage === 0) { // Force add element if no other element on page
-                console.log('Appending <--');
                 pointer.append(elem.clone().wrap('<div>').parent().html());
                 if (testdom.height() !== 0) { // Only count added element if element has a height
                     elemsOnPage++;
@@ -243,7 +242,6 @@ var TypeOtter = (function(obj, $) {
         var skipElem = ["P", "SCRIPT", "TABLE", "STYLE", "FIGURE"];
         if (skipElem.indexOf(elem.prop('tagName')) !== -1) {
             if (elemsOnPage === 0) { // Force add element if no other element on page
-                console.log('Appending skip <--');
                 pointer.append(elem.clone().wrap('<div>').parent().html());
                 if (testdom.height() !== 0) { // Only count added element if element has a height
                     elemsOnPage++;
@@ -286,7 +284,6 @@ var TypeOtter = (function(obj, $) {
             elem.remove();
         }
 
-        console.log('counter --> ' + elem.children().length);
         return {
             content: testdom,
             remain: elem,
@@ -358,7 +355,6 @@ var TypeOtter = (function(obj, $) {
             } else {
                 clone.html('');
             }
-            if (curPage == 10) break;
         }
 
         // Assemble the pages
