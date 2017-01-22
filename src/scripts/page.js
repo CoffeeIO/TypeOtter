@@ -194,77 +194,107 @@ var TypeOtter = (function(obj, $) {
     }
 
     /**
+     * Force an element to be added to the dom, even if doesn't fit.
+     */
+    function forceAddElem(elem, testdom, pointer) {
+        pointer.append(elem.clone().wrap('<div>').parent().html());
+        if (testdom.height() !== 0) { // Only count added element if element has a height
+            console.warn('Careful elements on page %s might exceed the height of the page', curPage);
+            elemsOnPage++;
+        }
+        elem.remove();
+        return {
+            content: testdom,
+            remain: null,
+            done: false
+        };
+    }
+
+    /**
      * Recursive check the specified element's children and add elements until the
      * maxheight is achieved or there's no more elements.
      *
-     * @param  {jQuery object} clone       DOM element with remaining elements
+     * @param  {jQuery object} elem        DOM element with remaining elements
      * @param  {jQuery object} testdom     DOM element for contructing a page
      * @param  {int}           totalHeight Max height of the content area of a page
      * @param  {jQuery object} pointer     Insertion point of new elements in 'testdom'
      * @return {object}        content     The testdom,
-     *                         remain      The remaining DOM of clone,
+     *                         remain      The remaining DOM of elem,
      *                         done        State of whether more elements can be added to testdom
      */
-    function recCheckDom(clone, testdom, totalHeight, pointer) {
+    function recCheckDom(elem, testdom, totalHeight, pointer) {
         // Check if entire element can be added to the page.
-        var obj = addToPage(clone, testdom, totalHeight, pointer);
-        if (obj !== null) {
-            clone.remove();
+        var obj = addToPage(elem, testdom, totalHeight, pointer);
+        if (obj !== null) { // Element fit
+            if (testdom.height() !== 0) { // Only count added element if element has a height
+                elemsOnPage++;
+            }
+            elem.remove();
             return obj;
         }
 
         // Remove newpage element and return null to end page.
-        if (clone.hasClass('tex-newpage')) {
-            clone.remove();
+        if (elem.hasClass('tex-newpage')) {
+            elem.remove();
             return null;
         }
 
-        if (clone.children().length === 0) {
+        if (elem.children().length === 0) {
+            if (elemsOnPage === 0) { // Force add element if no other element on page
+                forceAddElem(elem, testdom, pointer);
+            }
             return null;
         }
 
         // Elements that should not be recusively checked for children
-        var skipElem = ["P", "SCRIPT", "TABLE", "STYLE", "FIGURE"];
-        if (skipElem.indexOf(clone.prop('tagName')) !== -1) {
+        var skipElem = ["P", "SCRIPT", "TR", "STYLE", "FIGURE"];
+        if (skipElem.indexOf(elem.prop('tagName')) !== -1) {
+            if (elemsOnPage === 0) { // Force add element if no other element on page
+                forceAddElem(elem, testdom, pointer);
+            }
             return null;
         }
 
-        var wrapper = clone.clone().empty(),
+        var wrapper = elem.clone().empty(),
             inWrap = wrapper.wrap('<div>').parent().html();
 
         pointer.append(inWrap);
         pointer = pointer.children(':last-child'); // Move pointer to wrap element
 
-        while (clone.children().length > 0) {
-            var elem = clone.children(':nth-child(1)');
-            obj = recCheckDom(elem, testdom, totalHeight, pointer);
+        while (elem.children().length > 0) {
+            var childElem = elem.children(':nth-child(1)');
+            obj = recCheckDom(childElem, testdom, totalHeight, pointer);
             if (obj === null) {
-                break; // Exit foreach loop
+                break; // Couldn't add element, exit loop
             } else {
                 // If done is true, then not all children were added so we can't remove the parent element
                 if (obj.done === true) {
                     break;
                 }
 
-                elem.remove();
+                childElem.remove();
             }
         }
 
         if (pointer.children().length === 0) { // Remove wrapper if no elements were added to it
             pointer.remove();
         }
+        if (elem.children().length === 0) { // Remove element if no longer has any children
+            elem.remove();
+        }
 
         return {
             content: testdom,
-            remain: clone,
+            remain: elem,
             done: true
         };
     }
 
     /**
-     * Construct the content of a page.
+     * Construct the content of one page.
      */
     function makePage(basePage, clone, testdom) {
+        elemsOnPage = 0; // Reset element counter
         var totalHeight = basePage.page.height,
             obj = recCheckDom(clone, testdom, totalHeight, testdom);
         basePage.content = obj.content.html();
@@ -274,6 +304,9 @@ var TypeOtter = (function(obj, $) {
             "remain": obj.remain
         };
     }
+
+    var elemsOnPage,
+        curPage;
 
     /**
      * Convert a dom element to a series of printable pages.
@@ -290,8 +323,8 @@ var TypeOtter = (function(obj, $) {
         var pages = [],
             fullHtml = '',
             clone = dom.find('> div').first().clone(),
-            obj = null,
-            curPage = 1;
+            obj = null;
+        curPage = 1;
 
         // Create empty tex-document for testing rendering dimensions.
         dom.append(
