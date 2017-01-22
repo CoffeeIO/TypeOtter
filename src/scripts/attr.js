@@ -55,7 +55,8 @@ var TypeOtter = (function(obj, $) {
     function handleName(dom) {
         dom.find("*[name!=''][name]").each(function (index) {
             var elem = $(this);
-            if (elem.prop('tagName') === 'IMG') { //Images can't have nested <a> tag
+            var linkBefore = ['IMG', 'TEXTAREA'];
+            if (linkBefore.indexOf(elem.prop('tagName')) !== -1) { //Images can't have nested <a> tag
                 elem.before('<a name="' + $(this).attr('name') + '"></a>');
             } else if (elem.prop('tagName') === 'A') {
                 // 'A' is a valid tag, ignore modification.
