@@ -35,6 +35,7 @@ module.exports = function(config) {
             {pattern: 'test/wrap.test.js', watched: true, included: true, served: true},
             {pattern: 'test/controls.test.js', watched: true, included: true, served: true},
             {pattern: 'test/include.test.js', watched: true, included: true, served: true},
+            {pattern: 'test/code.test.js', watched: true, included: true, served: true},
         ],
 
         // list of files to exclude
