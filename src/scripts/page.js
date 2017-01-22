@@ -194,6 +194,23 @@ var TypeOtter = (function(obj, $) {
     }
 
     /**
+     * Force an element to be added to the dom, even if doesn't fit.
+     */
+    function forceAddElem(elem, testdom, pointer) {
+        pointer.append(elem.clone().wrap('<div>').parent().html());
+        if (testdom.height() !== 0) { // Only count added element if element has a height
+            console.warn('Careful elements on page %s might exceed the height of the page', curPage);
+            elemsOnPage++;
+        }
+        elem.remove();
+        return {
+            content: testdom,
+            remain: null,
+            done: false
+        };
+    }
+
+    /**
      * Recursive check the specified element's children and add elements until the
      * maxheight is achieved or there's no more elements.
      *
@@ -224,34 +241,16 @@ var TypeOtter = (function(obj, $) {
 
         if (elem.children().length === 0) {
             if (elemsOnPage === 0) { // Force add element if no other element on page
-                pointer.append(elem.clone().wrap('<div>').parent().html());
-                if (testdom.height() !== 0) { // Only count added element if element has a height
-                    elemsOnPage++;
-                }
-                elem.remove();
-                return {
-                    content: testdom,
-                    remain: null,
-                    done: false
-                };
+                forceAddElem(elem, testdom, pointer);
             }
             return null;
         }
 
         // Elements that should not be recusively checked for children
-        var skipElem = ["P", "SCRIPT", "TABLE", "STYLE", "FIGURE"];
+        var skipElem = ["P", "SCRIPT", "TR", "STYLE", "FIGURE"];
         if (skipElem.indexOf(elem.prop('tagName')) !== -1) {
             if (elemsOnPage === 0) { // Force add element if no other element on page
-                pointer.append(elem.clone().wrap('<div>').parent().html());
-                if (testdom.height() !== 0) { // Only count added element if element has a height
-                    elemsOnPage++;
-                }
-                elem.remove();
-                return {
-                    content: testdom,
-                    remain: null,
-                    done: false
-                };
+                forceAddElem(elem, testdom, pointer);
             }
             return null;
         }
@@ -305,7 +304,10 @@ var TypeOtter = (function(obj, $) {
             "remain": obj.remain
         };
     }
-    var elemsOnPage = 0;
+
+    var elemsOnPage,
+        curPage;
+
     /**
      * Convert a dom element to a series of printable pages.
      */
@@ -321,8 +323,8 @@ var TypeOtter = (function(obj, $) {
         var pages = [],
             fullHtml = '',
             clone = dom.find('> div').first().clone(),
-            obj = null,
-            curPage = 1;
+            obj = null;
+        curPage = 1;
 
         // Create empty tex-document for testing rendering dimensions.
         dom.append(
