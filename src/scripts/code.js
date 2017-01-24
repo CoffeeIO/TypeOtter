@@ -58,10 +58,14 @@ var TypeOtter = (function(obj, $) {
                     file = target.data('gist-file');
                     if (file) {
                         outer = gist.outer.clone();
-                        inner =
-                            "<div class=\"gist-file\">" +
-                                $(gist.files.get(gist.data.files.indexOf(file))).html() +
-                            "</div>";
+                        var index = gist.data.files.indexOf(file);
+                        inner = '';
+                        if (index !== -1) {
+                            inner =
+                                "<div class=\"gist-file\">" +
+                                    $(gist.files.get(gist.data.files.indexOf(file))).html() +
+                                "</div>";
+                        }
                         outer.html(inner);
                     } else {
                         outer = $(div);
