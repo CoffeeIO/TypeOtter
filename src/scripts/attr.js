@@ -160,8 +160,14 @@ var TypeOtter = (function(obj, $) {
         var counter = 1;
         dom.find('*[footnote=""]').each(function () {
             var elem = $(this);
-            elem.before('<a class="tex-footnote" href="#tex-footnote-' + counter + '"><sup>' + counter + '</sup></a>');
-            elem.wrap('<a class="tex-footnote-content">');
+            var reference = 'tex-footnote-' + counter;
+
+            elem.wrap('<span class="tex-footnote-content"></span>')
+                .parent()
+                .wrap('<span class="tex-footnote"></span>')
+                .before('<a href="#' + reference + '"><sup>' + counter + '</sup></a>');
+
+
             var content = elem.parent().html();
             console.log('Found one ' + content);
 
