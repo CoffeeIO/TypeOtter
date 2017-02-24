@@ -1,6 +1,6 @@
 {
   "name": "typeotter",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "TypeOtter is a javascript module for creating documents with great typesetting on the web.",
   "author": "Mathias Grundtvig Andreasen (MGApcDev)",
   "license": "GPL-3.0",
