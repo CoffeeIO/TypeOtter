@@ -30,14 +30,14 @@ $ npm install typeotter
 
 _or_
 
-[Download compressed: TypeOtter-0.2.0.zip](https://github.com/MGApcDev/TypeOtter/releases/download/v0.2.0/TypeOtter-0.2.0.zip)
+[Download compressed: TypeOtter-0.2.2.zip](https://github.com/MGApcDev/TypeOtter/releases/download/v0.2.2/TypeOtter-0.2.2.zip)
 
 _or_
 
-[Just link it, no download!(see example)](http://codepen.io/MGApcDev/full/jyyJOe/)
+[Just link it, no download!(see example)](http://codepen.io/MGApcDev/full/JWoRje/)
 
 ## Setup and Features
---> [CodePen Showcase: Setup, syntax, math, typesetting, support](http://codepen.io/MGApcDev/full/jyyJOe/)
+--> [CodePen Showcase: Setup, syntax, math, typesetting, support](http://codepen.io/MGApcDev/full/JWoRje/)
 
 ## Developers
 Make sure you have [node](https://nodejs.org/en/) installed
