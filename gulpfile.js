@@ -36,23 +36,25 @@ var js = [
 
 gulp.task('uglify', function() {
     return gulp.src([
-        'dependencies/jquery/jquery.min.js' // jQuery
+        'node_modules/jquery/dist/jquery.min.js', // jQuery
+        'node_modules/typesetbot/dist/mainWithPatterns.min.js'
     ]
     .concat(js)
     .concat([
         'src/scripts/vendor/MathJax.js' // MathJax:668
     ]))
     .pipe(concat('main.min.js'))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('dist'));
 });
 
 gulp.task('uglifyNoMath', function() {
     return gulp.src([
-        'dependencies/jquery/jquery.min.js' // jQuery
+        'node_modules/jquery/dist/jquery.min.js', // jQuery
+        'node_modules/typesetbot/dist/mainWithPatterns.min.js'
     ]
     .concat(js))
     .pipe(concat('mainNoMath.min.js'))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('dist'));
 });
