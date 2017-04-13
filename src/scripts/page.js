@@ -311,7 +311,8 @@ var TypeOtter = (function(obj, $) {
     /**
      * Convert a dom element to a series of printable pages.
      */
-    obj.texify = function(options, dom) {
+    obj.texify = function(settings, dom) {
+        var options = settings.options;
         dom.find('.tex-testdom').remove(); // Remove testing element we used to force font load
         var basePage = new Page();
 
@@ -341,41 +342,48 @@ var TypeOtter = (function(obj, $) {
 
         testdom.css('height', 'auto'); // Set height auto, so content area adjust in size depending on content
 
-        // Check there is still remaining html in the body.
-        while (clone.html().trim() !== '') {
-            testdom.html(''); // Clear the testdom object
+        // Typeset text.
+        testdom.html(clone.html());
+        TypesetBot.run('.tex-testdom', { dynamicWidth: false }, function () {
+            testdom.find('.typeset-hidden').remove();
+            clone.html(testdom.html());
 
-            // Use extend to clone pageSetting obj and remove its reference.
-            pages.push(makePage($.extend(true, [], basePage), clone, testdom));
+            // Check there is still remaining html in the body.
+            while (clone.html().trim() !== '') {
+                testdom.html(''); // Clear the testdom object
 
-            obj = pages[pages.length - 1];
+                // Use extend to clone pageSetting obj and remove its reference.
+                pages.push(makePage($.extend(true, [], basePage), clone, testdom));
 
-            basePage.number = ++curPage;
+                obj = pages[pages.length - 1];
 
-            if (obj.remain != null) {
-                clone.html(obj.remain.html());
-            } else {
-                clone.html('');
+                basePage.number = ++curPage;
+
+                if (obj.remain != null) {
+                    clone.html(obj.remain.html());
+                } else {
+                    clone.html('');
+                }
             }
-        }
 
-        // Assemble the pages
-        pages.forEach(function (item, index) {
-            item.page.total = pages.length;
-            var header = genHeader(options, item.page),
-                footer = genFooter(options, item.page),
-                page   = genPage(header, footer, item.page);
+            // Assemble the pages
+            pages.forEach(function (item, index) {
+                item.page.total = pages.length;
+                var header = genHeader(options, item.page),
+                    footer = genFooter(options, item.page),
+                    page   = genPage(header, footer, item.page);
 
-            fullHtml += page;
+                fullHtml += page;
+            });
+
+            testdom.parent().remove(); // Remove the test element
+
+            // Wrap document in div, to apply relative styling.
+            fullHtml = '<div class="tex-document" zoom="1">' + fullHtml + '</div>';
+
+            // Overwite the body
+            dom.html(fullHtml);
         });
-
-        testdom.parent().remove(); // Remove the test element
-
-        // Wrap document in div, to apply relative styling.
-        fullHtml = '<div class="tex-document" zoom="1">' + fullHtml + '</div>';
-
-        // Overwite the body
-        dom.html(fullHtml);
     };
 
     return obj;

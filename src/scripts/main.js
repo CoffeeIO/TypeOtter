@@ -69,12 +69,13 @@ var TypeOtter = (function(obj, $) {
             obj.makeToc(dom);
             obj.makeRef(dom);
             obj.makeRefPage(dom, settings.biblography);
+            obj.typeset(dom, settings);
             callback();
         };
 
         // Texify document.
         var step5 = function(callback) {
-            obj.texify(settings.options, dom);
+            obj.texify(settings, dom);
             callback();
         };
 

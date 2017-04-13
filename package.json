@@ -6,17 +6,17 @@
   "license": "GPL-3.0",
   "devDependencies": {
     "gulp": "*",
-    "gulp-sass": "*",
-    "gulp-watch": "*",
-    "gulp-uglify": "*",
-    "gulp-rename": "*",
     "gulp-concat": "*",
-    "pump": "~1.0.1",
+    "gulp-rename": "*",
+    "gulp-sass": "*",
+    "gulp-uglify": "*",
+    "gulp-watch": "^4.3.11",
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.1",
     "karma-chrome-launcher": "^1.0.1",
+    "karma-html2js-preprocessor": "~1.1.0",
     "karma-jasmine": "^1.0.2",
-    "karma-html2js-preprocessor": "~1.1.0"
+    "pump": "~1.0.1"
   },
   "scripts": {
     "start": "python -m SimpleHTTPServer",
