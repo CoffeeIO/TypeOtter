@@ -213,14 +213,19 @@ var TypeOtter = (function(obj, $) {
     }
 
     function addQueueElem(dom, testdom, totalHeight, imageDom) {
+        console.log('Logging imgQueue');
         console.log(imgQueue);
-        for (var i = 0; i < imgQueue.length; i++) {
-            var item = imgQueue[i];
+        console.log(imgQueue[0]);
+        var tempQueue = [].concat(imgQueue);
+        for (var i = 0; i < tempQueue.length; i++) {
+            var item = tempQueue[i];
             console.log('queuing  -->', item.html );
             imageDom.html(item.html);
             var obj = addToPage(imageDom, testdom, totalHeight, testdom);
             if (obj === null) {
                 return null;
+            } else {
+                imgQueue.shift(); // Successfully added, remove element from queue
             }
         }
     }
@@ -265,8 +270,8 @@ var TypeOtter = (function(obj, $) {
                 defaultDone = false;
             }
         }
-        console.log('dom --> %s', imageDom.elem.html());
-        console.log('pointer --> %s', imageDom.pointer.html());
+        // console.log('dom --> %s', imageDom.elem.html());
+        // console.log('pointer --> %s', imageDom.pointer.html());
 
 
         if (! skipConditions) {
@@ -325,7 +330,7 @@ var TypeOtter = (function(obj, $) {
         var wrapper = elem.clone().empty(),
             inWrap = wrapper.wrap('<div>').parent().html();
 
-        console.log('inwrap --> %s', inWrap);
+        // console.log('inwrap --> %s', inWrap);
 
         pointer.append(inWrap);
         pointer = pointer.children(':last-child'); // Move pointer to wrap element
