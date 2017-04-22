@@ -173,6 +173,17 @@ var TypeOtter = (function(obj, $) {
         return curHtml;
     }
 
+    function getSpanCount(elem) {
+        if (elem.prop('tagName') == "SPAN" && elem.hasClass('typeset-line')) {
+            return 1;
+        }
+        if (elem.prop('tagName') == "P") {
+            return elem.find('> span').length;
+        }
+
+        return elem.find('p > span').length;
+    }
+
     /**
      * Add element to testdom and compare with maxheight, return new testdom if less, otherwise
      * revert to previous state.
@@ -181,6 +192,7 @@ var TypeOtter = (function(obj, $) {
         var temp = pointer.html();
         pointer.append(element.clone().wrap('<div>').parent().html());
         if (testdom.outerHeight(true) <= totalHeight) {
+            spanCount += getSpanCount(element);
             return {
                 content: testdom,
                 remain: null,
@@ -204,7 +216,9 @@ var TypeOtter = (function(obj, $) {
             }
             elemsOnPage++;
         }
+        spanCount += getSpanCount(elem);
         elem.remove();
+
         return {
             content: testdom,
             remain: null,
@@ -231,8 +245,14 @@ var TypeOtter = (function(obj, $) {
     // object: { html, originPage, height }
     var imgQueue = [];
 
-    // State
+    // State of whether to add all images encountered in dom to the imageQueue.
     var forceImage = false;
+
+    // Count of span elements followed by section title.
+    var spanCount = 0;
+    var workingOnTitle = false;
+
+    var titleSnapshot = {dom: '', testdom: ''};
 
     /**
      * Recursive check the specified element's children and add elements until the
@@ -269,7 +289,13 @@ var TypeOtter = (function(obj, $) {
         }
         // console.log('dom --> %s', imageDom.elem.html());
         // console.log('pointer --> %s', imageDom.pointer.html());
-
+        if (elem.prop('tagName') == "A" && elem.attr('href') == "#tex-toc") {
+            // console.log('Previous --> %s', spanCount);
+            console.log('Found title %s', elem.html());
+            titleSnapshot.testdom = testdom.html();
+            titleSnapshot.dom =
+            spanCount = 0;
+        }
 
         if (! skipConditions) {
         // Check if entire element can be added to the page.
@@ -378,7 +404,8 @@ var TypeOtter = (function(obj, $) {
 
         var obj = recCheckDom(dom, testdom, totalHeight, testdom, {elem: imageDom, pointer: imageDom});
         basePage.content = obj.content.html();
-
+        console.log('Page --> %s', spanCount);
+        spanCount = 0;
         return {
             "page": basePage,
             "remain": obj.remain
