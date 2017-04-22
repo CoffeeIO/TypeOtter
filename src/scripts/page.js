@@ -230,6 +230,8 @@ var TypeOtter = (function(obj, $) {
 
     // object: { html, originPage, height }
     var imgQueue = [];
+
+    // State
     var forceImage = false;
 
     /**
@@ -245,8 +247,8 @@ var TypeOtter = (function(obj, $) {
      *                         done        State of whether more elements can be added to testdom
      */
     function recCheckDom(elem, testdom, totalHeight, pointer, imageDom) {
-        var skipConditions = false,
-            defaultDone = true;
+        var skipConditions = false, // Skip special conditions, so we start iterating on the children
+            defaultDone = true; // Default value to return when having added all children
         if (forceImage) {
             if (elem.prop('tagName') == "FIGURE") {
                 forceAddElem(elem, imageDom.elem, imageDom.pointer, true);
