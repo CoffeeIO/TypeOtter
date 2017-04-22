@@ -266,12 +266,12 @@ var TypeOtter = (function(obj, $) {
      *                         remain      The remaining DOM of elem,
      *                         done        State of whether more elements can be added to testdom
      */
-    function recCheckDom(elem, testdom, totalHeight, pointer, imageDom) {
+    function recCheckDom(dom, testDom, totalHeight, imageDom) {
         var skipConditions = false, // Skip special conditions, so we start iterating on the children
             defaultDone = true; // Default value to return when having added all children
         if (forceImage) {
-            if (elem.prop('tagName') == "FIGURE") {
-                forceAddElem(elem, imageDom.elem, imageDom.pointer, true);
+            if (dom.pointer.prop('tagName') == "FIGURE") {
+                forceAddElem(dom.pointer, imageDom.elem, imageDom.pointer, true);
                 imgQueue.push({
                     html: imageDom.elem.html(),
                     origin: 0,
@@ -281,7 +281,7 @@ var TypeOtter = (function(obj, $) {
                 return {
                     done: false
                 };
-            } else if (elem.find('figure').length > 0) {
+            } else if (dom.pointer.find('figure').length > 0) {
                 // Check all children
                 skipConditions = true;
                 defaultDone = false;
@@ -289,34 +289,34 @@ var TypeOtter = (function(obj, $) {
         }
         // console.log('dom --> %s', imageDom.elem.html());
         // console.log('pointer --> %s', imageDom.pointer.html());
-        if (elem.prop('tagName') == "A" && elem.attr('href') == "#tex-toc") {
+        if (dom.pointer.prop('tagName') == "A" && dom.pointer.attr('href') == "#tex-toc") {
             // console.log('Previous --> %s', spanCount);
-            console.log('Found title %s', elem.html());
-            titleSnapshot.testdom = testdom.html();
-            titleSnapshot.dom =
+            console.log('Found title %s', dom.pointer.html());
+            titleSnapshot.testdom = testDom.elem.html();
+            // titleSnapshot.dom =
             spanCount = 0;
         }
 
         if (! skipConditions) {
         // Check if entire element can be added to the page.
-        var obj = addToPage(elem, testdom, totalHeight, pointer);
+        var obj = addToPage(dom.pointer, testDom.elem, totalHeight, testDom.pointer);
         if (obj !== null) { // Element fit
-            if (testdom.height() !== 0) { // Only count added element if element has a height
+            if (testDom.elem.height() !== 0) { // Only count added element if element has a height
                 elemsOnPage++;
             }
-            elem.remove();
+            dom.pointer.remove();
             return obj;
         }
 
         // Remove newpage element and return null to end page.
-        if (elem.hasClass('tex-newpage')) {
-            elem.remove();
+        if (dom.pointer.hasClass('tex-newpage')) {
+            dom.pointer.remove();
             return null;
         }
 
-        if (elem.children().length === 0) {
+        if (dom.pointer.children().length === 0) {
             if (elemsOnPage === 0) { // Force add element if no other element on page
-                forceAddElem(elem, testdom, pointer);
+                forceAddElem(dom.pointer, testDom.elem, testDom.pointer);
             }
             return null;
         }
@@ -324,9 +324,9 @@ var TypeOtter = (function(obj, $) {
         // Elements that should not be recusively checked for children
         var skipElem = ["SPAN", "SCRIPT", "TR", "STYLE", "FIGURE", "IMG"];
 
-        if (elem.prop('tagName') == "FIGURE") {
+        if (dom.pointer.prop('tagName') == "FIGURE") {
             forceImage = true;
-            forceAddElem(elem, imageDom.elem, imageDom.pointer, true);
+            forceAddElem(dom.pointer, imageDom.elem, imageDom.pointer, true);
             imgQueue.push({
                 html: imageDom.elem.html(),
                 origin: 0,
@@ -339,29 +339,29 @@ var TypeOtter = (function(obj, $) {
         }
 
         // Check if we're working on an element that can't be split up.
-        if (skipElem.indexOf(elem.prop('tagName')) !== -1) {
+        if (skipElem.indexOf(dom.pointer.prop('tagName')) !== -1) {
             if (elemsOnPage === 0) { // Force add element if no other element on page
-                forceAddElem(elem, testdom, pointer);
+                forceAddElem(dom.pointer, testDom.elem, testDom.pointer);
             }
             return null;
         }
         }
 
 
-        var wrapper = elem.clone().empty(),
+        var wrapper = dom.pointer.clone().empty(),
             inWrap = wrapper.wrap('<div>').parent().html();
 
         // console.log('inwrap --> %s', inWrap);
 
-        pointer.append(inWrap);
-        pointer = pointer.children(':last-child'); // Move pointer to wrap element
+        testDom.pointer.append(inWrap);
+        testDom.pointer = testDom.pointer.children(':last-child'); // Move pointer to wrap element
 
         imageDom.pointer.append(inWrap);
         imageDom.pointer = imageDom.pointer.children(':last-child'); // Move pointer to wrap element
 
-        while (elem.children().length > 0) {
-            var childElem = elem.children(':nth-child(1)');
-            obj = recCheckDom(childElem, testdom, totalHeight, pointer, imageDom);
+        while (dom.pointer.children().length > 0) {
+            var childElem = dom.pointer.children(':nth-child(1)');
+            obj = recCheckDom({elem: dom.elem, pointer: childElem}, {elem: testDom.elem, pointer: testDom.pointer}, totalHeight, imageDom);
             if (obj === null) {
                 break; // Couldn't add element, exit loop
             } else {
@@ -374,17 +374,17 @@ var TypeOtter = (function(obj, $) {
             }
         }
 
-        if (pointer.children().length === 0) { // Remove wrapper if no elements were added to it
-            pointer.remove();
+        if (testDom.pointer.children().length === 0) { // Remove wrapper if no elements were added to it
+            testDom.pointer.remove();
             imageDom.pointer.remove();
         }
-        if (elem.children().length === 0) { // Remove element if no longer has any children
-            elem.remove();
+        if (dom.pointer.children().length === 0) { // Remove element if no longer has any children
+            dom.pointer.remove();
         }
 
         return {
-            content: testdom,
-            remain: elem,
+            content: testDom.elem,
+            remain: dom.pointer,
             done: defaultDone
         };
     }
@@ -402,7 +402,7 @@ var TypeOtter = (function(obj, $) {
         addQueueElem(dom, testdom, totalHeight, imageDom);
         imageDom.html('');
 
-        var obj = recCheckDom(dom, testdom, totalHeight, testdom, {elem: imageDom, pointer: imageDom});
+        var obj = recCheckDom({elem: dom, pointer: dom}, {elem: testdom, pointer: testdom}, totalHeight, {elem: imageDom, pointer: imageDom});
         basePage.content = obj.content.html();
         console.log('Page --> %s', spanCount);
         spanCount = 0;
