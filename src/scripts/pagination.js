@@ -45,28 +45,30 @@ var TypeOtter = (function(obj, $) {
     var imageShiftCount = 0;
 
 
+    function increaseImageOrigin() {
+        for (var i = 0; i < imgQueue.length; i++) {
+            imgQueue[i].origin++;
+        }
+    }
+
     /**
      * Add as many images to the dom while staying within dimentions of the page.
      */
     function addQueueElem(dom, testdom, totalHeight, imageDom) {
+        increaseImageOrigin();
         imageShiftCount = 0;
 
-        console.log('Logging imgQueue');
-        console.log(imgQueue);
         testdom.append('<div class="tex-image-move"></div>');
         var pointer = testdom.find('.tex-image-move');
-        var tempQueue = [].concat(imgQueue);
-        for (var i = 0; i < tempQueue.length; i++) {
-            var item = tempQueue[i];
+        for (var i = 0; i < imgQueue.length; i++) {
+            var item = imgQueue[i];
             imageDom.html(item.html);
             var imageDomPointer = imageDom.find(':last-child');
             var obj = addToPage(imageDomPointer, testdom, totalHeight, pointer);
             if (obj === null) {
                 return null;
             } else {
-                // console.log(testdom.html());
-                // imgQueue.shift(); // Successfully added, remove element from queue
-                imageShiftCount++;
+                imageShiftCount++; // Successfully added, remove element from queue
             }
         }
     }
@@ -152,6 +154,7 @@ var TypeOtter = (function(obj, $) {
                 height: imageDom.elem.height()
             });
             imageDom.pointer.html(''); // Remove element from pointer
+            defaultDone = false;
             return true;
         }
 
@@ -227,6 +230,7 @@ var TypeOtter = (function(obj, $) {
         skipConditions = false; // Skip special conditions, so we start iterating on the children
         defaultDone = true; // Default value to return when having added all children
 
+        // If we've move one image to the queue, we need to add all following images too.
         if (forceAddImage(dom, imageDom)) {
             return {done: false}; // We added the figure to the imageQueue, but we're not done
         }
@@ -282,6 +286,16 @@ var TypeOtter = (function(obj, $) {
         };
     }
 
+    function getImageDemerit(offset) {
+        var demerit = 0;
+        for (var i = 0; i < offset; i++) {
+            var item = imgQueue[i];
+            demerit += Math.pow(3 + ((item.origin - 1) * 2), 2);
+        }
+
+        return demerit;
+    }
+
     var bestfit = Infinity;
     var bestdom = null;
 
@@ -289,7 +303,7 @@ var TypeOtter = (function(obj, $) {
      * Construct the content of one page.
      */
     function makePage(basePage, dom, testdom, imageDom) {
-        bestfit = Infinity;
+        bestfit = Infinity; // Any solution is better than non
         bestdom = null;
         forceImage = false; // Reset image adding
         elemsOnPage = 0; // Reset element counter
@@ -306,70 +320,49 @@ var TypeOtter = (function(obj, $) {
 
         var objFinal = {content: '', remain: ''};
         // 0, 1, 2
-        // for (var i = 0; i <= imageShiftCount; i++) {
-        // console.log('Before:');
-        // console.log('--> dom length');
-        // console.log(objDom.elem.html().length);
+        for (var i = 0; i <= imageShiftCount; i++) {
             recCheckDom(objDom, objTestdom, totalHeight, objImagedom);
-
+            console.log(imageShiftCount);
             objFinal.content = objTestdom.elem.html();
             objFinal.remain = objDom.elem.html();
-            // console.log('After:');
-            // console.log('--> dom length');
-            //
-            // console.log(objDom.elem.html().length);
-            // console.log('--> dom pointer length');
-            //
-            // console.log(objDom.pointer.html().length);
 
-
+            // Use spanshot dom if title condition is not meet
             if (spanCount < 2) {
                 dom.html(titleSnapshot.dom); // Set the dom to the snapshot content
-                // obj.content.html(titleSnapshot.testdom);
+                testdom.html(titleSnapshot.testdom);
+
                 objFinal.content = titleSnapshot.testdom;
                 objFinal.remain = titleSnapshot.dom;
             }
 
-            // var remainHeight = totalHeight - testdom.height(),
-            //     heightDemerit = remainHeight * 5,
-            //     imageDemerit = i * 50;
-            // var demerit = heightDemerit;
-            // console.log('shift --> %s, remain --> %s', i, remainHeight);
-            //
-            // if (demerit < bestfit) {
-            //     bestfit = demerit;
-            //     bestdom = {testdom: testdom.html(), dom: dom.html(), shift: i};
-            // }
-            // objTestdom.elem.find('.tex-image-move > :last-child').remove();
-        // }
+            // Calculate demerit.
+            var remainHeight = totalHeight - testdom.height(),
+                heightDemerit = remainHeight * 1,
+                imageDemerit = getImageDemerit(i);
+            var demerit = heightDemerit + imageDemerit;
 
-        // dom.html(bestdom.dom);
-        // obj.content.html(bestdom.testdom);
+            console.log('shift --> %s, remain --> %s', i, remainHeight);
+            console.log('%s <--, height: %s, image: %s', demerit, heightDemerit, imageDemerit);
 
-        // if (obj.remain == null || objFinal.remain != obj.remain.html()) {
-        //     console.log('Unmatch');
-        //     console.log(objFinal.remain);
-        //     console.log(objDom.pointer.html());
-        //     if (obj.remain == null) {
-        //         console.log('null');
-        //     } else {
-        //         console.log(obj.remain.html());
-        //
-        //     }
-        // }
+            // Compare demerit with previous best.
+            if (demerit < bestfit) {
+                bestfit = demerit;
+                bestdom = {content: objFinal.content, remain: objFinal.remain, shift: i};
+            }
 
-        // imgQueue = imgQueue.slice(bestdom.shift);
-        imgQueue = imgQueue.slice(imageShiftCount);
+            objTestdom.elem.find('.tex-image-move > :last-child').remove();
+            // break;
+        }
 
+        imgQueue = imgQueue.slice(imageShiftCount - bestdom.shift);
 
-        // basePage.content = obj.content.html();
-        basePage.content = objFinal.content;
+        basePage.content = bestdom.content;
         console.log('Page --> %s', spanCount);
         spanCount = 100; // Set this high, so a page with a single line, but no title is allowed
 
         return {
             page: basePage,
-            remain: objFinal.remain
+            remain: bestdom.remain
         };
     }
 
