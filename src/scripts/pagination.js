@@ -7,7 +7,11 @@ var TypeOtter = (function(obj, $) {
     function addToPage(element, testdom, totalHeight, pointer) {
         var temp = pointer.html();
         pointer.append(element.clone().wrap('<div>').parent().html());
+        var x = testdom.outerHeight(true),
+            xx = testdom.html().length;
         if (testdom.outerHeight(true) <= totalHeight) {
+            var y = testdom.outerHeight(true),
+                yy = testdom.html().length;
             spanCount += TypeOtter.getSpanCount(element);
 
             if (testdom.height() !== 0) { // Only count added element if element has a height
@@ -227,6 +231,7 @@ var TypeOtter = (function(obj, $) {
      *                         done        State of whether more elements can be added to testdom
      */
     function recCheckDom(dom, testDom, totalHeight, imageDom) {
+
         skipConditions = false; // Skip special conditions, so we start iterating on the children
         defaultDone = true; // Default value to return when having added all children
 
@@ -314,15 +319,18 @@ var TypeOtter = (function(obj, $) {
 
         addQueueElem(dom, testdom, totalHeight, imageDom);
         imageDom.html('');
-        var objDom = {elem: dom, pointer: dom};
-        var objTestdom = {elem: testdom, pointer: testdom};
-        var objImagedom = {elem: imageDom, pointer: imageDom};
+        // var objDom = {elem: dom, pointer: dom};
+        // var objTestdom = {elem: testdom, pointer: testdom};
+        // var objImagedom = {elem: imageDom, pointer: imageDom};
 
         var objFinal = {content: '', remain: ''};
         // 0, 1, 2
         for (var i = 0; i <= imageShiftCount; i++) {
+            var objDom = {elem: dom, pointer: dom};
+            var objTestdom = {elem: testdom, pointer: testdom};
+            var objImagedom = {elem: imageDom, pointer: imageDom};
+
             recCheckDom(objDom, objTestdom, totalHeight, objImagedom);
-            console.log(imageShiftCount);
             objFinal.content = objTestdom.elem.html();
             objFinal.remain = objDom.elem.html();
 
@@ -341,9 +349,6 @@ var TypeOtter = (function(obj, $) {
                 imageDemerit = getImageDemerit(i);
             var demerit = heightDemerit + imageDemerit;
 
-            console.log('shift --> %s, remain --> %s', i, remainHeight);
-            console.log('%s <--, height: %s, image: %s', demerit, heightDemerit, imageDemerit);
-
             // Compare demerit with previous best.
             if (demerit < bestfit) {
                 bestfit = demerit;
@@ -357,7 +362,6 @@ var TypeOtter = (function(obj, $) {
         imgQueue = imgQueue.slice(imageShiftCount - bestdom.shift);
 
         basePage.content = bestdom.content;
-        console.log('Page --> %s', spanCount);
         spanCount = 100; // Set this high, so a page with a single line, but no title is allowed
 
         return {
