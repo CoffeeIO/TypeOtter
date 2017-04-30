@@ -172,6 +172,41 @@ var TypeOtter = (function(obj, $) {
         return false;
     }
 
+    function removeWrapperIfEmpty(dom, testDom, imageDom) {
+        if (testDom.pointer.children().length === 0) { // Remove wrapper if no elements were added to it
+            testDom.pointer.remove();
+            imageDom.pointer.remove();
+        }
+        if (dom.pointer.children().length === 0) { // Remove element if no longer has any children
+            dom.pointer.remove();
+        }
+
+    }
+
+    function loopOverChildren(dom, testDom, totalHeight, imageDom) {
+        while (dom.pointer.children().length > 0) {
+            var childElem = dom.pointer.children(':nth-child(1)');
+            obj = recCheckDom({elem: dom.elem, pointer: childElem}, {elem: testDom.elem, pointer: testDom.pointer}, totalHeight, imageDom);
+            if (obj === null) {
+                break; // Couldn't add element, exit loop
+            } else {
+                // If done is true, then not all children were added so we can't remove the parent element
+                if (obj.done === true) {
+                    break;
+                }
+
+                childElem.remove();
+            }
+        }
+    }
+
+    function movePointer(dom, pointer) {
+        var wrapper = dom.pointer.clone().empty(),
+            innerWrap = wrapper.wrap('<div>').parent().html();
+        pointer.append(innerWrap);
+        return pointer.children(':last-child'); // Move pointer to wrap element
+    }
+
 
     /**
      * Recursive check the specified element's children and add elements until the
@@ -200,13 +235,12 @@ var TypeOtter = (function(obj, $) {
         checkTitleSnapshot(dom, testDom);
 
         if (! skipConditions) {
+
             // Check if entire element can be added to the page.
             if (addToPage(dom.pointer, testDom.elem, totalHeight, testDom.pointer)) { // Element fit
-                dom.pointer.remove();
-                // dom.pointer.html('');
+                dom.pointer.empty(); // Remove element from dom
+
                 return {
-                    content: testDom.elem,
-                    remain: null,
                     done: false
                 };
             }
@@ -244,45 +278,8 @@ var TypeOtter = (function(obj, $) {
         removeWrapperIfEmpty(dom, testDom, imageDom);
 
         return {
-            content: testDom.elem,
-            remain: dom.pointer,
             done: defaultDone
         };
-    }
-
-    function removeWrapperIfEmpty(dom, testDom, imageDom) {
-        if (testDom.pointer.children().length === 0) { // Remove wrapper if no elements were added to it
-            testDom.pointer.remove();
-            imageDom.pointer.remove();
-        }
-        if (dom.pointer.children().length === 0) { // Remove element if no longer has any children
-            dom.pointer.remove();
-        }
-
-    }
-
-    function loopOverChildren(dom, testDom, totalHeight, imageDom) {
-        while (dom.pointer.children().length > 0) {
-            var childElem = dom.pointer.children(':nth-child(1)');
-            obj = recCheckDom({elem: dom.elem, pointer: childElem}, {elem: testDom.elem, pointer: testDom.pointer}, totalHeight, imageDom);
-            if (obj === null) {
-                break; // Couldn't add element, exit loop
-            } else {
-                // If done is true, then not all children were added so we can't remove the parent element
-                if (obj.done === true) {
-                    break;
-                }
-
-                childElem.remove();
-            }
-        }
-    }
-
-    function movePointer(dom, pointer) {
-        var wrapper = dom.pointer.clone().empty(),
-            innerWrap = wrapper.wrap('<div>').parent().html();
-        pointer.append(innerWrap);
-        return pointer.children(':last-child'); // Move pointer to wrap element
     }
 
     var bestfit = Infinity;
@@ -310,21 +307,27 @@ var TypeOtter = (function(obj, $) {
         var objFinal = {content: '', remain: ''};
         // 0, 1, 2
         // for (var i = 0; i <= imageShiftCount; i++) {
-        console.log('Before');
-        console.log(objDom.elem.html().length);
-            var obj = recCheckDom(objDom, objTestdom, totalHeight, objImagedom);
+        // console.log('Before:');
+        // console.log('--> dom length');
+        // console.log(objDom.elem.html().length);
+            recCheckDom(objDom, objTestdom, totalHeight, objImagedom);
+
             objFinal.content = objTestdom.elem.html();
             objFinal.remain = objDom.elem.html();
-            console.log('After');
-
-            console.log(objDom.elem.html().length);
+            // console.log('After:');
+            // console.log('--> dom length');
+            //
+            // console.log(objDom.elem.html().length);
+            // console.log('--> dom pointer length');
+            //
+            // console.log(objDom.pointer.html().length);
 
 
             if (spanCount < 2) {
-                dom.html(titleSnapshot.dom);
-                obj.content.html(titleSnapshot.testdom);
+                dom.html(titleSnapshot.dom); // Set the dom to the snapshot content
+                // obj.content.html(titleSnapshot.testdom);
+                objFinal.content = titleSnapshot.testdom;
                 objFinal.remain = titleSnapshot.dom;
-                objFinal.content = (titleSnapshot.testdom);
             }
 
             // var remainHeight = totalHeight - testdom.height(),
@@ -343,17 +346,17 @@ var TypeOtter = (function(obj, $) {
         // dom.html(bestdom.dom);
         // obj.content.html(bestdom.testdom);
 
-        if (obj.remain == null || objFinal.remain != obj.remain.html()) {
-            console.log('Unmatch');
-            console.log(objFinal.remain);
-            console.log(objDom.pointer.html());
-            if (obj.remain == null) {
-                console.log('null');
-            } else {
-                console.log(obj.remain.html());
-
-            }
-        }
+        // if (obj.remain == null || objFinal.remain != obj.remain.html()) {
+        //     console.log('Unmatch');
+        //     console.log(objFinal.remain);
+        //     console.log(objDom.pointer.html());
+        //     if (obj.remain == null) {
+        //         console.log('null');
+        //     } else {
+        //         console.log(obj.remain.html());
+        //
+        //     }
+        // }
 
         // imgQueue = imgQueue.slice(bestdom.shift);
         imgQueue = imgQueue.slice(imageShiftCount);
@@ -365,9 +368,8 @@ var TypeOtter = (function(obj, $) {
         spanCount = 100; // Set this high, so a page with a single line, but no title is allowed
 
         return {
-            "page": basePage,
-            "remain": obj.remain
-            // "remain": objFinal.remain
+            page: basePage,
+            remain: objFinal.remain
         };
     }
 
@@ -438,8 +440,8 @@ var TypeOtter = (function(obj, $) {
                 basePage.number = ++curPage;
 
                 if (obj.remain != null) {
-                    clone.html(obj.remain.html());
-                    // clone.html(obj.remain);
+                    // clone.html(obj.remain.html());
+                    clone.html(obj.remain);
                 } else {
                     clone.html('');
                 }
