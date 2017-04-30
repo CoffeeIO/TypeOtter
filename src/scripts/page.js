@@ -226,18 +226,31 @@ var TypeOtter = (function(obj, $) {
         };
     }
 
+    var imageShiftCount = 0;
+
+
+    /**
+     * Add as many images to the dom while staying within dimentions of the page.
+     */
     function addQueueElem(dom, testdom, totalHeight, imageDom) {
+        imageShiftCount = 0;
+
         console.log('Logging imgQueue');
         console.log(imgQueue);
+        testdom.append('<div class="tex-image-move"></div>');
+        var pointer = testdom.find('.tex-image-move');
         var tempQueue = [].concat(imgQueue);
         for (var i = 0; i < tempQueue.length; i++) {
             var item = tempQueue[i];
             imageDom.html(item.html);
-            var obj = addToPage(imageDom, testdom, totalHeight, testdom);
+            var imageDomPointer = imageDom.find(':last-child');
+            var obj = addToPage(imageDomPointer, testdom, totalHeight, pointer);
             if (obj === null) {
                 return null;
             } else {
-                imgQueue.shift(); // Successfully added, remove element from queue
+                // console.log(testdom.html());
+                // imgQueue.shift(); // Successfully added, remove element from queue
+                imageShiftCount++;
             }
         }
     }
@@ -281,6 +294,7 @@ var TypeOtter = (function(obj, $) {
                     origin: 0,
                     height: imageDom.elem.height(),
                 });
+                // console.log(imageDom.elem.html());
                 imageDom.pointer.html(''); // Remove element from pointer
                 return {
                     done: false
@@ -308,53 +322,53 @@ var TypeOtter = (function(obj, $) {
         }
 
         if (! skipConditions) {
-        // Check if entire element can be added to the page.
-        var obj = addToPage(dom.pointer, testDom.elem, totalHeight, testDom.pointer);
-        if (obj !== null) { // Element fit
-            if (testDom.elem.height() !== 0) { // Only count added element if element has a height
-                elemsOnPage++;
+            // Check if entire element can be added to the page.
+            var obj = addToPage(dom.pointer, testDom.elem, totalHeight, testDom.pointer);
+            if (obj !== null) { // Element fit
+                if (testDom.elem.height() !== 0) { // Only count added element if element has a height
+                    elemsOnPage++;
+                }
+                dom.pointer.remove();
+                return obj;
             }
-            dom.pointer.remove();
-            return obj;
-        }
 
-        // Remove newpage element and return null to end page.
-        if (dom.pointer.hasClass('tex-newpage')) {
-            dom.pointer.remove();
-            return null;
-        }
-
-        if (dom.pointer.children().length === 0) {
-            if (elemsOnPage === 0) { // Force add element if no other element on page
-                forceAddElem(dom.pointer, testDom.elem, testDom.pointer);
+            // Remove newpage element and return null to end page.
+            if (dom.pointer.hasClass('tex-newpage')) {
+                dom.pointer.remove();
+                return null;
             }
-            return null;
-        }
 
-        // Elements that should not be recusively checked for children
-        var skipElem = ["SPAN", "SCRIPT", "TR", "STYLE", "FIGURE", "IMG"];
-
-        if (dom.pointer.prop('tagName') == "FIGURE") {
-            forceImage = true;
-            forceAddElem(dom.pointer, imageDom.elem, imageDom.pointer, true);
-            imgQueue.push({
-                html: imageDom.elem.html(),
-                origin: 0,
-                height: imageDom.elem.height(),
-            });
-            imageDom.pointer.html(''); // Remove element from pointer
-            return {
-                done: false
-            };
-        }
-
-        // Check if we're working on an element that can't be split up.
-        if (skipElem.indexOf(dom.pointer.prop('tagName')) !== -1) {
-            if (elemsOnPage === 0) { // Force add element if no other element on page
-                forceAddElem(dom.pointer, testDom.elem, testDom.pointer);
+            if (dom.pointer.children().length === 0) {
+                if (elemsOnPage === 0) { // Force add element if no other element on page
+                    forceAddElem(dom.pointer, testDom.elem, testDom.pointer);
+                }
+                return null;
             }
-            return null;
-        }
+
+            // Elements that should not be recusively checked for children
+            var skipElem = ["SPAN", "SCRIPT", "TR", "STYLE", "FIGURE", "IMG"];
+
+            if (dom.pointer.prop('tagName') == "FIGURE") {
+                forceImage = true;
+                forceAddElem(dom.pointer, imageDom.elem, imageDom.pointer, true);
+                imgQueue.push({
+                    html: imageDom.elem.html(),
+                    origin: 0,
+                    height: imageDom.elem.height(),
+                });
+                imageDom.pointer.html(''); // Remove element from pointer
+                return {
+                    done: false
+                };
+            }
+
+            // Check if we're working on an element that can't be split up.
+            if (skipElem.indexOf(dom.pointer.prop('tagName')) !== -1) {
+                if (elemsOnPage === 0) { // Force add element if no other element on page
+                    forceAddElem(dom.pointer, testDom.elem, testDom.pointer);
+                }
+                return null;
+            }
         }
 
 
@@ -399,30 +413,72 @@ var TypeOtter = (function(obj, $) {
         };
     }
 
+    var bestfit = Infinity;
+    var bestdom = null;
+
     /**
      * Construct the content of one page.
      */
     function makePage(basePage, dom, testdom, imageDom) {
+        bestfit = Infinity;
+        bestdom = null;
         forceImage = false; // Reset image adding
         elemsOnPage = 0; // Reset element counter
         allowSnapshot = true;
+        imageDom.html('');
+
         var totalHeight = basePage.page.height;
 
-
-        imageDom.html('');
         addQueueElem(dom, testdom, totalHeight, imageDom);
         imageDom.html('');
+        var objTestdom = {elem: testdom, pointer: testdom};
+        var objDom = {elem: dom, pointer: dom};
 
-        var obj = recCheckDom({elem: dom, pointer: dom}, {elem: testdom, pointer: testdom}, totalHeight, {elem: imageDom, pointer: imageDom});
+        // 0, 1, 2
+        for (var i = 0; i <= imageShiftCount; i++) {
+            var obj = recCheckDom(objDom, objTestdom, totalHeight, {elem: imageDom, pointer: imageDom});
+            if (spanCount < 2) {
+                dom.html(titleSnapshot.dom);
+                obj.content.html(titleSnapshot.testdom);
+            }
 
-        if (spanCount < 2) {
-            dom.html(titleSnapshot.dom);
-            obj.content.html(titleSnapshot.testdom);
+            var remainHeight = totalHeight - testdom.height(),
+                heightDemerit = remainHeight * 5,
+                imageDemerit = i * 50;
+            var demerit = heightDemerit;
+            console.log('shift --> %s, remain --> %s', i, remainHeight);
+
+            if (demerit < bestfit) {
+                bestfit = demerit;
+                bestdom = {testdom: testdom.html(), dom: dom.html(), shift: i};
+            }
+            objTestdom.elem.find('.tex-image-move > :last-child').remove();
         }
+
+        // console.log('--> Math');
+        // console.log(testdom.height());
+        // console.log(totalHeight);
+
+        // if (imageShiftCount > 0) {
+        //     console.log('removing img --> ');
+        //     obj = recCheckDom(objDom, objTestdom, totalHeight, {elem: imageDom, pointer: imageDom});
+        //     console.log('---');
+        //     console.log(testdom.height());
+        //     console.log(totalHeight);
+        //     // obj.content.html(objTestdom.elem.html());
+        // }
+        dom.html(bestdom.dom);
+        // obj.remain = dom;
+        obj.content.html(bestdom.testdom);
+
+
+        imgQueue = imgQueue.slice(bestdom.shift);
+
 
         basePage.content = obj.content.html();
         console.log('Page --> %s', spanCount);
         spanCount = 100; // Set this high, so a page with a single line, but no title is allowed
+
         return {
             "page": basePage,
             "remain": obj.remain
