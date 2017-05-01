@@ -173,6 +173,9 @@ var TypeOtter = (function(obj, $) {
         return curHtml;
     }
 
+    /**
+     * Count number of spans inside paragraph or return one if the element is a typeset line.
+     */
     obj.getSpanCount = function (elem) {
         if (elem.prop('tagName') == "SPAN" && elem.hasClass('typeset-line')) {
             return 1;

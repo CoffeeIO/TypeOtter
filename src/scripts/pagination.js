@@ -1,8 +1,32 @@
 var TypeOtter = (function(obj, $) {
 
+    var imageShiftCount = 0;
+
+    // object: { html, originPage, height }
+    var imgQueue = [];
+
+    // State of whether to add all images encountered in dom to the imageQueue.
+    var forceImage = false;
+
+    // Count of span elements followed by section title.
+    var spanCount = 0;
+    var workingOnTitle = false;
+
+    var titleSnapshot = {dom: '', testdom: ''};
+    var allowSnapshot = true;
+
+    var skipConditions = false, // Skip special conditions, so we start iterating on the children
+        defaultDone = true; // Default value to return when having added all children
+
+    var bestfit = Infinity;
+    var bestdom = null;
+
+    var elemsOnPage,
+        curPage;
+
     /**
-     * Add element to testdom and compare with maxheight, return new testdom if less, otherwise
-     * revert to previous state.
+     * Add element to testdom and compare with maxheight.
+     * Return true if added else false and revert to previous state.
      */
     function addToPage(element, testdom, totalHeight, pointer) {
         var temp = pointer.html();
@@ -38,17 +62,12 @@ var TypeOtter = (function(obj, $) {
         }
         spanCount += TypeOtter.getSpanCount(elem);
         elem.remove();
-
-        return {
-            content: testdom,
-            remain: null,
-            done: false
-        };
     }
 
-    var imageShiftCount = 0;
 
-
+    /**
+     * Increase origin count for all elements in image queue.
+     */
     function increaseImageOrigin() {
         for (var i = 0; i < imgQueue.length; i++) {
             imgQueue[i].origin++;
@@ -77,20 +96,9 @@ var TypeOtter = (function(obj, $) {
         }
     }
 
-    // object: { html, originPage, height }
-    var imgQueue = [];
-
-    // State of whether to add all images encountered in dom to the imageQueue.
-    var forceImage = false;
-
-    // Count of span elements followed by section title.
-    var spanCount = 0;
-    var workingOnTitle = false;
-
-    var titleSnapshot = {dom: '', testdom: ''};
-    var allowSnapshot = true;
-
-
+    /**
+     * Check if we hit a section title and take a snapshot of the dom if we're allowed.
+     */
     function checkTitleSnapshot(dom, testDom) {
         if (dom.pointer.prop('tagName') == "A" && dom.pointer.attr('href') == "#tex-toc") {
             if (spanCount >= 2) {
@@ -105,9 +113,9 @@ var TypeOtter = (function(obj, $) {
         }
     }
 
-    var skipConditions = false, // Skip special conditions, so we start iterating on the children
-        defaultDone = true; // Default value to return when having added all children
-
+    /**
+     * If we're in forceImage state, add all images encountered to the image queue.
+     */
     function forceAddImage(dom, imageDom) {
         if (forceImage) {
             if (dom.pointer.prop('tagName') == "FIGURE") {
@@ -115,12 +123,11 @@ var TypeOtter = (function(obj, $) {
                 imgQueue.push({
                     html: imageDom.elem.html(),
                     origin: 0,
-                    height: imageDom.elem.height(),
                 });
                 imageDom.pointer.html(''); // Remove element from pointer
                 return true;
-            } else if (dom.pointer.find('figure').length > 0) {
-                // Check all children
+            } else if (dom.pointer.find('figure').length > 0) { // There is a figure inside the element we're working on
+                // Check all children instead of adding the whole element.
                 skipConditions = true;
                 defaultDone = false;
             }
@@ -128,6 +135,9 @@ var TypeOtter = (function(obj, $) {
         return false;
     }
 
+    /**
+     * Return true if element is a newpage, otherwise return false.
+     */
     function isNewPage(dom) {
         if (dom.pointer.hasClass('tex-newpage')) {
             dom.pointer.remove();
@@ -137,6 +147,9 @@ var TypeOtter = (function(obj, $) {
         return false;
     }
 
+    /**
+     * If element doesn't have children and there're no elements on the page, force add the element.
+     */
     function forceElementOnEmptyPage(dom, testDom) {
         if (dom.pointer.children().length === 0) {
             if (elemsOnPage === 0) {
@@ -148,6 +161,10 @@ var TypeOtter = (function(obj, $) {
         return false;
     }
 
+    /**
+     * Check if element is an image and move it to the image queue.
+     * This function is only called if the image can't fit on the page.
+     */
     function moveImageToQueue(dom, imageDom) {
         if (dom.pointer.prop('tagName') == "FIGURE") {
             forceImage = true;
@@ -165,6 +182,9 @@ var TypeOtter = (function(obj, $) {
         return false;
     }
 
+    /**
+     * End page if we can't split the element into children.
+     */
     function canSplitElem(dom, testDom) {
         // Elements that should not be recusively checked for children
         var skipElem = ["SPAN", "SCRIPT", "TR", "STYLE", "FIGURE", "IMG"];
@@ -179,6 +199,9 @@ var TypeOtter = (function(obj, $) {
         return false;
     }
 
+    /**
+     * Check if the different dom elements are now empty in which case remove them.
+     */
     function removeWrapperIfEmpty(dom, testDom, imageDom) {
         if (testDom.pointer.children().length === 0) { // Remove wrapper if no elements were added to it
             testDom.pointer.remove();
@@ -190,6 +213,9 @@ var TypeOtter = (function(obj, $) {
 
     }
 
+    /**
+     * Loop over children of the element remove them appropriately.
+     */
     function loopOverChildren(dom, testDom, totalHeight, imageDom) {
         while (dom.pointer.children().length > 0) {
             var childElem = dom.pointer.children(':nth-child(1)');
@@ -207,6 +233,9 @@ var TypeOtter = (function(obj, $) {
         }
     }
 
+    /**
+     * Get the wrapper inside dom and move the pointer into that element.
+     */
     function movePointer(dom, pointer) {
         var wrapper = dom.pointer.clone().empty(),
             innerWrap = wrapper.wrap('<div>').parent().html();
@@ -223,15 +252,12 @@ var TypeOtter = (function(obj, $) {
      *                                     pointer     The element to remove from
      * @param  {object}        testDom     elem        The main element
      *                                     pointer     The element to append on
-     * @param  {int}           totalHeight Max height of the content area of a page
+     * @param  {int}           totalHeight             Max height of the content area of a page
      * @param  {object}        imageDom    elem        The main element
      *                                     pointer     The element to append on
-     * @return {object}        content     The testdom,
-     *                         remain      The remaining DOM of elem,
-     *                         done        State of whether more elements can be added to testdom
+     * @return {bool|null}
      */
     function recCheckDom(dom, testDom, totalHeight, imageDom) {
-
         skipConditions = false; // Skip special conditions, so we start iterating on the children
         defaultDone = true; // Default value to return when having added all children
 
@@ -244,14 +270,10 @@ var TypeOtter = (function(obj, $) {
         checkTitleSnapshot(dom, testDom);
 
         if (! skipConditions) {
-
             // Check if entire element can be added to the page.
             if (addToPage(dom.pointer, testDom.elem, totalHeight, testDom.pointer)) { // Element fit
                 dom.pointer.empty(); // Remove element from dom
-
-                return {
-                    done: false
-                };
+                return {done: false};
             }
 
             // Remove newpage element and return null to end page.
@@ -273,7 +295,6 @@ var TypeOtter = (function(obj, $) {
             if (canSplitElem(dom, testDom)) {
                 return null;
             }
-
         }
 
         // Inner wrap elements and move their pointer.
@@ -286,11 +307,12 @@ var TypeOtter = (function(obj, $) {
         // Remove pointer elements if empty.
         removeWrapperIfEmpty(dom, testDom, imageDom);
 
-        return {
-            done: defaultDone
-        };
+        return {done: defaultDone};
     }
 
+    /**
+     * Calculate the demerit of the first number of elements in image queue.
+     */
     function getImageDemerit(offset) {
         var demerit = 0;
         for (var i = 0; i < offset; i++) {
@@ -301,30 +323,24 @@ var TypeOtter = (function(obj, $) {
         return demerit;
     }
 
-    var bestfit = Infinity;
-    var bestdom = null;
-
     /**
      * Construct the content of one page.
      */
     function makePage(basePage, dom, testdom, imageDom) {
+        // Reset values of a new page.
         bestfit = Infinity; // Any solution is better than non
         bestdom = null;
-        forceImage = false; // Reset image adding
-        elemsOnPage = 0; // Reset element counter
+        forceImage = false;
+        elemsOnPage = 0;
         allowSnapshot = true;
-        imageDom.html('');
-
         var totalHeight = basePage.page.height;
 
+        imageDom.html('');
         addQueueElem(dom, testdom, totalHeight, imageDom);
         imageDom.html('');
-        // var objDom = {elem: dom, pointer: dom};
-        // var objTestdom = {elem: testdom, pointer: testdom};
-        // var objImagedom = {elem: imageDom, pointer: imageDom};
 
         var objFinal = {content: '', remain: ''};
-        // 0, 1, 2
+
         for (var i = 0; i <= imageShiftCount; i++) {
             var objDom = {elem: dom, pointer: dom};
             var objTestdom = {elem: testdom, pointer: testdom};
@@ -355,10 +371,11 @@ var TypeOtter = (function(obj, $) {
                 bestdom = {content: objFinal.content, remain: objFinal.remain, shift: i};
             }
 
+            // Remove last image added from the image queue.
             objTestdom.elem.find('.tex-image-move > :last-child').remove();
-            // break;
         }
 
+        // Remove the number of elements we fit into the dom.
         imgQueue = imgQueue.slice(imageShiftCount - bestdom.shift);
 
         basePage.content = bestdom.content;
@@ -369,9 +386,6 @@ var TypeOtter = (function(obj, $) {
             remain: bestdom.remain
         };
     }
-
-    var elemsOnPage,
-        curPage;
 
     /**
      * Convert a dom element to a series of printable pages.
