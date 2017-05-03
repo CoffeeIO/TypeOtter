@@ -24,6 +24,8 @@ var TypeOtter = (function(obj, $) {
     var elemsOnPage,
         curPage;
 
+    var minSpanAfterTitle = 0;
+
     /**
      * Add element to testdom and compare with maxheight.
      * Return true if added else false and revert to previous state.
@@ -101,7 +103,7 @@ var TypeOtter = (function(obj, $) {
      */
     function checkTitleSnapshot(dom, testDom) {
         if (dom.pointer.prop('tagName') == "A" && dom.pointer.attr('href') == "#tex-toc") {
-            if (spanCount >= 2) {
+            if (spanCount >= minSpanAfterTitle) {
                 allowSnapshot = true;
             }
             if (allowSnapshot) {
@@ -311,22 +313,16 @@ var TypeOtter = (function(obj, $) {
     }
 
     /**
-     * Calculate the demerit of the first number of elements in image queue.
+     * Calculate the demerit for doing page break.
      */
-    function getImageDemerit(offset) {
-        var demerit = 0;
-        for (var i = 0; i < offset; i++) {
-            var item = imgQueue[i];
-            demerit += Math.pow(3 + ((item.origin - 1) * 2), 2);
-        }
-
-        return demerit;
+    function getPaginationDemerit(remainHeight, offset, options) {
+        return options.paginationDemerit(remainHeight, imgQueue, offset, options);
     }
 
     /**
      * Construct the content of one page.
      */
-    function makePage(basePage, dom, testdom, imageDom) {
+    function makePage(basePage, dom, testdom, imageDom, options) {
         // Reset values of a new page.
         bestfit = Infinity; // Any solution is better than non
         bestdom = null;
@@ -351,7 +347,7 @@ var TypeOtter = (function(obj, $) {
             objFinal.remain = objDom.elem.html();
 
             // Use spanshot dom if title condition is not meet
-            if (spanCount < 2) {
+            if (spanCount < minSpanAfterTitle) {
                 dom.html(titleSnapshot.dom); // Set the dom to the snapshot content
                 testdom.html(titleSnapshot.testdom);
 
@@ -360,10 +356,8 @@ var TypeOtter = (function(obj, $) {
             }
 
             // Calculate demerit.
-            var remainHeight = totalHeight - testdom.height(),
-                heightDemerit = remainHeight * 1,
-                imageDemerit = getImageDemerit(i);
-            var demerit = heightDemerit + imageDemerit;
+            var remainHeight = totalHeight - testdom.height();
+            var demerit = getPaginationDemerit(remainHeight, i, options);
 
             // Compare demerit with previous best.
             if (demerit < bestfit) {
@@ -392,6 +386,8 @@ var TypeOtter = (function(obj, $) {
      */
     obj.texify = function(settings, dom) {
         var options = settings.options;
+        minSpanAfterTitle = options.minSpanAfterTitle;
+
         dom.find('.tex-testdom').remove(); // Remove testing element we used to force font load
         var basePage = new TypeOtter.Page();
 
@@ -444,7 +440,7 @@ var TypeOtter = (function(obj, $) {
                 imageDom.html(''); // Clear the imagedom object
 
                 // Use extend to clone pageSetting obj and remove its reference.
-                pages.push(makePage($.extend(true, [], basePage), clone, testdom, imageDom));
+                pages.push(makePage($.extend(true, [], basePage), clone, testdom, imageDom, options));
 
                 obj = pages[pages.length - 1];
 
