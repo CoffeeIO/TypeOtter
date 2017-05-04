@@ -46,7 +46,7 @@ var TypeOtter = (function(obj, $) {
         }
 
         return null;
-    }
+    };
 
     /**
      * Load page style based on settings.
@@ -75,14 +75,14 @@ var TypeOtter = (function(obj, $) {
             "}";
 
         $('<style type="text/css">' + css + '</style>').appendTo('head');
-    }
+    };
 
     /**
      * Construct the html of the pager of a specific page.
      */
     obj.genPager = function (options, page) {
         return options.pager.replace('[cur]', page.number).replace('[total]', page.total);
-    }
+    };
 
     /**
      * Construct the html of the header of a specific page.
@@ -119,7 +119,7 @@ var TypeOtter = (function(obj, $) {
         curHtml += '</div>';
 
         return curHtml;
-    }
+    };
 
     /**
      * Construct the html of the footer of a specific page.
@@ -156,7 +156,7 @@ var TypeOtter = (function(obj, $) {
         curHtml += '</div>';
 
         return curHtml;
-    }
+    };
 
     /**
      * Construct the html of the page.
@@ -171,21 +171,21 @@ var TypeOtter = (function(obj, $) {
             '</div>';
 
         return curHtml;
-    }
+    };
 
     /**
      * Count number of spans inside paragraph or return one if the element is a typeset line.
      */
     obj.getSpanCount = function (elem) {
-        if (elem.prop('tagName') == "SPAN" && elem.hasClass('typeset-line')) {
+        if (elem.prop('tagName') === "SPAN" && elem.hasClass('typeset-line')) {
             return 1;
         }
-        if (elem.prop('tagName') == "P") {
+        if (elem.prop('tagName') === "P") {
             return elem.find('> span').length;
         }
 
         return elem.find('p > span').length;
-    }
+    };
 
 
     return obj;

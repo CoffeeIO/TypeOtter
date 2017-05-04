@@ -69,7 +69,6 @@ var TypeOtter = (function(obj, $) {
             obj.makeToc(dom);
             obj.makeRef(dom);
             obj.makeRefPage(dom, settings.biblography);
-            obj.typeset(dom, settings);
             callback();
         };
 

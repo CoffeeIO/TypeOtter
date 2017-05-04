@@ -102,7 +102,7 @@ var TypeOtter = (function(obj, $) {
      * Check if we hit a section title and take a snapshot of the dom if we're allowed.
      */
     function checkTitleSnapshot(dom, testDom) {
-        if (dom.pointer.prop('tagName') == "A" && dom.pointer.attr('href') == "#tex-toc") {
+        if (dom.pointer.prop('tagName') === "A" && dom.pointer.attr('href') === "#tex-toc") {
             if (spanCount >= minSpanAfterTitle) {
                 allowSnapshot = true;
             }
@@ -120,7 +120,7 @@ var TypeOtter = (function(obj, $) {
      */
     function forceAddImage(dom, imageDom) {
         if (forceImage) {
-            if (dom.pointer.prop('tagName') == "FIGURE") {
+            if (dom.pointer.prop('tagName') === "FIGURE") {
                 forceAddElem(dom.pointer, imageDom.elem, imageDom.pointer, true);
                 imgQueue.push({
                     html: imageDom.elem.html(),
@@ -221,12 +221,12 @@ var TypeOtter = (function(obj, $) {
     function loopOverChildren(dom, testDom, totalHeight, imageDom) {
         while (dom.pointer.children().length > 0) {
             var childElem = dom.pointer.children(':nth-child(1)');
-            obj = recCheckDom({elem: dom.elem, pointer: childElem}, {elem: testDom.elem, pointer: testDom.pointer}, totalHeight, imageDom);
-            if (obj === null) {
+            var objState = recCheckDom({elem: dom.elem, pointer: childElem}, {elem: testDom.elem, pointer: testDom.pointer}, totalHeight, imageDom);
+            if (objState === null) {
                 break; // Couldn't add element, exit loop
             } else {
                 // If done is true, then not all children were added so we can't remove the parent element
-                if (obj.done === true) {
+                if (objState.done === true) {
                     break;
                 }
 
@@ -430,7 +430,7 @@ var TypeOtter = (function(obj, $) {
 
         // Typeset text.
         testdom.html(clone.html());
-        TypesetBot.run('.tex-testdom', { dynamicWidth: false }, function () {
+        TypesetBot.run('.tex-testdom', {dynamicWidth: false}, function () {
             testdom.find('.typeset-hidden').remove();
             clone.html(testdom.html());
 
@@ -442,13 +442,12 @@ var TypeOtter = (function(obj, $) {
                 // Use extend to clone pageSetting obj and remove its reference.
                 pages.push(makePage($.extend(true, [], basePage), clone, testdom, imageDom, options));
 
-                obj = pages[pages.length - 1];
+                var objState = pages[pages.length - 1];
 
                 basePage.number = ++curPage;
 
-                if (obj.remain != null) {
-                    // clone.html(obj.remain.html());
-                    clone.html(obj.remain);
+                if (objState.remain != null) {
+                    clone.html(objState.remain);
                 } else {
                     clone.html('');
                 }
