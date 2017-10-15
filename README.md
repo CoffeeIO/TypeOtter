@@ -1,6 +1,6 @@
 <p align="center">
     <a href="http://mgapcdev.github.io/TypeOtter/">
-        <img alt="Rax" src="http://i.imgur.com/tGz40Of.png" width="300">
+        <img alt="Rax" src="logo.png" width="300">
     </a>
 </p>
 <p align="center">
