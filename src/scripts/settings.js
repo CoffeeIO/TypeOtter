@@ -21,7 +21,22 @@ var TypeOtter = (function(obj, $) {
 
         // Pager
         pager : '[cur]',
-        pagerStyle : '1'
+        pagerStyle : '1',
+
+        // Pagination
+        minSpanAfterTitle : 2,
+        paginationDemerit (remainHeight, imgQueue, offset, options) {
+            // Calculate image demerit.
+            var imageDemerit = 0;
+            for (var i = 0; i < offset; i++) {
+                var item = imgQueue[i];
+                imageDemerit += Math.pow(3 + ((item.origin - 1) * 2), 2);
+            }
+
+            var heightDemerit = remainHeight * 1;
+
+            return imageDemerit + heightDemerit;
+        }
     };
 
     /**

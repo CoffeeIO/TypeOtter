@@ -74,7 +74,7 @@ var TypeOtter = (function(obj, $) {
 
         // Texify document.
         var step5 = function(callback) {
-            obj.texify(settings.options, dom);
+            obj.texify(settings, dom);
             callback();
         };
 

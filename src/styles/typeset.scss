@@ -1,0 +1,16 @@
+// Correct style since breaking paragraphs between pages, means there can be multiple last lines in one paragraph.
+.typeset-justify {
+    text-align: justify;
+    .typeset-line {
+        &:last-of-type {
+            &:after {
+                display: inline-block;
+            }
+        }
+        &[ratio="undefined"] {
+            &:after {
+                display: none;
+            }
+        }
+    }
+}
