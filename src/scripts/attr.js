@@ -4,6 +4,7 @@ var TypeOtter = (function(obj, $) {
      * Look for specific attributes in dom and generate elements.
      */
     obj.attrify = function (dom) {
+        handleFootnote(dom);
         handleUrl(dom);
         handleNewpage(dom);
         handleImages(dom);
@@ -150,6 +151,28 @@ var TypeOtter = (function(obj, $) {
      */
     function removeScript(dom) {
         dom.find('script').remove();
+    }
+
+    /**
+     * Handle footnote so it's ready for pagination.
+     */
+    function handleFootnote(dom) {
+        var counter = 1;
+        dom.find('*[footnote=""]').each(function () {
+            var elem = $(this);
+            var reference = 'tex-footnote-' + counter;
+
+            elem.wrap('<span class="tex-footnote-content"></span>')
+                .parent()
+                .wrap('<span class="tex-footnote"></span>')
+                .before('<a href="#' + reference + '"><sup>' + counter + '</sup></a>');
+
+
+            var content = elem.parent().html();
+            console.log('Found one ' + content);
+
+            counter++;
+        });
     }
 
     return obj;
